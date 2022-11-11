@@ -1,0 +1,16 @@
+<table class="grid">
+  <thead class="grid__columns">
+  <th *ngFor="let col of columns" [style.width.px]="col.width">
+    {{ col.header }}
+  </th>
+  </thead>
+  <tbody class="grid__rows">
+    <tr *ngFor="let row of data">
+      <td
+        *ngFor="let col of columns"
+        style="padding-left: 1rem"
+      > {{row[col.field]}}
+      </td>
+    </tr>
+  </tbody>
+</table>
