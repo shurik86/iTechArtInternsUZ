@@ -62,7 +62,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task AirportExcelParser(IFormFile file)
         {
-            await _airportParsers.ExcelParser(file);
+            await _airportParsers.ExcelParserAsync(file);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task AirportXMLParser(IFormFile file)
         {
-            await _airportParsers.XmlParser(file);
+            await _airportParsers.XmlParserAsync(file);
         }   
     }
 }
