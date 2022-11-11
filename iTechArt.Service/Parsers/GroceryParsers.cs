@@ -1,68 +1,87 @@
-﻿using iTechArt.Domain.Enums;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Repository.Mappers;
+using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace iTechArt.Service.Parsers
 {
-    public sealed class GroceryParsers : IGroceryParsers
+    public sealed class GroceryParsers : IGroceryParser
     {
+        private const string DATETIMEFORMAT = "MM/dd/yyyy";
+        private const string INVALID_DOUBLE_MESSAGE = "Could not conver string to double: ";
+        private const string INVALID_DATETIME_MESSAGE = "Could not convert string to DateTime: ";
+        private const string INVALID_ENUM_MESSAGE = "Could not convert string to Enum: ";
+
         private static IList<IGrocery> _grocery;
         private readonly IGroceryRepository _groceryRepository;
+        /// <summary>
+        /// Checking the coming input for parsing from string to double and returning the result if its parsed
+        /// </summary>
+        private static double DoubleGuard(string input)
+        {
+            double doubleOutput;
+            var result = double.TryParse(input, NumberStyles.Number, CultureInfo.InvariantCulture, out doubleOutput);
+            if (result)
+                return doubleOutput;
+            throw new InvalidDataException($"{INVALID_DOUBLE_MESSAGE}{input}");
+        }
+        /// <summary>
+        /// Checking the coming input for parsing from string to DateTime and returning the result if its parsed
+        /// </summary>
+        private static DateTime DateTimeGuard(string input)
+        {
+            DateTime datetimeOutput;
+            var result = DateTime.TryParseExact(input, DATETIMEFORMAT, CultureInfo.InvariantCulture, DateTimeStyles.None, out datetimeOutput);
+            if (result)
+                return datetimeOutput;
+            throw new InvalidDataException($"{INVALID_DATETIME_MESSAGE}{input}");
+        }
+        /// <summary>
+        /// Checking the coming input for parsing from string to Enum and returning the result if its parsed
+        /// </summary>
+        private static Gender EnumGuard(string input)
+        {
+            Gender genderOutput;
+            var result = Enum.TryParse<Gender>(input, out genderOutput);
+            if (result)
+                return genderOutput;
+            throw new InvalidDataException($"{INVALID_ENUM_MESSAGE}{input}");
+        }
         public GroceryParsers(IGroceryRepository groceryRepository)
         {
             _groceryRepository = groceryRepository;
         }
         /// <summary>
-        /// Parsing Csv format grocery files
+        /// Parsing Csv format grocery files.
         /// </summary>
-        public async Task RecordCsvToDatabase(IFormFile formFile)
+        public async Task<IGrocery[]> ParseCsvAsync(IFormFile formFile)
         {
-            _grocery = new List<IGrocery>();
-            try
-            {
-                using (var fileStream = formFile.OpenReadStream())
-                using (var reader = new StreamReader(fileStream))
-                {
-                    string row;
-                    bool initial = true;
-                    while ((row = reader.ReadLine()) != null)
-                    {
-                        var items = row.Split(',');
+            using var fileStream = new MemoryStream();
 
-                        if (initial)
-                        {
-                            initial = false;
-                            continue;
-                        }
-                        try
-                        {
-                            _grocery.Add(GroceryMapper.CsvMapper(items));
-                        }
-                        catch (Exception ex)
-                        {
+            await formFile.CopyToAsync(fileStream);
+            fileStream.Position = 0;
 
-                            throw ex;
-                        }
-                    }
-                    await _groceryRepository.AddGroceriesAsync(_grocery);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            using TextReader csvReader = new StreamReader(fileStream);
+            using var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture);
+            csv.Context.RegisterClassMap<GroceryMap>();
+            var records = csv.GetRecords<GroceryDTO>();
+
+            return records.ToArray();
         }
         /// <summary>
-        /// Parsing Excel format grocery files
+        /// Parsing Excel format grocery files.
         /// </summary>
-        public async Task RecordExcelToDatabase(IFormFile formFile)
+        public async Task<IGrocery[]> ExcelParseAsync(IFormFile formFile)
         {
+            
             _grocery = new List<IGrocery>();
             if (formFile.Length > 0)
             {
@@ -74,13 +93,22 @@ namespace iTechArt.Service.Parsers
                     {
                         var sheet = p.Workbook.Worksheets.First();
                         var count = sheet.Dimension.Rows;
-
-                        for (int i = 2; i < count; i++)
+                        
+                        for (int index = 2; index < count; index++)
                         {
-                            _grocery.Add(GroceryMapper.XlsxMapper(sheet, i));
-
+                            var groceryDTO = new GroceryDTO
+                            {
+                                FirstName = sheet.Cells[index, 1].Value?.ToString(),
+                                LastName = sheet.Cells[index, 2].Value?.ToString(),
+                                Email = sheet.Cells[index, 3].Value?.ToString(),
+                                Gender = Enum.Parse<Gender>(sheet.Cells[index, 4].Value?.ToString()),
+                                Birthday = DateTimeGuard(sheet.Cells[index, 5].Value?.ToString()),
+                                JobTitle = sheet.Cells[index, 6].Value?.ToString(),
+                                DepartmentRetail = sheet.Cells[index, 7].Value?.ToString(),
+                                Salary = DoubleGuard(sheet.Cells[index, 8].Value?.ToString()),
+                            };
+                            _grocery.Add(groceryDTO);
                         }
-                         await _groceryRepository.AddGroceriesAsync(_grocery);
                     }
                 }
                 catch (Exception ex)
@@ -89,34 +117,51 @@ namespace iTechArt.Service.Parsers
                     throw ex; 
                 }
             }
+            return _grocery.ToArray();
         }
         /// <summary>
-        /// Parsing XML format grocery files
+        /// Parsing XML format grocery files.
         /// </summary>
-        public async Task RecordXmlToDatabase(IFormFile formFile)
+        public async Task<IGrocery[]> XmlParseAsync(IFormFile formFile)
         {
             _grocery = new List<IGrocery>();
             XDocument xm = new XDocument();
             using (var reader = new StreamReader(formFile.OpenReadStream()))
             {
             var xdoc = XDocument.Load(reader);
-            reader.ReadToEnd();
+             await reader.ReadToEndAsync();
                 var items = from item in xdoc.Descendants("dataset").Elements("record")
-                            select new GroceryDTO
+                            select new GroceryDTO()
                             {
-                                FirstName = item.Element("first_name").Value,
-                                LastName = item.Element("last_name").Value,
-                                Email = item.Element("email").Value,
-                                Gender = (Gender)Enum.Parse(typeof(Gender), item.Element("gender").Value),
-                                Birthday = (DateTime)item.Element("birthday"),
-                                JobTitle = item.Element("job_Title").Value,
-                                DepartmentRetail = item.Element("department_retail").Value,
-                                Salary = (double)item.Element("salary")
+                                FirstName = item.Element(GroceryIndexConstants.FIRSTNAME).Value,
+                                LastName = item.Element(GroceryIndexConstants.LASTNAME).Value,
+                                Email = item.Element(GroceryIndexConstants.EMAIL).Value,
+                                Gender = Enum.Parse<Gender>(item.Element(GroceryIndexConstants.GENDER).Value),
+                                Birthday = (DateTime)item.Element(GroceryIndexConstants.BIRTHDAY),
+                                JobTitle = item.Element(GroceryIndexConstants.JOBTITLE).Value,
+                                DepartmentRetail = item.Element(GroceryIndexConstants.DEPARTMENTRETAIL).Value,
+                                Salary = (double)item.Element(GroceryIndexConstants.SALARY)
                             };
 
-                _grocery = items.ToList<IGrocery>();
-                await _groceryRepository.AddGroceriesAsync(_grocery);
+                return items.ToArray();
             }
+        }
+    }
+    /// <summary>
+    /// Mapping item for Csv helper.
+    /// </summary>
+    public sealed class GroceryMap : ClassMap<GroceryDTO>
+    {
+        public GroceryMap()
+        {
+            Map(p => p.FirstName).Name("first_name");
+            Map(p => p.LastName).Name("last_name");
+            Map(p => p.Email).Name("email");
+            Map(p => p.Gender).Name("gender");
+            Map(p => p.Birthday).Name("birthday");
+            Map(p => p.JobTitle).Name("job_Title");
+            Map(p => p.DepartmentRetail).Name("department_retail");
+            Map(p => p.Salary).Name("salary");
         }
     }
 }

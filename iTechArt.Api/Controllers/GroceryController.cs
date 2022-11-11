@@ -23,17 +23,17 @@ namespace iTechArt.Api.Controllers
         {
             if (file != null && file.ContentType.Contains(CSV))
             {
-                await _groceryService.ImportCSVGrocery(file);
+                await _groceryService.ImportCSVGroceryAsync(file);
                 return Ok();
             }
             else if (file != null && file.ContentType.Contains(EXCEL)) 
             {
-                await _groceryService.ImportExcelGrocery(file);
+                await _groceryService.ImportExcelGroceryAsync(file);
                 return Ok();
             }
             else if (file != null && file.ContentType.Contains(XML))
             {
-                await _groceryService.ImportXMLGrocery(file);
+                await _groceryService.ImportXMLGroceryAsync(file);
                 return Ok();
             }
             return BadRequest();
@@ -47,7 +47,7 @@ namespace iTechArt.Api.Controllers
         {
             if (file != null && file.ContentType.Contains(CSV))
             {
-                await _groceryService.ImportCSVGrocery(file);
+                await _groceryService.ImportCSVGroceryAsync(file);
                 return Ok();
             }
             else
@@ -63,7 +63,7 @@ namespace iTechArt.Api.Controllers
         {
             if (file != null && file.ContentType.Contains(EXCEL))
             {
-                await _groceryService.ImportExcelGrocery(file);
+                await _groceryService.ImportExcelGroceryAsync(file);
                 return Ok();
             }
             else
@@ -79,7 +79,7 @@ namespace iTechArt.Api.Controllers
         {
             if (file != null && file.ContentType.Contains(XML))
             {
-                await _groceryService.ImportXMLGrocery(file);
+                await _groceryService.ImportXMLGroceryAsync(file);
                 return Ok();
             }
             else
@@ -91,7 +91,7 @@ namespace iTechArt.Api.Controllers
         [HttpGet("get_all")]
         public async Task<IActionResult> ExportGroceryData()
         {
-            return Ok(await _groceryService.ExportGrocery());
+            return Ok(await _groceryService.ExportGroceryAsync());
         }
         /// <summary>
         /// Get total amount of groceries

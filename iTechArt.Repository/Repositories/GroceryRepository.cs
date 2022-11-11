@@ -18,7 +18,7 @@ namespace iTechArt.Repository.Repositories
             _mapper = mapper;
         }
         /// <summary>
-        /// Get all entities from database
+        /// Get all entities from database.
         /// </summary>
         public async Task<IGrocery[]> GetAllAsync()
         {
@@ -26,7 +26,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Get grocery by id
+        /// Get grocery by id.
         /// </summary>
         public async Task<IGrocery> GetByIdAsync(long id)
         {
@@ -35,7 +35,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update grocery
+        /// Update grocery.
         /// </summary>
         public async Task UpdateAsync(IGrocery grocery)
         {
@@ -45,7 +45,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete grocery from database
+        /// Delete grocery from database.
         /// </summary>
         public async Task DeleteAsync(long id)
         {
@@ -56,6 +56,9 @@ namespace iTechArt.Repository.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
+        /// <summary>
+        /// Add grocery items to database.
+        /// </summary>
         public async Task AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
@@ -70,9 +73,9 @@ namespace iTechArt.Repository.Repositories
             }
         }
         /// <summary>
-        /// Get total count of groceries
+        /// Get total count of groceries.
         /// </summary>
-        public async ValueTask<int> GetCountOfGrocery()
+        public async ValueTask<int> GetCountOfGroceryAsync()
         {
             return await _dbContext.Groceries.CountAsync();
         }
