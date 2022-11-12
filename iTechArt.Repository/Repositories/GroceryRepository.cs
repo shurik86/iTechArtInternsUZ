@@ -22,7 +22,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IGrocery[]> GetAllAsync()
         {
-            return await _dbContext.Groceries.Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
+            return await _dbContext.Groceries.Select(grocery => _mapper.Map<Grocery>(grocery)).ToArrayAsync();
         }
 
         /// <summary>
@@ -49,21 +49,21 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var groceries = await _dbContext.Groceries.FirstOrDefaultAsync(c => c.Id == id);
-            if (groceries != null)
+            var grocery = await _dbContext.Groceries.FirstOrDefaultAsync(c => c.Id == id);
+            if (grocery != null)
             {
-                _dbContext.Groceries.Remove(groceries);
+                _dbContext.Groceries.Remove(grocery);
                 await _dbContext.SaveChangesAsync();
             }
         }
         /// <summary>
         /// Add grocery items to database.
         /// </summary>
-        public async Task AddGroceriesAsync(IEnumerable<IGrocery> groceries)
+        public async Task AddGroceriesAsync(IEnumerable<IGrocery> grocery)
         {
             try
             {
-                await _dbContext.AddRangeAsync(groceries.Select(_mapper.Map<GroceryDb>));
+                await _dbContext.AddRangeAsync(grocery.Select(_mapper.Map<GroceryDb>));
                 await _dbContext.SaveChangesAsync();
           
             }

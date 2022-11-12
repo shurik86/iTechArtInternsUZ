@@ -19,9 +19,9 @@
         /// </summary>
         public const int FIRSTNAMEINDEX = 1;
         public const int LASTNAMEINDEX = 2;
-        public const int BIRTHDAYINDEX = 3;
+        public const int EMAILINDEX = 3;
         public const int GENDERINDEX = 4;
-        public const int EMAILINDEX = 5;
+        public const int BIRTHDAYINDEX = 5;
         public const int JOBTITLEINDEX = 6;
         public const int DEPARTMENTRETAILINDEX = 7;
         public const int SALARYINDEX = 8;

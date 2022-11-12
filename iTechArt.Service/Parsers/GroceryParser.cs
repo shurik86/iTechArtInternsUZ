@@ -6,6 +6,7 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
+using iTechArt.Service.Helpers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using System.Globalization;
@@ -13,7 +14,7 @@ using System.Xml.Linq;
 
 namespace iTechArt.Service.Parsers
 {
-    public sealed class GroceryParsers : IGroceryParser
+    public sealed class GroceryParser : IGroceryParser
     {
         private const string DATETIMEFORMAT = "MM/dd/yyyy";
         private const string INVALID_DOUBLE_MESSAGE = "Could not conver string to double: ";
@@ -55,7 +56,7 @@ namespace iTechArt.Service.Parsers
                 return genderOutput;
             throw new InvalidDataException($"{INVALID_ENUM_MESSAGE}{input}");
         }
-        public GroceryParsers(IGroceryRepository groceryRepository)
+        public GroceryParser(IGroceryRepository groceryRepository)
         {
             _groceryRepository = groceryRepository;
         }
@@ -98,14 +99,14 @@ namespace iTechArt.Service.Parsers
                         {
                             var groceryDTO = new GroceryDTO
                             {
-                                FirstName = sheet.Cells[index, 1].Value?.ToString(),
-                                LastName = sheet.Cells[index, 2].Value?.ToString(),
-                                Email = sheet.Cells[index, 3].Value?.ToString(),
-                                Gender = Enum.Parse<Gender>(sheet.Cells[index, 4].Value?.ToString()),
-                                Birthday = DateTimeGuard(sheet.Cells[index, 5].Value?.ToString()),
-                                JobTitle = sheet.Cells[index, 6].Value?.ToString(),
-                                DepartmentRetail = sheet.Cells[index, 7].Value?.ToString(),
-                                Salary = DoubleGuard(sheet.Cells[index, 8].Value?.ToString()),
+                                FirstName = sheet.GetValue<string>(index,GroceryIndexConstants.FIRSTNAMEINDEX),
+                                LastName = sheet.GetValue<string>(index, GroceryIndexConstants.LASTNAMEINDEX),
+                                Email = sheet.GetValue<string>(index, GroceryIndexConstants.EMAILINDEX),
+                                Gender = Enum.Parse<Gender>(sheet.GetValue<string>(index, GroceryIndexConstants.GENDERINDEX)),
+                                Birthday = DateTimeGuard(sheet.GetValue<string>(index,GroceryIndexConstants.BIRTHDAYINDEX)),
+                                JobTitle = sheet.GetValue<string>(index, GroceryIndexConstants.GENDERINDEX),
+                                DepartmentRetail = sheet.GetValue<string>(index, GroceryIndexConstants.DEPARTMENTRETAILINDEX),
+                                Salary = DoubleGuard(sheet.GetValue<string>(index, GroceryIndexConstants.SALARYINDEX))
                             };
                             _grocery.Add(groceryDTO);
                         }
@@ -142,7 +143,6 @@ namespace iTechArt.Service.Parsers
                                 DepartmentRetail = item.Element(GroceryIndexConstants.DEPARTMENTRETAIL).Value,
                                 Salary = (double)item.Element(GroceryIndexConstants.SALARY)
                             };
-
                 return items.ToArray();
             }
         }
@@ -157,7 +157,7 @@ namespace iTechArt.Service.Parsers
             Map(p => p.FirstName).Name("first_name");
             Map(p => p.LastName).Name("last_name");
             Map(p => p.Email).Name("email");
-            Map(p => p.Gender).Name("gender");
+            Map(p => p.Gender).Name("gender").TypeConverter<EnumConverterHelper<Gender>>(); ;
             Map(p => p.Birthday).Name("birthday");
             Map(p => p.JobTitle).Name("job_Title");
             Map(p => p.DepartmentRetail).Name("department_retail");
