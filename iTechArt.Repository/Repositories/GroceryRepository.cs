@@ -59,11 +59,11 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Add grocery items to database.
         /// </summary>
-        public async Task AddGroceriesAsync(IEnumerable<IGrocery> grocery)
+        public async Task AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
             {
-                await _dbContext.AddRangeAsync(grocery.Select(_mapper.Map<GroceryDb>));
+                await _dbContext.AddRangeAsync(groceries.Select(_mapper.Map<GroceryDb>));
                 await _dbContext.SaveChangesAsync();
           
             }

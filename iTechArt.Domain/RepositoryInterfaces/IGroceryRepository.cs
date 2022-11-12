@@ -8,22 +8,22 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all groceries from database.
         /// </summary>
-        Task<IGrocery[]> GetAllAsync();
+        public Task<IGrocery[]> GetAllAsync();
 
         /// <summary>
         /// Get grocery by id.
         /// </summary>
-        //Task<IGrocery> GetByIdAsync(long id);
+        //public Task<IGrocery> GetByIdAsync(long id);
 
         /// <summary>
         /// Update grocery.
         /// </summary>
-        Task UpdateAsync(IGrocery grocery);
+        public Task UpdateAsync(IGrocery grocery);
 
         /// <summary>
         /// Delete grocery from database.
         /// </summary>
-        Task DeleteAsync(long id);
+        public Task DeleteAsync(long id);
 
         /// </summary>
         /// Get count of groceries.
