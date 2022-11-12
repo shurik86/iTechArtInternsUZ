@@ -22,7 +22,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Export data for grocery
         /// </summary>
-        public Task<IGrocery[]> ExportGrocery();
+        public Task<IGrocery[]> ExportGrocery(int pageIndex);
 
         /// <summary>
         /// Count of grocery not implemented yet

@@ -27,9 +27,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Exporting airport datas
         /// </summary>
-        public async Task<IAirport[]> ExportAirportExcel()
+        public async Task<IAirport[]> ExportAirportExcel(int pageIndex)
         {
-            return await _airportRepository.GetAllAsync();
+            return await _airportRepository.GetAllAsync(pageIndex);
         }
 
         /// <summary>

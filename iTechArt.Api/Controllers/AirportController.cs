@@ -44,9 +44,9 @@ namespace iTechArt.Api.Controllers
         /// Controller of Exporting airport data
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportAirportExcel()
+        public async Task<IActionResult> ExportAirportExcel(int pageIndex)
         {
-            return Ok( await _airportsService.ExportAirportExcel());
+            return Ok( await _airportsService.ExportAirportExcel(pageIndex));
         }
 
         [HttpPost(ApiConstants.IMPORTEXCEL)]

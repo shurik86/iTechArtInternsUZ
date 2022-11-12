@@ -89,9 +89,9 @@ namespace iTechArt.Api.Controllers
         /// api route which allows to get all info from db and parse it to the following format
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportGroceryData()
+        public async Task<IActionResult> ExportGroceryData([FromQuery] int pageIndex)
         {
-            return Ok(await _groceryService.ExportGrocery());
+            return Ok(await _groceryService.ExportGrocery(pageIndex));
         }
         /// <summary>
         /// Get total amount of groceries

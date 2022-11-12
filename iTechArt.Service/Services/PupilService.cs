@@ -19,9 +19,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync()
+        public async Task<IPupil[]> GetAllAsync(int pageIndex)
         {
-            return await _pupilRepository.GetAllAsync();
+            return await _pupilRepository.GetAllAsync(pageIndex);
         }
 
         /// <summary>

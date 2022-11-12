@@ -2,6 +2,9 @@
 {
     internal static class Pagination
     {
+        /// <summary>
+        /// Paginates DbSet according to the pageIndex and PageSize
+        /// </summary>
         public static IQueryable<TSource> Paginate<TSource>(this IQueryable<TSource> source, int pageIndex)
         {
             return PaginationConstant.PageSize > 0 && pageIndex > 0

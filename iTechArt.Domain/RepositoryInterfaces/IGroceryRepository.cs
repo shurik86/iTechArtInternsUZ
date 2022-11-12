@@ -9,7 +9,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all groceries from database
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IGrocery[]> GetAllAsync();
+        Task<IGrocery[]> GetAllAsync(int pageIndex);
 
         /// <summary>
         /// Get grocery by id

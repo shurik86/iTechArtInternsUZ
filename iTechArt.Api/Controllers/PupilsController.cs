@@ -43,9 +43,9 @@ namespace iTechArt.Api.Controllers
         /// Get all pupils
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPupil[]>> GetAllAsync()
+        public async Task<ActionResult<IPupil[]>> GetAllAsync([FromQuery] int pageIndex)
         {
-            return Ok(await _pupilService.GetAllAsync());
+            return Ok(await _pupilService.GetAllAsync(pageIndex));
         }
 
         /// <summary>

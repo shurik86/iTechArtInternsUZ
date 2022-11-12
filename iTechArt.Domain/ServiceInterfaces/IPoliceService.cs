@@ -24,6 +24,6 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// function to export data from the database.
         /// </summary>
-        public Task<IPolice[]> GetAllPolice();
+        public Task<IPolice[]> GetAllPolice(int pageIndex);
     }
 }

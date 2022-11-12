@@ -29,9 +29,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPolice()
+        public async Task<IPolice[]> GetAllPolice(int pageIndex)
         {
-            return await _policeRepository.GetAllAsync();
+            return await _policeRepository.GetAllAsync(pageIndex);
         }
 
         /// <summary>
