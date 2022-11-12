@@ -18,14 +18,13 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets the built date of airport.
         /// </summary>
-
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
+        
         public DateOnly BuiltDate { get; }
 
         /// <summary>
         /// Gets a number of people can be in at the same time at the airport.
         /// </summary>
-        public ushort Capacity { get; }
+        public int Capacity { get; }
 
         /// <summary>
         ///  Gets address location of the airport.
@@ -40,7 +39,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets a number of employees.
         /// </summary>
-        public ushort EmployeesCount { get; }
+        public int EmployeesCount { get; }
 
         /// <summary>
         /// Gets the number of passengers who fly from a particular airport.
@@ -55,6 +54,6 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets the average price of tickets.
         /// </summary>
-        public ushort AverageTicketPrice { get; }
+        public int AverageTicketPrice { get; }
     }
 }

@@ -27,7 +27,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Exporting airport datas
         /// </summary>
-        public async Task<IAirport[]> ExportAirportExcel()
+        public async Task<IAirport[]> ExportAirportExcelAsync()
         {
             return await _airportRepository.GetAllAsync();
         }
@@ -35,21 +35,21 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import airport's file
         /// </summary>
-        public async Task ImportAirportFile(IFormFile file)
+        public async Task ImportAirportFileAsync(IFormFile file)
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
             if (FileConstants.excelExtensions.Contains(fileExtension))
             {
-                await AirportExcelParser(file);
+                await AirportExcelParseAsync(file);
             }
             else if (FileConstants.csvExtensions.Contains(fileExtension))
             {
-                await AirportCSVParser(file);
+                await AirportCSVParseAsync(file);
             }
             else if (FileConstants.xmlExtensions.Contains(fileExtension))
             {
-                await AirportXMLParser(file);
+                await AirportXMLParseAsync(file);
             }
             else
             {
@@ -60,7 +60,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas from excel file
         /// </summary>
-        public async Task AirportExcelParser(IFormFile file)
+        public async Task AirportExcelParseAsync(IFormFile file)
         {
             await _airportParsers.ExcelParserAsync(file);
         }
@@ -68,7 +68,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas from csv file
         /// </summary>
-        public async Task AirportCSVParser(IFormFile file)
+        public async Task AirportCSVParseAsync(IFormFile file)
         {
             await _airportParsers.CsvParserAsync(file);
         }
@@ -76,7 +76,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas from xml file
         /// </summary>
-        public async Task AirportXMLParser(IFormFile file)
+        public async Task AirportXMLParseAsync(IFormFile file)
         {
             await _airportParsers.XmlParserAsync(file);
         }   

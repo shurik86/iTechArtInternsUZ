@@ -29,7 +29,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or internal sets A number of people can be in at the same time at the airport.
         /// </summary>
-        public ushort Capacity { get; set; }
+        public int Capacity { get; set; }
 
         /// <summary>
         /// Gets or internal sets Address location of the airport.
@@ -46,7 +46,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or internal sets A number of employees.
         /// </summary>
-        public ushort EmployeesCount { get; set; }
+        public int EmployeesCount { get; set; }
 
         /// <summary>
         /// Gets or internal sets The number of passengers who fly from a particular airport.
@@ -61,6 +61,6 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or internal sets The average price of tickets.
         /// </summary>
-        public ushort AverageTicketPrice { get; set; }
+        public int AverageTicketPrice { get; set; }
     }
 }

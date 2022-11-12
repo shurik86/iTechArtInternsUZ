@@ -30,7 +30,7 @@ namespace iTechArt.Repository.BusinessModels
         /// Gets or internal sets A number of people can be in at the same time at the airport.
         /// </summary>
 
-        public ushort Capacity { get; internal set; }
+        public int Capacity { get; internal set; }
 
         /// <summary>
         /// Gets or internal sets  Address location of the airport.
@@ -50,7 +50,7 @@ namespace iTechArt.Repository.BusinessModels
         /// Gets or internal sets A number of employees.
         /// </summary>
 
-        public ushort EmployeesCount { get; internal set; }
+        public int EmployeesCount { get; internal set; }
 
         /// <summary>
         /// Gets or internal sets The number of passengers who fly from a particular airport.
@@ -67,6 +67,6 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or internal sets The average price of tickets.
         /// </summary>
-        public ushort AverageTicketPrice { get; internal set; }
+        public int AverageTicketPrice { get; internal set; }
     }
 }

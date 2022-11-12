@@ -110,7 +110,7 @@ namespace iTechArt.Service.Parsers
                         Capacity = Convert.ToUInt16(worksheet.Cells[r, 1 + AirportIndexConstants.CAPACITYINDEX].Value),
                         Address = worksheet.Cells[r, 1 + AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
                         City = worksheet.Cells[r, 1 + AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
-                        EmployeesCount = Convert.ToUInt16(worksheet.Cells[r, 1 + AirportIndexConstants.EMPLOYEESCOUNTINDEX].Value),
+                        EmployeesCount = Convert.ToInt32(worksheet.Cells[r, 1 + AirportIndexConstants.EMPLOYEESCOUNTINDEX].Value),
                         PassengersPerYear = Convert.ToInt64(worksheet.Cells[r, 1 + AirportIndexConstants.PASSANGERPERYEARINDEX].Value),
                         FlightsPerYear = Convert.ToUInt32(worksheet.Cells[r, 1 + AirportIndexConstants.FLIGHTSPERYEARINDEX].Value),
                         AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[r, 1 + AirportIndexConstants.AVERAGETICKETPRICEINDEX].Value)
@@ -143,7 +143,7 @@ namespace iTechArt.Service.Parsers
                     EmployeesCount = Convert.ToUInt16(cells[i, AirportIndexConstants.EMPLOYEESCOUNTINDEX].Value),
                     PassengersPerYear = Convert.ToInt64(cells[i, AirportIndexConstants.PASSANGERPERYEARINDEX].Value),
                     FlightsPerYear = Convert.ToUInt32(cells[i, AirportIndexConstants.FLIGHTSPERYEARINDEX].Value),
-                    AverageTicketPrice = Convert.ToUInt16(cells[i, AirportIndexConstants.AVERAGETICKETPRICEINDEX].Value),
+                    AverageTicketPrice = Convert.ToInt32(cells[i, AirportIndexConstants.AVERAGETICKETPRICEINDEX].Value),
                 };
             }
 
