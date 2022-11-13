@@ -85,6 +85,21 @@ namespace iTechArt.Service.Services
         public async Task AirportXMLParseAsync(IFormFile file)
         {
             await _airportParsers.XmlParserAsync(file);
-        }   
+        }
+
+
+        /// <summary>
+        /// Exports MedStaff Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generateAirportXml.GetAirportXmlAsync();
+            using (var memoryStream = new MemoryStream())
+            {
+                xmlDocument.Save(memoryStream);
+                await memoryStream.FlushAsync();
+                return memoryStream.ToArray();
+            }
+        }
     }
 }

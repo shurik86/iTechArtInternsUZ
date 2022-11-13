@@ -12,7 +12,10 @@ namespace iTechArt.Serivce.Services
     {
         private readonly IGroceryRepository _groceryRepository;
         private readonly IGroceryParser _groceryParsers;
-        public GroceryService(IGroceryRepository groceryRepository, IGroceryParser groceryParsers)
+        private readonly IGenerateGroceryXml _generateGroceryXml;
+        public GroceryService(IGroceryRepository groceryRepository, 
+                              IGroceryParser groceryParsers,
+                              IGenerateGroceryXml generateGroceryXml)
         {
             _groceryParsers = groceryParsers;
             _groceryRepository = groceryRepository;

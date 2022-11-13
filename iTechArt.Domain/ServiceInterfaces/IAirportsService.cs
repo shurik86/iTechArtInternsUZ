@@ -23,10 +23,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         public Task AirportCSVParseAsync(IFormFile file);
 
 
-        /// <summary>
-        /// Exporting airport datas
-        /// </summary>
-        public Task<IAirport[]> ExportAirportExcel();
+        ///// <summary>
+        ///// Exporting airport datas
+        ///// </summary>
+        //public Task<IAirport[]> ExportAirportExcel();
 
         /// <summary>
         /// Parse airport's file from xml
@@ -36,5 +36,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports Airport Data to a new XML file.
         /// </summary>
         public Task<IAirport[]> ExportAirportExcelAsync();
+
+        /// <summary>
+        /// Exports Airport Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
     }
 }

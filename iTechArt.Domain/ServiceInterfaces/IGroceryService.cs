@@ -29,5 +29,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         public ValueTask <int> GetCountOfGroceryAsync();
 
+        /// <summary>
+        /// Exports Grocery Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
     }
 }
