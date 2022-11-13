@@ -35,9 +35,10 @@
         };
 
         /// <summary>
-        /// Content Type for XML.
+        /// Content Type for XML and XLSX.
         /// </summary>
         public static readonly string XmlContent = "text/xml";
+        public static readonly string ExcelContent = "application/vnd.ms-excel";
 
         /// <summary>
         /// Content types of EXCEL files.

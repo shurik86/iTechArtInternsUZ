@@ -10,7 +10,7 @@ namespace iTechArt.Domain.ParserInterfaces.IGenerateXml
     public interface IGenerateAirportXml
     {
         /// <summary>
-        /// Generates new xml document of Airport table in Database.
+        /// Generates new xml document of Airport table from Database.
         /// </summary>
         /// <returns>Xml Document</returns>
         public Task<XmlDocument> GetAirportXmlAsync();

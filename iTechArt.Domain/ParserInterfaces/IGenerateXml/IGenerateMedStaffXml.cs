@@ -10,7 +10,7 @@ namespace iTechArt.Domain.ParserInterfaces.IGenerateXml
     public interface IGenerateMedStaffXml
     {
         /// <summary>
-        /// Generates new xml document of MedStaff table in Database.
+        /// Generates new xml document of MedStaff table from Database.
         /// </summary>
         /// <returns>Xml Document</returns>
         public Task<XmlDocument> GetMedStaffXmlAsync();

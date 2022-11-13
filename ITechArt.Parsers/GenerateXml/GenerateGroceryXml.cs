@@ -1,5 +1,6 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.RepositoryInterfaces;
 using ITechArt.Parsers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,12 +14,13 @@ namespace ITechArt.Parsers.GenerateXml
 {
     public sealed class GenerateGroceryXml : IGenerateGroceryXml
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IGroceryRepository _groceryRepository;
 
-        public GenerateGroceryXml(AppDbContext dbContext)
+        public GenerateGroceryXml(IGroceryRepository groceryRepository)
         {
-            _dbContext = dbContext;
+            _groceryRepository = groceryRepository;
         }
+
 
         /// <summary>
         /// Generates a new XML file of type Grocery table from the Database.
@@ -30,7 +32,7 @@ namespace ITechArt.Parsers.GenerateXml
             xmlDocument.AppendChild(declaration);
             XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
 
-            var groceryArray = await _dbContext.Groceries.ToArrayAsync();
+            var groceryArray = await _groceryRepository.GetAllAsync();
             foreach (var grocery in groceryArray)
             {
                 XmlElement record = xmlDocument.CreateElement(null, XmlConstants.record, null);
@@ -48,8 +50,8 @@ namespace ITechArt.Parsers.GenerateXml
                 XmlText BirthdayText = xmlDocument.CreateTextNode(grocery.Birthday.ToString());
                 XmlText GenderText = xmlDocument.CreateTextNode(grocery.Gender.ToString());
                 XmlText EmailText = xmlDocument.CreateTextNode(grocery.Email);
-                XmlText JobtitleText = xmlDocument.CreateTextNode(grocery.Jobtitle);
-                XmlText DepartmentretailText = xmlDocument.CreateTextNode(grocery.Departmentretail);
+                XmlText JobtitleText = xmlDocument.CreateTextNode(grocery.JobTitle);
+                XmlText DepartmentretailText = xmlDocument.CreateTextNode(grocery.DepartmentRetail);
                 XmlText SalaryText = xmlDocument.CreateTextNode(grocery.Salary.ToString());
 
                 FirstName.AppendChild(FirstNameText);

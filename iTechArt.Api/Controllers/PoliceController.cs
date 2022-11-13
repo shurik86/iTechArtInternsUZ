@@ -107,5 +107,19 @@ namespace iTechArt.Api.Controllers
         {
             return Ok(await _policeService.GetAllPolice());
         }
+
+
+        /// <summary>
+        /// Exports Police table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _policeService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
     }
 }

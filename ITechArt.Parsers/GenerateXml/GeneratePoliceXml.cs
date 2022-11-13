@@ -1,5 +1,6 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.RepositoryInterfaces;
 using ITechArt.Parsers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,12 +14,13 @@ namespace ITechArt.Parsers.GenerateXml
 {
     public sealed class GeneratePoliceXml : IGeneratePoliceXml
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IPoliceRepository _policeRepository;
 
-        public GeneratePoliceXml(AppDbContext dbContext)
+        public GeneratePoliceXml(IPoliceRepository policeRepository)
         {
-            _dbContext = dbContext;
+            _policeRepository = policeRepository;
         }
+
 
         /// <summary>
         /// Generates a new XML file of type Police table from the Database.
@@ -30,7 +32,7 @@ namespace ITechArt.Parsers.GenerateXml
             xmlDocument.AppendChild(declaration);
             XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
 
-            var policeArray = await _dbContext.Police.ToArrayAsync();
+            var policeArray = await _policeRepository.GetAllAsync();
             foreach(var police in policeArray)
             {
                 XmlElement record = xmlDocument.CreateElement(null, XmlConstants.record, null);

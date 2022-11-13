@@ -1,5 +1,6 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.RepositoryInterfaces;
 using ITechArt.Parsers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,12 +14,14 @@ namespace ITechArt.Parsers.GenerateXml
 {
     public sealed class GenerateStudentsXml : IGenerateStudentXml
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IStudentRepository _studentRepository;
 
-        public GenerateStudentsXml(AppDbContext dbContext)
+        public GenerateStudentsXml(IStudentRepository studentRepository)
         {
-            _dbContext = dbContext;
+            _studentRepository = studentRepository;
         }
+
+
 
         /// <summary>
         /// Generates a new XML file of type Students table from the Database.
@@ -30,7 +33,7 @@ namespace ITechArt.Parsers.GenerateXml
             xmlDocument.AppendChild(declaration);
             XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
 
-            var studentsArray = await _dbContext.Students.ToArrayAsync();
+            var studentsArray = await _studentRepository.GetAllAsync();
             foreach (var student in studentsArray)
             {
                 XmlElement record = xmlDocument.CreateElement(null, XmlConstants.record, null);

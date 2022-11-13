@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ITechArt.Parsers.Constants
 {
+    /// <summary>
+    /// Static Strings for Grocery Model to use inside Parsers.
+    /// </summary>
     public static class GroceryConstants
     {
         public static readonly string FirstName = "FirstName";

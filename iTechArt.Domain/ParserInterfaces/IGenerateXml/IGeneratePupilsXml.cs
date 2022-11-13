@@ -10,7 +10,7 @@ namespace iTechArt.Domain.ParserInterfaces.IGenerateXml
     public interface IGeneratePupilsXml
     {
         /// <summary>
-        /// Generates new xml document of Pupils table in Database.
+        /// Generates new xml document of Pupils table from Database.
         /// </summary>
         /// <returns>Xml Document</returns>
         public Task<XmlDocument> GetPupilsXmlAsync();

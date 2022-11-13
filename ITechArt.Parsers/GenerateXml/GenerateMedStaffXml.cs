@@ -1,5 +1,6 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.RepositoryInterfaces;
 using ITechArt.Parsers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,11 +14,11 @@ namespace ITechArt.Parsers.GenerateXml
 {
     public sealed class GenerateMedStaffXml : IGenerateMedStaffXml
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IMedStaffRepository _medStaffRepository;
 
-        public GenerateMedStaffXml(AppDbContext dbContext)
+        public GenerateMedStaffXml(IMedStaffRepository medStaffRepository)
         {
-            _dbContext = dbContext;
+            _medStaffRepository = medStaffRepository;
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace ITechArt.Parsers.GenerateXml
             xmlDocument.AppendChild(declaration);
             XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
 
-            var medStaffArray = await _dbContext.Staffs.ToArrayAsync();
+            var medStaffArray = await _medStaffRepository.GetAllAsync();
             foreach (var medStaff in medStaffArray)
             {
                 XmlElement record = xmlDocument.CreateElement(null, XmlConstants.record, null);

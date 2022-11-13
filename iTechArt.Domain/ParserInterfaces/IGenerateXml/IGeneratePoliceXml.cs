@@ -10,7 +10,7 @@ namespace iTechArt.Domain.ParserInterfaces.IGenerateXml
     public interface IGeneratePoliceXml
     {
         /// <summary>
-        /// Generates new xml document of Police table in Database.
+        /// Generates new xml document of Police table from Database.
         /// </summary>
         /// <returns>Xml Document</returns>
         public Task<XmlDocument> GetPoliceXmlAsync();

@@ -2,6 +2,7 @@
 using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateExcel;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
@@ -19,14 +20,20 @@ namespace iTechArt.Service.Services
         private readonly IAirportRepository _airportRepository;
         private readonly IAirportParsers _airportParsers;
         private readonly IGenerateAirportXml _generateAirportXml;
+        private readonly IGenerateAirportExcel _generateAirportExcel;
+        private readonly IStreamToArray _streamToArray;
 
         public AirportService(IAirportRepository airportRepository, 
                               IAirportParsers airportParsers,
-                              IGenerateAirportXml generateAirportXml)
+                              IGenerateAirportXml generateAirportXml,
+                              IGenerateAirportExcel generateAirportExcel,
+                              IStreamToArray streamToArray)
         {
             _airportRepository = airportRepository;
             _airportParsers = airportParsers;
             _generateAirportXml = generateAirportXml;
+            _generateAirportExcel = generateAirportExcel;
+            _streamToArray = streamToArray;
         }
         
         /// <summary>
@@ -89,17 +96,21 @@ namespace iTechArt.Service.Services
 
 
         /// <summary>
-        /// Exports MedStaff Data to a new XML file.
+        /// Exports Airport Data to a new XML file.
         /// </summary>
         public async Task<byte[]> ExportXmlAsync()
         {
             XmlDocument xmlDocument = await _generateAirportXml.GetAirportXmlAsync();
-            using (var memoryStream = new MemoryStream())
-            {
-                xmlDocument.Save(memoryStream);
-                await memoryStream.FlushAsync();
-                return memoryStream.ToArray();
-            }
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+
+        /// <summary>
+        /// Exports Airport Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generateAirportExcel.GetAirportExcelAsync();
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateExcel;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
 using System.Xml;
 
 namespace iTechArt.Serivce.Services
@@ -13,13 +15,19 @@ namespace iTechArt.Serivce.Services
         private readonly IGroceryRepository _groceryRepository;
         private readonly IGroceryParser _groceryParsers;
         private readonly IGenerateGroceryXml _generateGroceryXml;
+        private readonly IGenerateGroceryExcel _generateGroceryExcel;
+        private readonly IStreamToArray _streamToArray;
         public GroceryService(IGroceryRepository groceryRepository, 
                               IGroceryParser groceryParsers,
-                              IGenerateGroceryXml generateGroceryXml)
+                              IGenerateGroceryXml generateGroceryXml,
+                              IStreamToArray streamToArray,
+                              IGenerateGroceryExcel generateGroceryExcel)
         {
             _groceryParsers = groceryParsers;
             _groceryRepository = groceryRepository;
             _generateGroceryXml = generateGroceryXml;
+            _streamToArray = streamToArray;
+            _generateGroceryExcel = generateGroceryExcel;
         }
 
         /// <summary>
@@ -76,12 +84,15 @@ namespace iTechArt.Serivce.Services
         public async Task<byte[]> ExportXmlAsync()
         {
             XmlDocument xmlDocument = await _generateGroceryXml.GetGroceryXmlAsync();
-            using (var memoryStream = new MemoryStream())
-            {
-                xmlDocument.Save(memoryStream);
-                await memoryStream.FlushAsync();
-                return memoryStream.ToArray();
-            }
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+        /// <summary>
+        /// Exports Grocery Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generateGroceryExcel.GetGroceryExcelAsync();
         }
     }
 }

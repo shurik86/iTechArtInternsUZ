@@ -1,5 +1,6 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.RepositoryInterfaces;
 using ITechArt.Parsers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,11 +14,11 @@ namespace ITechArt.Parsers.GenerateXml
 {
     public sealed class GeneratePupilsXml : IGeneratePupilsXml
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IPupilRepository _pupilRepository;
 
-        public GeneratePupilsXml(AppDbContext dbContext)
+        public GeneratePupilsXml(IPupilRepository pupilRepository)
         {
-            _dbContext = dbContext;
+            _pupilRepository = pupilRepository;
         }
 
 
@@ -31,7 +32,7 @@ namespace ITechArt.Parsers.GenerateXml
             xmlDocument.AppendChild(declaration);
             XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
 
-            var pupilsArray = await _dbContext.Pupils.ToArrayAsync();
+            var pupilsArray = await _pupilRepository.GetAllAsync();
             foreach (var pupil in pupilsArray)
             {
                 XmlElement record = xmlDocument.CreateElement(null, XmlConstants.record, null);

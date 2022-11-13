@@ -1,9 +1,11 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateExcel;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
 using System.Xml;
 
 namespace iTechArt.Service.Services
@@ -15,19 +17,25 @@ namespace iTechArt.Service.Services
         private readonly IExcelParse _excelParse;
         private readonly IXmlParse _xmlParse;
         private readonly IGeneratePoliceXml _generatePoliceXml;
+        private readonly IGeneratePoliceExcel _generatePoliceExcel;
+        private readonly IStreamToArray _streamToArray;
 
 
         public PoliceService(IPoliceRepository policeRepository,
                              IXmlParse xmlParse,
                              IExcelParse excelParse,
                              ICsvParse csvParse,
-                             IGeneratePoliceXml generatePoliceXml)
+                             IGeneratePoliceXml generatePoliceXml,
+                             IStreamToArray streamToArray,
+                             IGeneratePoliceExcel generatePoliceExcel)
         {
             _policeRepository = policeRepository;
             _xmlParse = xmlParse;
             _excelParse = excelParse;
             _csvParse = csvParse;
             _generatePoliceXml = generatePoliceXml;
+            _streamToArray = streamToArray;
+            _generatePoliceExcel = generatePoliceExcel;
         }
 
         /// <summary>
@@ -74,12 +82,15 @@ namespace iTechArt.Service.Services
         public async Task<byte[]> ExportXmlAsync()
         {
             XmlDocument xmlDocument = await _generatePoliceXml.GetPoliceXmlAsync();
-            using(var memoryStream = new MemoryStream())
-            {
-                xmlDocument.Save(memoryStream);
-                await memoryStream.FlushAsync();
-                return memoryStream.ToArray();
-            }
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+        /// <summary>
+        /// Exports Police Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generatePoliceExcel.GetPoliceExcelAsync();
         }
     }
 }

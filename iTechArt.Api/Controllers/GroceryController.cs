@@ -109,6 +109,19 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
+        /// Exports Grocery table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _groceryService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
+
+        /// <summary>
         /// Get total amount of groceries
         /// </summary>
 

@@ -1,5 +1,6 @@
 ﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.RepositoryInterfaces;
 using ITechArt.Parsers.Constants;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,12 +14,14 @@ namespace ITechArt.Parsers.GenerateXml
 {
     public sealed class GenerateAirportXml : IGenerateAirportXml
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IAirportRepository _airportRepository;
 
-        public GenerateAirportXml(AppDbContext dbContext)
+        public GenerateAirportXml(IAirportRepository airportRepository)
         {
-            _dbContext = dbContext;
+            _airportRepository = airportRepository;
         }
+
+
 
         /// <summary>
         /// Generates a new XML file of type Airport table from the Database.
@@ -30,7 +33,7 @@ namespace ITechArt.Parsers.GenerateXml
             xmlDocument.AppendChild(declaration);
             XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
 
-            var airportArray = await _dbContext.Airports.ToArrayAsync();
+            var airportArray = await _airportRepository.GetAllAsync();
             foreach (var airport in airportArray)
             {
                 XmlElement record = xmlDocument.CreateElement(null, XmlConstants.record, null);
@@ -39,7 +42,7 @@ namespace ITechArt.Parsers.GenerateXml
                 XmlElement Capacity = xmlDocument.CreateElement(null, AirportConstants.Capacity, null);
                 XmlElement Address = xmlDocument.CreateElement(null, AirportConstants.Address, null);
                 XmlElement City = xmlDocument.CreateElement(null, AirportConstants.City, null);
-                XmlElement EmpoyeesCount = xmlDocument.CreateElement(null, AirportConstants.EmpoyeesCount, null);
+                XmlElement EmployeesCount = xmlDocument.CreateElement(null, AirportConstants.EmpoyeesCount, null);
                 XmlElement PassengersPerYear = xmlDocument.CreateElement(null, AirportConstants.PassengersPerYear, null);
                 XmlElement FlightsPerYear = xmlDocument.CreateElement(null, AirportConstants.FlightsPerYear, null);
                 XmlElement AverageTicketPrice = xmlDocument.CreateElement(null, AirportConstants.AverageTicketPrice, null);
@@ -49,7 +52,7 @@ namespace ITechArt.Parsers.GenerateXml
                 XmlText CapacityText = xmlDocument.CreateTextNode(airport.Capacity.ToString());
                 XmlText AddressText = xmlDocument.CreateTextNode(airport.Address);
                 XmlText CityText = xmlDocument.CreateTextNode(airport.City);
-                XmlText EmpoyeesCountText = xmlDocument.CreateTextNode(airport.EmpoyeesCount.ToString());
+                XmlText EmployeesCountText = xmlDocument.CreateTextNode(airport.EmployeesCount.ToString());
                 XmlText PassengersPerYearText = xmlDocument.CreateTextNode(airport.PassengersPerYear.ToString());
                 XmlText FlightsPerYearText = xmlDocument.CreateTextNode(airport.FlightsPerYear.ToString());
                 XmlText AverageTicketPriceText = xmlDocument.CreateTextNode(airport.AverageTicketPrice.ToString());
@@ -59,7 +62,7 @@ namespace ITechArt.Parsers.GenerateXml
                 Capacity.AppendChild(CapacityText);
                 Address.AppendChild(AddressText);
                 City.AppendChild(CityText);
-                EmpoyeesCount.AppendChild(EmpoyeesCountText);
+                EmployeesCount.AppendChild(EmployeesCountText);
                 PassengersPerYear.AppendChild(PassengersPerYearText);
                 FlightsPerYear.AppendChild(FlightsPerYearText);
                 AverageTicketPrice.AppendChild(AverageTicketPriceText);
@@ -69,7 +72,7 @@ namespace ITechArt.Parsers.GenerateXml
                 record.AppendChild(Capacity);
                 record.AppendChild(Address);
                 record.AppendChild(City);
-                record.AppendChild(EmpoyeesCount);
+                record.AppendChild(EmployeesCount);
                 record.AppendChild(PassengersPerYear);
                 record.AppendChild(FlightsPerYear);
                 record.AppendChild(AverageTicketPrice);

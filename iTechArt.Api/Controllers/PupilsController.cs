@@ -102,5 +102,18 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.Pupils}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
             };
         }
+
+        /// <summary>
+        /// Exports Pupils table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _pupilService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Pupils}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
     }
 }

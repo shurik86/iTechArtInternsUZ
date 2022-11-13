@@ -10,7 +10,7 @@ namespace iTechArt.Domain.ParserInterfaces.IGenerateXml
     public interface IGenerateGroceryXml
     {
         /// <summary>
-        /// Generates new xml document of Grocery table in Database.
+        /// Generates new xml document of Grocery table from Database.
         /// </summary>
         /// <returns>Xml Document</returns>
         public Task<XmlDocument> GetGroceryXmlAsync();
