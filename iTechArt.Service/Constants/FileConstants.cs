@@ -20,9 +20,9 @@
         /// <summary>
         /// Constant extensions for file.
         /// </summary>
-        public static string xlsxExt = ".xlsx";
-        public static string csvExt = ".csv";
-        public static string xmlExt = ".xml";
+        public static readonly string xlsxExt = ".xlsx";
+        public static readonly string csvExt = ".csv";
+        public static readonly string xmlExt = ".xml";
 
 
         /// <summary>

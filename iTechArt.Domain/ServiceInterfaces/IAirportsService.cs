@@ -10,23 +10,33 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         public Task ImportAirportFile(IFormFile file);
 
+        
         /// <summary>
         /// Parse airport's file from excel
         /// </summary>      
         public Task AirportExcelParser(IFormFile file);
+
 
         /// <summary>
         /// Parse airport's file from csv
         /// </summary>
         public Task AirportCSVParser(IFormFile file);
 
+
+        /// <summary>
+        /// Exporting airport datas
+        /// </summary>
+        public Task<IAirport[]> ExportAirportExcel();
+
         /// <summary>
         /// Parse airport's file from xml
         /// </summary>
         public Task AirportXMLParser(IFormFile file);
+
+
         /// <summary>
-        /// Interface of Exporting airport datas
+        /// Exports Airport Data to a new XML file.
         /// </summary>
-        public Task<IAirport[]> ExportAirportExcel();
+        public Task<byte[]> ExportXmlAsync();
     }
 }

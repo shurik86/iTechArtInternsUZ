@@ -35,6 +35,11 @@
         };
 
         /// <summary>
+        /// Content Type for XML.
+        /// </summary>
+        public static readonly string XmlContent = "text/xml";
+
+        /// <summary>
         /// Content types of EXCEL files.
         /// </summary>
         public static readonly string[] EXCEL =
@@ -47,5 +52,15 @@
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.template"
         };
+
+        /// <summary>
+        /// Constants for File Titles.
+        /// </summary>
+        public static readonly string Police = "Police";
+        public static readonly string Airports = "Airports";
+        public static readonly string Groceries = "Groceries";
+        public static readonly string MedStaff = "MedStaff";
+        public static readonly string Pupils = "Pupils";
+        public static readonly string Students = "Students";
     }
 }

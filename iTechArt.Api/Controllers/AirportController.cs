@@ -40,13 +40,28 @@ namespace iTechArt.Api.Controllers
             }
         }
 
+
         /// <summary>
         /// Controller of Exporting airport data
         /// </summary>
         [HttpGet("get_all")]
         public async Task<IActionResult> ExportAirportExcel()
         {
-            return Ok( await _airportsService.ExportAirportExcel());
+            return Ok(await _airportsService.ExportAirportExcel());
+        }
+
+
+        /// <summary>
+        /// Exports Airport table from Database to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _airportsService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
         }
 
         [HttpPost(ApiConstants.IMPORTEXCEL)]

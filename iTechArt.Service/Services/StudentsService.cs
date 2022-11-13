@@ -1,9 +1,11 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -11,10 +13,15 @@ namespace iTechArt.Service.Services
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IStudentParser _studentParsers;
-        public StudentsService(IStudentRepository studentRepository, IStudentParser studentParsers)
+        private readonly IGenerateStudentXml _generateStudentXml;
+
+        public StudentsService(IStudentRepository studentRepository, 
+                               IStudentParser studentParsers,
+                               IGenerateStudentXml generateStudentXml)
         {
             _studentRepository = studentRepository;
             _studentParsers = studentParsers;
+            _generateStudentXml = generateStudentXml;
         }
 
         /// <summary>
@@ -73,6 +80,20 @@ namespace iTechArt.Service.Services
         public async Task ExcelImportAsync(IFormFile formFile)
         {
             await _studentParsers.ExcelParseAsync(formFile);
+        }
+
+        /// <summary>
+        /// Exports Students Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generateStudentXml.GetStudentsXmlAsync();
+            using (var memoryStream = new MemoryStream())
+            {
+                xmlDocument.Save(memoryStream);
+                await memoryStream.FlushAsync();
+                return memoryStream.ToArray();
+            }
         }
     }
 }

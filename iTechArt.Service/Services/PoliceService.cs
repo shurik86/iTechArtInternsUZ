@@ -1,9 +1,10 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
-
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -13,17 +14,20 @@ namespace iTechArt.Service.Services
         private readonly ICsvParse _csvParse;
         private readonly IExcelParse _excelParse;
         private readonly IXmlParse _xmlParse;
+        private readonly IGeneratePoliceXml _generatePoliceXml;
 
 
         public PoliceService(IPoliceRepository policeRepository,
                              IXmlParse xmlParse,
                              IExcelParse excelParse,
-                             ICsvParse csvParse)
+                             ICsvParse csvParse,
+                             IGeneratePoliceXml generatePoliceXml)
         {
             _policeRepository = policeRepository;
             _xmlParse = xmlParse;
             _excelParse = excelParse;
             _csvParse = csvParse;
+            _generatePoliceXml = generatePoliceXml;
         }
 
         /// <summary>
@@ -61,6 +65,21 @@ namespace iTechArt.Service.Services
         {
             var policesArr = await _csvParse.ParseCSVAsync(formFile);
             await _policeRepository.AddRangeAsync(policesArr);
+        }
+
+
+        /// <summary>
+        /// Exports Police Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generatePoliceXml.GetPoliceXmlAsync();
+            using(var memoryStream = new MemoryStream())
+            {
+                xmlDocument.Save(memoryStream);
+                await memoryStream.FlushAsync();
+                return memoryStream.ToArray();
+            }
         }
     }
 }

@@ -93,6 +93,21 @@ namespace iTechArt.Api.Controllers
         {
             return Ok(await _groceryService.ExportGrocery());
         }
+
+
+        /// <summary>
+        /// Exports Grocery table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _groceryService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
         /// <summary>
         /// Get total amount of groceries
         /// </summary>

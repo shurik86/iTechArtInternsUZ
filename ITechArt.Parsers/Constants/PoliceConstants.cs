@@ -11,12 +11,18 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class PoliceConstants
     {
-        public static string Name = "Name";
-        public static string Surname = "Surname";
-        public static string Email = "Email";
-        public static string Gender = "Gender";
-        public static string Address = "Address";
-        public static string JobTitle = "JobTitle";
-        public static string Salary = "Salary";
+        public static readonly string Name = "Name";
+        
+        public static readonly string Surname = "Surname";
+        
+        public static readonly string Email = "Email";
+        
+        public static readonly string Gender = "Gender";
+        
+        public static readonly string Address = "Address";
+        
+        public static readonly string JobTitle = "JobTitle";
+        
+        public static readonly string Salary = "Salary";
     }
 }

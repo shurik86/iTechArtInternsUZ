@@ -2,6 +2,7 @@
 using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Repositories;
@@ -16,14 +17,33 @@ namespace iTechArt.Service.Services
     public sealed class AirportService : IAirportsService
     {
         private readonly IAirportRepository _airportRepository;
-
         private readonly IAirportParsers _airportParsers;
-        public AirportService(IAirportRepository airportRepository, IAirportParsers airportParsers)
+        private readonly IGenerateAirportXml _generateAirportXml;
+
+        public AirportService(IAirportRepository airportRepository, 
+                              IAirportParsers airportParsers,
+                              IGenerateAirportXml generateAirportXml)
         {
             _airportRepository = airportRepository;
             _airportParsers = airportParsers;
+            _generateAirportXml = generateAirportXml;
         }
         
+        /// <summary>
+        /// Exporting airport datas
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generateAirportXml.GetAirportXmlAsync();
+            using(var memoryStream = new MemoryStream())
+            {
+                xmlDocument.Save(memoryStream);
+                await memoryStream.FlushAsync();
+                return memoryStream.ToArray();
+            }
+        }
+
+
         /// <summary>
         /// Exporting airport datas
         /// </summary>
@@ -31,6 +51,7 @@ namespace iTechArt.Service.Services
         {
             return await _airportRepository.GetAllAsync();
         }
+
 
         /// <summary>
         /// Import airport's file
@@ -79,6 +100,6 @@ namespace iTechArt.Service.Services
         public async Task AirportXMLParser(IFormFile file)
         {
             await _airportParsers.XmlParser(file);
-        }   
+        }
     }
 }

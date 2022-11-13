@@ -1,8 +1,10 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -10,11 +12,15 @@ namespace iTechArt.Service.Services
     {
         private readonly IMedStaffRepository _medStaffRepository;
         private readonly IMedStaffParser _medStaffParser;
+        private readonly IGenerateMedStaffXml _generateMedStaffXml;
 
-        public MedStaffService(IMedStaffRepository medStaffRepository, IMedStaffParser medStaffParser)
+        public MedStaffService(IMedStaffRepository medStaffRepository, 
+                               IMedStaffParser medStaffParser,
+                               IGenerateMedStaffXml generateMedStaffXml)
         {
             _medStaffRepository = medStaffRepository;
             _medStaffParser = medStaffParser;
+            _generateMedStaffXml = generateMedStaffXml;
         }
 
         /// <summary>
@@ -67,6 +73,21 @@ namespace iTechArt.Service.Services
             else if (fileExtension == ".xml")
             {
                 await _medStaffParser.ParseXMLAsync(file);
+            }
+        }
+
+
+        /// <summary>
+        /// Exports MedStaff Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generateMedStaffXml.GetMedStaffXmlAsync();
+            using (var memoryStream = new MemoryStream())
+            {
+                xmlDocument.Save(memoryStream);
+                await memoryStream.FlushAsync();
+                return memoryStream.ToArray();
             }
         }
     }

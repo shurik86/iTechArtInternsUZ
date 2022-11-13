@@ -30,5 +30,9 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         public Task<IMedStaff[]> ExportMedStaffFileAsync();
 
+        /// <summary>
+        /// Exports MedStaff Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
     }
 }

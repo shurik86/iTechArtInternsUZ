@@ -85,9 +85,23 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
+        /// Exports Police table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _policeService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
         /// route: api/police/export.
         /// Gets all data about police from the database.
         /// </summary>
+        [Obsolete]
         [HttpGet("get_all")]
         public async Task<ActionResult<IPolice[]>> GetAllData()
         {

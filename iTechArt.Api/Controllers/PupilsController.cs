@@ -89,5 +89,18 @@ namespace iTechArt.Api.Controllers
             }
             return BadRequest();
         }
+
+        /// <summary>
+        /// Exports Pupils table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _pupilService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Pupils}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
     }
 }

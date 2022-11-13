@@ -1,8 +1,10 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -10,10 +12,15 @@ namespace iTechArt.Service.Services
     {
         private readonly IPupilRepository _pupilRepository;
         private readonly IPupilParser _pupilParsers;
-        public PupilService(IPupilRepository pupilRepository, IPupilParser pupilParsers)
+        private readonly IGeneratePupilsXml _generatePupilsXml;
+
+        public PupilService(IPupilRepository pupilRepository, 
+                            IPupilParser pupilParsers,
+                            IGeneratePupilsXml generatePupilsXml)
         {
             _pupilRepository = pupilRepository;
             _pupilParsers = pupilParsers;
+            _generatePupilsXml = generatePupilsXml;
         }
 
         /// <summary>
@@ -73,6 +80,20 @@ namespace iTechArt.Service.Services
             var pupilsFromXml = await _pupilParsers.XmlParseAsync(file);
          
             await _pupilRepository.AddRangeAsync(pupilsFromXml);
+        }
+
+        /// <summary>
+        /// Exports Pupils Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generatePupilsXml.GetPupilsXmlAsync();
+            using (var memoryStream = new MemoryStream())
+            {
+                xmlDocument.Save(memoryStream);
+                await memoryStream.FlushAsync();
+                return memoryStream.ToArray();
+            }
         }
     }
 }

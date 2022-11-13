@@ -29,5 +29,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Parse pupil's file from xml.
         /// </summary>
         public Task ImportXmlAsync(IFormFile file);
+
+        /// <summary>
+        /// Exports Pupils Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
     }
 }
