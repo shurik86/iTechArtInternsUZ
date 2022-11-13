@@ -18,16 +18,16 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Async method takes no parameters and returns serialized entities as file
+        /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
         [HttpGet()]
-        public async Task<IStudent[]> ExportStudentsAsync()
+        public async Task<IStudent[]> ExportStudentsAsync(int pageIndex)
         {
-            return await _studentRepository.GetAllAsync();
+            return await _studentRepository.GetAllAsync(pageIndex);
         }
 
         /// <summary>
-        /// Async method that saves entities into DB
+        /// Async method that saves entities into DB.
         /// </summary>
         public async Task ImportStudentsAsync(IFormFile formFile)
         {
@@ -52,7 +52,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse student's file from xml
+        /// Parse student's file from xml.
         /// </summary>
         public async Task XmlImportAsync(IFormFile formFile)
         {
@@ -60,7 +60,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse student's file from csv
+        /// Parse student's file from csv.
         /// </summary>
         public async Task CsvImportAsync(IFormFile formFile)
         {
@@ -68,7 +68,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse student's file from excel
+        /// Parse student's file from excel.
         /// </summary>
         public async Task ExcelImportAsync(IFormFile formFile)
         {

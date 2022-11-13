@@ -20,7 +20,7 @@ namespace iTechArt.Service.Parsers
         }
 
         /// <summary>
-        /// Parse student's file from csv
+        /// Parse student's file from csv.
         /// </summary>
         public async Task CsvParseAsync(IFormFile file)
         {
@@ -46,7 +46,7 @@ namespace iTechArt.Service.Parsers
         }
 
         /// <summary>
-        /// Parse student's file from excel
+        /// Parse student's file from excel.
         /// </summary>
         public async Task ExcelParseAsync(IFormFile file)
         {
@@ -85,7 +85,7 @@ namespace iTechArt.Service.Parsers
         }
 
         /// <summary>
-        /// Parse student's file from xml
+        /// Parse student's file from xml.
         /// </summary>
         public async Task XmlParseAsync(IFormFile file)
         {
