@@ -6,19 +6,19 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IAirportsService
     {
         /// <summary>
-        /// Interface of Importing airport datas
+        /// Interface of Importing airport datas.
         /// </summary>
         public Task ImportAirportFileAsync(IFormFile file);
 
         
         /// <summary>
-        /// Parse airport's file from excel
+        /// Parse airport's file from excel.
         /// </summary>      
         public Task AirportExcelParseAsync(IFormFile file);
 
 
         /// <summary>
-        /// Parse airport's file from csv
+        /// Parse airport's file from csv.
         /// </summary>
         public Task AirportCSVParseAsync(IFormFile file);
 
@@ -29,23 +29,9 @@ namespace iTechArt.Domain.ServiceInterfaces
         //public Task<IAirport[]> ExportAirportExcel();
 
         /// <summary>
-        /// Parse airport's file from xml
+        /// Parse airport's file from xml.
         /// </summary>
         public Task AirportXMLParseAsync(IFormFile file);
         /// <summary>
-        /// Exports Airport Data to a new XML file.
-        /// </summary>
-        public Task<IAirport[]> ExportAirportExcelAsync();
-
-        /// <summary>
-        /// Exports Airport Data to a new XML file.
-        /// </summary>
-        public Task<byte[]> ExportXmlAsync();
-
-
-        /// <summary>
-        /// Exports Airport Data to a new Excel file.
-        /// </summary>
-        public Task<byte[]> ExportExcelAsync();
     }
 }

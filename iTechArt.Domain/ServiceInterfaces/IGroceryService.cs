@@ -1,5 +1,4 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
@@ -21,12 +20,9 @@ namespace iTechArt.Domain.ServiceInterfaces
 
         /// <summary>
         /// Export data for grocery.
-        /// </summary>
-        public Task<IGrocery[]> ExportGroceryAsync();
-
-        /// <summary>
         /// Count of grocery items.
         /// </summary>
+        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex);
         public ValueTask <int> GetCountOfGroceryAsync();
 
         /// <summary>

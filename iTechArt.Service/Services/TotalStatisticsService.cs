@@ -29,9 +29,9 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Get total counts of users
+        /// Get total counts of users.
         /// </summary>
-        public async Task<IDashboardInfo> GetCountOfUsers()
+        public async Task<IDashboardInfo> GetCountOfUsersAsync()
         {
             return new DashboardInfo()
             {
