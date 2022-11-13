@@ -3,12 +3,13 @@
     internal static class Pagination
     {
         /// <summary>
-        /// Paginates DbSet according to the pageIndex and PageSize
+        /// Paginates DbSet according to the pageIndex and PageSize.
         /// </summary>
         public static IQueryable<TSource> Paginate<TSource>(this IQueryable<TSource> source, int pageIndex)
         {
-            return PaginationConstant.PageSize > 0 && pageIndex > 0
-                ? source.Skip((pageIndex - 1) * PaginationConstant.PageSize).Take(PaginationConstant.PageSize)
+            return pageIndex > 0
+                ? source.Skip((pageIndex - 1) * PaginationConstant.PageSize)
+                        .Take(PaginationConstant.PageSize)
                 : source.Take(PaginationConstant.PageSize);
         }
     }
