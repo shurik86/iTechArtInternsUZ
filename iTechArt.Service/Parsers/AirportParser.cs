@@ -47,7 +47,7 @@ namespace iTechArt.Service.Parsers
                 }
             }
         }   
-        public async Task ExcelParser(IFormFile file)
+        public async Task ExcelParserAsync(IFormFile file)
         {
               var fileExtension = Path.GetExtension(file.FileName);
 
@@ -91,7 +91,7 @@ namespace iTechArt.Service.Parsers
                 }
         }
 
-        public async Task XmlParser(IFormFile file)
+        public async Task XmlParserAsync(IFormFile file)
         {
              var fileExtension = Path.GetExtension(file.FileName);
 

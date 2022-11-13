@@ -19,9 +19,9 @@ namespace iTechArt.Service.Parsers
             _groceryRepository = groceryRepository;
         }
         /// <summary>
-        /// Parsing Csv format grocery files
+        /// Parsing Csv format grocery files.
         /// </summary>
-        public async Task RecordCsvToDatabase(IFormFile formFile)
+        public async Task RecordCsvToDatabaseAsync(IFormFile formFile)
         {
             _grocery = new List<IGrocery>();
             try
@@ -59,9 +59,9 @@ namespace iTechArt.Service.Parsers
             }
         }
         /// <summary>
-        /// Parsing Excel format grocery files
+        /// Parsing Excel format grocery files.
         /// </summary>
-        public async Task RecordExcelToDatabase(IFormFile formFile)
+        public async Task RecordExcelToDatabaseAsync(IFormFile formFile)
         {
             _grocery = new List<IGrocery>();
             if (formFile.Length > 0)
@@ -91,9 +91,9 @@ namespace iTechArt.Service.Parsers
             }
         }
         /// <summary>
-        /// Parsing XML format grocery files
+        /// Parsing XML format grocery files.
         /// </summary>
-        public async Task RecordXmlToDatabase(IFormFile formFile)
+        public async Task RecordXmlToDatabaseAsync(IFormFile formFile)
         {
             _grocery = new List<IGrocery>();
             XDocument xm = new XDocument();

@@ -29,7 +29,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPolice(int pageIndex)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex)
         {
             return await _policeRepository.GetAllAsync(pageIndex);
         }
@@ -37,7 +37,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import XLSX or XLS data to the database.
         /// </summary>
-        public async Task ImportExcel(IFormFile formFile)
+        public async Task ImportExcelAsync(IFormFile formFile)
         {
             var policesArr = await _excelParse.ParseExcelAsync(formFile);
             await _policeRepository.AddRangeAsync(policesArr);
@@ -47,7 +47,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import XML data to the database.
         /// </summary>
-        public async Task ImportXml(IFormFile formFile)
+        public async Task ImportXmlAsync(IFormFile formFile)
         {
             var policesArr = await _xmlParse.ParseXMLAsync(formFile);
             await _policeRepository.AddRangeAsync(policesArr);
@@ -57,7 +57,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Import CSV data to the database.
         /// </summary>
-        public async Task ImportCsv(IFormFile formFile)
+        public async Task ImportCsvAsync(IFormFile formFile)
         {
             var policesArr = await _csvParse.ParseCSVAsync(formFile);
             await _policeRepository.AddRangeAsync(policesArr);

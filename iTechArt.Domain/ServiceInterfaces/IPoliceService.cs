@@ -8,22 +8,22 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// function to import XLSX or XLS data to the database.
         /// </summary>
-        public Task ImportExcel(IFormFile formFile);
+        public Task ImportExcelAsync(IFormFile formFile);
 
 
         /// <summary>
         /// function to import XML data to the database.
         /// </summary>
-        public Task ImportXml(IFormFile formFile);
+        public Task ImportXmlAsync(IFormFile formFile);
 
         /// <summary>
         /// function to import CSV data to the database.
         /// </summary>
-        public Task ImportCsv(IFormFile formFile);
+        public Task ImportCsvAsync(IFormFile formFile);
 
         /// <summary>
         /// function to export data from the database.
         /// </summary>
-        public Task<IPolice[]> GetAllPolice(int pageIndex);
+        public Task<IPolice[]> GetAllPoliceAsync(int pageIndex);
     }
 }

@@ -17,39 +17,39 @@ namespace iTechArt.Serivce.Services
         }
 
         /// <summary>
-        /// Export grocery data
+        /// Export grocery data.
         /// </summary>
-        public async Task<IGrocery[]> ExportGrocery(int pageIndex)
+        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex)
         {
             return await _groceryRepository.GetAllAsync(pageIndex);
         }
         /// <summary>
-        /// Get Count of Groceries
+        /// Get Count of Groceries.
         /// </summary>
-        public async ValueTask<int> GetCountOfGrocery()
+        public async ValueTask<int> GetCountOfGroceryAsync()
         {
-            return await _groceryRepository.GetCountOfGrocery();
+            return await _groceryRepository.GetCountOfGroceryAsync();
         }
         /// <summary>
-        /// Import Csv format grocery files
+        /// Import Csv format grocery files.
         /// </summary>
-        public async Task ImportCSVGrocery(IFormFile formFile)
+        public async Task ImportCSVGroceryAsync(IFormFile formFile)
         {
-            await _groceryParsers.RecordCsvToDatabase(formFile);
+            await _groceryParsers.RecordCsvToDatabaseAsync(formFile);
         }
         /// <summary>
-        /// Import Excel format grocery files
+        /// Import Excel format grocery files.
         /// </summary>
-        public async Task ImportExcelGrocery(IFormFile formFile)
+        public async Task ImportExcelGroceryAsync(IFormFile formFile)
         {
-            await _groceryParsers.RecordExcelToDatabase(formFile);
+            await _groceryParsers.RecordExcelToDatabaseAsync(formFile);
         }
         /// <summary>
-        /// Import XML format grocery files
+        /// Import XML format grocery files.
         /// </summary>
-        public async Task ImportXMLGrocery(IFormFile formFile)
+        public async Task ImportXMLGroceryAsync(IFormFile formFile)
         {
-            await _groceryParsers.RecordXmlToDatabase(formFile);
+            await _groceryParsers.RecordXmlToDatabaseAsync(formFile);
         }
     }
 }

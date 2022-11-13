@@ -19,7 +19,7 @@ namespace iTechArt.Api.Controllers
         /// Upload pupil's file
         /// </summary>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
-        public async Task<ActionResult> Import(IFormFile file)
+        public async Task<ActionResult> ImportAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -30,13 +30,9 @@ namespace iTechArt.Api.Controllers
                     await _pupilService.ImportPupilsFileAsync(file);
                     return Ok();
                 }
-
-                return BadRequest("Invalid file format!");
             }
-            else
-            {
-                return BadRequest("Invalid file format!");
-            }
+            
+            return BadRequest("Invalid file format!");
         }
 
         /// <summary>

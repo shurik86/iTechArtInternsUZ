@@ -29,9 +29,9 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Get total counts of users
+        /// Get total counts of users.
         /// </summary>
-        public async Task<IDashboardInfo> GetCountOfUsers()
+        public async Task<IDashboardInfo> GetCountOfUsersAsync()
         {
             return new DashboardInfo()
             {
@@ -40,7 +40,7 @@ namespace iTechArt.Service.Services
                 DoctorCount = await _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = await _policeRepository.GetCountOfPolice(),
                 PupilCount = await _pupilRepository.GetCountOfPupilsAsync(),
-                GroceryCount = await _groceryRepository.GetCountOfGrocery(),
+                GroceryCount = await _groceryRepository.GetCountOfGroceryAsync(),
             };
         }
     }
