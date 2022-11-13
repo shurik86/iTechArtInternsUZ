@@ -16,9 +16,8 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Controller of Importing airport data
+        /// Controller of Importing airport data.
         /// </summary>
-        /// <param name="file"></param>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
         public async Task<IActionResult> ImportAirportExcelAsync(IFormFile file)
         {
@@ -37,7 +36,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Controller of Exporting airport data
+        /// Controller of Exporting airport data.
         /// </summary>
         [HttpGet("get_all")]
         public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex)
@@ -45,22 +44,33 @@ namespace iTechArt.Api.Controllers
             return Ok(await _airportsService.ExportAirportExcelAsync(pageIndex));
         }
 
+        /// <summary>
+        /// Imports excel file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcelFileAsync(IFormFile file)
         {
-            await _airportsService.AirportExcelParserAsync(file);
+            await _airportsService.AirportExcelParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Imports csv file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<IActionResult> ImportCsvFileAsync(IFormFile file)
         {
-            await _airportsService.AirportCSVParserAsync(file);
+            await _airportsService.AirportCSVParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Imports xml file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<IActionResult> ImportXmlFileAsync(IFormFile file)
         {
-            await _airportsService.AirportXMLParserAsync(file);
+            await _airportsService.AirportXMLParseAsync(file);
             return Ok();
         }
     }
