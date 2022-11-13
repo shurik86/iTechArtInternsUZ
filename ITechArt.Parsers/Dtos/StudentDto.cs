@@ -2,56 +2,54 @@
 using iTechArt.Domain.Helpers;
 using iTechArt.Domain.ModelInterfaces;
 using System.Text.Json.Serialization;
-using System.Xml.Serialization;
 
-namespace iTechArt.Service.DTOs
+namespace ITechArt.Parsers.Dtos
 {
-    [XmlRoot("record")]
-    public sealed class StudentsDTO: IStudent
+    public sealed class StudentDto : IStudent
     {
         /// <summary>
-        /// Gets or sets id of student
+        /// Gets or sets id of student.
         /// </summary>
         public long Id { get; set; }
-        
+
         /// <summary>
-        /// Gets or sets name of student
+        /// Gets or sets name of student.
         /// </summary>
         public string FirstName { get; set; }
 
         /// <summary>
-        /// Gets or sets last name of student
+        /// Gets or sets last name of student.
         /// </summary>
         public string LastName { get; set; }
 
         /// <summary>
-        /// Gets or sets email of student
+        /// Gets or sets email of student.
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        /// Gets or sets password of student
+        /// Gets or sets password of student.
         /// </summary>
         public string Password { get; set; }
 
         /// <summary>
-        /// Gets or sets string value majority, field of study
+        /// Gets or sets string value majority, field of study.
         /// </summary>
         public string Majority { get; set; }
 
         /// <summary>
-        /// Gets or sets gender of student
+        /// Gets or sets gender of student.
         /// </summary>
         public Gender Gender { get; set; }
 
         /// <summary>
-        /// Gets or sets birth date of student
+        /// Gets or sets birth date of student.
         /// </summary>
         [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; set; }
 
         /// <summary>
-        /// Gets or sets name of university of student
+        /// Gets or sets name of university of student.
         /// </summary>
         public string University { get; set; }
     }
