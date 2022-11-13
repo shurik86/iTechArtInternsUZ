@@ -6,27 +6,27 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IStudentsService
     {
         /// <summary>
-        /// Imports students into DB from file
+        /// Imports students into DB from file.
         /// </summary>
         public Task ImportStudentsAsync(IFormFile formFile);
 
         /// <summary>
-        /// Exports students from DB
+        /// Exports students from DB.
         /// </summary>
-        public Task<IStudent[]> ExportStudentsAsync();
+        public Task<IStudent[]> ExportStudentsAsync(int pageIndex);
 
         /// <summary>
-        /// Parse student's file from xml
+        /// Parse student's file from xml.
         /// </summary>
         public Task XmlImportAsync(IFormFile formFile);
 
         /// <summary>
-        /// Parse student's file from csv
+        /// Parse student's file from csv.
         /// </summary>
         public Task CsvImportAsync(IFormFile formFile);
 
         /// <summary>
-        /// Parse student's file from excel
+        /// Parse student's file from excel.
         /// </summary>
         public Task ExcelImportAsync(IFormFile formFile);
 

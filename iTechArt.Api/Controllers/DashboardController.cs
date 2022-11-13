@@ -15,12 +15,12 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// returns total numbers of entities in db
+        /// Returns total numbers of entities in db.
         /// </summary>
         [HttpGet("count-of-users")]
-        public async Task<IActionResult> TotalAmounts()
+        public async Task<IActionResult> TotalAmountsAsync()
         {
-            return Ok(await _statsService.GetCountOfUsers());
+            return Ok(await _statsService.GetCountOfUsersAsync());
         }
     }
 }

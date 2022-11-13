@@ -16,11 +16,10 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Controller of Importing airport data
+        /// Controller of Importing airport data.
         /// </summary>
-        /// <param name="file"></param>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
-        public async Task<IActionResult> ImportAirportExcel(IFormFile file)
+        public async Task<IActionResult> ImportAirportExcelAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -31,40 +30,41 @@ namespace iTechArt.Api.Controllers
                     await _airportsService.ImportAirportFileAsync(file);
                     return Ok();
                 }
-
-                return BadRequest("Invalid file format!");
             }
-            else
-            {
-                return BadRequest("Invalid file format!");
-            }
+                
+            return BadRequest("Invalid file format!");
         }
 
 
         /// <summary>
-        /// Controller of Exporting airport data
+        /// Controller of Exporting airport data.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportAirportExcel()
+        public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex)
         {
-            return Ok(await _airportsService.ExportAirportExcelAsync());
-        }
-
 
         [HttpPost(ApiConstants.IMPORTEXCEL)]
-        public async Task<IActionResult> ImportExcelFile(IFormFile file)
+        public async Task<IActionResult> ImportExcelFileAsync(IFormFile file)
         {
             await _airportsService.AirportExcelParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Imports csv file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
-        public async Task<IActionResult> ImportCsvFile(IFormFile file)
+        public async Task<IActionResult> ImportCsvFileAsync(IFormFile file)
         {
             await _airportsService.AirportCSVParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Imports xml file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
-        public async Task<IActionResult> ImportXmlFile(IFormFile file)
+        public async Task<IActionResult> ImportXmlFileAsync(IFormFile file)
         {
             await _airportsService.AirportXMLParseAsync(file);
             return Ok();

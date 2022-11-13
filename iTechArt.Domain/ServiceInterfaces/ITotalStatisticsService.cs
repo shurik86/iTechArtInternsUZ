@@ -5,8 +5,8 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface ITotalStatisticsService
     {
         /// <summary>
-        /// Get count of users
+        /// Get count of users.
         /// </summary>
-        public Task<IDashboardInfo> GetCountOfUsers();
+        public Task<IDashboardInfo> GetCountOfUsersAsync();
     }
 }

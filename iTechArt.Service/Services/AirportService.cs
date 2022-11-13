@@ -37,16 +37,16 @@ namespace iTechArt.Service.Services
         }
         
         /// <summary>
-        /// Exporting airport datas
+        /// Exporting airport datas.
         /// </summary>
-        public async Task<IAirport[]> ExportAirportExcelAsync()
+        public async Task<IAirport[]> ExportAirportExcelAsync(int pageIndex)
         {
-            return await _airportRepository.GetAllAsync();
+            return await _airportRepository.GetAllAsync(pageIndex);
         }
 
 
         /// <summary>
-        /// Import airport's file
+        /// Import airport's file.
         /// </summary>
         public async Task ImportAirportFileAsync(IFormFile file)
         {
@@ -71,7 +71,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Importing airport datas from excel file
+        /// Importing airport datas from excel file.
         /// </summary>
         public async Task AirportExcelParseAsync(IFormFile file)
         {
@@ -79,7 +79,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Importing airport datas from csv file
+        /// Importing airport datas from csv file.
         /// </summary>
         public async Task AirportCSVParseAsync(IFormFile file)
         {
@@ -87,7 +87,7 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Importing airport datas from xml file
+        /// Importing airport datas from xml file.
         /// </summary>
         public async Task AirportXMLParseAsync(IFormFile file)
         {

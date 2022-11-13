@@ -46,7 +46,6 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets && internal sets Date of birth of a medStaff.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; internal set; }
 
         /// <summary>

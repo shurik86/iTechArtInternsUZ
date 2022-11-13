@@ -33,9 +33,9 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Export grocery data.
         /// </summary>
-        public async Task<IGrocery[]> ExportGroceryAsync()
+        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex)
         {
-            return await _groceryRepository.GetAllAsync();
+            return await _groceryRepository.GetAllAsync(pageIndex);
         }
 
 

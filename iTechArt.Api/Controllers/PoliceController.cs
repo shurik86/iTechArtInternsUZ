@@ -21,7 +21,7 @@ namespace iTechArt.Api.Controllers
         /// Uploads xslx data about Police and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
-        public async Task<IActionResult> ImportExcel(IFormFile file)
+        public async Task<IActionResult> ImportExcelAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -29,7 +29,7 @@ namespace iTechArt.Api.Controllers
 
                 if (fileExtension == FileConstants.xlsx || fileExtension == FileConstants.xls)
                 {
-                    await _policeService.ImportExcel(file);
+                    await _policeService.ImportExcelAsync(file);
                     return Ok();
                 }
                 else
@@ -49,13 +49,13 @@ namespace iTechArt.Api.Controllers
         /// Uploads xml data about Police and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
-        public async Task<IActionResult> ImportXml(IFormFile file)
+        public async Task<IActionResult> ImportXmlAsync(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
 
             if (file != null && fileExtension == FileConstants.xml)
             {
-                await _policeService.ImportXml(file);
+                await _policeService.ImportXmlAsync(file);
                 return Ok();
             }
             else
@@ -69,13 +69,13 @@ namespace iTechArt.Api.Controllers
         /// Uploads csv data about Police and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
-        public async Task<IActionResult> ImportCsv(IFormFile file)
+        public async Task<IActionResult> ImportCsvAsync(IFormFile file)
         {
             string fileExtension = Path.GetExtension(file.FileName);
 
             if (file != null && fileExtension == FileConstants.csv)
             {
-                await _policeService.ImportCsv(file);
+                await _policeService.ImportCsvAsync(file);
                 return Ok();
             }
             else
@@ -103,9 +103,9 @@ namespace iTechArt.Api.Controllers
         /// </summary>
         [Obsolete]
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPolice[]>> GetAllData()
+        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex)
         {
-            return Ok(await _policeService.GetAllPolice());
+            return Ok(await _policeService.GetAllPoliceAsync(pageIndex));
         }
 
 
