@@ -41,15 +41,15 @@ namespace iTechArt.Service.Services
 
             if (FileConstants.excelExtensions.Contains(fileExtension))
             {
-                await AirportExcelParserAsync(file);
+                await AirportExcelParseAsync(file);
             }
             else if (FileConstants.csvExtensions.Contains(fileExtension))
             {
-                await AirportCSVParserAsync(file);
+                await AirportCSVParseAsync(file);
             }
             else if (FileConstants.xmlExtensions.Contains(fileExtension))
             {
-                await AirportXMLParserAsync(file);
+                await AirportXMLParseAsync(file);
             }
             else
             {
@@ -60,7 +60,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas from excel file.
         /// </summary>
-        public async Task AirportExcelParserAsync(IFormFile file)
+        public async Task AirportExcelParseAsync(IFormFile file)
         {
             await _airportParsers.ExcelParserAsync(file);
         }
@@ -68,7 +68,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas from csv file.
         /// </summary>
-        public async Task AirportCSVParserAsync(IFormFile file)
+        public async Task AirportCSVParseAsync(IFormFile file)
         {
             await _airportParsers.CsvParserAsync(file);
         }
@@ -76,7 +76,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Importing airport datas from xml file.
         /// </summary>
-        public async Task AirportXMLParserAsync(IFormFile file)
+        public async Task AirportXMLParseAsync(IFormFile file)
         {
             await _airportParsers.XmlParserAsync(file);
         }   

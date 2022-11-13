@@ -37,7 +37,7 @@ builder.Services.AddScoped<IExcelParse, ParseExcel>();
 builder.Services.AddScoped<IXmlParse, ParseXml>();
 builder.Services.AddScoped<ICsvParse, ParseCsv>();
 builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
-builder.Services.AddScoped<IGroceryParsers, GroceryParsers>();
+builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
 builder.Services.AddScoped<IPupilParser, PupilParser>();
 builder.Services.AddScoped<IStudentParser, StudentParsers>();

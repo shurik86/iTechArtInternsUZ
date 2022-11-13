@@ -3,6 +3,7 @@ using CsvHelper.Configuration;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.Repositories;
+using ITechArt.Parsers.Constants;
 using ITechArt.Parsers.Dtos;
 using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
@@ -46,13 +47,13 @@ namespace ITechArt.Parsers.PoliceParsers
     {
         public PoliceMap()
         {
-            Map(c => c.Name).Name("Name");
-            Map(c => c.Surname).Name("Surname");
-            Map(c => c.Email).Name("Email");
-            Map(c => c.Gender).Name("Gender");
-            Map(c => c.Address).Name("Address");
-            Map(c => c.JobTitle).Name("JobTitle");
-            Map(c => c.Salary).Name("Salary");
+            Map(c => c.Name).Name(PoliceConstants.Name);
+            Map(c => c.Surname).Name(PoliceConstants.Surname);
+            Map(c => c.Email).Name(PoliceConstants.Email);
+            Map(c => c.Gender).Name(PoliceConstants.Gender);
+            Map(c => c.Address).Name(PoliceConstants.Address);
+            Map(c => c.JobTitle).Name(PoliceConstants.JobTitle);
+            Map(c => c.Salary).Name(PoliceConstants.Salary);
         }
     }
 }

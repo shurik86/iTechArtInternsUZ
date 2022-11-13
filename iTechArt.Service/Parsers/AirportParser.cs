@@ -1,5 +1,10 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using ExcelLibrary.BinaryFileFormat;
+using ExcelLibrary.SpreadSheet;
+using iTechArt.Database.Entities.Airports;
+using iTechArt.Database.Entities.Police;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
@@ -7,9 +12,13 @@ using iTechArt.Repository.Repositories;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using iTechArt.Service.Helpers;
+using ITechArt.Parsers.Constants;
+using ITechArt.Parsers.Dtos;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using System.Globalization;
+using System.IO;
+using System.IO.Pipes;
 using System.Xml;
 
 namespace iTechArt.Service.Parsers
@@ -29,12 +38,13 @@ namespace iTechArt.Service.Parsers
         {
             var fileExtension = Path.GetExtension(file.FileName);
 
-            if (fileExtension == ".csv")
+            if (fileExtension == FileExtensions.csv)
             {
                 using var fileStream = new MemoryStream();
 
                 await file.CopyToAsync(fileStream);
                 fileStream.Position = 0;
+
                 using (TextReader csvReader = new StreamReader(fileStream))
                 {
                     using (var csv = new CsvReader(csvReader, CultureInfo.InvariantCulture))
@@ -49,46 +59,95 @@ namespace iTechArt.Service.Parsers
         }   
         public async Task ExcelParserAsync(IFormFile file)
         {
-              var fileExtension = Path.GetExtension(file.FileName);
+            var fileExtension = Path.GetExtension(file.FileName);
 
-                if (FileConstants.excelExtensions.Contains(fileExtension))
+            if (!FileConstants.excelExtensions.Contains(fileExtension))
+            {
+                throw new Exception("Upload correct File!!!");
+            }
+
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                stream.Position = 0;
+
+                IList<AirportDTO> airports;
+
+                if (fileExtension == FileExtensions.xlsx)
                 {
-                    using (var stream = new MemoryStream())
-                    {
-                        await file.CopyToAsync(stream);
-                        using (var package = new ExcelPackage(stream))
-                        {
-                            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                            ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                            var rowCount = worksheet.Dimension.Rows;
-
-                            IList<AirportDTO> airports = new List<AirportDTO>(rowCount - 2);
-
-                            for (int row = 2; row <= rowCount; row++)
-                            {
-                                var airport = new AirportDTO
-                                {
-                                    AirportName = worksheet.Cells[row,AirportIndexConstants.AIRPORTNAMEINDEX].Value.ToString().Trim(),
-                                    BuiltDate = DateOnly.Parse(worksheet.Cells[row, AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
-                                    Capacity = Convert.ToUInt16(worksheet.Cells[row, AirportIndexConstants.CAPACITYINDEX].Value),
-                                    Address = worksheet.Cells[row, AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
-                                    City = worksheet.Cells[row, AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
-                                    EmployeesCount = Convert.ToUInt16(worksheet.Cells[row, AirportIndexConstants.EMPLOYEESCOUNTINDEX].Value),
-                                    PassengersPerYear = Convert.ToInt64(worksheet.Cells[row, AirportIndexConstants.PASSANGERPERYEARINDEX].Value),
-                                    FlightsPerYear = Convert.ToUInt32(worksheet.Cells[row, AirportIndexConstants.FLIGHTSPERYEARINDEX].Value),
-                                    AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[row, AirportIndexConstants.AVERAGETICKETPRICEINDEX].Value)
-                                };
-
-                                airports.Add(airport);
-                            }
-                            await _airportRepository.AddRangeAsync(airports);
-                        }
-                    }
+                    airports = ParseXlsx(stream);
+                }
+                else if (fileExtension == FileExtensions.xls)
+                {
+                    airports = ParseXls(stream);
                 }
                 else
                 {
-                    throw new Exception("Upload correct File!!!");
+                    throw new Exception("This Excel format is not supported yet.");
                 }
+
+                await _airportRepository.AddRangeAsync(airports);
+            }
+        }
+
+        private IList<AirportDTO> ParseXlsx(MemoryStream stream)
+        {
+
+            using (var package = new ExcelPackage(stream))
+            {
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                var rowCount = worksheet.Dimension.Rows;
+
+                IList<AirportDTO> airports = new List<AirportDTO>(rowCount - 2);
+
+                for (int r = 2; r <= rowCount; r++)
+                {
+                    var airport = new AirportDTO
+                    {
+                        AirportName = worksheet.Cells[r, 1 + AirportIndexConstants.AIRPORTNAMEINDEX].Value.ToString().Trim(),
+                        BuiltDate = DateOnly.Parse(worksheet.Cells[r, 1 + AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
+                        Capacity = Convert.ToUInt16(worksheet.Cells[r, 1 + AirportIndexConstants.CAPACITYINDEX].Value),
+                        Address = worksheet.Cells[r, 1 + AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
+                        City = worksheet.Cells[r, 1 + AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
+                        EmployeesCount = Convert.ToInt32(worksheet.Cells[r, 1 + AirportIndexConstants.EMPLOYEESCOUNTINDEX].Value),
+                        PassengersPerYear = Convert.ToInt64(worksheet.Cells[r, 1 + AirportIndexConstants.PASSANGERPERYEARINDEX].Value),
+                        FlightsPerYear = Convert.ToUInt32(worksheet.Cells[r, 1 + AirportIndexConstants.FLIGHTSPERYEARINDEX].Value),
+                        AverageTicketPrice = Convert.ToUInt16(worksheet.Cells[r, 1 + AirportIndexConstants.AVERAGETICKETPRICEINDEX].Value)
+                    };
+
+                    airports.Add(airport);
+                }
+
+                return airports;
+            }
+        }
+        private IList<AirportDTO> ParseXls(MemoryStream stream)
+        {
+            var workBook = Workbook.Load(stream);
+            var workSheet = workBook.Worksheets[0];
+            var cells = workSheet.Cells;
+            var rowCount = cells.Rows.Count;
+
+            IList<AirportDTO> airports = new List<AirportDTO>(rowCount - 2);
+
+            for (int i = Nums.One; i < rowCount; i++)
+            {
+                var airportDto = new AirportDTO
+                {
+                    AirportName = cells[i, AirportIndexConstants.AIRPORTNAMEINDEX].Value.ToString().Trim(),
+                    BuiltDate = DateOnly.Parse(cells[i, AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
+                    Capacity = Convert.ToUInt16(cells[i, AirportIndexConstants.CAPACITYINDEX].Value),
+                    Address = cells[i, AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
+                    City = cells[i, AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
+                    EmployeesCount = Convert.ToUInt16(cells[i, AirportIndexConstants.EMPLOYEESCOUNTINDEX].Value),
+                    PassengersPerYear = Convert.ToInt64(cells[i, AirportIndexConstants.PASSANGERPERYEARINDEX].Value),
+                    FlightsPerYear = Convert.ToUInt32(cells[i, AirportIndexConstants.FLIGHTSPERYEARINDEX].Value),
+                    AverageTicketPrice = Convert.ToInt32(cells[i, AirportIndexConstants.AVERAGETICKETPRICEINDEX].Value),
+                };
+            }
+
+            return airports;
         }
 
         public async Task XmlParserAsync(IFormFile file)

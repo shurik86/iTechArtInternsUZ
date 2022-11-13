@@ -9,8 +9,8 @@ namespace iTechArt.Serivce.Services
     public class GroceryService : IGroceryService
     {
         private readonly IGroceryRepository _groceryRepository;
-        private readonly IGroceryParsers _groceryParsers;
-        public GroceryService(IGroceryRepository groceryRepository, IGroceryParsers groceryParsers)
+        private readonly IGroceryParser _groceryParsers;
+        public GroceryService(IGroceryRepository groceryRepository, IGroceryParser groceryParsers)
         {
             _groceryParsers = groceryParsers;
             _groceryRepository = groceryRepository;
@@ -35,21 +35,24 @@ namespace iTechArt.Serivce.Services
         /// </summary>
         public async Task ImportCSVGroceryAsync(IFormFile formFile)
         {
-            await _groceryParsers.RecordCsvToDatabaseAsync(formFile);
+           var groceryParse = await _groceryParsers.ParseCsvAsync(formFile);
+            await _groceryRepository.AddGroceriesAsync(groceryParse);
         }
         /// <summary>
         /// Import Excel format grocery files.
         /// </summary>
         public async Task ImportExcelGroceryAsync(IFormFile formFile)
         {
-            await _groceryParsers.RecordExcelToDatabaseAsync(formFile);
+            var groceryParse= await _groceryParsers.ExcelParseAsync(formFile);
+            await _groceryRepository.AddGroceriesAsync(groceryParse);
         }
         /// <summary>
         /// Import XML format grocery files.
         /// </summary>
         public async Task ImportXMLGroceryAsync(IFormFile formFile)
         {
-            await _groceryParsers.RecordXmlToDatabaseAsync(formFile);
+            var groceryParse = await _groceryParsers.XmlParseAsync(formFile);
+            await _groceryRepository.AddGroceriesAsync(groceryParse);
         }
     }
 }

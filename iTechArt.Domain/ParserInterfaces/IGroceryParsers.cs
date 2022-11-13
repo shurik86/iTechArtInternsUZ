@@ -1,13 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iTechArt.Domain.ModelInterfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ParserInterfaces
 {
-    public interface IGroceryParsers
+    public interface IGroceryParser
     {
-        public Task RecordCsvToDatabaseAsync(IFormFile formFile);
+        /// <summary>
+        /// Parse csv grocery file. 
+        /// </summary>
+        public Task<IGrocery[]> ParseCsvAsync(IFormFile formFile);
 
-        public Task RecordExcelToDatabaseAsync(IFormFile formFile);
+        /// <summary>
+        /// Parse Excel grocery file. 
+        /// </summary>
+        public Task<IGrocery[]> ExcelParseAsync(IFormFile formFile);
 
-        public Task RecordXmlToDatabaseAsync(IFormFile formFile);
+        /// <summary>
+        /// Parse XML grocery file. 
+        /// </summary>
+        public Task<IGrocery[]> XmlParseAsync(IFormFile formFile);
     }
 }
