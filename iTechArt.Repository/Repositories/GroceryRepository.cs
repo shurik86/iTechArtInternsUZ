@@ -18,15 +18,15 @@ namespace iTechArt.Repository.Repositories
             _mapper = mapper;
         }
         /// <summary>
-        /// Get all entities from database
+        /// Get all entities from database.
         /// </summary>
         public async Task<IGrocery[]> GetAllAsync()
         {
-            return await _dbContext.Groceries.Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
+            return await _dbContext.Groceries.Select(grocery => _mapper.Map<Grocery>(grocery)).ToArrayAsync();
         }
 
         /// <summary>
-        /// Get grocery by id
+        /// Get grocery by id.
         /// </summary>
         public async Task<IGrocery> GetByIdAsync(long id)
         {
@@ -35,7 +35,7 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Update grocery
+        /// Update grocery.
         /// </summary>
         public async Task UpdateAsync(IGrocery grocery)
         {
@@ -45,17 +45,20 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Delete grocery from database
+        /// Delete grocery from database.
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var groceries = await _dbContext.Groceries.FirstOrDefaultAsync(c => c.Id == id);
-            if (groceries != null)
+            var grocery = await _dbContext.Groceries.FirstOrDefaultAsync(c => c.Id == id);
+            if (grocery != null)
             {
-                _dbContext.Groceries.Remove(groceries);
+                _dbContext.Groceries.Remove(grocery);
                 await _dbContext.SaveChangesAsync();
             }
         }
+        /// <summary>
+        /// Add grocery items to database.
+        /// </summary>
         public async Task AddGroceriesAsync(IEnumerable<IGrocery> groceries)
         {
             try
@@ -70,9 +73,9 @@ namespace iTechArt.Repository.Repositories
             }
         }
         /// <summary>
-        /// Get total count of groceries
+        /// Get total count of groceries.
         /// </summary>
-        public async ValueTask<int> GetCountOfGrocery()
+        public async ValueTask<int> GetCountOfGroceryAsync()
         {
             return await _dbContext.Groceries.CountAsync();
         }
