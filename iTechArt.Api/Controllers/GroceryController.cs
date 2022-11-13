@@ -39,8 +39,8 @@ namespace iTechArt.Api.Controllers
             return BadRequest();
         }
         /// <summary>
-        /// api route which applies the following extensions
-        /// will allow to upload the data from CSV file to db 
+        /// Api route which applies the following extensions
+        /// will allow to upload the data from CSV file to db.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
         public async ValueTask<IActionResult> ImportCsvGroceryFileAsync(IFormFile file)
@@ -55,8 +55,8 @@ namespace iTechArt.Api.Controllers
 
         }
         /// <summary>
-        /// api route which applies the following extensions
-        /// will allow to upload the data from Excel file to db 
+        /// Api route which applies the following extensions
+        /// will allow to upload the data from Excel file to db.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async ValueTask<IActionResult> ImportExcelGroceryFileAsync(IFormFile file)
@@ -71,8 +71,8 @@ namespace iTechArt.Api.Controllers
 
         }
         /// <summary>
-        /// api route which applies the following extensions
-        /// will allow to upload the data from XML file to db 
+        /// Api route which applies the following extensions
+        /// will allow to upload the data from XML file to db.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
         public async ValueTask<IActionResult> ImportXMLGroceryFileAsync(IFormFile file)
@@ -86,12 +86,12 @@ namespace iTechArt.Api.Controllers
                 return BadRequest();
         }
         /// <summary>
-        /// api route which allows to get all info from db and parse it to the following format
+        /// Api route which allows to get all info from db and parse it to the following format.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportGroceryDataAsync()
+        public async Task<IActionResult> ExportGroceryDataAsync([FromQuery] int pageIndex)
         {
-            return Ok(await _groceryService.ExportGroceryAsync());
+            return Ok(await _groceryService.ExportGroceryAsync(pageIndex));
         }
         /// <summary>
         /// Get total amount of groceries

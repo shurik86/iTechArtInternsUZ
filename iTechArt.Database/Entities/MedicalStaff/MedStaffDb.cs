@@ -44,7 +44,6 @@ namespace iTechArt.Database.Entities.MedicalStaff
         /// <summary>
         /// Gets && sets Date of birth of a medStaff.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; set; }
 
         /// <summary>

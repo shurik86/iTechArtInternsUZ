@@ -17,11 +17,11 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Async method takes no parameters and returns serialized entities as file
+        /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
-        public async Task<IStudent[]> GetAllAsync()
+        public async Task<IStudent[]> GetAllAsync(int pageIndex)
         {
-            return await _studentRepository.GetAllAsync();
+            return await _studentRepository.GetAllAsync(pageIndex);
         }
 
         /// <summary>

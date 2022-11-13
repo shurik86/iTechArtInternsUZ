@@ -30,22 +30,18 @@ namespace iTechArt.Api.Controllers
                     await _studentsService.ImportStudentsAsync(file);
                     return Ok();
                 }
-
-                return BadRequest("Invalid file format!");
             }
-            else
-            {
-                return BadRequest("Invalid file format!");
-            }
+             
+            return BadRequest("Invalid file format!");
         }
 
         /// <summary>
         /// Get all students.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IStudent[]>> GetAllAsync()
+        public async Task<ActionResult<IStudent[]>> GetAllAsync([FromQuery] int pageIndex)
         {
-            return Ok(await _studentsService.GetAllAsync());
+            return Ok(await _studentsService.GetAllAsync(pageIndex));
         }
 
         /// <summary>
