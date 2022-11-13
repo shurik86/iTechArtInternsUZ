@@ -19,21 +19,21 @@ namespace iTechArt.Api.Controllers
         }
 
         [HttpPost(ApiConstants.IMPORT),Obsolete]
-        public async ValueTask<IActionResult> ImportGroceryFiles(IFormFile file)
+        public async ValueTask<IActionResult> ImportGroceryFilesAsync(IFormFile file)
         {
             if (file != null && file.ContentType.Contains(CSV))
             {
-                await _groceryService.ImportCSVGrocery(file);
+                await _groceryService.ImportCSVGroceryAsync(file);
                 return Ok();
             }
             else if (file != null && file.ContentType.Contains(EXCEL)) 
             {
-                await _groceryService.ImportExcelGrocery(file);
+                await _groceryService.ImportExcelGroceryAsync(file);
                 return Ok();
             }
             else if (file != null && file.ContentType.Contains(XML))
             {
-                await _groceryService.ImportXMLGrocery(file);
+                await _groceryService.ImportXMLGroceryAsync(file);
                 return Ok();
             }
             return BadRequest();
@@ -43,11 +43,11 @@ namespace iTechArt.Api.Controllers
         /// will allow to upload the data from CSV file to db 
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
-        public async ValueTask<IActionResult> ImportCsvGroceryFile(IFormFile file)
+        public async ValueTask<IActionResult> ImportCsvGroceryFileAsync(IFormFile file)
         {
             if (file != null && file.ContentType.Contains(CSV))
             {
-                await _groceryService.ImportCSVGrocery(file);
+                await _groceryService.ImportCSVGroceryAsync(file);
                 return Ok();
             }
             else
@@ -59,11 +59,11 @@ namespace iTechArt.Api.Controllers
         /// will allow to upload the data from Excel file to db 
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
-        public async ValueTask<IActionResult> ImportExcelGroceryFile(IFormFile file)
+        public async ValueTask<IActionResult> ImportExcelGroceryFileAsync(IFormFile file)
         {
             if (file != null && file.ContentType.Contains(EXCEL))
             {
-                await _groceryService.ImportExcelGrocery(file);
+                await _groceryService.ImportExcelGroceryAsync(file);
                 return Ok();
             }
             else
@@ -75,11 +75,11 @@ namespace iTechArt.Api.Controllers
         /// will allow to upload the data from XML file to db 
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
-        public async ValueTask<IActionResult> ImportXMLGroceryFile(IFormFile file)
+        public async ValueTask<IActionResult> ImportXMLGroceryFileAsync(IFormFile file)
         {
             if (file != null && file.ContentType.Contains(XML))
             {
-                await _groceryService.ImportXMLGrocery(file);
+                await _groceryService.ImportXMLGroceryAsync(file);
                 return Ok();
             }
             else
