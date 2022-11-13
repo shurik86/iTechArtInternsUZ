@@ -97,17 +97,6 @@ namespace iTechArt.Api.Controllers
             };
         }
 
-        /// <summary>
-        /// route: api/police/export.
-        /// Gets all data about police from the database.
-        /// </summary>
-        [Obsolete]
-        [HttpGet("get_all")]
-        public async Task<ActionResult<IPolice[]>> GetAllData()
-        {
-            return Ok(await _policeService.GetAllPolice());
-        }
-
 
         /// <summary>
         /// Exports Police table from Database to Excel file.
@@ -120,6 +109,17 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
+        }
+
+        /// <summary>
+        /// route: api/police/export.
+        /// Gets all data about police from the database.
+        /// </summary>
+        [Obsolete]
+        [HttpGet("get_all")]
+        public async Task<ActionResult<IPolice[]>> GetAllData()
+        {
+            return Ok(await _policeService.GetAllPolice());
         }
     }
 }
