@@ -1,47 +1,46 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Service.DTOs
 {
-    internal sealed class GroceryDTO : IGrocery
+    public sealed class GroceryDTO : IGrocery
     {
 
         /// <summary>
-        /// gets or internal sets Id of grocery
+        /// Gets or sets Id of grocery.
         /// </summary>
-        public long Id { get; internal set; }
+        public long Id { get;  set; }
         /// <summary>
-        /// gets or internal sets First name of grocery employee
+        /// Gets or sets First name of grocery employee.
         /// </summary>
-        public string FirstName { get; internal set; }
+        public string FirstName { get;  set; }
         /// <summary>
-        /// gets or internal sets Last name of grocery employee
+        /// Gets or sets Last name of grocery employee.
         /// </summary>
-        public string LastName { get; internal set; }
+        public string LastName { get;  set; }
         /// <summary>
-        /// gets or internal sets Date of birth of grocery employee
+        /// Gets or sets Date of birth of grocery employee.
         /// </summary>
-        public DateTime Birthday { get; internal set; }
+        public DateTime Birthday { get;  set; }
         /// <summary>
-        /// gets or internal sets Gender of grocery employee
+        /// Gets or sets Gender of grocery employee.
         /// </summary>
-        public Gender Gender { get; internal set; }
+        public Gender Gender { get;  set; }
         /// <summary>
-        /// gets or internal sets Email of grocery employee
+        /// Gets or internal sets Email of grocery employee.
         /// </summary>
-        public string Email { get; internal set; }
+        public string Email { get;  set; }
         /// <summary>
-        /// gets or internal sets Jop position of grocery employee
+        /// Gets or sets Jop position of grocery employee.
         /// </summary>
-        public string JobTitle { get; internal set; }
+        public string JobTitle { get;  set; }
         /// <summary>
-        /// gets or internal sets Which department employee works
+        /// Gets or sets Which department employee works.
         /// </summary>
-        public string DepartmentRetail { get; internal set; }
+        public string DepartmentRetail { get; set; }
         /// <summary>
-        /// gets or internal sets Salary of grocery employee
+        /// Gets or sets Salary of grocery employee.
         /// </summary>
-        public double Salary { get; internal set; }
+        public double Salary { get; set; }
     }
 }
