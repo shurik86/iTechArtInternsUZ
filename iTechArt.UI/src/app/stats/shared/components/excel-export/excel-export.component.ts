@@ -87,4 +87,12 @@ export class ExcelExportComponent {
       },
     });
   }
+
+  public downloadExcel(): void {
+    console.log('Requested Excel file');
+  }
+
+  public downloadCsv(): void {
+    console.log('Requested CSV file');
+  }
 }

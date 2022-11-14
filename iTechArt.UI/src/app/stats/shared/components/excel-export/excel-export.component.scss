@@ -3,6 +3,8 @@
     margin-left: 30px;
     &__form {
       display: flex;
+      margin-right: 50px;
+
       &__button {
         margin-left: 20px;
       }
@@ -29,6 +31,14 @@
     [type="file"]::-webkit-file-upload-button:hover {
       background: #3a5696;
       color: #fff;
+    }
+
+    .user-control {
+      display: flex;
+
+      .download-button {
+        margin: 0 20px;
+      }
     }
   }
 }
