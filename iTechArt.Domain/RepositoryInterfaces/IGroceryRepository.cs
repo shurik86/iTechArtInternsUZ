@@ -1,5 +1,4 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
