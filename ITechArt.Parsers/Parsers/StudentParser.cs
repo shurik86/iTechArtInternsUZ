@@ -18,7 +18,7 @@ namespace ITechArt.Parsers.Parsers
         /// </summary>
         public async Task<IStudent[]> CsvParseAsync(IFormFile file)
         {
-            using var fileStream = new MemoryStream();
+            await using var fileStream = new MemoryStream();
 
             await file.CopyToAsync(fileStream);
             fileStream.Position = 0;
@@ -36,7 +36,7 @@ namespace ITechArt.Parsers.Parsers
         /// </summary>
         public async Task<IStudent[]> ExcelParseAsync(IFormFile file)
         {
-            using var stream = new MemoryStream();
+            await using var stream = new MemoryStream();
             await file.CopyToAsync(stream);
             using var package = new ExcelPackage(stream);
 
@@ -68,7 +68,7 @@ namespace ITechArt.Parsers.Parsers
         /// </summary>
         public async Task<IStudent[]> XmlParseAsync(IFormFile file)
         {
-            using var fileStream = new MemoryStream();
+            await using var fileStream = new MemoryStream();
 
             await file.CopyToAsync(fileStream);
 
@@ -81,18 +81,18 @@ namespace ITechArt.Parsers.Parsers
 
             IList<StudentDto> students = new List<StudentDto>(nodes.Count);
 
-            for (int node = 0; node < nodes.Count; node++)
+            foreach (XmlNode node in nodes)
             {
                 StudentDto student = new()
                 {
-                    FirstName = nodes[node]["FirstName"].InnerText,
-                    LastName = nodes[node]["LastName"].InnerText,
-                    Email = nodes[node]["Email"].InnerText,
-                    Password = nodes[node]["Password"].InnerText,
-                    Majority = nodes[node]["Majority"].InnerText,
-                    Gender = Enum.Parse<Gender>(nodes[node]["Gender"].InnerText),
-                    DateOfBirth = DateOnly.Parse(nodes[node]["DateOfBirth"].InnerText),
-                    University = nodes[node]["University"].InnerText
+                    FirstName = node["FirstName"].InnerText,
+                    LastName = node["LastName"].InnerText,
+                    Email = node["Email"].InnerText,
+                    Password = node["Password"].InnerText,
+                    Majority = node["Majority"].InnerText,
+                    Gender = Enum.Parse<Gender>(node["Gender"].InnerText),
+                    DateOfBirth = DateOnly.Parse(node["DateOfBirth"].InnerText),
+                    University = node["University"].InnerText
                 };
                 students.Add(student);
             }
