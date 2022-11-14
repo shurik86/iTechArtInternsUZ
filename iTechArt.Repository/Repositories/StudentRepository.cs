@@ -88,5 +88,14 @@ namespace iTechArt.Repository.Repositories
 
             await _dbContext.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Get all students from database.
+        /// </summary>
+        public async Task<IStudent[]> GetAllAsync()
+        {
+            return await _dbContext.Students.Select(s => _mapper.Map<Student>(s))
+                                            .ToArrayAsync();
+        }
     }
 }

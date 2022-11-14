@@ -1,11 +1,11 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.Repositories;
 using ITechArt.Parsers.Constants;
 using ITechArt.Parsers.Dtos;
-using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

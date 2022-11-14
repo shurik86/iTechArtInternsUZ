@@ -30,5 +30,15 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// </summary>
         public Task ExcelImportAsync(IFormFile formFile);
 
+        /// <summary>
+        /// Exports Student Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
+        /// <summary>
+        /// Exports Student Data to a new Excel file.
+        /// </summary>
+        public Task<byte[]> ExportExcelAsync();
+
     }
 }

@@ -39,5 +39,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         public Task AddRangeAsync(IEnumerable<IStudent> pupils);
 
+        /// <summary>
+        /// Gets all Students data from database.
+        /// </summary>
+        public Task<IStudent[]> GetAllAsync();
+
     }
 }

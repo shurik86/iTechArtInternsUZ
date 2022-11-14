@@ -1,5 +1,8 @@
 using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateExcel;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
@@ -8,7 +11,8 @@ using iTechArt.Serivce.Services;
 using iTechArt.Service.Helpers;
 using iTechArt.Service.Parsers;
 using iTechArt.Service.Services;
-using ITechArt.Parsers.IPoliceParsers;
+using ITechArt.Parsers.GenerateExcel;
+using ITechArt.Parsers.GenerateXml;
 using ITechArt.Parsers.Parsers;
 using ITechArt.Parsers.PoliceParsers;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +45,21 @@ builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
 builder.Services.AddScoped<IPupilParser, PupilParser>();
 builder.Services.AddScoped<IStudentParser, StudentParsers>();
+builder.Services.AddScoped<IStreamToArray, StreamToArray>();
 
+builder.Services.AddScoped<IGeneratePoliceXml, GeneratePoliceXml>();
+builder.Services.AddScoped<IGeneratePupilsXml, GeneratePupilsXml>();
+builder.Services.AddScoped<IGenerateAirportXml, GenerateAirportXml>();
+builder.Services.AddScoped<IGenerateGroceryXml, GenerateGroceryXml>();
+builder.Services.AddScoped<IGenerateMedStaffXml, GenerateMedStaffXml>();
+builder.Services.AddScoped<IGenerateStudentXml, GenerateStudentsXml>();
+
+builder.Services.AddScoped<IGenerateAirportExcel, GenerateAirportExcel>();
+builder.Services.AddScoped<IGenerateGroceryExcel, GenerateGroceryExcel>();
+builder.Services.AddScoped<IGenerateMedStaffExcel, GenerateMedStaffExcel>();
+builder.Services.AddScoped<IGeneratePoliceExcel, GeneratePoliceExcel>();
+builder.Services.AddScoped<IGeneratePupilsExcel, GeneratePupilsExcel>();
+builder.Services.AddScoped<IGenerateStudentsExcel, GenerateStudentsExcel>();
 
 builder.Services.AddCors(option =>
 {

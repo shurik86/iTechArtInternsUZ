@@ -115,5 +115,13 @@ namespace iTechArt.Repository.Repositories
             }
             await _dbContext.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Get all Police data from database.
+        /// </summary>
+        public async Task<IPolice[]> GetAllAsync()
+        {
+            return await _dbContext.Police.Select(police => _mapper.Map<Police>(police)).ToArrayAsync();
+        }
     }
 }

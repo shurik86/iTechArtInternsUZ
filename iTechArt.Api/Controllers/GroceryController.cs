@@ -102,5 +102,32 @@ namespace iTechArt.Api.Controllers
         //{
         //    return Ok(_groceryService.GetCountOfGrocery());
         //}
+
+
+        /// <summary>
+        /// Exports Grocery table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _groceryService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
+        /// Exports Grocery table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _groceryService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
     }
 }

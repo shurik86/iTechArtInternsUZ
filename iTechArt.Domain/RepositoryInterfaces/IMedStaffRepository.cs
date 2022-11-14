@@ -40,5 +40,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of medStaff.
         /// </summary>
         public Task<int> GetCountOfDoctors();
+
+        /// <summary>
+        /// Gets all MedStaff data from database.
+        /// </summary>
+        public Task<IMedStaff[]> GetAllAsync();
     }
 }

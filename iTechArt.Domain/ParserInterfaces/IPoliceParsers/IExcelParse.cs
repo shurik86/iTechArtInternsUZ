@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITechArt.Parsers.IPoliceParsers
+namespace iTechArt.Domain.ParserInterfaces.IPoliceParsers
 {
-    public interface IXmlParse
+    public interface IExcelParse
     {
         /// <summary>
-        /// Parses XML file and returns array of entities.
+        /// Parses XLSX file and return array of entities.
         /// </summary>
-        public Task<IPolice[]> ParseXMLAsync(IFormFile file);
+        public Task<IPolice[]> ParseExcelAsync(IFormFile file);
     }
 }

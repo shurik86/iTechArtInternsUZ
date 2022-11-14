@@ -40,5 +40,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Adds collection of entities to the database.
         /// </summary>
         public Task AddRangeAsync(IPolice[] police);
+
+        /// <summary>
+        /// Gets all Police data from database.
+        /// </summary>
+        public Task<IPolice[]> GetAllAsync();
     }
 }

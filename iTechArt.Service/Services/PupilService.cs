@@ -1,8 +1,11 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateExcel;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -10,10 +13,21 @@ namespace iTechArt.Service.Services
     {
         private readonly IPupilRepository _pupilRepository;
         private readonly IPupilParser _pupilParsers;
-        public PupilService(IPupilRepository pupilRepository, IPupilParser pupilParsers)
+        private readonly IGeneratePupilsExcel _generatePupilsExcel;
+        private readonly IGeneratePupilsXml _generatePupilsXml;
+        private readonly IStreamToArray _streamToArray;
+
+        public PupilService(IPupilRepository pupilRepository, 
+                            IPupilParser pupilParsers, 
+                            IGeneratePupilsExcel generatePupilsExcel, 
+                            IGeneratePupilsXml generatePupilsXml, 
+                            IStreamToArray streamToArray)
         {
             _pupilRepository = pupilRepository;
             _pupilParsers = pupilParsers;
+            _generatePupilsExcel = generatePupilsExcel;
+            _generatePupilsXml = generatePupilsXml;
+            _streamToArray = streamToArray;
         }
 
         /// <summary>
@@ -73,6 +87,23 @@ namespace iTechArt.Service.Services
             var pupilsFromXml = await _pupilParsers.XmlParseAsync(file);
          
             await _pupilRepository.AddRangeAsync(pupilsFromXml);
+        }
+
+        /// <summary>
+        /// Exports Pupils Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generatePupilsXml.GetPupilsXmlAsync();
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+        /// <summary>
+        /// Exports Pupils Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generatePupilsExcel.GetPupilsExcelAsync();
         }
     }
 }
