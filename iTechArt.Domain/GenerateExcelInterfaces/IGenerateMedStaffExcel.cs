@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace iTechArt.Domain.GenerateExcelInterfaces
 {
-    public interface IGenerateExcel
+    public interface IGenerateMedStaffExcel
     {
         /// <summary>
         /// Creates excel file and converts it to memory stream array.
         /// </summary>
-        public Task<byte[]> GetExcelAsync<T>(T[] arrayOfEntities)
-            where T : class;
+        public Task<byte[]> GetExcelAsync();
     }
 }

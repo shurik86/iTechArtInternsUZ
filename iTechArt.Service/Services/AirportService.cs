@@ -1,5 +1,4 @@
-﻿using iTechArt.Database.Entities.Airports;
-using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.GenerateExcelInterfaces;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IGenerateXml;
@@ -17,20 +16,20 @@ namespace iTechArt.Service.Services
     public sealed class AirportService : IAirportsService
     {
         private readonly IAirportRepository _airportRepository;
-        private readonly IGenerateExcel _generateExcel;
+        private readonly IGenerateAirportExcel _generateAirportExcel;
         private readonly IAirportParsers _airportParsers;
         private readonly IGenerateAirportXml _generateAirportXml;
         private readonly IStreamToArray _streamToArray;
 
         public AirportService(IAirportRepository airportRepository, 
                               IAirportParsers airportParsers,
-                              IGenerateExcel generateExcel,
+                              IGenerateAirportExcel generateAirportExcel,
                               IGenerateAirportXml generateAirportXml,
                               IStreamToArray streamToArray)
         {
             _airportRepository = airportRepository;
             _airportParsers = airportParsers;
-            _generateExcel = generateExcel;
+            _generateAirportExcel = generateAirportExcel;
             _generateAirportXml = generateAirportXml;
             _streamToArray = streamToArray;
         }
@@ -106,7 +105,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task<byte[]> ExportExcelAsync()
         {
-            return await _generateExcel.GetExcelAsync<AirportDb>();
+            return await _generateAirportExcel.GetExcelAsync();
         }
     }
 }
