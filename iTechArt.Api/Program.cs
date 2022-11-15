@@ -40,7 +40,7 @@ builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
 builder.Services.AddScoped<IPupilParser, PupilParser>();
-builder.Services.AddScoped<IStudentParser, StudentParsers>();
+builder.Services.AddScoped<IStudentParser, StudentParser>();
 
 
 builder.Services.AddCors(option =>
