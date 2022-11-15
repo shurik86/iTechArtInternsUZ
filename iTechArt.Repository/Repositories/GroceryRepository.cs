@@ -80,5 +80,13 @@ namespace iTechArt.Repository.Repositories
         {
             return await _dbContext.Groceries.CountAsync();
         }
+
+        /// <summary>
+        /// Get all entities from database.
+        /// </summary>
+        public async Task<IGrocery[]> GetAllAsync()
+        {
+            return await _dbContext.Groceries.Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
+        }
     }
 }

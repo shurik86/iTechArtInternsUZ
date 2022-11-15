@@ -88,5 +88,13 @@ namespace iTechArt.Repository.Repositories
 
             await _dbContext.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Get all pupils.
+        /// </summary>
+        public async Task<IPupil[]> GetAllAsync()
+        {
+            return await _dbContext.Pupils.Select(p => _mapper.Map<Pupil>(p)).ToArrayAsync();
+        }
     }
 }
