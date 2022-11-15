@@ -47,5 +47,21 @@
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.template"
         };
+
+        /// <summary>
+        /// Content Type for XML and XLSX.
+        /// </summary>
+        public static readonly string XmlContent = "text/xml";
+        public static readonly string ExcelContent = "application/vnd.ms-excel";
+
+        /// <summary>
+        /// Constants for File Titles.
+        /// </summary>
+        public static readonly string Police = "Police";
+        public static readonly string Airports = "Airports";
+        public static readonly string Groceries = "Groceries";
+        public static readonly string MedStaff = "MedStaff";
+        public static readonly string Pupils = "Pupils";
+        public static readonly string Students = "Students";
     }
 }

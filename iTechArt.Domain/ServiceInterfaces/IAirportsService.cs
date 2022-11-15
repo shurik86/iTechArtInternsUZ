@@ -28,5 +28,15 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Interface of Exporting airport datas.
         /// </summary>
         public Task<IAirport[]> ExportAirportExcelAsync(int pageIndex);
+
+        /// <summary>
+        /// Exports Airport Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
+        /// <summary>
+        /// Exports Airport Data to a new Excel file.
+        /// </summary>
+        public Task<byte[]> ExportExcelAsync();
     }
 }
