@@ -3,7 +3,6 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Service.Services
 {
@@ -20,8 +19,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
-        [HttpGet()]
-        public async Task<IStudent[]> ExportStudentsAsync(int pageIndex)
+        public async Task<IStudent[]> GetAllAsync(int pageIndex)
         {
             return await _studentRepository.GetAllAsync(pageIndex);
         }
@@ -56,7 +54,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task XmlImportAsync(IFormFile formFile)
         {
-            await _studentParsers.XmlParseAsync(formFile);
+            var studentsXml = await _studentParsers.XmlParseAsync(formFile);
+
+            await _studentRepository.AddRangeAsync(studentsXml);
         }
 
         /// <summary>
@@ -64,7 +64,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task CsvImportAsync(IFormFile formFile)
         {
-            await _studentParsers.CsvParseAsync(formFile);
+            var studentsCsv = await _studentParsers.CsvParseAsync(formFile);
+
+            await _studentRepository.AddRangeAsync(studentsCsv);
         }
 
         /// <summary>
@@ -72,7 +74,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ExcelImportAsync(IFormFile formFile)
         {
-            await _studentParsers.ExcelParseAsync(formFile);
+            var studentsExcel = await _studentParsers.ExcelParseAsync(formFile);
+
+            await _studentRepository.AddRangeAsync(studentsExcel);
         }
     }
 }

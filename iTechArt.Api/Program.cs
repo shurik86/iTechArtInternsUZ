@@ -44,6 +44,7 @@ builder.Services.AddScoped<IStudentParser, StudentParsers>();
 builder.Services.AddScoped<IGenericParser, GenericParser>();
 
 
+
 builder.Services.AddCors(option =>
 {
     option.AddDefaultPolicy(builder =>

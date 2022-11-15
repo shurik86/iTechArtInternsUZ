@@ -49,7 +49,7 @@ namespace iTechArt.Database.Entities.Students
         public Gender Gender { get; set; }
 
         /// <summary>
-        /// Gets or sets birthday of student
+        /// Gets or sets birthday of student.
         /// </summary>
         [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; set; }
