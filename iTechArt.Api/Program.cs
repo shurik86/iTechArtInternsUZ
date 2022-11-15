@@ -41,6 +41,7 @@ builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
 builder.Services.AddScoped<IPupilParser, PupilParser>();
 builder.Services.AddScoped<IStudentParser, StudentParsers>();
+builder.Services.AddScoped<IGenericParser, GenericParser>();
 
 
 builder.Services.AddCors(option =>

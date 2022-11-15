@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml.Serialization;
 using Ganss.Excel;
+using iTechArt.Domain.Enums;
+using ITechArt.Parsers.Dtos;
 
 namespace ITechArt.Parsers.Parsers
 {
@@ -44,6 +46,8 @@ namespace ITechArt.Parsers.Parsers
 
             var excelMapper = new ExcelMapper(stream);
 
+            ConfigurationMappingExcel(excelMapper);
+
             return excelMapper.Fetch<TSourse>().ToArray();
         }
 
@@ -63,6 +67,27 @@ namespace ITechArt.Parsers.Parsers
             using TextReader reader = new StreamReader(stream);
 
             return (TSource)xmlSerializer.Deserialize(reader);
+        }
+
+        private void ConfigurationMappingExcel(ExcelMapper mapper)
+        {
+            mapper.AddMapping<PupilDto>("Gender", p => p.Gender)
+                .SetPropertyUsing(v =>
+                {
+                    return Enum.Parse<Gender>(v.ToString());
+                });
+
+            mapper.AddMapping<PupilDto>("CourseLanguage", p => p.CourseLanguage)
+                .SetPropertyUsing(v =>
+                {
+                    return Enum.Parse<CourseLanguage>(v.ToString());
+                });
+
+            mapper.AddMapping<PupilDto>("Shift", p => p.Shift)
+                .SetPropertyUsing(v =>
+                {
+                    return Enum.Parse<Shift>(v.ToString());
+                });
         }
     }
 }
