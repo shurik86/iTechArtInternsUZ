@@ -73,5 +73,31 @@ namespace iTechArt.Api.Controllers
             await _airportsService.AirportXMLParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Exports Airport table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _airportsService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
+
+        /// <summary>
+        /// Exports Airport table from Database to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _airportsService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
     }
 }

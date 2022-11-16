@@ -1,5 +1,7 @@
 using iTechArt.Database.DbContexts;
+using iTechArt.Domain.GenerateExcelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
@@ -8,6 +10,8 @@ using iTechArt.Serivce.Services;
 using iTechArt.Service.Helpers;
 using iTechArt.Service.Parsers;
 using iTechArt.Service.Services;
+using ITechArt.Parsers.GenerateExcel;
+using ITechArt.Parsers.GenerateXml;
 using ITechArt.Parsers.IPoliceParsers;
 using ITechArt.Parsers.Parsers;
 using ITechArt.Parsers.PoliceParsers;
@@ -31,6 +35,7 @@ builder.Services.AddScoped<IGroceryService, GroceryService>();
 builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
+builder.Services.AddScoped<IStreamToArray, StreamToArray>();
 
 // Parser Services
 builder.Services.AddScoped<IExcelParse, ParseExcel>();
@@ -40,10 +45,18 @@ builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
 builder.Services.AddScoped<IPupilParser, PupilParser>();
-builder.Services.AddScoped<IStudentParser, StudentParsers>();
+builder.Services.AddScoped<IStudentParser, StudentParser>();
 builder.Services.AddScoped<IGenericParser, GenericParser>();
 
 
+builder.Services.AddScoped<IGenerateExcel, GenerateExcelFile>();
+builder.Services.AddScoped<IGenerateAirportXml, GenerateAirportXml>();
+builder.Services.AddScoped<IGenerateAirportExcel, GenerateAirportExcel>();
+builder.Services.AddScoped<IGenerateGroceryExcel, GenerateGroceryExcel>();
+builder.Services.AddScoped<IGenerateMedStaffExcel, GenerateMedStaffExcel>();
+builder.Services.AddScoped<IGeneratePoliceExcel, GeneratePoliceExcel>();
+builder.Services.AddScoped<IGeneratePupilExcel, GeneratePupilExcel>();
+builder.Services.AddScoped<IGenerateStudentExcel, GenerateStudentExcel>();
 
 builder.Services.AddCors(option =>
 {
