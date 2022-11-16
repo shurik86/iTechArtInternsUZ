@@ -6,6 +6,7 @@ import { UnitsEnum } from '../../../../shared/enums/units.enum';
 import { ApiService } from '../../../../shared/services/api.service';
 import { ContentTypeService } from '../../../../shared/services/content-type.service';
 import { ExtensionsEnum } from '../../../../shared/enums/extensions.enum';
+import { StatsService } from "../../../stats.service";
 
 @Component({
   selector: 'app-excel-export',
@@ -29,7 +30,8 @@ export class ExcelExportComponent {
   public constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    private contentTypeService: ContentTypeService
+    private contentTypeService: ContentTypeService,
+    private statsService: StatsService
   ) {}
 
   public onFileChange(event: any): void {
@@ -89,10 +91,12 @@ export class ExcelExportComponent {
   }
 
   public downloadExcel(): void {
+    this.statsService.downloadXlsx(this.unit!)
     console.log('Requested Excel file');
   }
 
   public downloadCsv(): void {
+    this.statsService.downloadCsv(this.unit!)
     console.log('Requested CSV file');
   }
 }

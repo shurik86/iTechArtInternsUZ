@@ -5,7 +5,7 @@ import { APIS } from '../apis/constants/apis';
 import { ExtensionsEnum } from '../enums/extensions.enum';
 import { environment } from '../../../environments/environment';
 import { ApisImportEnum } from '../apis/enums/apis-import.enum';
-import { ApisExportEnum } from "../apis/enums/apis-export.enum";
+import { ApisDownloadEnum, ApisExportEnum } from "../apis/enums/apis-export.enum";
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +70,18 @@ export class ApiService {
   public defineExportApiForCurrentUnit(unit: UnitsEnum | undefined): string {
     this.defineUnitPath(unit);
 
-    return `${this.url}${this.unitPath}${ApisExportEnum.getAll}`;
+    return `${this.url}${this.unitPath}${ApisExportEnum.getAll}`
+  }
+
+  public defineDownloadCsvApiForCurrentUnit(unit: UnitsEnum | undefined): string {
+    this.defineUnitPath(unit);
+
+    return `${this.url}${this.unitPath}${ApisDownloadEnum.csv}`
+  }
+
+  public defineDownloadXlsxApiForCurrentUnit(unit: UnitsEnum | undefined): string {
+    this.defineUnitPath(unit);
+
+    return `${this.url}${this.unitPath}${ApisDownloadEnum.csv}`
   }
 }

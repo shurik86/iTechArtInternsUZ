@@ -24,4 +24,20 @@ export class StatsService {
 
     return this.http.get<UnitsTypes>(`${this.api}`);
   }
+
+  public downloadCsv(unit: UnitsEnum): Observable<UnitsTypes> {
+    this.api = this.apiService.defineDownloadCsvApiForCurrentUnit(unit);
+
+    console.log(this.api)
+
+    return this.http.get<any>(`${this.api}`);
+  }
+
+  public downloadXlsx(unit: UnitsEnum): Observable<UnitsTypes> {
+    this.api = this.apiService.defineDownloadXlsxApiForCurrentUnit(unit);
+
+    console.log(this.api)
+
+    return this.http.get<any>(`${this.api}`);
+  }
 }
