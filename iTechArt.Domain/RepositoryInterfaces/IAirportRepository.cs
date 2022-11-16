@@ -38,5 +38,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of airports
         /// </summary>
         public Task<int> GetCountOfAirportAsync();
+
+        /// <summary>
+        /// Get all airports from database
+        /// </summary>
+        public Task<IAirport[]> GetAllAsync();
     }
 }

@@ -38,5 +38,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of pupils.
         /// </summary>
         public Task<int> GetCountOfPupilsAsync();
+
+        /// <summary>
+        /// Get all pupils.
+        /// </summary>
+        public Task<IPupil[]> GetAllAsync();
     }
 }

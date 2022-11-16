@@ -98,5 +98,13 @@ namespace iTechArt.Repository.Repositories
         {
             return await _dbContext.Staffs.CountAsync();
         }
+
+        /// <summary>
+        /// Get all medStaffs from database.
+        /// </summary>
+        public async Task<IMedStaff[]> GetAllAsync()
+        {
+            return await _dbContext.Staffs.Select(c => _mapper.Map<MedStaff>(c)).ToArrayAsync();
+        }
     }
 }
