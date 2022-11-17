@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all medStaff from database.
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IMedStaff[]> GetAllAsync();
+        Task<IMedStaff[]> GetAllAsync(int pageIndex);
 
         /// <summary>
         /// Add medStaff to database.
@@ -40,5 +40,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of medStaff.
         /// </summary>
         public Task<int> GetCountOfDoctors();
+
+        /// <summary>
+        /// Get all medStaffs from database.
+        /// </summary>
+        public Task<IMedStaff[]> GetAllAsync();
     }
 }

@@ -28,7 +28,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Gets all info from database.
         /// </summary>
-        public Task<IMedStaff[]> ExportMedStaffFileAsync();
+        public Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex);
 
     }
 }

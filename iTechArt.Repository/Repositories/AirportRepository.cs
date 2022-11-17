@@ -4,6 +4,7 @@ using iTechArt.Database.Entities.Airports;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.PaginationHelpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -31,9 +32,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all airports from database
         /// </summary>
-        public async Task<IAirport[]> GetAllAsync()
+        public async Task<IAirport[]> GetAllAsync(int pageIndex)
         {
-            return await _dbContext.Airports.Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
+            return await _dbContext.Airports.Paginate(pageIndex).Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
         }
 
         /// <summary>
@@ -83,6 +84,14 @@ namespace iTechArt.Repository.Repositories
         {
             await _dbContext.Airports.AddRangeAsync(airports.Select(_mapper.Map<AirportDb>));
             await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get all airports from database
+        /// </summary>
+        public async Task<IAirport[]> GetAllAsync()
+        {
+            return await _dbContext.Airports.Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
         }
     }
 

@@ -3,7 +3,6 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Service.Services
 {
@@ -18,16 +17,15 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Async method takes no parameters and returns serialized entities as file
+        /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
-        [HttpGet()]
-        public async Task<IStudent[]> ExportStudentsAsync()
+        public async Task<IStudent[]> GetAllAsync(int pageIndex)
         {
-            return await _studentRepository.GetAllAsync();
+            return await _studentRepository.GetAllAsync(pageIndex);
         }
 
         /// <summary>
-        /// Async method that saves entities into DB
+        /// Async method that saves entities into DB.
         /// </summary>
         public async Task ImportStudentsAsync(IFormFile formFile)
         {
@@ -52,27 +50,33 @@ namespace iTechArt.Service.Services
         }
 
         /// <summary>
-        /// Parse student's file from xml
+        /// Parse student's file from xml.
         /// </summary>
         public async Task XmlImportAsync(IFormFile formFile)
         {
-            await _studentParsers.XmlParseAsync(formFile);
+            var studentsXml = await _studentParsers.XmlParseAsync(formFile);
+
+            await _studentRepository.AddRangeAsync(studentsXml);
         }
 
         /// <summary>
-        /// Parse student's file from csv
+        /// Parse student's file from csv.
         /// </summary>
         public async Task CsvImportAsync(IFormFile formFile)
         {
-            await _studentParsers.CsvParseAsync(formFile);
+            var studentsCsv = await _studentParsers.CsvParseAsync(formFile);
+
+            await _studentRepository.AddRangeAsync(studentsCsv);
         }
 
         /// <summary>
-        /// Parse student's file from excel
+        /// Parse student's file from excel.
         /// </summary>
         public async Task ExcelImportAsync(IFormFile formFile)
         {
-            await _studentParsers.ExcelParseAsync(formFile);
+            var studentsExcel = await _studentParsers.ExcelParseAsync(formFile);
+
+            await _studentRepository.AddRangeAsync(studentsExcel);
         }
     }
 }
