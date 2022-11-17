@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using iTechArt.Domain.GenerateExcelInterfaces;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using ITechArt.Parsers.Dtos;
 using ITechArt.Parsers.Parsers;
 using Microsoft.AspNetCore.Http;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -14,15 +17,25 @@ namespace iTechArt.Service.Services
         private readonly IPupilRepository _pupilRepository;
         private readonly IGenericParser _genericParser;
         private readonly IMapper _mapper;
+        private readonly IGeneratePupilExcel _generatePupilExcel;
+        private readonly IGeneratePupilXml _generatePupilXml;
+        private readonly IStreamToArray _streamToArray;
 
         public PupilService(IPupilRepository pupilRepository, 
                             IGenericParser genericParser, 
-                            IMapper mapper)
+                            IMapper mapper, 
+                            IGeneratePupilExcel generatePupilExcel, 
+                            IGeneratePupilXml generatePupilXml, 
+                            IStreamToArray streamToArray)
         {
             _pupilRepository = pupilRepository;
             _genericParser = genericParser;
             _mapper = mapper;
+            _generatePupilExcel = generatePupilExcel;
+            _generatePupilXml = generatePupilXml;
+            _streamToArray = streamToArray;
         }
+
 
         /// <summary>
         /// Get all pupils.
@@ -84,6 +97,23 @@ namespace iTechArt.Service.Services
             var pupilsDto = pupilsFromXml.Pupils.Select(p => _mapper.Map<PupilDto>(p));
 
             await _pupilRepository.AddRangeAsync(pupilsDto);
+        }
+
+        /// <summary>
+        /// Exports Pupils Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generatePupilXml.GetPupilsXmlAsync();
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+        /// <summary>
+        /// Exports Pupils Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generatePupilExcel.GetExcelAsync();
         }
     }
 }

@@ -1,8 +1,11 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.GenerateExcelInterfaces;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -10,12 +13,23 @@ namespace iTechArt.Service.Services
     {
         private readonly IMedStaffRepository _medStaffRepository;
         private readonly IMedStaffParser _medStaffParser;
+        private readonly IGenerateMedStaffExcel _generateMedStaffExcel;
+        private readonly IGenerateMedStaffXml _generateMedStaffXml;
+        private readonly IStreamToArray _streamToArray;
 
-        public MedStaffService(IMedStaffRepository medStaffRepository, IMedStaffParser medStaffParser)
+        public MedStaffService(IMedStaffRepository medStaffRepository, 
+                               IMedStaffParser medStaffParser, 
+                               IGenerateMedStaffExcel generateMedStaffExcel, 
+                               IGenerateMedStaffXml generateMedStaffXml, 
+                               IStreamToArray streamToArray)
         {
             _medStaffRepository = medStaffRepository;
             _medStaffParser = medStaffParser;
+            _generateMedStaffExcel = generateMedStaffExcel;
+            _generateMedStaffXml = generateMedStaffXml;
+            _streamToArray = streamToArray;
         }
+
 
         /// <summary>
         /// Takes no input so far.
@@ -68,6 +82,23 @@ namespace iTechArt.Service.Services
             {
                 await _medStaffParser.ParseXMLAsync(file);
             }
+        }
+
+        /// <summary>
+        /// Exports MedStaff Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generateMedStaffXml.GetMedStaffXmlAsync();
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+        /// <summary>
+        /// Exports MedStaff Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generateMedStaffExcel.GetExcelAsync();
         }
     }
 }

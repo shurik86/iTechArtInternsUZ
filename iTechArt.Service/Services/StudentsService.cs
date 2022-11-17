@@ -1,8 +1,11 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.GenerateExcelInterfaces;
+using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
+using iTechArt.Domain.ParserInterfaces.IGenerateXml;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using System.Xml;
 
 namespace iTechArt.Service.Services
 {
@@ -10,11 +13,24 @@ namespace iTechArt.Service.Services
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IStudentParser _studentParsers;
-        public StudentsService(IStudentRepository studentRepository, IStudentParser studentParsers)
+        private readonly IGenerateStudentExcel _generateStudentExcel;
+        private readonly IGenerateStudentXml _generateStudentXml;
+        private readonly IStreamToArray _streamToArray;
+
+        public StudentsService(IStudentRepository studentRepository, 
+                               IStudentParser studentParsers, 
+                               IGenerateStudentExcel generateStudentExcel, 
+                               IGenerateStudentXml generateStudentXml, 
+                               IStreamToArray streamToArray)
         {
             _studentRepository = studentRepository;
             _studentParsers = studentParsers;
+            _generateStudentExcel = generateStudentExcel;
+            _generateStudentXml = generateStudentXml;
+            _streamToArray = streamToArray;
         }
+
+
 
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file.
@@ -77,6 +93,23 @@ namespace iTechArt.Service.Services
             var studentsExcel = await _studentParsers.ExcelParseAsync(formFile);
 
             await _studentRepository.AddRangeAsync(studentsExcel);
+        }
+
+        /// <summary>
+        /// Exports Students Data to a new XML file.
+        /// </summary>
+        public async Task<byte[]> ExportXmlAsync()
+        {
+            XmlDocument xmlDocument = await _generateStudentXml.GetStudentsXmlAsync();
+            return await _streamToArray.XmlStreamToArrayAsync(xmlDocument);
+        }
+
+        /// <summary>
+        /// Exports Students Data to a new Excel file.
+        /// </summary>
+        public async Task<byte[]> ExportExcelAsync()
+        {
+            return await _generateStudentExcel.GetExcelAsync();
         }
     }
 }

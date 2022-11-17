@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.GenerateExcelInterfaces;
+using iTechArt.Domain.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,19 @@ namespace ITechArt.Parsers.GenerateExcel
 {
     public sealed class GenerateStudentExcel : IGenerateStudentExcel
     {
-        public Task<byte[]> GetExcelAsync()
+        private readonly IStudentRepository _studentRepository;
+        private readonly IGenerateExcel _generateExcel;
+
+        public GenerateStudentExcel(IStudentRepository studentRepository, IGenerateExcel generateExcel)
         {
-            throw new NotImplementedException();
+            _studentRepository = studentRepository;
+            _generateExcel = generateExcel;
+        }
+
+        public async Task<byte[]> GetExcelAsync()
+        {
+            var entities = await _studentRepository.GetAllAsync();
+            return await _generateExcel.GetExcelAsync(entities);
         }
     }
 }
