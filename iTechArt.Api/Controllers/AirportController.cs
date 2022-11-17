@@ -28,7 +28,7 @@ namespace iTechArt.Api.Controllers
 
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    await _airportsService.ImportAirportFile(file);
+                    await _airportsService.ImportAirportFileAsync(file);
                     return Ok();
                 }
 
@@ -46,25 +46,25 @@ namespace iTechArt.Api.Controllers
         [HttpGet("get_all")]
         public async Task<IActionResult> ExportAirportExcel()
         {
-            return Ok( await _airportsService.ExportAirportExcel());
+            return Ok( await _airportsService.ExportAirportExcelAsync());
         }
 
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<IActionResult> ImportExcelFile(IFormFile file)
         {
-            await _airportsService.AirportExcelParser(file);
+            await _airportsService.AirportExcelParseAsync(file);
             return Ok();
         }
         [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<IActionResult> ImportCsvFile(IFormFile file)
         {
-            await _airportsService.AirportCSVParser(file);
+            await _airportsService.AirportCSVParseAsync(file);
             return Ok();
         }
         [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<IActionResult> ImportXmlFile(IFormFile file)
         {
-            await _airportsService.AirportXMLParser(file);
+            await _airportsService.AirportXMLParseAsync(file);
             return Ok();
         }
     }
