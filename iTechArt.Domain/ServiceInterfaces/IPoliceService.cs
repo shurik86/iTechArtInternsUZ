@@ -25,5 +25,15 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// function to export data from the database.
         /// </summary>
         public Task<IPolice[]> GetAllPoliceAsync(int pageIndex);
+
+        /// <summary>
+        /// Exports Police Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
+        /// <summary>
+        /// Exports Police Data to a new Excel file.
+        /// </summary>
+        public Task<byte[]> ExportExcelAsync();
     }
 }

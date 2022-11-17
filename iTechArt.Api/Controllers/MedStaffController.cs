@@ -107,5 +107,31 @@ namespace iTechArt.Api.Controllers
         {
             return Ok(await _medStaffService.ExportMedStaffFileAsync(pageIndex));
         }
+
+        /// <summary>
+        /// Exports MedStaff table to Xml file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _medStaffService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
+        /// Exports MedStaff table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _medStaffService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
     }
 }

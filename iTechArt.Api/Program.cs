@@ -57,6 +57,11 @@ builder.Services.AddScoped<IGenerateMedStaffExcel, GenerateMedStaffExcel>();
 builder.Services.AddScoped<IGeneratePoliceExcel, GeneratePoliceExcel>();
 builder.Services.AddScoped<IGeneratePupilExcel, GeneratePupilExcel>();
 builder.Services.AddScoped<IGenerateStudentExcel, GenerateStudentExcel>();
+builder.Services.AddScoped<IGenerateGroceryXml, GenerateGroceryXml>();
+builder.Services.AddScoped<IGenerateMedStaffXml, GenerateMedStaffXml>();
+builder.Services.AddScoped<IGeneratePoliceXml, GeneratePoliceXml>();
+builder.Services.AddScoped<IGeneratePupilXml, GeneratePupilXml>();
+builder.Services.AddScoped<IGenerateStudentXml, GenerateStudentXml>();
 
 builder.Services.AddCors(option =>
 {
