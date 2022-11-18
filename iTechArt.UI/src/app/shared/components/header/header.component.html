@@ -76,7 +76,7 @@
         <li>
           <p
             class="nav-cursor"
-            [ngClass]="currentPath === unitsEnum.medStaff ? 'active' : ''"
+            [ngClass]="currentPath === 'med-staff' ? 'active' : ''"
             routerLink="{{ units.medStaff.path }}"
             (click)="toggleMenu(); changePath()"
           >
