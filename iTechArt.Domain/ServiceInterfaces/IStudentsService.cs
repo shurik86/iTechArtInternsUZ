@@ -13,7 +13,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Exports students from DB.
         /// </summary>
-        public Task<IStudent[]> GetAllAsync(int pageIndex);
+        public Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Parse student's file from xml.

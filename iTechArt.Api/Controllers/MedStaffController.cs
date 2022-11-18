@@ -103,9 +103,9 @@ namespace iTechArt.Api.Controllers
         /// Gets all data from database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromQuery] int pageIndex)
+        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _medStaffService.ExportMedStaffFileAsync(pageIndex));
+            return Ok(await _medStaffService.ExportMedStaffFileAsync(pageIndex, pageSize));
         }
 
         /// <summary>
