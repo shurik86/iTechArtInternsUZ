@@ -9,14 +9,6 @@ import { PupilsModule } from './modules/pupils/pupils.module';
 import { StudentsModule } from './modules/students/students.module';
 import { SharedStatsModule } from './shared/shared-stats.module';
 import { StatisticsPageComponent } from './modules/statistics/pages/statistics-page/statistics-page.component';
-import {
-  IgxBarSeriesModule,
-  IgxCategoryHighlightLayerModule,
-  IgxCategoryYAxisModule,
-  IgxDataChartCoreModule, IgxDataToolTipLayerModule,
-  IgxLegendModule,
-  IgxNumericXAxisModule
-} from "igniteui-angular-charts";
 
 @NgModule({
   imports: [
@@ -28,13 +20,6 @@ import {
     PupilsModule,
     StudentsModule,
     SharedStatsModule,
-    IgxLegendModule,
-    IgxDataChartCoreModule,
-    IgxCategoryYAxisModule,
-    IgxNumericXAxisModule,
-    IgxCategoryHighlightLayerModule,
-    IgxBarSeriesModule,
-    IgxDataToolTipLayerModule
   ],
   declarations: [StatisticsPageComponent],
 })
