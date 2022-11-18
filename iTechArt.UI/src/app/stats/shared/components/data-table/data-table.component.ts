@@ -1,10 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { StatsService } from '../../../stats.service';
 import { UnitsTypes } from '../../types/units-types';
 import { UnitsEnum } from '../../../../shared/enums/units.enum';
 import { UnitCountDashboardInterface } from '../../../../shared/interfaces/unit-count-dashboard.interface';
 import { APIS } from '../../../../shared/apis/constants/apis';
-import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
