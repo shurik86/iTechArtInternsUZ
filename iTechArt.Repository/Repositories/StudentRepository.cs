@@ -32,9 +32,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all students from database.
         /// </summary>
-        public async Task<IStudent[]> GetAllAsync(int pageIndex)
+        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Students.Paginate(pageIndex, 9).Select(s => _mapper.Map<Student>(s))
+            return await _dbContext.Students.Paginate(pageIndex, pageSize).Select(s => _mapper.Map<Student>(s))
                                             .ToArrayAsync();
         }
 
