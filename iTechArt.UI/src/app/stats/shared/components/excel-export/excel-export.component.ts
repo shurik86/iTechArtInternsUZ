@@ -6,6 +6,7 @@ import { UnitsEnum } from '../../../../shared/enums/units.enum';
 import { ApiService } from '../../../../shared/services/api.service';
 import { ContentTypeService } from '../../../../shared/services/content-type.service';
 import { ExtensionsEnum } from '../../../../shared/enums/extensions.enum';
+import { StatsService } from '../../../stats.service';
 
 @Component({
   selector: 'app-excel-export',
@@ -20,6 +21,7 @@ export class ExcelExportComponent {
   public isFormValid = false;
   public isFormButtonDisabled = false;
   public fileExtension: string | undefined;
+  public extensions = ExtensionsEnum;
 
   public exportForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
@@ -29,7 +31,8 @@ export class ExcelExportComponent {
   public constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    private contentTypeService: ContentTypeService
+    private contentTypeService: ContentTypeService,
+    private statsService: StatsService
   ) {}
 
   public onFileChange(event: any): void {
@@ -71,9 +74,7 @@ export class ExcelExportComponent {
     const formData = new FormData();
     formData.append('file', file!);
 
-    console.log(this.api);
-
-    this.http.post<any>(`${this.api}`, formData).subscribe({
+    this.http.post<string>(`${this.api}`, formData).subscribe({
       next: (data: string) => {
         alert('Uploaded Successfully.');
         console.log(data);
@@ -81,10 +82,25 @@ export class ExcelExportComponent {
         location.reload();
       },
       error: (error: string) => {
-        alert(`There was an error! ${error}`);
+        alert(`There was an error!`);
         console.log(error);
         this.isFormButtonDisabled = false;
       },
     });
+  }
+
+  public downloadFile(extension : ExtensionsEnum): void {
+    this.statsService
+      .downloadFile(this.unit!, extension)
+      .subscribe((data: Blob | MediaSource) => {
+        const currentDate = new Date();
+        const downloadURL = window.URL.createObjectURL(data);
+        const link = document.createElement('a');
+
+        link.href = downloadURL;
+        link.download = `${this.unit}-${currentDate}.${extension}`;
+
+        link.click();
+      });
   }
 }
