@@ -27,7 +27,7 @@ export class PolicePageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.statsService.getAllStatsByUnit(this.unit).subscribe({
-      next: (data: UnitsTypes) => (this.data = data),
+      next: (data: UnitsTypes) => this.data = data,
       error: () => alert("Couldn't load data."),
     });
   }

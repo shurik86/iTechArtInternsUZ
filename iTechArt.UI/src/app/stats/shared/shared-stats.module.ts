@@ -5,10 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DataTableComponent } from './components/data-table/data-table.component';
 import { UnitHeaderComponent } from './components/unit-header/unit-header.component';
 import { ExcelExportComponent } from './components/excel-export/excel-export.component';
+import { NgxPaginationModule } from "ngx-pagination";
 
 @NgModule({
   declarations: [ExcelExportComponent, UnitHeaderComponent, DataTableComponent],
   exports: [ExcelExportComponent, UnitHeaderComponent, DataTableComponent],
-  imports: [NgForOf, ReactiveFormsModule, NgIf],
+    imports: [NgForOf, ReactiveFormsModule, NgIf, NgxPaginationModule]
 })
 export class SharedStatsModule {}
