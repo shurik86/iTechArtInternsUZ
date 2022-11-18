@@ -1,5 +1,5 @@
 export enum ApisExportEnum {
-  getAll = 'get_all',
+  getAll = 'get_all?pageIndex=',
 }
 
 export enum ApisDownloadEnum {

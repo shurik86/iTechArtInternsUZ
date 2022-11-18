@@ -1,3 +1,7 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
 .grid {
   border-collapse: collapse;
   margin: 30px;
@@ -20,4 +24,9 @@
       color: #3a5696;
     }
   }
+}
+
+.pagination-controls-wrapper {
+  display: flex;
+  justify-content: center;
 }
