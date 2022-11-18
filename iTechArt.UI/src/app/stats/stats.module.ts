@@ -8,6 +8,7 @@ import { PoliceModule } from './modules/police/police.module';
 import { PupilsModule } from './modules/pupils/pupils.module';
 import { StudentsModule } from './modules/students/students.module';
 import { SharedStatsModule } from './shared/shared-stats.module';
+import { StatisticsPageComponent } from './modules/statistics/pages/statistics-page/statistics-page.component';
 
 @NgModule({
   imports: [
@@ -20,5 +21,6 @@ import { SharedStatsModule } from './shared/shared-stats.module';
     StudentsModule,
     SharedStatsModule,
   ],
+  declarations: [StatisticsPageComponent],
 })
 export class StatsModule {}
