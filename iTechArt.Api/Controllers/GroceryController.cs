@@ -93,14 +93,5 @@ namespace iTechArt.Api.Controllers
         {
             return Ok(await _groceryService.ExportGroceryAsync());
         }
-        /// <summary>
-        /// Get total amount of groceries
-        /// </summary>
-
-        //[HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
-        //public IActionResult GetCountOfGrocery()
-        //{
-        //    return Ok(_groceryService.GetCountOfGrocery());
-        //}
     }
 }

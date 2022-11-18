@@ -16,12 +16,12 @@ namespace iTechArt.Service.Graphs
         /// </summary>
         public async Task<List<IGraph>> GetGraphData() 
         {
-            List<IGraph> result = new List<IGraph>();
-            result.AddRange(await _graphRepository.GetGroceryGraphData());
-            result.AddRange(await _graphRepository.GetPupilsGraphData());
-            result.AddRange(await _graphRepository.GetPoliceGraphData());
-            result.AddRange(await _graphRepository.GetStudentsGraphData());
-            result.AddRange(await _graphRepository.GetMedstaffGraphData());
+            var result = new List<IGraph>();
+            result.Add(await _graphRepository.GetGroceryGraphData());
+            result.Add(await _graphRepository.GetPupilsGraphData());
+            result.Add(await _graphRepository.GetPoliceGraphData());
+            result.Add(await _graphRepository.GetStudentsGraphData());
+            result.Add(await _graphRepository.GetMedstaffGraphData());
             return result;
         }
     }
