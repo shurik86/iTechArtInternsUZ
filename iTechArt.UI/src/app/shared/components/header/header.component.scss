@@ -7,7 +7,6 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
   position: sticky;
   top: 0;
-  z-index: 2;
 }
 
 p {
@@ -18,7 +17,6 @@ p {
 .active {
   scale: 130%;
   font-weight: bold;
-  text-decoration: underline;
 }
 
 nav {
@@ -55,7 +53,6 @@ a {
 
 .button-container {
   justify-content: flex-end;
-  margin-right: 30px;
 }
 
 .logo-container {
@@ -65,11 +62,6 @@ a {
 
 .nav-cursor {
   cursor: pointer;
-}
-
-.nav-item-statistics {
-  font-size: 25px;
-  margin-left: 100px;
 }
 
 .hamburger-container {
@@ -129,7 +121,7 @@ a {
   opacity: 0;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1010px) {
   .menu {
     display: flex;
     flex-direction: column;
@@ -144,11 +136,6 @@ a {
     background-color: rgba(58, 86, 151, 1);
     transition: all 0.3s;
     cursor: pointer;
-  }
-
-  .nav-item-statistics {
-    font-size: 25px;
-    margin-left: 0px;
   }
 
   .menu div {

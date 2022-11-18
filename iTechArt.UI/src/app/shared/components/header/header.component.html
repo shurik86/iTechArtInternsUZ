@@ -22,7 +22,7 @@
     <div class="overlay" *ngIf="menuIsActive" (click)="toggleMenu()"></div>
 
     <ul class="menu" [ngClass]="{ menu_active: menuIsActive }">
-      <div style="display: flex">
+      <div>
         <li>
           <p
             class="nav-cursor"
@@ -76,22 +76,13 @@
         <li>
           <p
             class="nav-cursor"
-            [ngClass]="currentPath === 'med-staff' ? 'active' : ''"
+            [ngClass]="currentPath === unitsEnum.medStaff ? 'active' : ''"
             routerLink="{{ units.medStaff.path }}"
             (click)="toggleMenu(); changePath()"
           >
             {{ unitsTitles.medStaff.toString().toUpperCase() }}
           </p>
         </li>
-
-        <p
-          class="nav-cursor nav-item-statistics"
-          routerLink="statistics"
-          [ngClass]="currentPath === 'statistics' ? 'active' : ''"
-          (click)="toggleMenu(); changePath()"
-        >
-          STATISTICS
-        </p>
       </div>
       <div class="button-container header-element">
         <button class="button-secondary">Log Out</button>
