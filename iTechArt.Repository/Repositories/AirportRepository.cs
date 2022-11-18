@@ -32,9 +32,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all airports from database
         /// </summary>
-        public async Task<IAirport[]> GetAllAsync(int pageIndex)
+        public async Task<IAirport[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Airports.Paginate(pageIndex, 9).Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
+            return await _dbContext.Airports.Paginate(pageIndex, pageSize).Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
         }
 
         /// <summary>
