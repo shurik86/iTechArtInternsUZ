@@ -32,9 +32,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync(int pageIndex)
+        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Pupils.Paginate(pageIndex, 9).Select(p => _mapper.Map<Pupil>(p))
+            return await _dbContext.Pupils.Paginate(pageIndex, pageSize).Select(p => _mapper.Map<Pupil>(p))
                                           .ToArrayAsync();
         }
 

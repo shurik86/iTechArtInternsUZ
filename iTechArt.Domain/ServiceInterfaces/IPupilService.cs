@@ -13,7 +13,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public Task<IPupil[]> GetAllAsync(int pageIndex);
+        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Parse pupil's file from excel.
