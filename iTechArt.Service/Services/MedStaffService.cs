@@ -34,9 +34,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes no input so far.
         /// </summary>
-        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex)
+        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize)
         {
-            return await _medStaffRepository.GetAllAsync(pageIndex);
+            return await _medStaffRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>

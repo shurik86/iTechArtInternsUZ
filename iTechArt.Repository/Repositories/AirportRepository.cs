@@ -4,7 +4,7 @@ using iTechArt.Database.Entities.Airports;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using iTechArt.Repository.PaginationHelpers;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -34,7 +34,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IAirport[]> GetAllAsync(int pageIndex)
         {
-            return await _dbContext.Airports.Paginate(pageIndex).Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
+            return await _dbContext.Airports.Paginate(pageIndex, 9).Select(a => _mapper.Map<Airport>(a)).ToArrayAsync();
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using iTechArt.Repository.PaginationHelpers;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -45,7 +45,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPolice[]> GetAllAsync(int pageIndex)
         {
-            return await _dbContext.Police.Paginate(pageIndex).Select(police => _mapper.Map<Police>(police)).ToArrayAsync();
+            return await _dbContext.Police.Paginate(pageIndex, 9).Select(police => _mapper.Map<Police>(police)).ToArrayAsync();
         }
 
         /// <summary>

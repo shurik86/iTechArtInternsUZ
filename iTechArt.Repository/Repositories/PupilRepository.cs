@@ -4,7 +4,7 @@ using iTechArt.Database.Entities.Pupils;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using iTechArt.Repository.PaginationHelpers;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -34,7 +34,7 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IPupil[]> GetAllAsync(int pageIndex)
         {
-            return await _dbContext.Pupils.Paginate(pageIndex).Select(p => _mapper.Map<Pupil>(p))
+            return await _dbContext.Pupils.Paginate(pageIndex, 9).Select(p => _mapper.Map<Pupil>(p))
                                           .ToArrayAsync();
         }
 
