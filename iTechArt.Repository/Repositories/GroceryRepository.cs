@@ -21,9 +21,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database.
         /// </summary>
-        public async Task<IGrocery[]> GetAllAsync(int pageIndex)
+        public async Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Groceries.Paginate(pageIndex, 9).Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
+            return await _dbContext.Groceries.Paginate(pageIndex, pageSize).Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
         }
 
         /// <summary>
