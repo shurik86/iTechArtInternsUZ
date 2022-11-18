@@ -12,12 +12,12 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or sets the males count in table
         /// </summary>
-        public double Male { get; set; }
+        public double MaleAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the females count in table
         /// </summary>
-        public double Female { get; set; }
+        public double FemaleAmount { get; set; }
 
         /// <summary>
         /// Gets or sets the average age count of males in table

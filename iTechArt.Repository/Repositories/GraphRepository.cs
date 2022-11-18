@@ -31,8 +31,8 @@ namespace iTechArt.Repository.Repositories
             graphs.Add(new Graph()
             {
                 Unit = tableName,
-                Male = maleAmount,
-                Female = femaleCount,
+                MaleAmount = maleAmount,
+                FemaleAmount = femaleCount,
                 AverageAgeFemale = femaleCount/ femaleAge,
                 AverageAgeMale = maleAmount/maleAge
             }
@@ -52,8 +52,8 @@ namespace iTechArt.Repository.Repositories
             graphs.Add(new Graph()
             {
                 Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Pupils")).ToString(),
-                Male = maleCount,
-                Female = femaleCount,
+                MaleAmount = maleCount,
+                FemaleAmount = femaleCount,
             });
                
             return graphs;
@@ -67,9 +67,9 @@ namespace iTechArt.Repository.Repositories
             graphs.Add(new Graph()
             {
                 Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Students")).ToString(),
-                Male = await _dbContext.Students
+                MaleAmount = await _dbContext.Students
                       .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                Female = await _dbContext.Students
+                FemaleAmount = await _dbContext.Students
                     .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
             });
             return graphs;
@@ -84,9 +84,9 @@ namespace iTechArt.Repository.Repositories
             graphs.Add(new Graph()
             {
                 Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Staffs")).ToString(),
-                Male = await _dbContext.Staffs
+                MaleAmount = await _dbContext.Staffs
                       .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                Female = await _dbContext.Staffs
+                FemaleAmount = await _dbContext.Staffs
                     .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
             });
             return graphs;
@@ -101,9 +101,9 @@ namespace iTechArt.Repository.Repositories
             graphs.Add(new Graph()
             {
                 Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Police")).ToString(),
-                Male = await _dbContext.Police
+                MaleAmount = await _dbContext.Police
                       .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                Female = await _dbContext.Police
+                FemaleAmount = await _dbContext.Police
                     .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
             });
             return graphs;
