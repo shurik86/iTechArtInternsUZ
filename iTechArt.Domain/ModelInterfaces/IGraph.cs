@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.AspNetCore.Http;
+
 namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IGraph
@@ -11,12 +13,12 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets or sets the males count in table
         /// </summary>
-        public int Male { get; set; }
+        public double Male { get; set; }
 
         /// <summary>
         /// Gets or sets the females count in table
         /// </summary>
-        public int Female { get; set; }
+        public double Female { get; set; }
 
         /// <summary>
         /// Gets or sets the average age count of males in table
@@ -26,6 +28,6 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets or sets the average age count of females in table
         /// </summary>
-        public TimeSpan AverageAgeFemale { get; set; }
+        public double AverageAgeFemale { get; set; }
     }
 }

@@ -21,36 +21,41 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<List<IGraph>> GetGroceryGraphData()
         {
+            var tableName = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Groceries")).ToString();
+            var maleAmount = await _dbContext.Groceries.GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync();
+            var femaleCount = await _dbContext.Groceries.GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync();
+            var femaleAge = await _dbContext.Groceries.Where(p => p.Gender == Gender.Female).Select(c => new { Age = DateTime.Now.Year - c.Birthday.Year}.Age).SumAsync();
+            var maleAge = await _dbContext.Groceries.Where(p => p.Gender == Gender.Male).Select(c => new { Age = DateTime.Now.Year - c.Birthday.Year }.Age).SumAsync();
+
             var graphs = new List<IGraph>();
             graphs.Add(new Graph()
             {
-                Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Groceries")).ToString(),
-                Male = await _dbContext.Groceries
-                      .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                Female = await _dbContext.Groceries
-                    .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
-                AverageAgeFemale = _dbContext.Groceries
-                                   .Where(u=> u.Gender.HasFlag(Gender.Female))
-                                   .Select(s=>DateTime.Today.Subtract(s.Birthday)).FirstOrDefault(),
+                Unit = tableName,
+                Male = maleAmount,
+                Female = femaleCount,
+                AverageAgeFemale = femaleCount/ femaleAge,
+                AverageAgeMale = maleAmount/maleAge
             }
-            );;
+            );
             return graphs;
         }
-
+            
         /// <summary>
         /// Gets from database table-name for pupils and count of males and females in pupil table.
         /// </summary>
         public async Task<List<IGraph>> GetPupilsGraphData()
         {
+            var femaleCount = await _dbContext.Pupils.GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync();
+            var maleCount = await _dbContext.Pupils.GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync();
+
             var graphs = new List<IGraph>();
             graphs.Add(new Graph()
             {
                 Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Pupils")).ToString(),
-                Male = await _dbContext.Pupils
-                      .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                Female = await _dbContext.Pupils
-                    .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
+                Male = maleCount,
+                Female = femaleCount,
             });
+               
             return graphs;
         }
         /// <summary>
@@ -103,5 +108,6 @@ namespace iTechArt.Repository.Repositories
             });
             return graphs;
         }
+
     }
 }
