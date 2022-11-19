@@ -4,6 +4,7 @@ using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -43,9 +44,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all medStaffs from database.
         /// </summary>
-        public async Task<IMedStaff[]> GetAllAsync()
+        public async Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            var medStaffs = await _dbContext.Staffs.ToArrayAsync();
+            var medStaffs = await _dbContext.Staffs.Paginate(pageIndex, pageSize).ToArrayAsync();
 
             return medStaffs.Select(_mapper.Map<MedStaff>).ToArray();
         }
@@ -55,8 +56,12 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IMedStaff> GetByIdAsync(long id)
         {
-            return (await GetAllAsync()).Select(_mapper.Map<MedStaff>)
-                                        .FirstOrDefault(d => d.Id == id);
+            var medStaff = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
+
+            if (medStaff is null)
+                return null;
+
+            return _mapper.Map<MedStaff>(medStaff);
         }
 
         /// <summary>
@@ -76,7 +81,10 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task DeleteAsync(long id)
         {
-            var medStaff = (await GetAllAsync()).FirstOrDefault(d => d.Id == id);
+            var medStaff = await _dbContext.Staffs.FirstOrDefaultAsync(d => d.Id == id);
+
+            if(medStaff is null)
+                return;
 
             _dbContext.Staffs.Remove(_mapper.Map<MedStaffDb>(medStaff));
 
@@ -89,6 +97,14 @@ namespace iTechArt.Repository.Repositories
         public async Task<int> GetCountOfDoctors()
         {
             return await _dbContext.Staffs.CountAsync();
+        }
+
+        /// <summary>
+        /// Get all medStaffs from database.
+        /// </summary>
+        public async Task<IMedStaff[]> GetAllAsync()
+        {
+            return await _dbContext.Staffs.Select(c => _mapper.Map<MedStaff>(c)).ToArrayAsync();
         }
     }
 }

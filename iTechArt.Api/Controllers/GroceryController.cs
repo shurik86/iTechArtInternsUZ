@@ -39,8 +39,8 @@ namespace iTechArt.Api.Controllers
             return BadRequest();
         }
         /// <summary>
-        /// api route which applies the following extensions
-        /// will allow to upload the data from CSV file to db 
+        /// Api route which applies the following extensions
+        /// will allow to upload the data from CSV file to db.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
         public async ValueTask<IActionResult> ImportCsvGroceryFileAsync(IFormFile file)
@@ -55,8 +55,8 @@ namespace iTechArt.Api.Controllers
 
         }
         /// <summary>
-        /// api route which applies the following extensions
-        /// will allow to upload the data from Excel file to db 
+        /// Api route which applies the following extensions
+        /// will allow to upload the data from Excel file to db.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async ValueTask<IActionResult> ImportExcelGroceryFileAsync(IFormFile file)
@@ -71,8 +71,8 @@ namespace iTechArt.Api.Controllers
 
         }
         /// <summary>
-        /// api route which applies the following extensions
-        /// will allow to upload the data from XML file to db 
+        /// Api route which applies the following extensions
+        /// will allow to upload the data from XML file to db.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
         public async ValueTask<IActionResult> ImportXMLGroceryFileAsync(IFormFile file)
@@ -86,12 +86,47 @@ namespace iTechArt.Api.Controllers
                 return BadRequest();
         }
         /// <summary>
-        /// api route which allows to get all info from db and parse it to the following format
+        /// Api route which allows to get all info from db and parse it to the following format.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportGroceryDataAsync()
+        public async Task<IActionResult> ExportGroceryDataAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _groceryService.ExportGroceryAsync());
+            return Ok(await _groceryService.ExportGroceryAsync(pageIndex, pageSize));
+        }
+        /// <summary>
+        /// Get total amount of groceries
+        /// </summary>
+
+        //[HttpGet(ApiConstants.GETCOUNTOFGROCERY)]
+        //public IActionResult GetCountOfGrocery()
+        //{
+        //    return Ok(_groceryService.GetCountOfGrocery());
+        //}
+
+        /// <summary>
+        /// Exports Grocery table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _groceryService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
+        /// Exports Grocery table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _groceryService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
         }
     }
 }

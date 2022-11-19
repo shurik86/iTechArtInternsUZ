@@ -28,7 +28,16 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Gets all info from database.
         /// </summary>
-        public Task<IMedStaff[]> ExportMedStaffFileAsync();
+        public Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize);
 
+        /// <summary>
+        /// Exports MedStaff Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
+        /// <summary>
+        /// Exports MedStaff Data to a new Excel file.
+        /// </summary>
+        public Task<byte[]> ExportExcelAsync();
     }
 }

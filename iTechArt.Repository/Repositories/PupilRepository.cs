@@ -4,6 +4,7 @@ using iTechArt.Database.Entities.Pupils;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -31,9 +32,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync()
+        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Pupils.Select(p => _mapper.Map<Pupil>(p))
+            return await _dbContext.Pupils.Paginate(pageIndex, pageSize).Select(p => _mapper.Map<Pupil>(p))
                                           .ToArrayAsync();
         }
 
@@ -86,6 +87,14 @@ namespace iTechArt.Repository.Repositories
             await _dbContext.Pupils.AddRangeAsync(pupils.Select(_mapper.Map<PupilDb>));
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get all pupils.
+        /// </summary>
+        public async Task<IPupil[]> GetAllAsync()
+        {
+            return await _dbContext.Pupils.Select(p => _mapper.Map<Pupil>(p)).ToArrayAsync();
         }
     }
 }

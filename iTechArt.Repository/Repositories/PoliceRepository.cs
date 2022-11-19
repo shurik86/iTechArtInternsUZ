@@ -2,16 +2,11 @@
 using CsvHelper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Police;
-using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
-using OfficeOpenXml;
-using System.Globalization;
-using System.Xml;
 
 namespace iTechArt.Repository.Repositories
 {
@@ -42,9 +37,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all Police data from database.
         /// </summary>
-        public async Task<IPolice[]> GetAllAsync()
+        public async Task<IPolice[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Police.Select(police => _mapper.Map<Police>(police)).ToArrayAsync();
+            return await _dbContext.Police.Paginate(pageIndex, pageSize).Select(police => _mapper.Map<Police>(police)).ToArrayAsync();
         }
 
         /// <summary>
@@ -113,6 +108,14 @@ namespace iTechArt.Repository.Repositories
                 await _dbContext.Police.AddRangeAsync(policesArray);
             }
             await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get all Police data from database.
+        /// </summary>
+        public async Task<IPolice[]> GetAllAsync()
+        {
+            return await _dbContext.Police.Select(police => _mapper.Map<Police>(police)).ToArrayAsync();
         }
     }
 }

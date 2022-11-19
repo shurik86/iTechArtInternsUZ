@@ -1,14 +1,9 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
+using ITechArt.Parsers.Constants;
 using ITechArt.Parsers.Dtos;
-using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace ITechArt.Parsers.PoliceParsers
@@ -21,7 +16,7 @@ namespace ITechArt.Parsers.PoliceParsers
         public async Task<IPolice[]> ParseXMLAsync(IFormFile file)
         {
             List<IPolice> polices = new List<IPolice>();
-            using (var fileStream = new MemoryStream())
+            await using (var fileStream = new MemoryStream())
             {
                 await file.CopyToAsync(fileStream);
                 fileStream.Position = 0;
@@ -32,13 +27,13 @@ namespace ITechArt.Parsers.PoliceParsers
                 {
                     PoliceDto policeDto = new PoliceDto
                     {
-                        Name = node["Name"].InnerText,
-                        Surname = node["Surname"].InnerText,
-                        Email = node["Email"].InnerText,
-                        Gender = Enum.Parse<Gender>(node["Gender"].InnerText),
-                        Address = node["Address"].InnerText,
-                        JobTitle = node["JobTitle"].InnerText,
-                        Salary = Convert.ToDouble(node["Salary"].InnerText)
+                        Name = node[PoliceConstants.Name].InnerText,
+                        Surname = node[PoliceConstants.Surname].InnerText,
+                        Email = node[PoliceConstants.Email].InnerText,
+                        Gender = Enum.Parse<Gender>(node[PoliceConstants.Gender].InnerText),
+                        Address = node[PoliceConstants.Address].InnerText,
+                        JobTitle = node[PoliceConstants.JobTitle].InnerText,
+                        Salary = Convert.ToDouble(node[PoliceConstants.Salary].InnerText)
                     };
                     polices.Add(policeDto);
                 }

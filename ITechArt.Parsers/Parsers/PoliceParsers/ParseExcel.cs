@@ -1,17 +1,12 @@
 ﻿using ExcelLibrary.SpreadSheet;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.RepositoryInterfaces;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using ITechArt.Parsers.Constants;
 using ITechArt.Parsers.Dtos;
-using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ITechArt.Parsers.PoliceParsers
 {
@@ -24,7 +19,7 @@ namespace ITechArt.Parsers.PoliceParsers
         {
             string fileExtension = Path.GetExtension(file.FileName);
             var polices = new List<IPolice>();
-            using (var fileStream = new MemoryStream())
+            await using (var fileStream = new MemoryStream())
             {
                 await file.CopyToAsync(fileStream);
                 fileStream.Position = 0;
