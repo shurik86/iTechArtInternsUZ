@@ -22,7 +22,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets birthdate of pupil.
         /// </summary>
-        public DateOnly DateOfBirth { get; }
+        public DateTime DateOfBirth { get; }
 
         /// <summary>
         /// Gets gender of pupil.
