@@ -93,26 +93,11 @@ namespace iTechArt.Repository.Repositories
         }
 
         /// <summary>
-        /// Adds collection of entities to the database.
+        /// Add collection of polices to database.
         /// </summary>
-        public async Task AddRangeAsync(IPolice[] polices)
+        public async Task AddRangeAsync(IEnumerable<IPolice> polices)
         {
-            var entityFromDb = _dbContext.Police.OrderByDescending(c => c.Id).FirstOrDefault();
-            PoliceDb[] policesArray = polices.Select(c => _mapper.Map<PoliceDb>(c)).ToArray();
-            if (entityFromDb != null)
-            {
-                long id = entityFromDb.Id;
-                foreach (var police in policesArray)
-                {
-                    police.Id = id += 1;
-                    id += 1;
-                }
-                await _dbContext.AddRangeAsync(policesArray);
-            }
-            else
-            {
-                await _dbContext.Police.AddRangeAsync(policesArray);
-            }
+            await _dbContext.AddRangeAsync(polices.Select(_mapper.Map<PoliceDb>));
             await _dbContext.SaveChangesAsync();
         }
 

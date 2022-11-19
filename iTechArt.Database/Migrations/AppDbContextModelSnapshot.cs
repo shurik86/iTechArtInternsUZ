@@ -178,6 +178,9 @@ namespace iTechArt.Database.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Email")
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
@@ -186,19 +189,20 @@ namespace iTechArt.Database.Migrations
                         .HasColumnType("smallint");
 
                     b.Property<string>("JobTitle")
-                        .HasColumnType("text");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<double>("Salary")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Surname")
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.HasKey("Id");
 

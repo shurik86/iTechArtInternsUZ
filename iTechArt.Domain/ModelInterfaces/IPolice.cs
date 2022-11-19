@@ -6,43 +6,48 @@ namespace iTechArt.Domain.ModelInterfaces
     public interface IPolice
     {
         /// <summary>
-        /// Gets Police Officers Id.
+        /// Gets police officer's id.
         /// </summary>
         public long Id { get; }
 
         /// <summary>
-        /// Gets Police Officers Firstname.
+        /// Gets police officer's firstname.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
-        /// Gets Police Officers Lastname.
+        /// Gets police officer's lastname.
         /// </summary>
         public string Surname { get; }
 
         /// <summary>
-        /// Gets Police Officers email address.
+        /// Gets police officer's email address.
         /// </summary>
         public string Email { get; }
 
         /// <summary>
-        /// Gets Police Officers gender.
+        /// Gets police Officer's gender.
         /// </summary>
         public Gender Gender { get; }
 
         /// <summary>
-        /// Gets Police Officers address.
+        /// Gets police officer's address.
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// Gets Police Officers job title.
+        /// Gets police officer's job title.
         /// </summary>
         public string JobTitle { get; }
 
         /// <summary>
-        /// Gets Police Officers salary in US dollars with 2 double precision.
+        /// Gets police officers salary in us dollars with 2 double precision.
         /// </summary>
         public double Salary { get; }
+
+        /// <summary>
+        /// Gets birthdate of police officer.
+        /// </summary>
+        public DateTime BirthDate { get; }
     }
 }
