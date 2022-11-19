@@ -48,6 +48,7 @@ namespace ITechArt.Parsers.PoliceParsers
             Map(c => c.Address).Name(PoliceConstants.Address);
             Map(c => c.JobTitle).Name(PoliceConstants.JobTitle);
             Map(c => c.Salary).Name(PoliceConstants.Salary);
+            Map(c => c.BirthDate).Name(PoliceConstants.Birthdate);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Adds collection of entities to the database.
         /// </summary>
-        public Task AddRangeAsync(IPolice[] police);
+        public Task AddRangeAsync(IEnumerable<IPolice> polices);
 
         /// <summary>
         /// Get all Police data from database.

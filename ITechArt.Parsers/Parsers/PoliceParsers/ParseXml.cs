@@ -33,7 +33,8 @@ namespace ITechArt.Parsers.PoliceParsers
                         Gender = Enum.Parse<Gender>(node[PoliceConstants.Gender].InnerText),
                         Address = node[PoliceConstants.Address].InnerText,
                         JobTitle = node[PoliceConstants.JobTitle].InnerText,
-                        Salary = Convert.ToDouble(node[PoliceConstants.Salary].InnerText)
+                        Salary = Convert.ToDouble(node[PoliceConstants.Salary].InnerText),
+                        BirthDate = Convert.ToDateTime(node[PoliceConstants.Birthdate].InnerText)
                     };
                     polices.Add(policeDto);
                 }

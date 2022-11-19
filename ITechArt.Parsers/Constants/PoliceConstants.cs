@@ -7,12 +7,13 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class PoliceConstants
     {
-        public const string Name = "name";
-        public const string Surname = "surname";
-        public const string Email = "email";
-        public const string Gender = "gender";
-        public const string Address = "address";
-        public const string JobTitle = "jobTitle";
-        public const string Salary = "salary";
+        public const string Name = "Name";
+        public const string Surname = "Surname";
+        public const string Email = "Email";
+        public const string Gender = "Gender";
+        public const string Address = "Address";
+        public const string JobTitle = "JobTitle";
+        public const string Salary = "Salary";
+        public const string Birthdate = "BirthDate";
     }
 }

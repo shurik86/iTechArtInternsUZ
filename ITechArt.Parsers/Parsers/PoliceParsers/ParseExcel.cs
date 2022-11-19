@@ -35,13 +35,14 @@ namespace ITechArt.Parsers.PoliceParsers
                         {
                             var policeDto = new PoliceDto
                             {
-                                Name = worksheet.GetValue<string>(row, Nums.ColumnZero).Trim(),
+                                Name = worksheet.GetValue<string>(row, Nums.ColumnOne).Trim(),
                                 Surname = worksheet.GetValue<string>(row, Nums.ColumnTwo).Trim(),
                                 Email = worksheet.GetValue<string>(row, Nums.ColumnThree).Trim(),
                                 Gender = Enum.Parse<Gender>(worksheet.GetValue<string>(row, Nums.ColumnFour)),
                                 Address = worksheet.GetValue<string>(row, Nums.ColumnFive).Trim(),
                                 JobTitle = worksheet.GetValue<string>(row, Nums.ColumnSix).Trim(),
-                                Salary = Convert.ToDouble(worksheet.Cells[row, Nums.ColumnSeven].Value)
+                                Salary = Convert.ToDouble(worksheet.Cells[row, Nums.ColumnSeven].Value),
+                                BirthDate = Convert.ToDateTime(worksheet.Cells[row, Nums.ColumnEight].Value),
                             };
                             polices.Add(policeDto);
                         }
@@ -65,7 +66,8 @@ namespace ITechArt.Parsers.PoliceParsers
                             Gender = Enum.Parse<Gender>(cells[rowIndex, Nums.ColumnThree].Value.ToString()),
                             Address = cells[rowIndex, Nums.ColumnFour].Value.ToString().Trim(),
                             JobTitle = cells[rowIndex, Nums.ColumnFive].Value.ToString().Trim(),
-                            Salary = Convert.ToDouble(cells[rowIndex, Nums.ColumnSix].Value)
+                            Salary = Convert.ToDouble(cells[rowIndex, Nums.ColumnSix].Value),
+                            BirthDate = Convert.ToDateTime(cells[rowIndex, Nums.ColumnSeven].Value)
                         };
                         polices.Add(policeDto);
                     }

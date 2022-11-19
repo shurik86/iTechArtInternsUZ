@@ -7,13 +7,13 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class StudentsConstants
     {
-        public const string FirstName = "firstName";
-        public const string LastName = "lastName";
-        public const string Email = "email";
-        public const string Password = "password";
-        public const string Majority = "majority";
-        public const string Gender = "gender";
-        public const string DateOfBirth = "dateOfBirth";
-        public const string University = "university";
+        public const string FirstName = "FirstName";
+        public const string LastName = "LastName";
+        public const string Email = "Email";
+        public const string Password = "Password";
+        public const string Majority = "Majority";
+        public const string Gender = "Gender";
+        public const string DateOfBirth = "DateOfBirth";
+        public const string University = "University";
     }
 }

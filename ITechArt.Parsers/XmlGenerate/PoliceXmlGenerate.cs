@@ -38,6 +38,7 @@ namespace ITechArt.Parsers.XmlGenerate
                 var Address = xmlDocument.CreateAttribute(null, PoliceConstants.Address, null);
                 var JobTitle = xmlDocument.CreateAttribute(null, PoliceConstants.JobTitle, null);
                 var Salary = xmlDocument.CreateAttribute(null, PoliceConstants.Salary, null);
+                var BirthDate = xmlDocument.CreateAttribute(null, PoliceConstants.Birthdate, null);
 
                 Name.Value = police.Name;
                 Surname.Value = police.Surname;
@@ -46,6 +47,7 @@ namespace ITechArt.Parsers.XmlGenerate
                 Address.Value = police.Address;
                 JobTitle.Value = police.JobTitle;
                 Salary.Value = police.Salary.ToString();
+                BirthDate.Value = police.BirthDate.ToString();
 
                 policeElement.Attributes.Append(Name);
                 policeElement.Attributes.Append(Surname);
@@ -54,6 +56,7 @@ namespace ITechArt.Parsers.XmlGenerate
                 policeElement.Attributes.Append(Address);
                 policeElement.Attributes.Append(JobTitle);
                 policeElement.Attributes.Append(Salary);
+                policeElement.Attributes.Append(BirthDate);
 
                 polices.AppendChild(policeElement);
             }
