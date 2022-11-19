@@ -28,7 +28,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// Get count of groceries.
         /// </summary>
-        public ValueTask<int> GetCountOfGroceryAsync();
+        public ValueTask<int> GetCountAsync();
 
         /// <summary>
         /// Add groceries to database.
