@@ -13,7 +13,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public Task<IPupil[]> GetAllAsync();
+        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Parse pupil's file from excel.
@@ -29,5 +29,15 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Parse pupil's file from xml.
         /// </summary>
         public Task ImportXmlAsync(IFormFile file);
+
+        /// <summary>
+        /// Exports Pupils Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
+        /// <summary>
+        /// Exports Pupils Data to a new Excel file.
+        /// </summary>
+        public Task<byte[]> ExportExcelAsync();
     }
 }

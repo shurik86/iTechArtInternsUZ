@@ -19,7 +19,7 @@ namespace iTechArt.Api.Controllers
         /// Uploads file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
-        public async Task<IActionResult> Import(IFormFile file)
+        public async Task<IActionResult> ImportAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -40,7 +40,7 @@ namespace iTechArt.Api.Controllers
         /// Uploads excel file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
-        public async Task<IActionResult> ImportExcel(IFormFile file)
+        public async Task<IActionResult> ImportExcelAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -61,7 +61,7 @@ namespace iTechArt.Api.Controllers
         /// Uploads csv file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
-        public async Task<IActionResult> ImportCSV(IFormFile file)
+        public async Task<IActionResult> ImportCSVAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -82,7 +82,7 @@ namespace iTechArt.Api.Controllers
         /// Uploads xml file and saves in database.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
-        public async Task<IActionResult> ImportXML(IFormFile file)
+        public async Task<IActionResult> ImportXMLAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -103,9 +103,35 @@ namespace iTechArt.Api.Controllers
         /// Gets all data from database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromServices] IMedStaffService _medStaffService)
+        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _medStaffService.ExportMedStaffFileAsync());
+            return Ok(await _medStaffService.ExportMedStaffFileAsync(pageIndex, pageSize));
+        }
+
+        /// <summary>
+        /// Exports MedStaff table to Xml file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _medStaffService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
+        /// Exports MedStaff table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _medStaffService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
         }
     }
 }

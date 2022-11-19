@@ -1,14 +1,10 @@
 ﻿using iTechArt.Api.Constants;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
-    /// <summary>
-    /// route: "api/students"
-    /// </summary>
     [Route(RouteConstants.STUDENTS)]
     [ApiController]
     public sealed class StudentsController : ControllerBase
@@ -20,7 +16,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Takes csv or xlsx file
+        /// Takes csv or xlsx file.
         /// </summary>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
         public async Task<ActionResult> ImportAsync(IFormFile file)
@@ -34,26 +30,22 @@ namespace iTechArt.Api.Controllers
                     await _studentsService.ImportStudentsAsync(file);
                     return Ok();
                 }
-
-                return BadRequest("Invalid file format!");
             }
-            else
-            {
-                return BadRequest("Invalid file format!");
-            }
+             
+            return BadRequest("Invalid file format!");
         }
 
         /// <summary>
-        /// Get all students
+        /// Get all students.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IStudent[]>> GetAllAsync()
+        public async Task<ActionResult<IStudent[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _studentsService.ExportStudentsAsync());
+            return Ok(await _studentsService.GetAllAsync(pageIndex, pageSize));
         }
 
         /// <summary>
-        /// Parse student's file from excel
+        /// Parse student's file from excel.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
         public async Task<ActionResult> ImportExcelFileAsync(IFormFile file)
@@ -67,7 +59,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Parse student's file from csv
+        /// Parse student's file from csv.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
         public async Task<ActionResult> ImportCsvFileAsync(IFormFile file)
@@ -81,7 +73,7 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Parse student's file from xml
+        /// Parse student's file from xml.
         /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
         public async Task<ActionResult> ImportXmlFileAsync(IFormFile file)
@@ -92,6 +84,32 @@ namespace iTechArt.Api.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        /// <summary>
+        /// Exports Students table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _studentsService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Students}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
+        /// Exports Students table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _studentsService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Students}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
         }
     }
 }

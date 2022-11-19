@@ -20,13 +20,19 @@ namespace iTechArt.Domain.ServiceInterfaces
 
         /// <summary>
         /// Export data for grocery.
-        /// </summary>
-        public Task<IGrocery[]> ExportGroceryAsync();
-
-        /// <summary>
         /// Count of grocery items.
         /// </summary>
+        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize);
         public ValueTask <int> GetCountOfGroceryAsync();
 
+        /// <summary>
+        /// Exports Grocery Data to a new XML file.
+        /// </summary>
+        public Task<byte[]> ExportXmlAsync();
+
+        /// <summary>
+        /// Exports Grocery Data to a new Excel file.
+        /// </summary>
+        public Task<byte[]> ExportExcelAsync();
     }
 }

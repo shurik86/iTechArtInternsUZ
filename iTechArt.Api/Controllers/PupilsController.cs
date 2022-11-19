@@ -19,7 +19,7 @@ namespace iTechArt.Api.Controllers
         /// Upload pupil's file
         /// </summary>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
-        public async Task<ActionResult> Import(IFormFile file)
+        public async Task<ActionResult> ImportAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -30,22 +30,18 @@ namespace iTechArt.Api.Controllers
                     await _pupilService.ImportPupilsFileAsync(file);
                     return Ok();
                 }
-
-                return BadRequest("Invalid file format!");
             }
-            else
-            {
-                return BadRequest("Invalid file format!");
-            }
+            
+            return BadRequest("Invalid file format!");
         }
 
         /// <summary>
         /// Get all pupils
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPupil[]>> GetAllAsync()
+        public async Task<ActionResult<IPupil[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _pupilService.GetAllAsync());
+            return Ok(await _pupilService.GetAllAsync(pageIndex, pageSize));
         }
 
         /// <summary>
@@ -88,6 +84,32 @@ namespace iTechArt.Api.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+
+        /// <summary>
+        /// Exports Pupils table to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _pupilService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Pupils}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
+        }
+
+        /// <summary>
+        /// Exports Pupils table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _pupilService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Pupils}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
         }
     }
 }
