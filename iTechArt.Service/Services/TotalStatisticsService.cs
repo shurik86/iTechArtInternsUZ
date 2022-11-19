@@ -40,7 +40,7 @@ namespace iTechArt.Service.Services
                 DoctorCount = await _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = await _policeRepository.GetCountOfPolice(),
                 PupilCount = await _pupilRepository.GetCountOfPupilsAsync(),
-                GroceryCount = await _groceryRepository.GetCountOfGroceryAsync(),
+                GroceryCount = await _groceryRepository.GetCountAsync(),
             };
         }
     }

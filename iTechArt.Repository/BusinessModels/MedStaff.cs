@@ -46,8 +46,8 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets && internal sets Date of birth of a medStaff.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly DateOfBirth { get; internal set; }
+        //[JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateTime DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets && internal sets Address of a medStaff.
