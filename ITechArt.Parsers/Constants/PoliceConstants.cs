@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace ITechArt.Parsers.Constants
 {
@@ -11,12 +7,12 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class PoliceConstants
     {
-        public static string Name = "Name";
-        public static string Surname = "Surname";
-        public static string Email = "Email";
-        public static string Gender = "Gender";
-        public static string Address = "Address";
-        public static string JobTitle = "JobTitle";
-        public static string Salary = "Salary";
+        public const string Name = "name";
+        public const string Surname = "surname";
+        public const string Email = "email";
+        public const string Gender = "gender";
+        public const string Address = "address";
+        public const string JobTitle = "jobTitle";
+        public const string Salary = "salary";
     }
 }

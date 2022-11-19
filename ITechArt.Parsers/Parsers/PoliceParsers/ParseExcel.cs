@@ -31,17 +31,17 @@ namespace ITechArt.Parsers.PoliceParsers
                         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                         ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                         var rowCount = worksheet.Dimension.Rows;
-                        for (int row = Nums.Two; row <= rowCount; row++)
+                        for (int row = Nums.RowTwo; row <= rowCount; row++)
                         {
                             var policeDto = new PoliceDto
                             {
-                                Name = worksheet.GetValue<string>(row, Nums.One).Trim(),
-                                Surname = worksheet.GetValue<string>(row, Nums.Two).Trim(),
-                                Email = worksheet.GetValue<string>(row, Nums.Three).Trim(),
-                                Gender = Enum.Parse<Gender>(worksheet.GetValue<string>(row, Nums.Four)),
-                                Address = worksheet.GetValue<string>(row, Nums.Five).Trim(),
-                                JobTitle = worksheet.GetValue<string>(row, Nums.Six).Trim(),
-                                Salary = Convert.ToDouble(worksheet.Cells[row, Nums.Seven].Value)
+                                Name = worksheet.GetValue<string>(row, Nums.ColumnZero).Trim(),
+                                Surname = worksheet.GetValue<string>(row, Nums.ColumnTwo).Trim(),
+                                Email = worksheet.GetValue<string>(row, Nums.ColumnThree).Trim(),
+                                Gender = Enum.Parse<Gender>(worksheet.GetValue<string>(row, Nums.ColumnFour)),
+                                Address = worksheet.GetValue<string>(row, Nums.ColumnFive).Trim(),
+                                JobTitle = worksheet.GetValue<string>(row, Nums.ColumnSix).Trim(),
+                                Salary = Convert.ToDouble(worksheet.Cells[row, Nums.ColumnSeven].Value)
                             };
                             polices.Add(policeDto);
                         }
@@ -55,17 +55,17 @@ namespace ITechArt.Parsers.PoliceParsers
                     var cells = workSheet.Cells;
                     var rowCount = cells.Rows.Count;
                     
-                    for(int rowIndex = Nums.One; rowIndex < rowCount; rowIndex++)
+                    for(int rowIndex = Nums.RowOne; rowIndex < rowCount; rowIndex++)
                     {
                         var policeDto = new PoliceDto
                         {
-                            Name = cells[rowIndex, Nums.Zero].Value.ToString().Trim(),
-                            Surname = cells[rowIndex, Nums.One].Value.ToString().Trim(),
-                            Email = cells[rowIndex, Nums.Two].Value.ToString().Trim(),
-                            Gender = Enum.Parse<Gender>(cells[rowIndex, Nums.Three].Value.ToString()),
-                            Address = cells[rowIndex, Nums.Four].Value.ToString().Trim(),
-                            JobTitle = cells[rowIndex, Nums.Five].Value.ToString().Trim(),
-                            Salary = Convert.ToDouble(cells[rowIndex, Nums.Six].Value)
+                            Name = cells[rowIndex, Nums.ColumnZero].Value.ToString().Trim(),
+                            Surname = cells[rowIndex, Nums.ColumnOne].Value.ToString().Trim(),
+                            Email = cells[rowIndex, Nums.ColumnTwo].Value.ToString().Trim(),
+                            Gender = Enum.Parse<Gender>(cells[rowIndex, Nums.ColumnThree].Value.ToString()),
+                            Address = cells[rowIndex, Nums.ColumnFour].Value.ToString().Trim(),
+                            JobTitle = cells[rowIndex, Nums.ColumnFive].Value.ToString().Trim(),
+                            Salary = Convert.ToDouble(cells[rowIndex, Nums.ColumnSix].Value)
                         };
                         polices.Add(policeDto);
                     }

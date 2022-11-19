@@ -37,7 +37,7 @@ namespace ITechArt.Parsers.PoliceParsers
     /// <summary>
     /// class for mapping police model for CSVReader.
     /// </summary>
-    public class PoliceMap : ClassMap<PoliceDto>
+    internal sealed class PoliceMap : ClassMap<PoliceDto>
     {
         public PoliceMap()
         {

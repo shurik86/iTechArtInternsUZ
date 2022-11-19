@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace ITechArt.Parsers.Constants
 {
@@ -11,20 +7,20 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class GroceryConstants
     {
-        public static readonly string FirstName = "FirstName";
+        public const string FirstName = "firstName";
 
-        public static readonly string LastName = "LastName";
+        public const string LastName = "lastName";
 
-        public static readonly string Birthday = "Birthday";
+        public const string Birthday = "birthday";
 
-        public static readonly string Gender = "Gender";
+        public const string Gender = "gender";
 
-        public static readonly string Email = "Email";
+        public const string Email = "email";
 
-        public static readonly string Jobtitle = "Jobtitle";
+        public const string Jobtitle = "jobtitle";
 
-        public static readonly string Departmentretail = "Departmentretail";
+        public const string Departmentretail = "departmentretail";
 
-        public static readonly string Salary = "Salary";
+        public const string Salary = "salary";
     }
 }

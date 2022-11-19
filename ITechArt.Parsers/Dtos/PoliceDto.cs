@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ITechArt.Parsers.Dtos
 {
-    public class PoliceDto : IPolice
+    public sealed class PoliceDto : IPolice
     {
         /// <summary>
         /// Gets and sets Police Officers Id.

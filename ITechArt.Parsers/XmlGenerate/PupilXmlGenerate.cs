@@ -21,53 +21,55 @@ namespace ITechArt.Parsers.XmlGenerate
         /// </summary>
         public async Task<XmlDocument> GetPupilsXmlAsync()
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            XmlDeclaration declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
+            var xmlDocument = new XmlDocument();
+            var declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
             xmlDocument.AppendChild(declaration);
-            XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
+            var pupils = xmlDocument.CreateElement(null, XmlConstants.pupils, null);
 
             var pupilsArray = await _pupilRepository.GetAllAsync();
             foreach (var pupil in pupilsArray)
             {
-                XmlNode record = xmlDocument.CreateElement(null, XmlConstants.record, null);
-                XmlNode FirstName = xmlDocument.CreateElement(null, PupilsConstants.FirstName, null);
-                XmlNode LastName = xmlDocument.CreateElement(null, PupilsConstants.LastName, null);
-                XmlNode DateOfBirth = xmlDocument.CreateElement(null, PupilsConstants.DateOfBirth, null);
-                XmlNode Gender = xmlDocument.CreateElement(null, PupilsConstants.Gender, null);
-                XmlNode PhoneNumber = xmlDocument.CreateElement(null, PupilsConstants.PhoneNumber, null);
-                XmlNode Address = xmlDocument.CreateElement(null, PupilsConstants.Address, null);
-                XmlNode City = xmlDocument.CreateElement(null, PupilsConstants.City, null);
-                XmlNode SchoolName = xmlDocument.CreateElement(null, PupilsConstants.SchoolName, null);
-                XmlNode Grade = xmlDocument.CreateElement(null, PupilsConstants.Grade, null);
-                XmlNode CourseLanguage = xmlDocument.CreateElement(null, PupilsConstants.CourseLanguage, null);
-                XmlNode Shift = xmlDocument.CreateElement(null, PupilsConstants.Shift, null);
+                var pupilElement = xmlDocument.CreateElement(null, XmlConstants.pupil, null);
+                
+                var FirstName = xmlDocument.CreateAttribute(null, PupilsConstants.FirstName, null);
+                var LastName = xmlDocument.CreateAttribute(null, PupilsConstants.LastName, null);
+                var DateOfBirth = xmlDocument.CreateAttribute(null, PupilsConstants.DateOfBirth, null);
+                var Gender = xmlDocument.CreateAttribute(null, PupilsConstants.Gender, null);
+                var PhoneNumber = xmlDocument.CreateAttribute(null, PupilsConstants.PhoneNumber, null);
+                var Address = xmlDocument.CreateAttribute(null, PupilsConstants.Address, null);
+                var City = xmlDocument.CreateAttribute(null, PupilsConstants.City, null);
+                var SchoolName = xmlDocument.CreateAttribute(null, PupilsConstants.SchoolName, null);
+                var Grade = xmlDocument.CreateAttribute(null, PupilsConstants.Grade, null);
+                var CourseLanguage = xmlDocument.CreateAttribute(null, PupilsConstants.CourseLanguage, null);
+                var Shift = xmlDocument.CreateAttribute(null, PupilsConstants.Shift, null);
 
-                FirstName.AppendChild(xmlDocument.CreateTextNode(pupil.FirstName));
-                LastName.AppendChild(xmlDocument.CreateTextNode(pupil.LastName));
-                DateOfBirth.AppendChild(xmlDocument.CreateTextNode(pupil.DateOfBirth.ToString()));
-                Gender.AppendChild(xmlDocument.CreateTextNode(pupil.Gender.ToString()));
-                PhoneNumber.AppendChild(xmlDocument.CreateTextNode(pupil.PhoneNumber));
-                Address.AppendChild(xmlDocument.CreateTextNode(pupil.Address));
-                City.AppendChild(xmlDocument.CreateTextNode(pupil.City));
-                SchoolName.AppendChild(xmlDocument.CreateTextNode(pupil.SchoolName));
-                Grade.AppendChild(xmlDocument.CreateTextNode(pupil.Grade.ToString()));
-                CourseLanguage.AppendChild(xmlDocument.CreateTextNode(pupil.CourseLanguage.ToString()));
-                Shift.AppendChild(xmlDocument.CreateTextNode(pupil.Shift.ToString()));
+                FirstName.Value = pupil.FirstName;
+                LastName.Value = pupil.LastName;
+                DateOfBirth.Value = pupil.DateOfBirth.ToString();
+                Gender.Value = pupil.Gender.ToString();
+                PhoneNumber.Value = pupil.PhoneNumber;
+                Address.Value = pupil.Address;
+                City.Value = pupil.City;
+                SchoolName.Value = pupil.SchoolName;
+                Grade.Value = pupil.Grade.ToString();
+                CourseLanguage.Value = pupil.CourseLanguage.ToString();
+                Shift.Value = pupil.Shift.ToString();
 
-                record.AppendChild(FirstName);
-                record.AppendChild(LastName);
-                record.AppendChild(DateOfBirth);
-                record.AppendChild(Gender);
-                record.AppendChild(PhoneNumber);
-                record.AppendChild(Address);
-                record.AppendChild(City);
-                record.AppendChild(SchoolName);
-                record.AppendChild(Grade);
-                record.AppendChild(CourseLanguage);
-                record.AppendChild(Shift);
-                dataset.AppendChild(record);
+                pupilElement.Attributes.Append(FirstName);
+                pupilElement.Attributes.Append(LastName);
+                pupilElement.Attributes.Append(DateOfBirth);
+                pupilElement.Attributes.Append(Gender);
+                pupilElement.Attributes.Append(PhoneNumber);
+                pupilElement.Attributes.Append(Address);
+                pupilElement.Attributes.Append(City);
+                pupilElement.Attributes.Append(SchoolName);
+                pupilElement.Attributes.Append(Grade);
+                pupilElement.Attributes.Append(CourseLanguage);
+                pupilElement.Attributes.Append(Shift);
+
+                pupils.AppendChild(pupilElement);
             }
-            xmlDocument.AppendChild(dataset);
+            xmlDocument.AppendChild(pupils);
 
             return xmlDocument;
         }
