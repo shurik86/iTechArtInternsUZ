@@ -1,7 +1,7 @@
-﻿using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +13,14 @@ namespace iTechArt.Serivce.Services
     {
         private readonly IGroceryRepository _groceryRepository;
         private readonly IGroceryParser _groceryParsers;
-        private readonly IGenerateGroceryExcel _generateGroceryExcel;
-        private readonly IGenerateGroceryXml _generateGroceryXml;
+        private readonly IGroceryExcelGenerate _generateGroceryExcel;
+        private readonly IGroceryXmlGenerate _generateGroceryXml;
         private readonly IStreamToArray _streamToArray;
 
         public GroceryService(IGroceryRepository groceryRepository, 
                               IGroceryParser groceryParsers,
-                              IGenerateGroceryExcel generateGroceryExcel,
-                              IGenerateGroceryXml generateGroceryXml,
+                              IGroceryExcelGenerate generateGroceryExcel,
+                              IGroceryXmlGenerate generateGroceryXml,
                               IStreamToArray streamToArray)
         {
             _groceryRepository = groceryRepository;
