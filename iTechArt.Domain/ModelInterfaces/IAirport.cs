@@ -18,8 +18,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets the built date of airport.
         /// </summary>
-        
-        public DateOnly BuiltDate { get; }
+        public DateTime BuiltDate { get; }
 
         /// <summary>
         /// Gets a number of people can be in at the same time at the airport.

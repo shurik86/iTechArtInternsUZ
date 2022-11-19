@@ -106,7 +106,7 @@ namespace iTechArt.Service.Parsers
                     var airport = new AirportDTO
                     {
                         AirportName = worksheet.Cells[r, 1 + AirportIndexConstants.AIRPORTNAMEINDEX].Value.ToString().Trim(),
-                        BuiltDate = DateOnly.Parse(worksheet.Cells[r, 1 + AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
+                        BuiltDate = DateTime.Parse(worksheet.Cells[r, 1 + AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
                         Capacity = Convert.ToUInt16(worksheet.Cells[r, 1 + AirportIndexConstants.CAPACITYINDEX].Value),
                         Address = worksheet.Cells[r, 1 + AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
                         City = worksheet.Cells[r, 1 + AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
@@ -136,7 +136,7 @@ namespace iTechArt.Service.Parsers
                 var airportDto = new AirportDTO
                 {
                     AirportName = cells[i, AirportIndexConstants.AIRPORTNAMEINDEX].Value.ToString().Trim(),
-                    BuiltDate = DateOnly.Parse(cells[i, AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
+                    BuiltDate = DateTime.Parse(cells[i, AirportIndexConstants.BUILDDATEINDEX].Value.ToString()),
                     Capacity = Convert.ToUInt16(cells[i, AirportIndexConstants.CAPACITYINDEX].Value),
                     Address = cells[i, AirportIndexConstants.ADDRESSINDEX].Value.ToString().Trim(),
                     City = cells[i, AirportIndexConstants.CITYINDEX].Value.ToString().Trim(),
@@ -171,7 +171,7 @@ namespace iTechArt.Service.Parsers
                         AirportDTO airport = new AirportDTO
                         {
                             AirportName = nodes[node]["AirportName"].InnerText,
-                            BuiltDate = DateOnly.Parse(nodes[node]["BuiltDate"].InnerText),
+                            BuiltDate = DateTime.Parse(nodes[node]["BuiltDate"].InnerText),
                             Capacity = Convert.ToUInt16(nodes[node]["Capacity"].InnerText),
                             Address = nodes[node]["Address"].InnerText,
                             City = nodes[node]["City"].InnerText,
