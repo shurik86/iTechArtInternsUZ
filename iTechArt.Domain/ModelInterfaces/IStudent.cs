@@ -42,7 +42,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets birthday of student.
         /// </summary>
-        public DateOnly DateOfBirth { get; }
+        public DateTime DateOfBirth { get; }
 
         /// <summary>
         /// Gets name of university of student.

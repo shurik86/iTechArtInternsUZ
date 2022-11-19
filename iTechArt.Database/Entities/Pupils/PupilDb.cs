@@ -27,7 +27,7 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets birthdate of pupil.
         /// </summary>
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets gender of pupil.

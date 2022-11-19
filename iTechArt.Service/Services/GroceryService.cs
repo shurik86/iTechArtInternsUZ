@@ -44,7 +44,7 @@ namespace iTechArt.Serivce.Services
         /// </summary>
         public async ValueTask<int> GetCountOfGroceryAsync()
         {
-            return await _groceryRepository.GetCountOfGroceryAsync();
+            return await _groceryRepository.GetCountAsync();
         }
         /// <summary>
         /// Import Csv format grocery files.

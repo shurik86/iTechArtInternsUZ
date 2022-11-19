@@ -53,7 +53,7 @@ namespace ITechArt.Parsers.Parsers
                 {
                     FirstName = worksheet.GetValue<string>(row, PupilConstants.FIRSTNAME).Trim(),
                     LastName = worksheet.GetValue<string>(row, PupilConstants.LASTNAME).Trim(),
-                    DateOfBirth = DateOnly.Parse(worksheet.GetValue<string>(row, PupilConstants.DATEOFBIRTH).Trim()),
+                    DateOfBirth = DateTime.Parse(worksheet.GetValue<string>(row, PupilConstants.DATEOFBIRTH).Trim()),
                     Gender = Enum.Parse<Gender>(worksheet.GetValue<string>(row, PupilConstants.GENDER).Trim()),
                     PhoneNumber = worksheet.GetValue<string>(row, PupilConstants.PHONENUMBER).Trim(),
                     Address = worksheet.GetValue<string>(row, PupilConstants.ADDRESS).Trim(),
@@ -92,7 +92,7 @@ namespace ITechArt.Parsers.Parsers
                 {
                     FirstName = nodes[node]["FirstName"].InnerText,
                     LastName = nodes[node]["LastName"].InnerText,
-                    DateOfBirth = DateOnly.Parse(nodes[node]["DateOfBirth"].InnerText),
+                    DateOfBirth = DateTime.Parse(nodes[node]["DateOfBirth"].InnerText),
                     Gender = Enum.Parse<Gender>(nodes[node]["Gender"].InnerText),
                     PhoneNumber = nodes[node]["PhoneNumber"].InnerText,
                     Address = nodes[node]["Address"].InnerText,

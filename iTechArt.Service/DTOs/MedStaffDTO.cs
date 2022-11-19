@@ -46,7 +46,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets && internal sets Date of birth of a medStaff.
         /// </summary>
-        public DateOnly DateOfBirth { get; internal set; }
+        public DateTime DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets && internal sets Address of a medStaff.

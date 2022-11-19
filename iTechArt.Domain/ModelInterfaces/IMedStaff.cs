@@ -1,6 +1,4 @@
 ﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.Helpers;
-using System.Text.Json.Serialization;
 
 namespace iTechArt.Domain.ModelInterfaces
 {
@@ -39,7 +37,7 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets Date of birth of a medStaff.
         /// </summary>
-        public DateOnly DateOfBirth { get; }
+        public DateTime DateOfBirth { get; }
 
         /// <summary>
         /// Gets Address of a medStaff.
