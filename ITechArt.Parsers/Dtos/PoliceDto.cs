@@ -11,42 +11,42 @@ namespace ITechArt.Parsers.Dtos
     public class PoliceDto : IPolice
     {
         /// <summary>
-        /// Gets and Sets Police Officers Id.
+        /// Gets and sets Police Officers Id.
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers Firstname.
+        /// Gets and sets Police Officers Firstname.
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers Lastname.
+        /// Gets and sets Police Officers Lastname.
         /// </summary>
         public string Surname { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers email address.
+        /// Gets and sets Police Officers email address.
         /// </summary>
         public string Email { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers gender.
+        /// Gets and sets Police Officers gender.
         /// </summary>
         public Gender Gender { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers address.
+        /// Gets and sets Police Officers address.
         /// </summary>
         public string Address { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers job title.
+        /// Gets and sets Police Officers job title.
         /// </summary> 
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Gets and Sets Police Officers salary in US dollars with 2 double precision.
+        /// Gets and sets Police Officers salary in US dollars with 2 double precision.
         /// </summary>
         public double Salary { get; set; }
     }
