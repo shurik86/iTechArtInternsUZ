@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all polices from database.
         /// </summary>
-        public Task<IPolice[]> GetAllAsync();
+        public Task<IPolice[]> GetAllAsync(int pageIndex);
 
         /// <summary>
         /// Add police to database.
@@ -40,5 +40,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Adds collection of entities to the database.
         /// </summary>
         public Task AddRangeAsync(IPolice[] police);
+
+        /// <summary>
+        /// Get all Police data from database.
+        /// </summary>
+        public Task<IPolice[]> GetAllAsync();
     }
 }

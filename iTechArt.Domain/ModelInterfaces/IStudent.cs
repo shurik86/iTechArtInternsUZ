@@ -1,6 +1,4 @@
 ﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.Helpers;
-using System.Text.Json.Serialization;
 
 namespace iTechArt.Domain.ModelInterfaces
 {
@@ -42,9 +40,8 @@ namespace iTechArt.Domain.ModelInterfaces
         public Gender Gender { get; }
 
         /// <summary>
-        /// Gets birthday of student
+        /// Gets birthday of student.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; }
 
         /// <summary>

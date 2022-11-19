@@ -1,5 +1,4 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.HelperModelInterfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
@@ -7,30 +6,33 @@ namespace iTechArt.Domain.ServiceInterfaces
     public interface IGroceryService
     {
         /// <summary>
-        /// Import Csv format data for grocery
+        /// Import Csv format data for grocery.
         /// </summary>
-        public Task ImportCSVGrocery(IFormFile formFile);
+        public Task ImportCSVGroceryAsync(IFormFile formFile);
         /// <summary>
-        /// Import Excel format data for grocery
+        /// Import Excel format data for grocery.
         /// </summary>
-        public Task ImportExcelGrocery(IFormFile formFile);
+        public Task ImportExcelGroceryAsync(IFormFile formFile);
         /// <summary>
-        /// Import Xml format data for grocery
+        /// Import Xml format data for grocery.
         /// </summary>
-        public Task ImportXMLGrocery(IFormFile formFile);
+        public Task ImportXMLGroceryAsync(IFormFile formFile);
 
         /// <summary>
-        /// Export data for grocery
+        /// Export data for grocery.
+        /// Count of grocery items.
         /// </summary>
-        public Task<IGrocery[]> ExportGrocery();
+        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex);
+        public ValueTask <int> GetCountOfGroceryAsync();
 
         /// <summary>
-        /// Count of grocery not implemented yet
+        /// Exports Grocery Data to a new XML file.
         /// </summary>
-        public ValueTask <int> GetCountOfGrocery();
+        public Task<byte[]> ExportXmlAsync();
 
         /// <summary>
-        /// taking items from Xlsx file and record to db
+        /// Exports Grocery Data to a new Excel file.
         /// </summary>
+        public Task<byte[]> ExportExcelAsync();
     }
 }

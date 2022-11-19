@@ -27,7 +27,6 @@ namespace iTechArt.Database.Entities.Pupils
         /// <summary>
         /// Gets or sets birthdate of pupil.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; set; }
 
         /// <summary>

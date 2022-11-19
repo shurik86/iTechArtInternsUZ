@@ -1,16 +1,26 @@
-<table class="grid">
-  <thead class="grid__columns">
-  <th *ngFor="let col of columns" [style.width.px]="col.width">
-    {{ col.header }}
-  </th>
-  </thead>
-  <tbody class="grid__rows">
-    <tr *ngFor="let row of data">
+<div class="container">
+  <table class="grid">
+    <thead class="grid__columns">
+    <th *ngFor="let col of columns" [style.width.px]="col.width">
+      {{ col.header }}
+    </th>
+    </thead>
+    <tbody class="grid__rows">
+    <tr *ngFor="let row of dataOnPage | paginate: { itemsPerPage: itemsPerPage,
+              currentPage: page,
+              totalItems: AllUnitDataCount }">
       <td
         *ngFor="let col of columns"
         style="padding-left: 1rem"
       > {{row[col.field]}}
       </td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <div class="pagination-controls-wrapper">
+    <pagination-controls
+      class="pagi"
+      (pageChange)="switchPage(page = $event)"
+    ></pagination-controls>
+  </div>
+</div>

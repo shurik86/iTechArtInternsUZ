@@ -16,11 +16,10 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
-        /// Controller of Importing airport data
+        /// Controller of Importing airport data.
         /// </summary>
-        /// <param name="file"></param>
         [HttpPost(ApiConstants.IMPORT), Obsolete]
-        public async Task<IActionResult> ImportAirportExcel(IFormFile file)
+        public async Task<IActionResult> ImportAirportExcelAsync(IFormFile file)
         {
             if (file != null)
             {
@@ -28,44 +27,77 @@ namespace iTechArt.Api.Controllers
 
                 if (FileConstants.Extensions.Contains(fileExtension))
                 {
-                    await _airportsService.ImportAirportFile(file);
+                    await _airportsService.ImportAirportFileAsync(file);
                     return Ok();
                 }
-
-                return BadRequest("Invalid file format!");
             }
-            else
-            {
-                return BadRequest("Invalid file format!");
-            }
+                
+            return BadRequest("Invalid file format!");
         }
 
         /// <summary>
-        /// Controller of Exporting airport data
+        /// Controller of Exporting airport data.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportAirportExcel()
+        public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex)
         {
-            return Ok( await _airportsService.ExportAirportExcel());
+            return Ok(await _airportsService.ExportAirportExcelAsync(pageIndex));
         }
 
+        /// <summary>
+        /// Imports excel file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTEXCEL)]
-        public async Task<IActionResult> ImportExcelFile(IFormFile file)
+        public async Task<IActionResult> ImportExcelFileAsync(IFormFile file)
         {
-            await _airportsService.AirportExcelParser(file);
+            await _airportsService.AirportExcelParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Imports csv file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTCSV)]
-        public async Task<IActionResult> ImportCsvFile(IFormFile file)
+        public async Task<IActionResult> ImportCsvFileAsync(IFormFile file)
         {
-            await _airportsService.AirportCSVParser(file);
+            await _airportsService.AirportCSVParseAsync(file);
             return Ok();
         }
+
+        /// <summary>
+        /// Imports xml file.
+        /// </summary>
         [HttpPost(ApiConstants.IMPORTXML)]
-        public async Task<IActionResult> ImportXmlFile(IFormFile file)
+        public async Task<IActionResult> ImportXmlFileAsync(IFormFile file)
         {
-            await _airportsService.AirportXMLParser(file);
+            await _airportsService.AirportXMLParseAsync(file);
             return Ok();
+        }
+
+        /// <summary>
+        /// Exports Airport table from Database to Excel file.
+        /// </summary>
+        [HttpGet("get_xlsx")]
+        public async Task<ActionResult> ExportExcelFile()
+        {
+            byte[] streamArray = await _airportsService.ExportExcelAsync();
+            return new FileContentResult(streamArray, FileConstants.ExcelContent)
+            {
+                FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
+            };
+        }
+
+        /// <summary>
+        /// Exports Airport table from Database to XML file.
+        /// </summary>
+        [HttpGet("get_xml")]
+        public async Task<ActionResult> ExportXmlFile()
+        {
+            byte[] streamArray = await _airportsService.ExportXmlAsync();
+            return new FileContentResult(streamArray, FileConstants.XmlContent)
+            {
+                FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
+            };
         }
     }
 }

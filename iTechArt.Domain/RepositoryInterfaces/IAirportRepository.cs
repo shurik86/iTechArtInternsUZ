@@ -7,7 +7,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all airports from database
         /// </summary>
-        Task<IAirport[]> GetAllAsync();
+        Task<IAirport[]> GetAllAsync(int pageIndex);
 
         /// <summary>
         /// Add array of airport
@@ -38,5 +38,10 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get count of airports
         /// </summary>
         public Task<int> GetCountOfAirportAsync();
+
+        /// <summary>
+        /// Get all airports from database
+        /// </summary>
+        public Task<IAirport[]> GetAllAsync();
     }
 }

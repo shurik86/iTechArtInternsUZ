@@ -39,7 +39,6 @@ namespace iTechArt.Domain.ModelInterfaces
         /// <summary>
         /// Gets Date of birth of a medStaff.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
         public DateOnly DateOfBirth { get; }
 
         /// <summary>

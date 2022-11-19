@@ -22,37 +22,76 @@
     <div class="overlay" *ngIf="menuIsActive" (click)="toggleMenu()"></div>
 
     <ul class="menu" [ngClass]="{ menu_active: menuIsActive }">
-      <div>
+      <div style="display: flex">
         <li>
-          <p class="nav-cursor" routerLink="{{ units.police.path }}" (click)="toggleMenu()">
+          <p
+            class="nav-cursor"
+            [ngClass]="currentPath === unitsEnum.police ? 'active' : ''"
+            routerLink="{{ units.police.path }}"
+            (click)="toggleMenu(); changePath()"
+          >
             {{ unitsTitles.police.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.pupils.path }}"  (click)="toggleMenu()">
+          <p
+            class="nav-cursor"
+            [ngClass]="currentPath === unitsEnum.pupils ? 'active' : ''"
+            routerLink="{{ units.pupils.path }}"
+            (click)="toggleMenu(); changePath()"
+          >
             {{ unitsTitles.pupils.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.students.path }}"  (click)="toggleMenu()">
+          <p
+            class="nav-cursor"
+            [ngClass]="currentPath === unitsEnum.students ? 'active' : ''"
+            routerLink="{{ units.students.path }}"
+            (click)="toggleMenu(); changePath()"
+          >
             {{ unitsTitles.students.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.airport.path }}"  (click)="toggleMenu()">
+          <p
+            class="nav-cursor"
+            [ngClass]="currentPath === unitsEnum.airport ? 'active' : ''"
+            routerLink="{{ units.airport.path }}"
+            (click)="toggleMenu(); changePath()"
+          >
             {{ unitsTitles.airport.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.grocery.path }}"  (click)="toggleMenu()">
+          <p
+            class="nav-cursor"
+            [ngClass]="currentPath === unitsEnum.grocery ? 'active' : ''"
+            routerLink="{{ units.grocery.path }}"
+            (click)="toggleMenu(); changePath()"
+          >
             {{ unitsTitles.grocery.toString().toUpperCase() }}
           </p>
         </li>
         <li>
-          <p class="nav-cursor" routerLink="{{ units.medStaff.path }}"  (click)="toggleMenu()">
+          <p
+            class="nav-cursor"
+            [ngClass]="currentPath === 'med-staff' ? 'active' : ''"
+            routerLink="{{ units.medStaff.path }}"
+            (click)="toggleMenu(); changePath()"
+          >
             {{ unitsTitles.medStaff.toString().toUpperCase() }}
           </p>
         </li>
+
+        <p
+          class="nav-cursor nav-item-statistics"
+          routerLink="statistics"
+          [ngClass]="currentPath === 'statistics' ? 'active' : ''"
+          (click)="toggleMenu(); changePath()"
+        >
+          STATISTICS
+        </p>
       </div>
       <div class="button-container header-element">
         <button class="button-secondary">Log Out</button>
