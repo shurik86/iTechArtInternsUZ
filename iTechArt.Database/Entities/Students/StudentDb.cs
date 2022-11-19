@@ -51,8 +51,7 @@ namespace iTechArt.Database.Entities.Students
         /// <summary>
         /// Gets or sets birthday of student.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets university of student.

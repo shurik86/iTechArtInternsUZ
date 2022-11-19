@@ -45,8 +45,7 @@ namespace ITechArt.Parsers.Dtos
         /// <summary>
         /// Gets or sets birth date of student.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets name of university of student.
