@@ -20,53 +20,55 @@ namespace ITechArt.Parsers.XmlGenerate
         /// </summary>
         public async Task<XmlDocument> GetMedStaffXmlAsync()
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            XmlDeclaration declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
+            var xmlDocument = new XmlDocument();
+            var declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
             xmlDocument.AppendChild(declaration);
-            XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
+            var medStaffs = xmlDocument.CreateElement(null, XmlConstants.medstaff, null);
 
             var medStaffArray = await _medStaffRepository.GetAllAsync();
             foreach (var medStaff in medStaffArray)
             {
-                XmlNode record = xmlDocument.CreateElement(null, XmlConstants.record, null);
-                XmlNode FirstName = xmlDocument.CreateElement(null, MedStaffConstants.FirstName, null);
-                XmlNode LastName = xmlDocument.CreateElement(null, MedStaffConstants.LastName, null);
-                XmlNode Gender = xmlDocument.CreateElement(null, MedStaffConstants.Gender, null);
-                XmlNode Email = xmlDocument.CreateElement(null, MedStaffConstants.Email, null);
-                XmlNode PhoneNumber = xmlDocument.CreateElement(null, MedStaffConstants.PhoneNumber, null);
-                XmlNode DateOfBirth = xmlDocument.CreateElement(null, MedStaffConstants.DateOfBirth, null);
-                XmlNode Address = xmlDocument.CreateElement(null, MedStaffConstants.Address, null);
-                XmlNode Salary = xmlDocument.CreateElement(null, MedStaffConstants.Salary, null);
-                XmlNode HospitalName = xmlDocument.CreateElement(null, MedStaffConstants.HospitalName, null);
-                XmlNode PostalCode = xmlDocument.CreateElement(null, MedStaffConstants.PostalCode, null);
-                XmlNode Shift = xmlDocument.CreateElement(null, MedStaffConstants.Shift, null);
+                var staffElement = xmlDocument.CreateElement(null, XmlConstants.staff, null);
+                
+                var FirstName = xmlDocument.CreateAttribute(null, MedStaffConstants.FirstName, null);
+                var LastName = xmlDocument.CreateAttribute(null, MedStaffConstants.LastName, null);
+                var Gender = xmlDocument.CreateAttribute(null, MedStaffConstants.Gender, null);
+                var Email = xmlDocument.CreateAttribute(null, MedStaffConstants.Email, null);
+                var PhoneNumber = xmlDocument.CreateAttribute(null, MedStaffConstants.PhoneNumber, null);
+                var DateOfBirth = xmlDocument.CreateAttribute(null, MedStaffConstants.DateOfBirth, null);
+                var Address = xmlDocument.CreateAttribute(null, MedStaffConstants.Address, null);
+                var Salary = xmlDocument.CreateAttribute(null, MedStaffConstants.Salary, null);
+                var HospitalName = xmlDocument.CreateAttribute(null, MedStaffConstants.HospitalName, null);
+                var PostalCode = xmlDocument.CreateAttribute(null, MedStaffConstants.PostalCode, null);
+                var Shift = xmlDocument.CreateAttribute(null, MedStaffConstants.Shift, null);
 
-                FirstName.AppendChild(xmlDocument.CreateTextNode(medStaff.FirstName));
-                LastName.AppendChild(xmlDocument.CreateTextNode(medStaff.LastName));
-                Gender.AppendChild(xmlDocument.CreateTextNode(medStaff.Gender.ToString()));
-                Email.AppendChild(xmlDocument.CreateTextNode(medStaff.Email));
-                PhoneNumber.AppendChild(xmlDocument.CreateTextNode(medStaff.PhoneNumber));
-                DateOfBirth.AppendChild(xmlDocument.CreateTextNode(medStaff.DateOfBirth.ToString()));
-                Address.AppendChild(xmlDocument.CreateTextNode(medStaff.Address));
-                Salary.AppendChild(xmlDocument.CreateTextNode(medStaff.Salary.ToString()));
-                HospitalName.AppendChild(xmlDocument.CreateTextNode(medStaff.HospitalName));
-                PostalCode.AppendChild(xmlDocument.CreateTextNode(medStaff.PostalCode));
-                Shift.AppendChild(xmlDocument.CreateTextNode(medStaff.Shift.ToString()));
+                FirstName.Value = medStaff.FirstName;
+                LastName.Value = medStaff.LastName;
+                Gender.Value = medStaff.Gender.ToString();
+                Email.Value = medStaff.Email;
+                PhoneNumber.Value = medStaff.PhoneNumber;
+                DateOfBirth.Value = medStaff.DateOfBirth.ToString();
+                Address.Value = medStaff.Address;
+                Salary.Value = medStaff.Salary.ToString();
+                HospitalName.Value = medStaff.HospitalName;
+                PostalCode.Value = medStaff.PostalCode;
+                Shift.Value = medStaff.Shift.ToString();
 
-                record.AppendChild(FirstName);
-                record.AppendChild(LastName);
-                record.AppendChild(Gender);
-                record.AppendChild(Email);
-                record.AppendChild(PhoneNumber);
-                record.AppendChild(DateOfBirth);
-                record.AppendChild(Address);
-                record.AppendChild(Salary);
-                record.AppendChild(HospitalName);
-                record.AppendChild(PostalCode);
-                record.AppendChild(Shift);
-                dataset.AppendChild(record);
+                staffElement.Attributes.Append(FirstName);
+                staffElement.Attributes.Append(LastName);
+                staffElement.Attributes.Append(Gender);
+                staffElement.Attributes.Append(Email);
+                staffElement.Attributes.Append(PhoneNumber);
+                staffElement.Attributes.Append(DateOfBirth);
+                staffElement.Attributes.Append(Address);
+                staffElement.Attributes.Append(Salary);
+                staffElement.Attributes.Append(HospitalName);
+                staffElement.Attributes.Append(PostalCode);
+                staffElement.Attributes.Append(Shift);
+
+                medStaffs.AppendChild(staffElement);
             }
-            xmlDocument.AppendChild(dataset);
+            xmlDocument.AppendChild(medStaffs);
 
             return xmlDocument;
         }

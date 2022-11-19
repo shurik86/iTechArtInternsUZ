@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace ITechArt.Parsers.Constants
 {
@@ -11,26 +7,26 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class PupilsConstants
     {
-        public static readonly string FirstName = "FirstName";
+        public const string FirstName = "firstName";
 
-        public static readonly string LastName = "LastName";
+        public const string LastName = "lastName";
 
-        public static readonly string DateOfBirth = "DateOfBirth";
+        public const string DateOfBirth = "dateOfBirth";
 
-        public static readonly string Gender = "Gender";
+        public const string Gender = "gender";
 
-        public static readonly string PhoneNumber = "PhoneNumber";
+        public const string PhoneNumber = "phoneNumber";
 
-        public static readonly string Address = "Address";
+        public const string Address = "address";
 
-        public static readonly string City = "City";
+        public const string City = "city";
 
-        public static readonly string SchoolName = "SchoolName";
+        public const string SchoolName = "schoolName";
 
-        public static readonly string Grade = "Grade";
+        public const string Grade = "grade";
 
-        public static readonly string CourseLanguage = "CourseLanguage";
+        public const string CourseLanguage = "courseLanguage";
 
-        public static readonly string Shift = "Shift";
+        public const string Shift = "shift";
     }
 }

@@ -131,7 +131,7 @@ namespace iTechArt.Service.Parsers
 
             IList<AirportDTO> airports = new List<AirportDTO>(rowCount - 2);
 
-            for (int i = Nums.One; i < rowCount; i++)
+            for (int i = Nums.RowOne; i < rowCount; i++)
             {
                 var airportDto = new AirportDTO
                 {

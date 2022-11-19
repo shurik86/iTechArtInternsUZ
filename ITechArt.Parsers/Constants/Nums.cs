@@ -11,16 +11,18 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class Nums
     {
-        public static readonly int Zero = 0;
-        public static readonly int One = 1;
-        public static readonly int Two = 2;
-        public static readonly int Three = 3;
-        public static readonly int Four = 4;
-        public static readonly int Five = 5;
-        public static readonly int Six = 6;
-        public static readonly int Seven = 7;
-        public static readonly int Eight = 8;
-        public static readonly int Nine = 9;
-        public static readonly int Ten = 10;
+        public const int RowOne = 1;
+        public const int RowTwo = 2;
+        public const int ColumnZero = 0;
+        public const int ColumnOne = 1;
+        public const int ColumnTwo = 2;
+        public const int ColumnThree = 3;
+        public const int ColumnFour = 4;
+        public const int ColumnFive = 5;
+        public const int ColumnSix = 6;
+        public const int ColumnSeven = 7;
+        public const int ColumnEight = 8;
+        public const int ColumnNine = 9;
+        public const int ColumnTen = 10;
     }
 }

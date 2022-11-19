@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ITechArt.Parsers.Constants
 {
     /// <summary>
     /// Static Strings for Airport Model to use inside Parsers.
     /// </summary>
-    public class AirportConstants
+    public static class AirportConstants
     {
-        public static readonly string AirportName = "AirportName";
+        public const string AirportName = "airportName";
 
-        public static readonly string BuiltDate = "BuiltDate";
+        public const string BuiltDate = "builtDate";
 
-        public static readonly string Capacity = "Capacity";
+        public const string Capacity = "capacity";
 
-        public static readonly string Address = "Address";
+        public const string Address = "address";
 
-        public static readonly string City = "City";
+        public const string City = "city";
 
-        public static readonly string EmpoyeesCount = "EmpoyeesCount";
+        public const string EmpoyeesCount = "empoyeesCount";
 
-        public static readonly string PassengersPerYear = "PassengersPerYear";
+        public const string PassengersPerYear = "passengersPerYear";
 
-        public static readonly string FlightsPerYear = "FlightsPerYear";
+        public const string FlightsPerYear = "flightsPerYear";
 
-        public static readonly string AverageTicketPrice = "AverageTicketPrice";
+        public const string AverageTicketPrice = "averageTicketPrice";
     }
 }

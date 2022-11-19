@@ -20,44 +20,37 @@ namespace ITechArt.Parsers.XmlGenerate
         /// </summary>
         public async Task<XmlDocument> GetGroceryXmlAsync()
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            XmlDeclaration declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
+            var xmlDocument = new XmlDocument();
+            var declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
             xmlDocument.AppendChild(declaration);
-            XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
+            var groceries = xmlDocument.CreateElement(null, XmlConstants.groceries, null);
 
             var groceryArray = await _groceryRepository.GetAllAsync();
             foreach (var grocery in groceryArray)
             {
-                XmlNode record = xmlDocument.CreateElement(null, XmlConstants.record, null);
-                XmlNode FirstName = xmlDocument.CreateElement(null, GroceryConstants.FirstName, null);
-                XmlNode LastName = xmlDocument.CreateElement(null, GroceryConstants.LastName, null);
-                XmlNode Birthday = xmlDocument.CreateElement(null, GroceryConstants.Birthday, null);
-                XmlNode Gender = xmlDocument.CreateElement(null, GroceryConstants.Gender, null);
-                XmlNode Email = xmlDocument.CreateElement(null, GroceryConstants.Email, null);
-                XmlNode Jobtitle = xmlDocument.CreateElement(null, GroceryConstants.Jobtitle, null);
-                XmlNode Departmentretail = xmlDocument.CreateElement(null, GroceryConstants.Departmentretail, null);
-                XmlNode Salary = xmlDocument.CreateElement(null, GroceryConstants.Salary, null);
+                var groceryElement = xmlDocument.CreateElement(null, XmlConstants.grocery, null);
+                
+                var FirstName = xmlDocument.CreateAttribute(null, GroceryConstants.FirstName, null);
+                var LastName = xmlDocument.CreateAttribute(null, GroceryConstants.LastName, null);
+                var Birthday = xmlDocument.CreateAttribute(null, GroceryConstants.Birthday, null);
+                var Gender = xmlDocument.CreateAttribute(null, GroceryConstants.Gender, null);
+                var Email = xmlDocument.CreateAttribute(null, GroceryConstants.Email, null);
+                var Jobtitle = xmlDocument.CreateAttribute(null, GroceryConstants.Jobtitle, null);
+                var Departmentretail = xmlDocument.CreateAttribute(null, GroceryConstants.Departmentretail, null);
+                var Salary = xmlDocument.CreateAttribute(null, GroceryConstants.Salary, null);
 
-                FirstName.AppendChild(xmlDocument.CreateTextNode(grocery.FirstName));
-                LastName.AppendChild(xmlDocument.CreateTextNode(grocery.LastName));
-                Birthday.AppendChild(xmlDocument.CreateTextNode(grocery.Birthday.ToString()));
-                Gender.AppendChild(xmlDocument.CreateTextNode(grocery.Gender.ToString()));
-                Email.AppendChild(xmlDocument.CreateTextNode(grocery.Email));
-                Jobtitle.AppendChild(xmlDocument.CreateTextNode(grocery.JobTitle));
-                Departmentretail.AppendChild(xmlDocument.CreateTextNode(grocery.DepartmentRetail));
-                Salary.AppendChild(xmlDocument.CreateTextNode(grocery.Salary.ToString()));
+                FirstName.Value = grocery.FirstName;
+                LastName.Value = grocery.LastName;
+                Birthday.Value = grocery.Birthday.ToString();
+                Gender.Value = grocery.Gender.ToString();
+                Email.Value = grocery.Email;
+                Jobtitle.Value = grocery.JobTitle;
+                Departmentretail.Value = grocery.DepartmentRetail;
+                Salary.Value = grocery.Salary.ToString();
 
-                record.AppendChild(FirstName);
-                record.AppendChild(LastName);
-                record.AppendChild(Birthday);
-                record.AppendChild(Gender);
-                record.AppendChild(Email);
-                record.AppendChild(Jobtitle);
-                record.AppendChild(Departmentretail);
-                record.AppendChild(Salary);
-                dataset.AppendChild(record);
+                groceries.AppendChild(groceryElement);
             }
-            xmlDocument.AppendChild(dataset);
+            xmlDocument.AppendChild(groceries);
 
             return xmlDocument;
         }

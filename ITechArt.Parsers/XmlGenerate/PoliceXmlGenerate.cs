@@ -21,41 +21,43 @@ namespace ITechArt.Parsers.XmlGenerate
         /// </summary>
         public async Task<XmlDocument> GetPoliceXmlAsync()
         {
-            XmlDocument xmlDocument = new XmlDocument();
-            XmlDeclaration declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
+            var xmlDocument = new XmlDocument();
+            var declaration = xmlDocument.CreateXmlDeclaration(XmlConstants.version, XmlConstants.encoding, null);
             xmlDocument.AppendChild(declaration);
-            XmlElement dataset = xmlDocument.CreateElement(null, XmlConstants.dataset, null);
+            var polices = xmlDocument.CreateElement(null, XmlConstants.polices, null);
 
             var policeArray = await _policeRepository.GetAllAsync();
             foreach (var police in policeArray)
             {
-                XmlNode record = xmlDocument.CreateElement(null, XmlConstants.record, null);
-                XmlNode Name = xmlDocument.CreateElement(null, PoliceConstants.Name, null);
-                XmlNode Surname = xmlDocument.CreateElement(null, PoliceConstants.Surname, null);
-                XmlNode Email = xmlDocument.CreateElement(null, PoliceConstants.Email, null);
-                XmlNode Gender = xmlDocument.CreateElement(null, PoliceConstants.Gender, null);
-                XmlNode Address = xmlDocument.CreateElement(null, PoliceConstants.Address, null);
-                XmlNode JobTitle = xmlDocument.CreateElement(null, PoliceConstants.JobTitle, null);
-                XmlNode Salary = xmlDocument.CreateElement(null, PoliceConstants.Salary, null);
+                var policeElement = xmlDocument.CreateElement(null, XmlConstants.record, null);
+                
+                var Name = xmlDocument.CreateAttribute(null, PoliceConstants.Name, null);
+                var Surname = xmlDocument.CreateAttribute(null, PoliceConstants.Surname, null);
+                var Email = xmlDocument.CreateAttribute(null, PoliceConstants.Email, null);
+                var Gender = xmlDocument.CreateAttribute(null, PoliceConstants.Gender, null);
+                var Address = xmlDocument.CreateAttribute(null, PoliceConstants.Address, null);
+                var JobTitle = xmlDocument.CreateAttribute(null, PoliceConstants.JobTitle, null);
+                var Salary = xmlDocument.CreateAttribute(null, PoliceConstants.Salary, null);
 
-                Name.AppendChild(xmlDocument.CreateTextNode(police.Name));
-                Surname.AppendChild(xmlDocument.CreateTextNode(police.Surname));
-                Email.AppendChild(xmlDocument.CreateTextNode(police.Email));
-                Gender.AppendChild(xmlDocument.CreateTextNode(police.Gender.ToString()));
-                Address.AppendChild(xmlDocument.CreateTextNode(police.Address));
-                JobTitle.AppendChild(xmlDocument.CreateTextNode(police.JobTitle));
-                Salary.AppendChild(xmlDocument.CreateTextNode(police.Salary.ToString()));
+                Name.Value = police.Name;
+                Surname.Value = police.Surname;
+                Email.Value = police.Email;
+                Gender.Value = police.Gender.ToString();
+                Address.Value = police.Address;
+                JobTitle.Value = police.JobTitle;
+                Salary.Value = police.Salary.ToString();
 
-                record.AppendChild(Name);
-                record.AppendChild(Surname);
-                record.AppendChild(Email);
-                record.AppendChild(Gender);
-                record.AppendChild(Address);
-                record.AppendChild(JobTitle);
-                record.AppendChild(Salary);
-                dataset.AppendChild(record);
+                policeElement.Attributes.Append(Name);
+                policeElement.Attributes.Append(Surname);
+                policeElement.Attributes.Append(Email);
+                policeElement.Attributes.Append(Gender);
+                policeElement.Attributes.Append(Address);
+                policeElement.Attributes.Append(JobTitle);
+                policeElement.Attributes.Append(Salary);
+
+                polices.AppendChild(policeElement);
             }
-            xmlDocument.AppendChild(dataset);
+            xmlDocument.AppendChild(polices);
 
             return xmlDocument;
         }
