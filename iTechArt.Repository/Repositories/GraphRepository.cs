@@ -80,16 +80,19 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IGraph> GetMedstaffGraphData()
         {
-            var graphs = new List<IGraph>();
-            graphs.Add(new Graph()
-            {
-                Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Staffs")).ToString(),
-                MaleAmount = await _dbContext.Staffs
-                      .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                FemaleAmount = await _dbContext.Staffs
-                    .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
-            });
-            return null;
+            var tableName = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Staffs")).ToString();
+            var maleAmount = await _dbContext.Staffs.GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync();
+            var femaleAmount = await _dbContext.Staffs.GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync();
+            var femaleAge = await _dbContext.Staffs.Where(p => p.Gender == Gender.Female).Select(c => new { Age = DateTime.Now.Year - c.DateOfBirth.Year }.Age).SumAsync();
+            var maleAge = await _dbContext.Staffs.Where(p => p.Gender == Gender.Male).Select(c => new { Age = DateTime.Now.Year - c.DateOfBirth.Year }.Age).SumAsync();
+
+            IGraph graphs = new Graph();
+            graphs.Unit = tableName;
+            graphs.MaleAmount = maleAmount;
+            graphs.FemaleAmount = femaleAmount;
+            graphs.AverageAgeMale = maleAmount / maleAge;
+            graphs.AverageAgeFemale = femaleAmount / femaleAge;
+            return graphs;
         }
 
         /// <summary>
@@ -97,16 +100,23 @@ namespace iTechArt.Repository.Repositories
         /// </summary>
         public async Task<IGraph> GetPoliceGraphData()
         {
-            var graphs = new List<IGraph>();
-            graphs.Add(new Graph()
-            {
-                Unit = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Police")).ToString(),
-                MaleAmount = await _dbContext.Police
-                      .GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync(),
-                FemaleAmount = await _dbContext.Police
-                    .GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync(),
-            });
-            return null;
+            var tableName = _dbContext.Model.GetEntityTypes().Select(x => x.GetTableName()).FirstOrDefault(a => a.Equals("Police")).ToString();
+            var maleAmount = await _dbContext.Police.GroupBy(a => a.Gender).Select(g => g.Count(o => o.Gender == Gender.Male)).FirstOrDefaultAsync();
+            var femaleAmount = await _dbContext.Police.GroupBy(c => new { Gender.Female }).Select(s => s.Count(x => x.Gender == Gender.Female)).FirstOrDefaultAsync();
+
+            //TODO:DM: After the dob will be added police need to uncomment the logic.
+            //var femaleAge = await _dbContext.Police.Where(p => p.Gender == Gender.Female).Select(c => new { Age = DateTime.Now.Year - c.DateOfBirth.Year }.Age).SumAsync();
+            //var maleAge = await _dbContext.Police.Where(p => p.Gender == Gender.Male).Select(c => new { Age = DateTime.Now.Year - c.DateOfBirth.Year }.Age).SumAsync();
+
+            IGraph graphs = new Graph();
+            graphs.Unit = tableName;
+            graphs.MaleAmount = maleAmount;
+            graphs.FemaleAmount = femaleAmount;
+
+            //graphs.AverageAgeMale = maleAmount / maleAge;
+            //graphs.AverageAgeFemale = femaleAmount / femaleAge;
+
+            return graphs;
         }
 
     }
