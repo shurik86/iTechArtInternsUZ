@@ -26,7 +26,7 @@ namespace iTechArt.Database.Entities.Police
         /// <summary>
         /// Gets and sets police officers email address.
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(50)]
         public string Email { get; set; }
 
         /// <summary>
@@ -37,13 +37,13 @@ namespace iTechArt.Database.Entities.Police
         /// <summary>
         /// Gets and sets police officers address.
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(40)]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets and sets police officers job title.
         /// </summary>
-        [MaxLength(32)]
+        [MaxLength(40)]
         public string JobTitle { get; set; }
 
         /// <summary>
