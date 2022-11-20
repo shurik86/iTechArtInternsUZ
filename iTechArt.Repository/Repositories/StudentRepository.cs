@@ -74,7 +74,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of students.
         /// </summary>
-        public async Task<int> GetCountOfStudentsAsync()
+        public async Task<long> GetCountAsync()
         {
             return await _dbContext.Students.CountAsync();
         }

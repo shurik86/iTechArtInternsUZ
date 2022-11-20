@@ -2,7 +2,7 @@
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using ITechArt.Parsers.Constants;
-using ITechArt.Parsers.Dtos;
+using ITechArt.Parsers.Dtos.Polices;
 using Microsoft.AspNetCore.Http;
 using System.Xml;
 
@@ -27,14 +27,14 @@ namespace ITechArt.Parsers.PoliceParsers
                 {
                     PoliceDto policeDto = new PoliceDto
                     {
-                        Name = node[PoliceConstants.Name].InnerText,
-                        Surname = node[PoliceConstants.Surname].InnerText,
-                        Email = node[PoliceConstants.Email].InnerText,
-                        Gender = Enum.Parse<Gender>(node[PoliceConstants.Gender].InnerText),
-                        Address = node[PoliceConstants.Address].InnerText,
-                        JobTitle = node[PoliceConstants.JobTitle].InnerText,
-                        Salary = Convert.ToDouble(node[PoliceConstants.Salary].InnerText),
-                        BirthDate = Convert.ToDateTime(node[PoliceConstants.Birthdate].InnerText)
+                        Name = node[PoliceConstants.NAME].InnerText,
+                        Surname = node[PoliceConstants.SURNAME].InnerText,
+                        Email = node[PoliceConstants.EMAIL].InnerText,
+                        Gender = Enum.Parse<Gender>(node[PoliceConstants.GENDER].InnerText),
+                        Address = node[PoliceConstants.ADDRESS].InnerText,
+                        JobTitle = node[PoliceConstants.JOBTITLE].InnerText,
+                        Salary = Convert.ToDouble(node[PoliceConstants.SALARY].InnerText),
+                        BirthDate = Convert.ToDateTime(node[PoliceConstants.BIRTHDATE].InnerText)
                     };
                     polices.Add(policeDto);
                 }

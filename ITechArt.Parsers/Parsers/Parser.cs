@@ -10,6 +10,7 @@ using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 using ITechArt.Parsers.Dtos.Students;
 using ITechArt.Parsers.Dtos.Groceries;
 using ITechArt.Parsers.Dtos.MedStaffs;
+using ITechArt.Parsers.Dtos.Polices;
 
 namespace ITechArt.Parsers.Parsers
 {
@@ -119,6 +120,14 @@ namespace ITechArt.Parsers.Parsers
                 .SetPropertyUsing(m =>
                 {
                     return Enum.Parse<Shift>(m.ToString());
+                });
+
+
+            // Configuration mapping of police.
+            mapper.AddMapping<PoliceDto>("Gender", p => p.Gender)
+                .SetPropertyUsing(p =>
+                {
+                    return Enum.Parse<Gender>(p.ToString());
                 });
         }
     }
