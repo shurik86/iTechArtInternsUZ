@@ -4,7 +4,7 @@ using ITechArt.Parsers.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
-namespace ITechArt.Parsers.Dtos
+namespace ITechArt.Parsers.Dtos.Pupils
 {
     [XmlRoot(PupilStringConstants.PUPILS)]
     public class PupilDto : IPupil

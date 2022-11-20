@@ -1,16 +1,17 @@
 ﻿using CsvHelper.Configuration;
 using CsvHelper;
-using iTechArt.Domain.ParserInterfaces;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml.Serialization;
 using Ganss.Excel;
 using iTechArt.Domain.Enums;
-using ITechArt.Parsers.Dtos;
+using ITechArt.Parsers.Dtos.Pupils;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
+using ITechArt.Parsers.Dtos.Students;
 
 namespace ITechArt.Parsers.Parsers
 {
-    public sealed class GenericParser : IGenericParser
+    public sealed class Parser : IParser
     {
         /// <summary>
         /// Parse TSource file from csv.
@@ -69,7 +70,7 @@ namespace ITechArt.Parsers.Parsers
             return (TSource)xmlSerializer.Deserialize(reader);
         }
 
-        private void ConfigurationMappingExcel(ExcelMapper mapper)
+        private static void ConfigurationMappingExcel(ExcelMapper mapper)
         {
             mapper.AddMapping<PupilDto>("Gender", p => p.Gender)
                 .SetPropertyUsing(v =>
@@ -87,6 +88,13 @@ namespace ITechArt.Parsers.Parsers
                 .SetPropertyUsing(v =>
                 {
                     return Enum.Parse<Shift>(v.ToString());
+                });
+
+
+            mapper.AddMapping<StudentDto>("Gender", s => s.Gender)
+                .SetPropertyUsing(s =>
+                {
+                    return Enum.Parse<Gender>(s.ToString());
                 });
         }
     }

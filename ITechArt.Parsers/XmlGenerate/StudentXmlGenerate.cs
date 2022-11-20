@@ -32,14 +32,14 @@ namespace ITechArt.Parsers.XmlGenerate
             {
                 var studentElement = xmlDocument.CreateElement(null, XmlConstants.student, null);
                 
-                var FirstName = xmlDocument.CreateAttribute(null, StudentsConstants.FirstName, null);
-                var LastName = xmlDocument.CreateAttribute(null, StudentsConstants.LastName, null);
-                var Email = xmlDocument.CreateAttribute(null, StudentsConstants.Email, null);
-                var Password = xmlDocument.CreateAttribute(null, StudentsConstants.Password, null);
-                var Majority = xmlDocument.CreateAttribute(null, StudentsConstants.Majority, null);
-                var Gender = xmlDocument.CreateAttribute(null, StudentsConstants.Gender, null);
-                var DateOfBirth = xmlDocument.CreateAttribute(null, StudentsConstants.DateOfBirth, null);
-                var University = xmlDocument.CreateAttribute(null, StudentsConstants.University, null);
+                var FirstName = xmlDocument.CreateAttribute(null, StudentsConstants.FIRSTNAME, null);
+                var LastName = xmlDocument.CreateAttribute(null, StudentsConstants.LASTNAME, null);
+                var Email = xmlDocument.CreateAttribute(null, StudentsConstants.EMAIL, null);
+                var Password = xmlDocument.CreateAttribute(null, StudentsConstants.PASSWORD, null);
+                var Majority = xmlDocument.CreateAttribute(null, StudentsConstants.MAJORITY, null);
+                var Gender = xmlDocument.CreateAttribute(null, StudentsConstants.GENDER, null);
+                var DateOfBirth = xmlDocument.CreateAttribute(null, StudentsConstants.DATEOFBIRTH, null);
+                var University = xmlDocument.CreateAttribute(null, StudentsConstants.UNIVERSITY, null);
 
                 FirstName.Value = student.FirstName;
                 LastName.Value = student.LastName;
