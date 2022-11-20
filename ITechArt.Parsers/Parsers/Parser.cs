@@ -9,6 +9,7 @@ using ITechArt.Parsers.Dtos.Pupils;
 using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 using ITechArt.Parsers.Dtos.Students;
 using ITechArt.Parsers.Dtos.Groceries;
+using ITechArt.Parsers.Dtos.MedStaffs;
 
 namespace ITechArt.Parsers.Parsers
 {
@@ -104,6 +105,20 @@ namespace ITechArt.Parsers.Parsers
                 .SetPropertyUsing(g =>
                 {
                     return Enum.Parse<Gender>(g.ToString());
+                });
+
+
+            // Configuration mapping of med staff.
+            mapper.AddMapping<MedStaffDto>("Gender", m => m.Gender)
+                .SetPropertyUsing(m =>
+                {
+                    return Enum.Parse<Gender>(m.ToString());
+                });
+
+            mapper.AddMapping<MedStaffDto>("Shift", m => m.Shift)
+                .SetPropertyUsing(m =>
+                {
+                    return Enum.Parse<Shift>(m.ToString());
                 });
         }
     }
