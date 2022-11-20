@@ -1,6 +1,4 @@
-﻿
-
-namespace ITechArt.Parsers.Constants
+﻿namespace ITechArt.Parsers.Constants
 {
     /// <summary>
     /// Static Strings for Pupil Model to use inside Parsers.
