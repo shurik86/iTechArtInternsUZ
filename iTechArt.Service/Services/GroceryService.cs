@@ -42,7 +42,7 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Get Count of Groceries.
         /// </summary>
-        public async ValueTask<int> GetCountOfGroceryAsync()
+        public async ValueTask<long> GetCountAsync()
         {
             return await _groceryRepository.GetCountAsync();
         }

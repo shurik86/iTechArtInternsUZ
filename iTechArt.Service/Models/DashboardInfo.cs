@@ -17,7 +17,7 @@ namespace iTechArt.Service.Models
         /// <summary>
         /// Count of groceries
         /// </summary>
-        public int GroceryCount { get; set; }
+        public long GroceryCount { get; set; }
 
         /// <summary>
         /// Count of polices

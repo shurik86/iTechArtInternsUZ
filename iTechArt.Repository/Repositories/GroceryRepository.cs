@@ -76,7 +76,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of groceries.
         /// </summary>
-        public async ValueTask<int> GetCountAsync()
+        public async ValueTask<long> GetCountAsync()
         {
             return await _dbContext.Groceries.CountAsync();
         }
