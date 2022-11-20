@@ -1,6 +1,6 @@
 ﻿namespace ITechArt.Parsers.Constants
 {
-    public static class PupilStringConstants
+    public static class PupilConstants
     {
         public const string PUPILS = "pupils";
         public const string PUPIL = "pupil";
