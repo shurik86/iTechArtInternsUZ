@@ -14,8 +14,7 @@ import { StatsModule } from './stats/stats.module';
     AppRoutingModule,
     SharedModule,
     StatsModule,
-    HttpClientModule,
-
+    HttpClientModule
   ],
   bootstrap: [AppComponent],
 })
