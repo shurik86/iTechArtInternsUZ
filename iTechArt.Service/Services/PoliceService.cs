@@ -1,9 +1,9 @@
-﻿using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using ITechArt.Parsers.IPoliceParsers;
 using Microsoft.AspNetCore.Http;
 using System.Xml;
 
@@ -15,17 +15,17 @@ namespace iTechArt.Service.Services
         private readonly ICsvParse _csvParse;
         private readonly IExcelParse _excelParse;
         private readonly IXmlParse _xmlParse;
-        private readonly IGeneratePoliceExcel _generatePoliceExcel;
+        private readonly IPoliceExcelGenerate _generatePoliceExcel;
         private readonly IStreamToArray _streamToArray;
-        private readonly IGeneratePoliceXml _generatePoliceXml;
+        private readonly IPoliceXmlGenerate _generatePoliceXml;
 
         public PoliceService(IPoliceRepository policeRepository, 
                              ICsvParse csvParse, 
                              IExcelParse excelParse, 
                              IXmlParse xmlParse, 
-                             IGeneratePoliceExcel generatePoliceExcel, 
+                             IPoliceExcelGenerate generatePoliceExcel, 
                              IStreamToArray streamToArray, 
-                             IGeneratePoliceXml generatePoliceXml)
+                             IPoliceXmlGenerate generatePoliceXml)
         {
             _policeRepository = policeRepository;
             _csvParse = csvParse;
@@ -41,9 +41,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize)
         {
-            return await _policeRepository.GetAllAsync(pageIndex);
+            return await _policeRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>

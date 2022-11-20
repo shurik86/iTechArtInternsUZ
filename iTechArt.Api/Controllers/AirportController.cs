@@ -39,9 +39,9 @@ namespace iTechArt.Api.Controllers
         /// Controller of Exporting airport data.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex)
+        public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex, int pageSize)
         {
-            return Ok(await _airportsService.ExportAirportExcelAsync(pageIndex));
+            return Ok(await _airportsService.ExportAirportExcelAsync(pageIndex, pageSize));
         }
 
         /// <summary>

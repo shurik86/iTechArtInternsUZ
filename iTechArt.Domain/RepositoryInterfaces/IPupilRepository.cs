@@ -12,7 +12,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public Task<IPupil[]> GetAllAsync(int pageIndex);
+        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Get pupil by id.

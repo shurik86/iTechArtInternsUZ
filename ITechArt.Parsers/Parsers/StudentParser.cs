@@ -55,7 +55,7 @@ namespace ITechArt.Parsers.Parsers
                     Password = worksheet.GetValue<string>(row, 4).Trim(),
                     Majority = worksheet.GetValue<string>(row, 5).Trim(),
                     Gender = Enum.Parse<Gender>(worksheet.GetValue<string>(row, 6).Trim()),
-                    DateOfBirth = DateOnly.Parse(worksheet.GetValue<string>(row, 7).Trim()),
+                    DateOfBirth = DateTime.Parse(worksheet.GetValue<string>(row, 7).Trim()),
                     University = worksheet.GetValue<string>(row, 8).Trim()
                 };
                 students.Add(student);
@@ -91,7 +91,7 @@ namespace ITechArt.Parsers.Parsers
                     Password = node["Password"].InnerText,
                     Majority = node["Majority"].InnerText,
                     Gender = Enum.Parse<Gender>(node["Gender"].InnerText),
-                    DateOfBirth = DateOnly.Parse(node["DateOfBirth"].InnerText),
+                    DateOfBirth = DateTime.Parse(node["DateOfBirth"].InnerText),
                     University = node["University"].InnerText
                 };
                 students.Add(student);

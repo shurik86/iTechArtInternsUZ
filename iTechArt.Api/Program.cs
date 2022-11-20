@@ -1,20 +1,21 @@
 using iTechArt.Database.DbContexts;
-using iTechArt.Domain.GenerateExcelInterfaces;
+using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
+using iTechArt.Service.Graphs;
 using iTechArt.Service.Helpers;
 using iTechArt.Service.Parsers;
 using iTechArt.Service.Services;
-using ITechArt.Parsers.GenerateExcel;
-using ITechArt.Parsers.GenerateXml;
-using ITechArt.Parsers.IPoliceParsers;
+using ITechArt.Parsers.ExcelGenerate;
 using ITechArt.Parsers.Parsers;
 using ITechArt.Parsers.PoliceParsers;
+using ITechArt.Parsers.XmlGenerate;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,20 +49,23 @@ builder.Services.AddScoped<IPupilParser, PupilParser>();
 builder.Services.AddScoped<IStudentParser, StudentParser>();
 builder.Services.AddScoped<IGenericParser, GenericParser>();
 
+builder.Services.AddScoped<IGraphRepository, GraphRepository>();
+builder.Services.AddScoped<IGenderGraphService, GenderGraphService>();
 
-builder.Services.AddScoped<IGenerateExcel, GenerateExcelFile>();
-builder.Services.AddScoped<IGenerateAirportXml, GenerateAirportXml>();
-builder.Services.AddScoped<IGenerateAirportExcel, GenerateAirportExcel>();
-builder.Services.AddScoped<IGenerateGroceryExcel, GenerateGroceryExcel>();
-builder.Services.AddScoped<IGenerateMedStaffExcel, GenerateMedStaffExcel>();
-builder.Services.AddScoped<IGeneratePoliceExcel, GeneratePoliceExcel>();
-builder.Services.AddScoped<IGeneratePupilExcel, GeneratePupilExcel>();
-builder.Services.AddScoped<IGenerateStudentExcel, GenerateStudentExcel>();
-builder.Services.AddScoped<IGenerateGroceryXml, GenerateGroceryXml>();
-builder.Services.AddScoped<IGenerateMedStaffXml, GenerateMedStaffXml>();
-builder.Services.AddScoped<IGeneratePoliceXml, GeneratePoliceXml>();
-builder.Services.AddScoped<IGeneratePupilXml, GeneratePupilXml>();
-builder.Services.AddScoped<IGenerateStudentXml, GenerateStudentXml>();
+
+builder.Services.AddScoped<IExcelGenerator, GenerateExcelFile>();
+builder.Services.AddScoped<IAirportXmlGenerate, AirportXmlGenerate>();
+builder.Services.AddScoped<IAirportExcelGenerate, AirportExcelGenerate>();
+builder.Services.AddScoped<IGroceryExcelGenerate, GroceryExcelGenerate>();
+builder.Services.AddScoped<IMedStaffExcelGenerate, MedStaffExcelGenerate>();
+builder.Services.AddScoped<IPoliceExcelGenerate, PoliceExcelGenerate>();
+builder.Services.AddScoped<IPupilExcelGenerate, PupilExcelGenerate>();
+builder.Services.AddScoped<IStudentExcelGenerate, StudentExcelGenerate>();
+builder.Services.AddScoped<IGroceryXmlGenerate, GroceryXmlGenerate>();
+builder.Services.AddScoped<IMedStaffXmlGenerate, MedStaffXmlGenerate>();
+builder.Services.AddScoped<IPoliceXmlGenerate, PoliceXmlGenerate>();
+builder.Services.AddScoped<IPupilXmlGenerate, PupilXmlGenerate>();
+builder.Services.AddScoped<IStudentXmlGenerate, StudentXmlGenerate>();
 
 builder.Services.AddCors(option =>
 {

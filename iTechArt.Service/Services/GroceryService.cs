@@ -1,7 +1,7 @@
-﻿using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +13,14 @@ namespace iTechArt.Serivce.Services
     {
         private readonly IGroceryRepository _groceryRepository;
         private readonly IGroceryParser _groceryParsers;
-        private readonly IGenerateGroceryExcel _generateGroceryExcel;
-        private readonly IGenerateGroceryXml _generateGroceryXml;
+        private readonly IGroceryExcelGenerate _generateGroceryExcel;
+        private readonly IGroceryXmlGenerate _generateGroceryXml;
         private readonly IStreamToArray _streamToArray;
 
         public GroceryService(IGroceryRepository groceryRepository, 
                               IGroceryParser groceryParsers,
-                              IGenerateGroceryExcel generateGroceryExcel,
-                              IGenerateGroceryXml generateGroceryXml,
+                              IGroceryExcelGenerate generateGroceryExcel,
+                              IGroceryXmlGenerate generateGroceryXml,
                               IStreamToArray streamToArray)
         {
             _groceryRepository = groceryRepository;
@@ -35,16 +35,16 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Export grocery data.
         /// </summary>
-        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex)
+        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize)
         {
-            return await _groceryRepository.GetAllAsync(pageIndex);
+            return await _groceryRepository.GetAllAsync(pageIndex, pageSize);
         }
         /// <summary>
         /// Get Count of Groceries.
         /// </summary>
         public async ValueTask<int> GetCountOfGroceryAsync()
         {
-            return await _groceryRepository.GetCountOfGroceryAsync();
+            return await _groceryRepository.GetCountAsync();
         }
         /// <summary>
         /// Import Csv format grocery files.

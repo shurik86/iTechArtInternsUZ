@@ -33,7 +33,7 @@ namespace ITechArt.Parsers.Dtos
         /// Gets or sets birthdate of pupil.
         /// </summary>
         [XmlElement(ElementName = PupilStringConstants.DATEOFBIRTH)]
-        public DateOnly DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets gender of pupil.

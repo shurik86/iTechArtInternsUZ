@@ -89,9 +89,9 @@ namespace iTechArt.Api.Controllers
         /// Gets all data about police from the database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex)
+        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _policeService.GetAllPoliceAsync(pageIndex));
+            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize));
         }
 
         /// <summary>

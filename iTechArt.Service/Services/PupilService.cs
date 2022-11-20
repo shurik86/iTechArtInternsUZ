@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using iTechArt.Domain.GenerateExcelInterfaces;
+using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using ITechArt.Parsers.Dtos;
@@ -17,15 +17,15 @@ namespace iTechArt.Service.Services
         private readonly IPupilRepository _pupilRepository;
         private readonly IGenericParser _genericParser;
         private readonly IMapper _mapper;
-        private readonly IGeneratePupilExcel _generatePupilExcel;
-        private readonly IGeneratePupilXml _generatePupilXml;
+        private readonly IPupilExcelGenerate _generatePupilExcel;
+        private readonly IPupilXmlGenerate _generatePupilXml;
         private readonly IStreamToArray _streamToArray;
 
         public PupilService(IPupilRepository pupilRepository, 
                             IGenericParser genericParser, 
                             IMapper mapper, 
-                            IGeneratePupilExcel generatePupilExcel, 
-                            IGeneratePupilXml generatePupilXml, 
+                            IPupilExcelGenerate generatePupilExcel, 
+                            IPupilXmlGenerate generatePupilXml, 
                             IStreamToArray streamToArray)
         {
             _pupilRepository = pupilRepository;
@@ -40,9 +40,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync(int pageIndex)
+        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _pupilRepository.GetAllAsync(pageIndex);
+            return await _pupilRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>

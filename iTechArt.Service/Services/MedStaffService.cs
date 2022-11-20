@@ -1,7 +1,7 @@
-﻿using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +13,14 @@ namespace iTechArt.Service.Services
     {
         private readonly IMedStaffRepository _medStaffRepository;
         private readonly IMedStaffParser _medStaffParser;
-        private readonly IGenerateMedStaffExcel _generateMedStaffExcel;
-        private readonly IGenerateMedStaffXml _generateMedStaffXml;
+        private readonly IMedStaffExcelGenerate _generateMedStaffExcel;
+        private readonly IMedStaffXmlGenerate _generateMedStaffXml;
         private readonly IStreamToArray _streamToArray;
 
         public MedStaffService(IMedStaffRepository medStaffRepository, 
                                IMedStaffParser medStaffParser, 
-                               IGenerateMedStaffExcel generateMedStaffExcel, 
-                               IGenerateMedStaffXml generateMedStaffXml, 
+                               IMedStaffExcelGenerate generateMedStaffExcel, 
+                               IMedStaffXmlGenerate generateMedStaffXml, 
                                IStreamToArray streamToArray)
         {
             _medStaffRepository = medStaffRepository;
@@ -34,9 +34,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes no input so far.
         /// </summary>
-        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex)
+        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize)
         {
-            return await _medStaffRepository.GetAllAsync(pageIndex);
+            return await _medStaffRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>

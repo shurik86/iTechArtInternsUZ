@@ -123,7 +123,7 @@ namespace iTechArt.Database.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Surname",
                 table: "Police",
-                type: "character varying(24)",
+                type: "character varying(32)",
                 maxLength: 24,
                 nullable: true,
                 oldClrType: typeof(string),
@@ -133,7 +133,7 @@ namespace iTechArt.Database.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Police",
-                type: "character varying(24)",
+                type: "character varying(32)",
                 maxLength: 24,
                 nullable: false,
                 defaultValue: "",

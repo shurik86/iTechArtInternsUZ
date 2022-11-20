@@ -10,10 +10,10 @@
         /// <summary>
         /// Constant file extension strings.
         /// </summary>
-        public static readonly string csv = ".csv";
-        public static readonly string xml = ".xml";
-        public static readonly string xlsx = ".xlsx";
-        public static readonly string xls = ".xls";
+        public const string csv = ".csv";
+        public const string xml = ".xml";
+        public const string xlsx = ".xlsx";
+        public const string xls = ".xls";
 
         /// <summary>
         /// Content types of CSV files.
@@ -51,17 +51,17 @@
         /// <summary>
         /// Content Type for XML and XLSX.
         /// </summary>
-        public static readonly string XmlContent = "text/xml";
-        public static readonly string ExcelContent = "application/vnd.ms-excel";
+        public const string XmlContent = "text/xml";
+        public const string ExcelContent = "application/vnd.ms-excel";
 
         /// <summary>
         /// Constants for File Titles.
         /// </summary>
-        public static readonly string Police = "Police";
-        public static readonly string Airports = "Airports";
-        public static readonly string Groceries = "Groceries";
-        public static readonly string MedStaff = "MedStaff";
-        public static readonly string Pupils = "Pupils";
-        public static readonly string Students = "Students";
+        public const string Police = "Police";
+        public const string Airports = "Airports";
+        public const string Groceries = "Groceries";
+        public const string MedStaff = "MedStaff";
+        public const string Pupils = "Pupils";
+        public const string Students = "Students";
     }
 }

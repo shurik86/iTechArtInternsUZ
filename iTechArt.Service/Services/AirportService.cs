@@ -1,7 +1,7 @@
-﻿using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Repositories;
@@ -16,15 +16,15 @@ namespace iTechArt.Service.Services
     public sealed class AirportService : IAirportsService
     {
         private readonly IAirportRepository _airportRepository;
-        private readonly IGenerateAirportExcel _generateAirportExcel;
+        private readonly IAirportExcelGenerate _generateAirportExcel;
         private readonly IAirportParsers _airportParsers;
-        private readonly IGenerateAirportXml _generateAirportXml;
+        private readonly IAirportXmlGenerate _generateAirportXml;
         private readonly IStreamToArray _streamToArray;
 
         public AirportService(IAirportRepository airportRepository, 
                               IAirportParsers airportParsers,
-                              IGenerateAirportExcel generateAirportExcel,
-                              IGenerateAirportXml generateAirportXml,
+                              IAirportExcelGenerate generateAirportExcel,
+                              IAirportXmlGenerate generateAirportXml,
                               IStreamToArray streamToArray)
         {
             _airportRepository = airportRepository;
@@ -37,9 +37,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Exporting airport datas.
         /// </summary>
-        public async Task<IAirport[]> ExportAirportExcelAsync(int pageIndex)
+        public async Task<IAirport[]> ExportAirportExcelAsync(int pageIndex, int pageSize)
         {
-            return await _airportRepository.GetAllAsync(pageIndex);
+            return await _airportRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>

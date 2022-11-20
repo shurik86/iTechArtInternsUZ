@@ -22,9 +22,7 @@ namespace iTechArt.Service.DTOs
         /// <summary>
         /// Gets or internal sets The built date of airport.
         /// </summary>
-        
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly BuiltDate { get; set; }
+        public DateTime BuiltDate { get; set; }
 
         /// <summary>
         /// Gets or internal sets A number of people can be in at the same time at the airport.

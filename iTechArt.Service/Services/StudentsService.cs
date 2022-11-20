@@ -1,7 +1,7 @@
-﻿using iTechArt.Domain.GenerateExcelInterfaces;
+﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
-using iTechArt.Domain.ParserInterfaces.IGenerateXml;
+using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +13,14 @@ namespace iTechArt.Service.Services
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IStudentParser _studentParsers;
-        private readonly IGenerateStudentExcel _generateStudentExcel;
-        private readonly IGenerateStudentXml _generateStudentXml;
+        private readonly IStudentExcelGenerate _generateStudentExcel;
+        private readonly IStudentXmlGenerate _generateStudentXml;
         private readonly IStreamToArray _streamToArray;
 
         public StudentsService(IStudentRepository studentRepository, 
                                IStudentParser studentParsers, 
-                               IGenerateStudentExcel generateStudentExcel, 
-                               IGenerateStudentXml generateStudentXml, 
+                               IStudentExcelGenerate generateStudentExcel, 
+                               IStudentXmlGenerate generateStudentXml, 
                                IStreamToArray streamToArray)
         {
             _studentRepository = studentRepository;
@@ -35,9 +35,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
-        public async Task<IStudent[]> GetAllAsync(int pageIndex)
+        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _studentRepository.GetAllAsync(pageIndex);
+            return await _studentRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>
