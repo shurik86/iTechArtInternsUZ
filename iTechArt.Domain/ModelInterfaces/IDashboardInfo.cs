@@ -16,7 +16,7 @@
         /// <summary>
         /// Gets count of groceries
         /// </summary>
-        public int GroceryCount { get; }
+        public long GroceryCount { get; }
 
         /// <summary>
         /// Gets count of polices
