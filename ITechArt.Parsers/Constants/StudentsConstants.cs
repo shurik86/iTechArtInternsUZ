@@ -1,19 +1,20 @@
-﻿
-
-namespace ITechArt.Parsers.Constants
+﻿namespace ITechArt.Parsers.Constants
 {
     /// <summary>
     /// Static Strings for Student Model to use inside Parsers.
     /// </summary>
     public static class StudentsConstants
     {
-        public const string FirstName = "FirstName";
-        public const string LastName = "LastName";
-        public const string Email = "Email";
-        public const string Password = "Password";
-        public const string Majority = "Majority";
-        public const string Gender = "Gender";
-        public const string DateOfBirth = "DateOfBirth";
-        public const string University = "University";
+        public const string STUDENTS = "students";
+        public const string STUDENT = "student";
+
+        public const string FIRSTNAME = "FirstName";
+        public const string LASTNAME = "LastName";
+        public const string EMAIL = "Email";
+        public const string PASSWORD = "Password";
+        public const string MAJORITY = "Majority";
+        public const string GENDER = "Gender";
+        public const string DATEOFBIRTH = "DateOfBirth";
+        public const string UNIVERSITY = "University";
     }
 }

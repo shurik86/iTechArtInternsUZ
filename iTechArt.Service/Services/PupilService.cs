@@ -5,8 +5,7 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using ITechArt.Parsers.Dtos;
-using ITechArt.Parsers.Parsers;
+using ITechArt.Parsers.Dtos.Pupils;
 using Microsoft.AspNetCore.Http;
 using System.Xml;
 
@@ -15,21 +14,21 @@ namespace iTechArt.Service.Services
     public sealed class PupilService : IPupilService
     {
         private readonly IPupilRepository _pupilRepository;
-        private readonly IGenericParser _genericParser;
+        private readonly IParser _parser;
         private readonly IMapper _mapper;
         private readonly IPupilExcelGenerate _generatePupilExcel;
         private readonly IPupilXmlGenerate _generatePupilXml;
         private readonly IStreamToArray _streamToArray;
 
         public PupilService(IPupilRepository pupilRepository, 
-                            IGenericParser genericParser, 
+                            IParser parser, 
                             IMapper mapper, 
                             IPupilExcelGenerate generatePupilExcel, 
                             IPupilXmlGenerate generatePupilXml, 
                             IStreamToArray streamToArray)
         {
             _pupilRepository = pupilRepository;
-            _genericParser = genericParser;
+            _parser = parser;
             _mapper = mapper;
             _generatePupilExcel = generatePupilExcel;
             _generatePupilXml = generatePupilXml;
@@ -72,7 +71,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportExcelAsync(IFormFile file)
         {
-            var pupilsFromExcel = await _genericParser.ExcelParseAsync<PupilDto>(file);
+            var pupilsFromExcel = await _parser.ExcelParseAsync<PupilDto>(file);
 
             await _pupilRepository.AddRangeAsync(pupilsFromExcel);
         }
@@ -82,7 +81,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportCsvAsync(IFormFile file)
         {
-            var pupilsFromCsv = await _genericParser.CsvParseAsync<PupilMap, PupilDto>(file);
+            var pupilsFromCsv = await _parser.CsvParseAsync<PupilMap, PupilDto>(file);
 
             await _pupilRepository.AddRangeAsync(pupilsFromCsv);
         }
@@ -92,7 +91,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportXmlAsync(IFormFile file)
         {
-            var pupilsFromXml = await _genericParser.XmlParseAsync<PupilXml>(file);
+            var pupilsFromXml = await _parser.XmlParseAsync<PupilXml>(file);
 
             var pupilsDto = pupilsFromXml.Pupils.Select(p => _mapper.Map<PupilDto>(p));
 

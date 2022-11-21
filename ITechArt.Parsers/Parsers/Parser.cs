@@ -1,16 +1,20 @@
 ﻿using CsvHelper.Configuration;
 using CsvHelper;
-using iTechArt.Domain.ParserInterfaces;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml.Serialization;
 using Ganss.Excel;
 using iTechArt.Domain.Enums;
-using ITechArt.Parsers.Dtos;
+using ITechArt.Parsers.Dtos.Pupils;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
+using ITechArt.Parsers.Dtos.Students;
+using ITechArt.Parsers.Dtos.Groceries;
+using ITechArt.Parsers.Dtos.MedStaffs;
+using ITechArt.Parsers.Dtos.Polices;
 
 namespace ITechArt.Parsers.Parsers
 {
-    public sealed class GenericParser : IGenericParser
+    public sealed class Parser : IParser
     {
         /// <summary>
         /// Parse TSource file from csv.
@@ -69,8 +73,9 @@ namespace ITechArt.Parsers.Parsers
             return (TSource)xmlSerializer.Deserialize(reader);
         }
 
-        private void ConfigurationMappingExcel(ExcelMapper mapper)
+        private static void ConfigurationMappingExcel(ExcelMapper mapper)
         {
+            //Configuration mapping of pupil
             mapper.AddMapping<PupilDto>("Gender", p => p.Gender)
                 .SetPropertyUsing(v =>
                 {
@@ -87,6 +92,42 @@ namespace ITechArt.Parsers.Parsers
                 .SetPropertyUsing(v =>
                 {
                     return Enum.Parse<Shift>(v.ToString());
+                });
+            
+            // Configuration mapping of student.
+            mapper.AddMapping<StudentDto>("Gender", s => s.Gender)
+                .SetPropertyUsing(s =>
+                {
+                    return Enum.Parse<Gender>(s.ToString());
+                });
+
+            // Configuration mapping of grocery.
+            mapper.AddMapping<GroceryDto>("Gender", g => g.Gender)
+                .SetPropertyUsing(g =>
+                {
+                    return Enum.Parse<Gender>(g.ToString());
+                });
+
+
+            // Configuration mapping of med staff.
+            mapper.AddMapping<MedStaffDto>("Gender", m => m.Gender)
+                .SetPropertyUsing(m =>
+                {
+                    return Enum.Parse<Gender>(m.ToString());
+                });
+
+            mapper.AddMapping<MedStaffDto>("Shift", m => m.Shift)
+                .SetPropertyUsing(m =>
+                {
+                    return Enum.Parse<Shift>(m.ToString());
+                });
+
+
+            // Configuration mapping of police.
+            mapper.AddMapping<PoliceDto>("Gender", p => p.Gender)
+                .SetPropertyUsing(p =>
+                {
+                    return Enum.Parse<Gender>(p.ToString());
                 });
         }
     }

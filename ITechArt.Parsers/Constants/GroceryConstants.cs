@@ -7,20 +7,25 @@ namespace ITechArt.Parsers.Constants
     /// </summary>
     public static class GroceryConstants
     {
-        public const string FirstName = "FirstName";
+        public const string GROCERIES = "dataset";
 
-        public const string LastName = "LastName";
+        public const string GROCERY = "record";
 
-        public const string Birthday = "Birthday";
 
-        public const string Gender = "Gender";
+        public const string FIRSTNAME = "FirstName";
 
-        public const string Email = "Email";
+        public const string LASTNAME = "LastName";
 
-        public const string Jobtitle = "Jobtitle";
+        public const string BIRTHDAY = "Birthday";
 
-        public const string Departmentretail = "Departmentretail";
+        public const string GENDER = "Gender";
 
-        public const string Salary = "Salary";
+        public const string EMAIL = "Email";
+
+        public const string JOBTITLE = "Jobtitle";
+
+        public const string DEPARTMENTRETAIL = "Departmentretail";
+
+        public const string SALARY = "Salary";
     }
 }
