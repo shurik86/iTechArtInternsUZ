@@ -37,7 +37,7 @@ namespace ITechArt.Parsers.Parsers
         }
 
         /// <summary>
-        /// Parse pupil's file from excel.
+        /// Parse TSource's file from excel.
         /// </summary>
         public async Task<TSourse[]> ExcelParseAsync<TSourse>(IFormFile file) 
             where TSourse : class
@@ -99,6 +99,13 @@ namespace ITechArt.Parsers.Parsers
                 .SetPropertyUsing(s =>
                 {
                     return Enum.Parse<Gender>(s.ToString());
+                });
+
+            // Configuration mapping of student.
+            mapper.AddMapping<StudentDto>("Faculty", s => s.Faculty)
+                .SetPropertyUsing(s =>
+                {
+                    return Enum.Parse<Faculty>(s.ToString());
                 });
 
             // Configuration mapping of grocery.

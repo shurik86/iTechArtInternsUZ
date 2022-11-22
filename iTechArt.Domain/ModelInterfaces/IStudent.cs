@@ -48,5 +48,10 @@ namespace iTechArt.Domain.ModelInterfaces
         /// Gets name of university of student.
         /// </summary>
         public string University { get; }
+
+        /// <summary>
+        /// Gets faculty of student.
+        /// </summary>
+        public Faculty Faculty { get; }
     }
 }

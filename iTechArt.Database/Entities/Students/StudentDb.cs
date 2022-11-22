@@ -1,7 +1,5 @@
 ﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.Helpers;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace iTechArt.Database.Entities.Students
 {
@@ -39,7 +37,6 @@ namespace iTechArt.Database.Entities.Students
         /// <summary>
         /// Get or set major of student study.
         /// </summary>
-        
         [MaxLength(128)]
         public string Majority { get; set; }
 
@@ -58,5 +55,10 @@ namespace iTechArt.Database.Entities.Students
         /// </summary>
         [MaxLength(128)]
         public string University { get; set; }
+
+        /// <summary>
+        /// Gets or sets faculty of student.
+        /// </summary>
+        public Faculty Faculty { get; set; }
     }
 }

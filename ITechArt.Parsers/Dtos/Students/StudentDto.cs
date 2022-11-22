@@ -61,5 +61,11 @@ namespace ITechArt.Parsers.Dtos.Students
         /// </summary>
         [XmlElement(ElementName = StudentsConstants.UNIVERSITY)]
         public string University { get; set; }
+
+        /// <summary>
+        /// Gets or sets name of university of student.
+        /// </summary>
+        [XmlElement(ElementName = StudentsConstants.FACULTY)]
+        public Faculty Faculty { get; set; }
     }
 }
