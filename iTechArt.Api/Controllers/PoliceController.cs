@@ -10,10 +10,12 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
+        private readonly IGetRetirementInfo _getRetirementInfo;
 
-        public PoliceController(IPoliceService policeService)
+        public PoliceController(IPoliceService policeService, IGetRetirementInfo getRetirementInfo)
         {
             _policeService = policeService;
+            _getRetirementInfo = getRetirementInfo;
         }
 
         /// <summary>
@@ -119,6 +121,12 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
+        }
+
+        [HttpGet("get_retired")]
+        public async Task<ActionResult> GetRetiredPolices()
+        {
+            return Ok(await _getRetirementInfo.GetRetiredPoliceAsync());
         }
     }
 }

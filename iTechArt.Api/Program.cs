@@ -27,6 +27,8 @@ builder.Services.AddScoped<IPoliceRepository, PoliceRepository>();
 builder.Services.AddScoped<IMedStaffRepository, MedStaffRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGroceryRepository, GroceryRepository>();
+builder.Services.AddScoped<IRetirementRepository, RetirementRepository>();
+
 
 builder.Services.AddScoped<ITotalStatisticsService, TotalStatisticsService>();
 builder.Services.AddScoped<IAirportsService, AirportService>();
@@ -36,6 +38,7 @@ builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
 builder.Services.AddScoped<IStreamToArray, StreamToArray>();
+builder.Services.AddScoped<IGetRetirementInfo, GetRetirementInfo>();
 
 // Parser Services
 builder.Services.AddScoped<IExcelParse, ParseExcel>();
@@ -62,6 +65,7 @@ builder.Services.AddScoped<IMedStaffXmlGenerate, MedStaffXmlGenerate>();
 builder.Services.AddScoped<IPoliceXmlGenerate, PoliceXmlGenerate>();
 builder.Services.AddScoped<IPupilXmlGenerate, PupilXmlGenerate>();
 builder.Services.AddScoped<IStudentXmlGenerate, StudentXmlGenerate>();
+
 
 builder.Services.AddCors(option =>
 {
