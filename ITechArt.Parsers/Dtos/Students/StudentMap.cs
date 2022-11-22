@@ -14,6 +14,7 @@ namespace ITechArt.Parsers.Dtos.Students
             Map(s => s.Gender).Name("Gender");
             Map(s => s.DateOfBirth).Name("DateOfBirth");
             Map(s => s.University).Name("University");
+            Map(s => s.Faculty).Name("Faculty");
         }
     }
 }
