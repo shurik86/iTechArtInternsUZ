@@ -1,6 +1,7 @@
 ﻿using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using System.Reactive.Subjects;
 
 namespace iTechArt.Service.Graphs
 {

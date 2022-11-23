@@ -17,6 +17,7 @@ import {
   IgxLegendModule,
   IgxNumericXAxisModule
 } from "igniteui-angular-charts";
+import { NgChartsModule } from "ng2-charts";
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import {
     IgxNumericXAxisModule,
     IgxCategoryHighlightLayerModule,
     IgxBarSeriesModule,
-    IgxDataToolTipLayerModule
+    IgxDataToolTipLayerModule,
+    NgChartsModule
   ],
   declarations: [StatisticsPageComponent],
 })

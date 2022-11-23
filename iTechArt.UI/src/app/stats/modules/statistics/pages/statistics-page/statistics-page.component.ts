@@ -1,43 +1,83 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ChangeDetectorRef } from "@angular/core";
-import { IgxLegendComponent, IgxDataChartComponent, IgxCategoryYAxisComponent, IgxNumericXAxisComponent, IgxCategoryHighlightLayerComponent, IgxBarSeriesComponent, IgxDataToolTipLayerComponent } from 'igniteui-angular-charts';
-import { HighestGrossingMovies } from "./data";
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration } from 'chart.js';
+import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-statistics-page',
   templateUrl: './statistics-page.component.html',
   styleUrls: ['./statistics-page.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class StatisticsPageComponent {
-  public constructor(private _detector: ChangeDetectorRef) {
+export class StatisticsPageComponent implements OnInit {
+  @ViewChild(BaseChartDirective) private chart!: BaseChartDirective;
+  public barChartLegend = true;
+  public barChartPlugins = [];
+  public url = environment.apiUrl;
+
+  public barChartData: ChartConfiguration<'bar'>['data'] = {
+    labels: ['Groceries', 'Pupils', 'Police', 'Students', 'Staffs'],
+    datasets: [
+      {
+        data: [333, 247, 1059, 415, 5095],
+        label: 'males',
+      },
+      {
+        data: [307, 253, 1061, 445, 4905],
+        label: 'females',
+      },
+    ],
+  };
+
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: false,
+  };
+
+  public constructor(private http: HttpClient) {}
+
+  public ngOnInit(): void {
+    this.http.get<any>(`${this.url}get_graph`).subscribe((data: any) => {
+      this.aggregateChartData(data);
+    });
   }
 
-  @ViewChild("legend", { static: true })
-  private legend: IgxLegendComponent | undefined
-  @ViewChild("chart", { static: true })
-  private chart: IgxDataChartComponent | undefined
-  @ViewChild("yAxis", { static: true })
-  private yAxis: IgxCategoryYAxisComponent | undefined
-  @ViewChild("xAxis", { static: true })
-  private xAxis: IgxNumericXAxisComponent | undefined
-  @ViewChild("categoryHighlightLayer", { static: true })
-  private categoryHighlightLayer: IgxCategoryHighlightLayerComponent | undefined
-  @ViewChild("barSeries1", { static: true })
-  private barSeries1: IgxBarSeriesComponent | undefined
-  @ViewChild("barSeries2", { static: true })
-  private barSeries2: IgxBarSeriesComponent | undefined
-  @ViewChild("tooltips", { static: true })
-  private tooltips: IgxDataToolTipLayerComponent | undefined
+  private aggregateChartData(data: any): void {
+    let labels: any = [];
+    let males: any = [];
+    let females: any = [];
 
-   private _highestGrossingMovies: HighestGrossingMovies | undefined;
-   public get highestGrossingMovies(): HighestGrossingMovies {
-     if (this._highestGrossingMovies == null) {
-       this._highestGrossingMovies = new HighestGrossingMovies();
-     }
-      return this._highestGrossingMovies;
+    data.forEach((element: any) => {
+      labels.push(element.unit);
+      males.push(element.maleAmount);
+      females.push(element.femaleAmount);
+    });
+    this.barChartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: males,
+          label: 'males',
+        },
+        {
+          data: females,
+          label: 'females',
+        },
+      ],
+    };
 
+    // TODO delete before creating PR!!!
+    console.log(this.chart);
 
-   }
+    this.chart.data = this.barChartData;
 
+    // TODO delete before creating PR!!!
+    console.log(this.chart.data);
+  }
 }
