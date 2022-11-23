@@ -32,5 +32,10 @@
         /// </summary>
         public const string IMPORTXML = "import_xml";
 
+        /// <summary>
+        /// Gets the graph data for api route.
+        /// </summary>
+        public const string GETGRAPH = "get_graph";
+
     }
 }
