@@ -18,6 +18,7 @@ import {
   IgxNumericXAxisModule
 } from "igniteui-angular-charts";
 import { NgChartsModule } from "ng2-charts";
+import { GraphMaleFemaleComponent } from './modules/statistics/components/graph-male-female/graph-male-female.component';
 
 @NgModule({
   imports: [
@@ -38,6 +39,6 @@ import { NgChartsModule } from "ng2-charts";
     IgxDataToolTipLayerModule,
     NgChartsModule
   ],
-  declarations: [StatisticsPageComponent],
+  declarations: [StatisticsPageComponent, GraphMaleFemaleComponent],
 })
 export class StatsModule {}

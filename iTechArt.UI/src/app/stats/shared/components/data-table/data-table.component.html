@@ -8,7 +8,7 @@
     <tbody class="grid__rows">
     <tr *ngFor="let row of dataOnPage | paginate: { itemsPerPage: itemsPerPage,
               currentPage: page,
-              totalItems: AllUnitDataCount }">
+              totalItems: allUnitDataCount }">
       <td
         *ngFor="let col of columns"
         style="padding-left: 1rem"

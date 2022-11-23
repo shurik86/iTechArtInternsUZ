@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { UnitsEnum } from '../enums/units.enum';
-import { APIS } from '../apis/constants/apis';
 import { ExtensionsEnum } from '../enums/extensions.enum';
 import { environment } from '../../../environments/environment';
-import { ApisImportEnum } from '../apis/enums/apis-import.enum';
-import {
-  ApisDownloadEnum,
-  ApisExportEnum,
-} from '../apis/enums/apis-export.enum';
+import { APIS_LOGIC_PATHS } from '../apis/apis-logic-path';
+import { APIS_UNIT_PATHS } from '../apis/api-unit-paths';
 
 @Injectable({
   providedIn: 'root',
@@ -21,22 +17,22 @@ export class ApiService {
     unit: UnitsEnum | undefined,
     extension: string | undefined
   ): string {
-    let currentImportApi: ApisImportEnum | undefined;
+    let currentImportApi: string | undefined;
 
     this.defineUnitPath(unit);
 
     switch (extension) {
       case ExtensionsEnum.xml:
-        currentImportApi = ApisImportEnum.xml;
+        currentImportApi = APIS_LOGIC_PATHS.import.xml;
         break;
       case ExtensionsEnum.xls:
-        currentImportApi = ApisImportEnum.xls;
+        currentImportApi = APIS_LOGIC_PATHS.import.xls;
         break;
       case ExtensionsEnum.xlsx:
-        currentImportApi = ApisImportEnum.xlsx;
+        currentImportApi = APIS_LOGIC_PATHS.import.xlsx;
         break;
       case ExtensionsEnum.csv:
-        currentImportApi = ApisImportEnum.csv;
+        currentImportApi = APIS_LOGIC_PATHS.import.csv;
         break;
       default:
         return '';
@@ -47,7 +43,7 @@ export class ApiService {
 
   public defineExportApiForCurrentUnit(unit: UnitsEnum | undefined): string {
     this.defineUnitPath(unit);
-    return `${this._url}${this._unitPath}${ApisExportEnum.getAll}`;
+    return `${this._url}${this._unitPath}${APIS_LOGIC_PATHS.export}`;
   }
 
   public defineDownloadFileApiForCurrentUnit(
@@ -61,12 +57,12 @@ export class ApiService {
 
   private defineDownloadApiByExtension(
     extension: ExtensionsEnum | undefined
-  ): ApisDownloadEnum | undefined {
+  ): string | undefined {
     switch (extension) {
       case ExtensionsEnum.xlsx:
-        return ApisDownloadEnum.xlsx;
+        return APIS_LOGIC_PATHS.download.xlsx;
       case ExtensionsEnum.xml:
-        return ApisDownloadEnum.xml;
+        return APIS_LOGIC_PATHS.download.xml;
       default:
         return undefined;
     }
@@ -75,22 +71,22 @@ export class ApiService {
   private defineUnitPath(unit: UnitsEnum | undefined): void {
     switch (unit) {
       case UnitsEnum.airport:
-        this._unitPath = APIS.airport.path;
+        this._unitPath = APIS_UNIT_PATHS.airport;
         break;
       case UnitsEnum.grocery:
-        this._unitPath = APIS.grocery.path;
+        this._unitPath = APIS_UNIT_PATHS.grocery;
         break;
       case UnitsEnum.police:
-        this._unitPath = APIS.police.path;
+        this._unitPath = APIS_UNIT_PATHS.police;
         break;
       case UnitsEnum.pupils:
-        this._unitPath = APIS.pupils.path;
+        this._unitPath = APIS_UNIT_PATHS.pupils;
         break;
       case UnitsEnum.medStaff:
-        this._unitPath = APIS.medStaff.path;
+        this._unitPath = APIS_UNIT_PATHS.medStaff;
         break;
       case UnitsEnum.students:
-        this._unitPath = APIS.students.path;
+        this._unitPath = APIS_UNIT_PATHS.students;
         break;
       default:
         break;

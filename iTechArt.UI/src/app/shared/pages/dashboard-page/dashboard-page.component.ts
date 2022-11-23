@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { UNITS } from '../../constants/units';
 import { environment } from '../../../../environments/environment';
 import { UnitCountDashboardInterface } from '../../interfaces/unit-count-dashboard.interface';
-import { APIS } from '../../apis/constants/apis';
+import { APIS_LOGIC_PATHS } from "../../apis/apis-logic-path";
 
 @Component({
   selector: 'app-dashboard-page',
@@ -25,7 +25,7 @@ export class DashboardPageComponent implements OnInit {
   public getUnitCountsInfo(): void {
     this.http
       .get<UnitCountDashboardInterface>(
-        `${this.url}${APIS.dashboard.totalAmounts}`
+        `${this.url}${APIS_LOGIC_PATHS.graphs.dashboard}`
       )
       .subscribe((data: UnitCountDashboardInterface) => {
         this.unitCountsInfo = data;

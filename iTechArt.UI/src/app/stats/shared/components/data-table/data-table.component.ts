@@ -1,12 +1,11 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { StatsService } from '../../../stats.service';
 import { UnitsTypes } from '../../types/units-types';
 import { UnitsEnum } from '../../../../shared/enums/units.enum';
 import { UnitCountDashboardInterface } from '../../../../shared/interfaces/unit-count-dashboard.interface';
-import { APIS } from '../../../../shared/apis/constants/apis';
 import { environment } from '../../../../../environments/environment';
+import { GraphsService } from '../../../modules/statistics/graphs.service';
 
 @Component({
   selector: 'app-data-table',
@@ -23,11 +22,11 @@ export class DataTableComponent implements OnChanges {
   public dataOnPage: any = [];
   public unitCountsInfo: UnitCountDashboardInterface | undefined;
   public url = environment.apiUrl;
-  public AllUnitDataCount: number | undefined
+  public allUnitDataCount: number | undefined;
 
   public constructor(
     private statsService: StatsService,
-    private http: HttpClient
+    private graphsService: GraphsService
   ) {}
 
   public ngOnChanges(): void {
@@ -51,40 +50,34 @@ export class DataTableComponent implements OnChanges {
       error: () => alert("Couldn't load data."),
     });
 
-    console.log(this.data)
-    console.log(this.data)
-
     this.dataOnPage = this.data.slice(start, end);
   }
 
-    public defineUnitCount(unit: UnitsEnum | undefined): number | undefined {
-        switch (unit) {
-          case UnitsEnum.pupils:
-            return this.unitCountsInfo?.pupilCount
-          case UnitsEnum.airport:
-            return this.unitCountsInfo?.airportCount
-          case UnitsEnum.police:
-            return this.unitCountsInfo?.policeCount
-          case UnitsEnum.medStaff:
-            return this.unitCountsInfo?.doctorCount
-          case UnitsEnum.grocery:
-            return this.unitCountsInfo?.groceryCount
-          case UnitsEnum.students:
-            return this.unitCountsInfo?.studentCount
-          default:
-            return undefined
-        }
+  public defineUnitCount(unit: UnitsEnum | undefined): number | undefined {
+    switch (unit) {
+      case UnitsEnum.pupils:
+        return this.unitCountsInfo?.pupilCount;
+      case UnitsEnum.airport:
+        return this.unitCountsInfo?.airportCount;
+      case UnitsEnum.police:
+        return this.unitCountsInfo?.policeCount;
+      case UnitsEnum.medStaff:
+        return this.unitCountsInfo?.doctorCount;
+      case UnitsEnum.grocery:
+        return this.unitCountsInfo?.groceryCount;
+      case UnitsEnum.students:
+        return this.unitCountsInfo?.studentCount;
+      default:
+        return undefined;
     }
+  }
 
   public getUnitCountsInfo(unit: UnitsEnum | undefined): void {
-    this.http
-      .get<UnitCountDashboardInterface>(
-        `${this.url}${APIS.dashboard.totalAmounts}`
-      )
+    this.graphsService
+      .getStatsForDashboard()
       .subscribe((data: UnitCountDashboardInterface) => {
         this.unitCountsInfo = data;
-        this.AllUnitDataCount = this.defineUnitCount(unit);
-        console.log(this.dataOnPage.length)
+        this.allUnitDataCount = this.defineUnitCount(unit);
       });
   }
 }

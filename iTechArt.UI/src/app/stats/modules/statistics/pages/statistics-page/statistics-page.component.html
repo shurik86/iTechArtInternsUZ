@@ -1,18 +1,8 @@
 <div class="statistics-page">
   <div class="statistics-page__side-bar">
-    <p>First graph</p>
-    <p>Second graph</p>
-    <p>Third graph</p>
+    <p>Male / Female (by units)</p>
   </div>
   <div class="statistics-page__main-content">
-  <canvas baseChart
-          style="min-width: 400px; min-height: 400px; margin-left: 350px; margin-top: 30px;"
-          [data]="barChartData"
-          [options]="barChartOptions"
-          [plugins]="barChartPlugins"
-          [legend]="barChartLegend"
-          [type]="'bar'"
-  ></canvas>
+    <app-graph-male-female></app-graph-male-female>
+  </div>
 </div>
-</div>
-
