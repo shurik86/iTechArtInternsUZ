@@ -31,8 +31,8 @@ namespace iTechArt.Repository.Repositories
             graphs.Unit = tableName;
             graphs.MaleAmount = maleAmount;
             graphs.FemaleAmount = femaleAmount;
-            graphs.AverageAgeMale = maleAmount / maleAge;
-            graphs.AverageAgeFemale = femaleAmount / femaleAge;  
+            graphs.AverageAgeMale = maleAge/ maleAmount;
+            graphs.AverageAgeFemale = femaleAge/ femaleAmount;  
             return graphs;
         }
             
@@ -51,8 +51,8 @@ namespace iTechArt.Repository.Repositories
             graphs.Unit = tableName;
             graphs.MaleAmount = maleAmount;
             graphs.FemaleAmount = femaleAmount;
-            graphs.AverageAgeMale = maleAmount / maleAge;
-            graphs.AverageAgeFemale = femaleAmount / femaleAge;
+            graphs.AverageAgeMale = maleAge / maleAmount;
+            graphs.AverageAgeFemale = femaleAge / femaleAmount;
             return graphs;
         }
         /// <summary>
@@ -70,8 +70,8 @@ namespace iTechArt.Repository.Repositories
             graphs.Unit = tableName;
             graphs.MaleAmount = maleAmount;
             graphs.FemaleAmount = femaleAmount;
-            graphs.AverageAgeMale = maleAmount / maleAge;
-            graphs.AverageAgeFemale = femaleAmount / femaleAge;
+            graphs.AverageAgeMale = maleAge / maleAmount;
+            graphs.AverageAgeFemale = femaleAge / femaleAmount;
             return graphs;
         }
 
@@ -90,8 +90,8 @@ namespace iTechArt.Repository.Repositories
             graphs.Unit = tableName;
             graphs.MaleAmount = maleAmount;
             graphs.FemaleAmount = femaleAmount;
-            graphs.AverageAgeMale = maleAmount / maleAge;
-            graphs.AverageAgeFemale = femaleAmount / femaleAge;
+            graphs.AverageAgeMale = maleAge / maleAmount;
+            graphs.AverageAgeFemale = femaleAge / femaleAmount;
             return graphs;
         }
 
@@ -113,8 +113,8 @@ namespace iTechArt.Repository.Repositories
             graphs.MaleAmount = maleAmount;
             graphs.FemaleAmount = femaleAmount;
 
-            graphs.AverageAgeMale = maleAmount / maleAge;
-            graphs.AverageAgeFemale = femaleAmount / femaleAge;
+            graphs.AverageAgeMale = maleAge / maleAmount;
+            graphs.AverageAgeFemale = femaleAge / femaleAmount;
 
             return graphs;
         }
