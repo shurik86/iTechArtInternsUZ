@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.IExcelGenerate;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
@@ -19,12 +20,12 @@ namespace iTechArt.Service.Services
         private readonly IStreamToArray _streamToArray;
         private readonly IPoliceXmlGenerate _generatePoliceXml;
 
-        public PoliceService(IPoliceRepository policeRepository, 
-                             ICsvParse csvParse, 
-                             IExcelParse excelParse, 
-                             IXmlParse xmlParse, 
-                             IPoliceExcelGenerate generatePoliceExcel, 
-                             IStreamToArray streamToArray, 
+        public PoliceService(IPoliceRepository policeRepository,
+                             ICsvParse csvParse,
+                             IExcelParse excelParse,
+                             IXmlParse xmlParse,
+                             IPoliceExcelGenerate generatePoliceExcel,
+                             IStreamToArray streamToArray,
                              IPoliceXmlGenerate generatePoliceXml)
         {
             _policeRepository = policeRepository;
@@ -36,14 +37,12 @@ namespace iTechArt.Service.Services
             _generatePoliceXml = generatePoliceXml;
         }
 
-
-
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _policeRepository.GetAllAsync(pageIndex, pageSize);
+            return await _policeRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>
