@@ -5,11 +5,11 @@ using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public sealed class GetRetirementInfo : IGetRetirementInfo
+    public sealed class GetRetirementInfoService : IGetRetirementInfo
     {
         private readonly IRetirementRepository _retirementRepository;
 
-        public GetRetirementInfo(IRetirementRepository retirementRepository)
+        public GetRetirementInfoService(IRetirementRepository retirementRepository)
         {
             _retirementRepository = retirementRepository;
         }

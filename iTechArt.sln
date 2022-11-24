@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iTechArt.Repository", "iTec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "iTechArt.Database", "iTechArt.Database\iTechArt.Database.csproj", "{D35EAFEA-C992-4315-A9FC-751B4B524212}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechArt.Parsers", "ITechArt.Parsers\ITechArt.Parsers.csproj", "{2A0AAF84-ED95-4581-96F8-84106BF00B10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITechArt.Parsers", "ITechArt.Parsers\ITechArt.Parsers.csproj", "{2A0AAF84-ED95-4581-96F8-84106BF00B10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

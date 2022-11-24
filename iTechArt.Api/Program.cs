@@ -39,7 +39,7 @@ builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
 builder.Services.AddScoped<IStreamToArray, StreamToArray>();
-builder.Services.AddScoped<IGetRetirementInfo, GetRetirementInfo>();
+builder.Services.AddScoped<IGetRetirementInfo, GetRetirementInfoService>();
 
 // Parser Services
 builder.Services.AddScoped<IExcelParse, ParseExcel>();
