@@ -6,17 +6,17 @@
         /// Gets count of pupils
         /// </summary>
         
-        public int PupilCount { get; }
+        public long PupilCount { get; }
 
         /// <summary>
         /// Gets count of students
         /// </summary>
-        public int StudentCount { get; }
+        public long StudentCount { get; }
 
         /// <summary>
         /// Gets count of groceries
         /// </summary>
-        public int GroceryCount { get; }
+        public long GroceryCount { get; }
 
         /// <summary>
         /// Gets count of polices

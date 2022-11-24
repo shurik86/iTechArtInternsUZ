@@ -1,9 +1,11 @@
 ﻿using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
+using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using ITechArt.Parsers.Dtos.Polices;
 using Microsoft.AspNetCore.Http;
 using System.Xml;
 
@@ -11,6 +13,7 @@ namespace iTechArt.Service.Services
 {
     public sealed class PoliceService : IPoliceService
     {
+        private readonly IParser _parser;
         private readonly IPoliceRepository _policeRepository;
         private readonly ICsvParse _csvParse;
         private readonly IExcelParse _excelParse;
@@ -25,7 +28,8 @@ namespace iTechArt.Service.Services
                              IXmlParse xmlParse, 
                              IPoliceExcelGenerate generatePoliceExcel, 
                              IStreamToArray streamToArray, 
-                             IPoliceXmlGenerate generatePoliceXml)
+                             IPoliceXmlGenerate generatePoliceXml,
+                             IParser parser)
         {
             _policeRepository = policeRepository;
             _csvParse = csvParse;
@@ -34,16 +38,15 @@ namespace iTechArt.Service.Services
             _generatePoliceExcel = generatePoliceExcel;
             _streamToArray = streamToArray;
             _generatePoliceXml = generatePoliceXml;
+            _parser = parser;
         }
-
-
 
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize)
         {
-            return await _policeRepository.GetAllAsync(pageIndex);
+            return await _policeRepository.GetAllAsync(pageIndex, pageSize);
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportExcelAsync(IFormFile formFile)
         {
-            var policesArr = await _excelParse.ParseExcelAsync(formFile);
+            var policesArr = await _parser.ExcelParseAsync<PoliceDto>(formFile);
             await _policeRepository.AddRangeAsync(policesArr);
         }
 
@@ -71,7 +74,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ImportCsvAsync(IFormFile formFile)
         {
-            var policesArr = await _csvParse.ParseCSVAsync(formFile);
+            var policesArr = await _parser.CsvParseAsync<PoliceMap, PoliceDto>(formFile);
             await _policeRepository.AddRangeAsync(policesArr);
         }
 

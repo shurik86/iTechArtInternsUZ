@@ -4,6 +4,7 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using ITechArt.Parsers.Dtos.Groceries;
 using Microsoft.AspNetCore.Http;
 using System.Xml;
 
@@ -11,6 +12,7 @@ namespace iTechArt.Serivce.Services
 {
     public class GroceryService : IGroceryService
     {
+        private readonly IParser _parser;
         private readonly IGroceryRepository _groceryRepository;
         private readonly IGroceryParser _groceryParsers;
         private readonly IGroceryExcelGenerate _generateGroceryExcel;
@@ -21,47 +23,53 @@ namespace iTechArt.Serivce.Services
                               IGroceryParser groceryParsers,
                               IGroceryExcelGenerate generateGroceryExcel,
                               IGroceryXmlGenerate generateGroceryXml,
-                              IStreamToArray streamToArray)
+                              IStreamToArray streamToArray,
+                              IParser parser)
         {
             _groceryRepository = groceryRepository;
             _groceryParsers = groceryParsers;
             _generateGroceryExcel = generateGroceryExcel;
             _generateGroceryXml = generateGroceryXml;
             _streamToArray = streamToArray;
+            _parser = parser;
         }
-
-
 
         /// <summary>
         /// Export grocery data.
         /// </summary>
-        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex)
+        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize)
         {
-            return await _groceryRepository.GetAllAsync(pageIndex);
+            return await _groceryRepository.GetAllAsync(pageIndex, pageSize);
         }
+
         /// <summary>
         /// Get Count of Groceries.
         /// </summary>
-        public async ValueTask<int> GetCountOfGroceryAsync()
+        public async ValueTask<long> GetCountAsync()
         {
-            return await _groceryRepository.GetCountOfGroceryAsync();
+            return await _groceryRepository.GetCountAsync();
         }
+
         /// <summary>
         /// Import Csv format grocery files.
         /// </summary>
         public async Task ImportCSVGroceryAsync(IFormFile formFile)
         {
-           var groceryParse = await _groceryParsers.ParseCsvAsync(formFile);
+            var groceryParse = await _parser.CsvParseAsync<GroceryMap, GroceryDto>(formFile);
+           
             await _groceryRepository.AddGroceriesAsync(groceryParse);
         }
+
         /// <summary>
         /// Import Excel format grocery files.
         /// </summary>
         public async Task ImportExcelGroceryAsync(IFormFile formFile)
         {
-            var groceryParse= await _groceryParsers.ExcelParseAsync(formFile);
+            var groceryParse= await _parser.ExcelParseAsync<GroceryDto>(formFile);
+
             await _groceryRepository.AddGroceriesAsync(groceryParse);
         }
+
         /// <summary>
         /// Import XML format grocery files.
         /// </summary>

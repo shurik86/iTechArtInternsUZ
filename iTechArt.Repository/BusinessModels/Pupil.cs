@@ -25,8 +25,8 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or sets birthdate of pupil.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly DateOfBirth { get; internal set; }
+        //[JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateTime DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets or sets gender of pupil.

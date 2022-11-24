@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all groceries from database.
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IGrocery[]> GetAllAsync(int pageIndex);
+        Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Get grocery by id.
@@ -28,7 +28,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// Get count of groceries.
         /// </summary>
-        public ValueTask<int> GetCountOfGroceryAsync();
+        public ValueTask<long> GetCountAsync();
 
         /// <summary>
         /// Add groceries to database.

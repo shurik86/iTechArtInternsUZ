@@ -45,12 +45,17 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or sets birth date of student.
         /// </summary>
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly DateOfBirth { get; internal set; }
+        //[JsonConverter(typeof(DateOnlyJsonConverter))]
+        public DateTime DateOfBirth { get; internal set; }
 
         /// <summary>
         /// Gets or sets name of university of student.
         /// </summary>
         public string University { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets faculty of student.
+        /// </summary>
+        public Faculty Faculty { get; internal set; }
     }
 }

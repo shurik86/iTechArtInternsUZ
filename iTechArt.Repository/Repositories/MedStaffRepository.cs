@@ -4,7 +4,7 @@ using iTechArt.Database.Entities.MedicalStaff;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using iTechArt.Repository.PaginationHelpers;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -44,9 +44,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all medStaffs from database.
         /// </summary>
-        public async Task<IMedStaff[]> GetAllAsync(int pageIndex)
+        public async Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            var medStaffs = await _dbContext.Staffs.Paginate(pageIndex).ToArrayAsync();
+            var medStaffs = await _dbContext.Staffs.Paginate(pageIndex, pageSize).ToArrayAsync();
 
             return medStaffs.Select(_mapper.Map<MedStaff>).ToArray();
         }

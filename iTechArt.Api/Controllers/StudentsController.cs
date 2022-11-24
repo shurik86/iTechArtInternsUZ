@@ -39,9 +39,9 @@ namespace iTechArt.Api.Controllers
         /// Get all students.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IStudent[]>> GetAllAsync([FromQuery] int pageIndex)
+        public async Task<ActionResult<IStudent[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize)
         {
-            return Ok(await _studentsService.GetAllAsync(pageIndex));
+            return Ok(await _studentsService.GetAllAsync(pageIndex, pageSize));
         }
 
         /// <summary>

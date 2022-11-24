@@ -8,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all medStaff from database.
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IMedStaff[]> GetAllAsync(int pageIndex);
+        Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Add medStaff to database.

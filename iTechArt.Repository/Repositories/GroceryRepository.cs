@@ -4,7 +4,7 @@ using iTechArt.Database.Entities.Groceries;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
-using iTechArt.Repository.PaginationHelpers;
+using iTechArt.Repository.PaginationExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -21,9 +21,9 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database.
         /// </summary>
-        public async Task<IGrocery[]> GetAllAsync(int pageIndex)
+        public async Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize)
         {
-            return await _dbContext.Groceries.Paginate(pageIndex).Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
+            return await _dbContext.Groceries.Paginate(pageIndex, pageSize).Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of groceries.
         /// </summary>
-        public async ValueTask<int> GetCountOfGroceryAsync()
+        public async ValueTask<long> GetCountAsync()
         {
             return await _dbContext.Groceries.CountAsync();
         }

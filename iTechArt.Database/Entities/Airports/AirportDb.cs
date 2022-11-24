@@ -20,9 +20,7 @@ namespace iTechArt.Database.Entities.Airports
         /// <summary>
         /// gets or sets The built date of airport
         /// </summary>
-
-        [JsonConverter(typeof(DateOnlyJsonConverter))]
-        public DateOnly BuiltDate { get; set; }
+        public DateTime BuiltDate { get; set; }
 
         /// <summary>
         /// gets or sets A number of people can be in at the same time at the airport

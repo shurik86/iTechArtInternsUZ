@@ -7,7 +7,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all students from database.
         /// </summary>
-        public Task<IStudent[]> GetAllAsync(int pageIndex);
+        public Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize);
 
         /// <summary>
         /// Add student to database.
@@ -32,7 +32,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// Get count of students.
         /// </summary>
-        public Task<int> GetCountOfStudentsAsync();
+        public Task<long> GetCountAsync();
 
         /// <summary>
         /// Add student array.

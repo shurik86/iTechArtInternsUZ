@@ -8,6 +8,7 @@ using iTechArt.Domain.ServiceInterfaces;
 using iTechArt.Repository.Mappers;
 using iTechArt.Repository.Repositories;
 using iTechArt.Serivce.Services;
+using iTechArt.Service.Graphs;
 using iTechArt.Service.Helpers;
 using iTechArt.Service.Parsers;
 using iTechArt.Service.Services;
@@ -47,9 +48,10 @@ builder.Services.AddScoped<ICsvParse, ParseCsv>();
 builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
-builder.Services.AddScoped<IPupilParser, PupilParser>();
-builder.Services.AddScoped<IStudentParser, StudentParser>();
-builder.Services.AddScoped<IGenericParser, GenericParser>();
+builder.Services.AddScoped<IParser, Parser>();
+
+builder.Services.AddScoped<IGraphRepository, GraphRepository>();
+builder.Services.AddScoped<IGenderGraphService, GenderGraphService>();
 
 
 builder.Services.AddScoped<IExcelGenerator, GenerateExcelFile>();

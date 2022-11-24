@@ -35,12 +35,12 @@ namespace iTechArt.Service.Services
         {
             return new DashboardInfo()
             {
-                StudentCount = await _studentRepository.GetCountOfStudentsAsync(),
+                StudentCount = await _studentRepository.GetCountAsync(),
                 AirportCount = await _airportRepository.GetCountOfAirportAsync(),
                 DoctorCount = await _medStaffRepository.GetCountOfDoctors(),
                 PoliceCount = await _policeRepository.GetCountOfPolice(),
-                PupilCount = await _pupilRepository.GetCountOfPupilsAsync(),
-                GroceryCount = await _groceryRepository.GetCountOfGroceryAsync(),
+                PupilCount = await _pupilRepository.GetCountAsync(),
+                GroceryCount = await _groceryRepository.GetCountAsync(),
             };
         }
     }
