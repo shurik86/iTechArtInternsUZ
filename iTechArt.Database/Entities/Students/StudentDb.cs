@@ -59,6 +59,6 @@ namespace iTechArt.Database.Entities.Students
         /// <summary>
         /// Gets or sets faculty of student.
         /// </summary>
-        public Faculty Faculty { get; set; }
+        public string Faculty { get; set; }
     }
 }
