@@ -29,6 +29,7 @@ builder.Services.AddScoped<IMedStaffRepository, MedStaffRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGroceryRepository, GroceryRepository>();
 builder.Services.AddScoped<IRetirementRepository, RetirementRepository>();
+builder.Services.AddScoped<IFacultyInfoRepository, FacultyInfoRepository>();
 
 
 builder.Services.AddScoped<ITotalStatisticsService, TotalStatisticsService>();
@@ -39,7 +40,8 @@ builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
 builder.Services.AddScoped<IStreamToArray, StreamToArray>();
-builder.Services.AddScoped<IGetRetirementInfo, GetRetirementInfoService>();
+builder.Services.AddScoped<IGetRetirementInfoService, GetRetirementInfoService>();
+builder.Services.AddScoped<IFacultyInfoService, FacultyInfoService>();
 
 // Parser Services
 builder.Services.AddScoped<IExcelParse, ParseExcel>();

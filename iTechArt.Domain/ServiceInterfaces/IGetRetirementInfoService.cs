@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iTechArt.Domain.RepositoryInterfaces
+namespace iTechArt.Domain.ServiceInterfaces
 {
-    public interface IRetirementRepository
+    public interface IGetRetirementInfoService
     {
         /// <summary>
         /// Gets all polices from database who already retired

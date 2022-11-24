@@ -12,9 +12,9 @@ namespace iTechArt.Api.Controllers
         private const string CSV = "csv";
         private const string EXCEL = "officedocument.spreadsheetml.sheet";
         private const string XML = "xml";
-        private readonly IGetRetirementInfo _getRetirementInfo;
+        private readonly IGetRetirementInfoService _getRetirementInfo;
 
-        public GroceryController(IGroceryService groceryService, IGetRetirementInfo getRetirementInfo)
+        public GroceryController(IGroceryService groceryService, IGetRetirementInfoService getRetirementInfo)
         {
             _groceryService = groceryService;
             _getRetirementInfo = getRetirementInfo;
@@ -135,9 +135,9 @@ namespace iTechArt.Api.Controllers
         /// Gets retirement info about groceries from database.
         /// </summary>
         [HttpGet("get_retired")]
-        public async Task<ActionResult> GetRetiredGroceries()
+        public async Task<ActionResult> GetRetiredGroceries(int from, int to)
         {
-            return Ok(await _getRetirementInfo.GetRetiredGroceriesAsync());
+            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
         }
     }
 }

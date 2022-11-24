@@ -9,9 +9,9 @@ namespace iTechArt.Api.Controllers
     public sealed class MedStaffController : ControllerBase
     {
         private readonly IMedStaffService _medStaffService;
-        private readonly IGetRetirementInfo _getRetirementInfo;
+        private readonly IGetRetirementInfoService _getRetirementInfo;
 
-        public MedStaffController(IMedStaffService medStaffService, IGetRetirementInfo getRetirementInfo)
+        public MedStaffController(IMedStaffService medStaffService, IGetRetirementInfoService getRetirementInfo)
         {
             _medStaffService = medStaffService;
             _getRetirementInfo = getRetirementInfo;
@@ -140,9 +140,9 @@ namespace iTechArt.Api.Controllers
         /// Gets retirement info about medstaffs from database.
         /// </summary>
         [HttpGet("get_retired")]
-        public async Task<ActionResult> GetRetiredMedStaffs()
+        public async Task<ActionResult> GetRetiredMedStaffs(int from, int to)
         {
-            return Ok(await _getRetirementInfo.GetRetiredMedStaffsAsync());
+            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
         }
     }
 }

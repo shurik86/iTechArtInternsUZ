@@ -10,9 +10,12 @@ namespace iTechArt.Api.Controllers
     public sealed class StudentsController : ControllerBase
     {
         private readonly IStudentsService _studentsService;
-        public StudentsController(IStudentsService studentService)
+        private readonly IFacultyInfoService _faultyInfoService;
+
+        public StudentsController(IStudentsService studentService, IFacultyInfoService faultyInfoService)
         {
             _studentsService = studentService;
+            _faultyInfoService = faultyInfoService;
         }
 
         /// <summary>
@@ -110,6 +113,15 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.Students}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
+        }
+
+        /// <summary>
+        /// Gets students number of each faculty from database.
+        /// </summary>
+        [HttpGet("get_faculty_info")]
+        public async Task<ActionResult> GetFacultyInfo()
+        {
+            return Ok(await _faultyInfoService.GetFacultyInfo());
         }
     }
 }
