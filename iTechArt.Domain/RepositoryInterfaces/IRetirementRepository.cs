@@ -13,6 +13,6 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Gets all polices from database who already retired
         /// </summary>
-        public Task<IRetiredPeople> GetRetiredPolicesAsync();
+        public Task<IRetiredPeople> GetRetiredPeopleAsync(int from, int to);
     }
 }

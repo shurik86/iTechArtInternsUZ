@@ -10,9 +10,9 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
-        private readonly IGetRetirementInfo _getRetirementInfo;
+        private readonly IGetRetirementInfoService _getRetirementInfo;
 
-        public PoliceController(IPoliceService policeService, IGetRetirementInfo getRetirementInfo)
+        public PoliceController(IPoliceService policeService, IGetRetirementInfoService getRetirementInfo)
         {
             _policeService = policeService;
             _getRetirementInfo = getRetirementInfo;
@@ -123,10 +123,13 @@ namespace iTechArt.Api.Controllers
             };
         }
 
+        /// <summary>
+        /// Gets retirement info about polices from database.
+        /// </summary>
         [HttpGet("get_retired")]
-        public async Task<ActionResult> GetRetiredPolices()
+        public async Task<ActionResult> GetRetiredPolices(int from, int to)
         {
-            return Ok(await _getRetirementInfo.GetRetiredPoliceAsync());
+            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
         }
     }
 }
