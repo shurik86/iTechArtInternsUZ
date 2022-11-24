@@ -128,5 +128,18 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
         }
+
+        /// <summary>
+        /// Exports Grocery table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _groceryService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
     }
 }

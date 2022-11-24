@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CsvHelper;
+using CsvHelper.Configuration;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
@@ -8,6 +10,7 @@ using iTechArt.Domain.ServiceInterfaces;
 using ITechArt.Parsers.Dtos;
 using ITechArt.Parsers.Parsers;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Services
@@ -114,6 +117,32 @@ namespace iTechArt.Service.Services
         public async Task<byte[]> ExportExcelAsync()
         {
             return await _generatePupilExcel.GetExcelAsync();
+        }
+
+        /// <summary>
+        /// Exports pupils Data to a new Csv file.
+        /// </summary>
+        public async Task<byte[]> ExportCsvAsync()
+        {
+            var csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture)
+            {
+                HasHeaderRecord = true,
+                Delimiter = ",",
+                AllowComments = false,
+            };
+            var dataList = await _pupilRepository.GetAllAsync();
+            await using var ms = new MemoryStream();
+            await using var writer = new StreamWriter(ms);
+            await using CsvWriter cs = new CsvWriter(writer, csvConfig);
+            cs.WriteHeader<IPupil>();
+            cs.NextRecord();
+            foreach (var record in dataList)
+            {
+                cs.WriteRecord(record);
+                cs.NextRecord();
+            }
+            var res = ms.ToArray();
+            return res;
         }
     }
 }

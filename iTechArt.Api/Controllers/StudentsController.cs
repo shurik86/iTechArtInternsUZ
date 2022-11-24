@@ -111,5 +111,18 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.Students}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
         }
+
+        /// <summary>
+        /// Exports Students table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _studentsService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Students}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
     }
 }

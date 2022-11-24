@@ -1,10 +1,14 @@
-﻿using iTechArt.Domain.IExcelGenerate;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
+using System.Text;
 using System.Xml;
 
 namespace iTechArt.Serivce.Services
@@ -86,6 +90,32 @@ namespace iTechArt.Serivce.Services
         public async Task<byte[]> ExportExcelAsync()
         {
             return await _generateGroceryExcel.GetExcelAsync();
+        }
+
+        /// <summary>
+        /// Exports Grocery Data to a new Csv file.
+        /// </summary>
+        public async Task<byte[]> ExportCsvAsync()
+        {
+            var csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture)
+            {
+                HasHeaderRecord = true,
+                Delimiter = ",",    
+                AllowComments = false,
+            };
+            var groceryList = await _groceryRepository.GetAllAsync();
+            await using var ms= new MemoryStream();
+            await using var writer = new StreamWriter(ms);
+            await using CsvWriter cs = new CsvWriter(writer, csvConfig);
+            cs.WriteHeader<IGrocery>();
+            cs.NextRecord();
+            foreach(var record in groceryList)
+            {
+                cs.WriteRecord(record);
+                cs.NextRecord();
+            }
+            var res = ms.ToArray();
+            return res;
         }
     }
 }

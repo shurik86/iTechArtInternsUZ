@@ -34,5 +34,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports Grocery Data to a new Excel file.
         /// </summary>
         public Task<byte[]> ExportExcelAsync();
+
+        /// <summary>
+        /// Exports Grocery Data to a new Csv file.
+        /// </summary>
+        public Task<byte[]> ExportCsvAsync();
     }
 }

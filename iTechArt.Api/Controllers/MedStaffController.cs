@@ -133,5 +133,18 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
         }
+
+        /// <summary>
+        /// Exports Medstaff table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _medStaffService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
     }
 }

@@ -120,5 +120,18 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
         }
+
+        /// <summary>
+        /// Exports Police table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _policeService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
     }
 }
