@@ -22,5 +22,21 @@ namespace iTechArt.Service.Services
         {
             return await _retirementRepository.GetRetiredPolicesAsync();
         }
+
+        /// <summary>
+        /// Gets all medstaffs from database who already retired
+        /// </summary>
+        public async Task<IRetiredPeople> GetRetiredMedStaffsAsync()
+        {
+            return await _retirementRepository.GetRetiredMedStaffAsync();
+        }
+
+        /// <summary>
+        /// Gets all groceries from database who already retired
+        /// </summary>
+        public async Task<IRetiredPeople> GetRetiredGroceriesAsync()
+        {
+            return await _retirementRepository.GetRetiredGroceriesAsync();
+        }
     }
 }

@@ -14,5 +14,15 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Gets all polices from database who already retired
         /// </summary>
         public Task<IRetiredPeople> GetRetiredPoliceAsync();
+
+        /// <summary>
+        /// Gets all medstaffs from database who already retired
+        /// </summary>
+        public Task<IRetiredPeople> GetRetiredMedStaffsAsync();
+
+        /// <summary>
+        /// Gets all groceries from database who already retired
+        /// </summary>
+        public Task<IRetiredPeople> GetRetiredGroceriesAsync();
     }
 }

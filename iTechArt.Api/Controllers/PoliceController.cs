@@ -123,6 +123,9 @@ namespace iTechArt.Api.Controllers
             };
         }
 
+        /// <summary>
+        /// Gets retirement info about polices from database.
+        /// </summary>
         [HttpGet("get_retired")]
         public async Task<ActionResult> GetRetiredPolices()
         {
