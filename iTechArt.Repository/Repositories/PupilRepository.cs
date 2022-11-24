@@ -74,7 +74,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get total count of pupils.
         /// </summary>
-        public async Task<int> GetCountOfPupilsAsync()
+        public async Task<long> GetCountAsync()
         {
             return await _dbContext.Pupils.CountAsync();
         }

@@ -276,6 +276,9 @@ namespace iTechArt.Database.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)");
 
+                    b.Property<byte>("Faculty")
+                        .HasColumnType("smallint");
+
                     b.Property<string>("FirstName")
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)");

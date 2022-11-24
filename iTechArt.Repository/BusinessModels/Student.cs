@@ -52,5 +52,10 @@ namespace iTechArt.Repository.BusinessModels
         /// Gets or sets name of university of student.
         /// </summary>
         public string University { get; internal set; }
+
+        /// <summary>
+        /// Gets or sets faculty of student.
+        /// </summary>
+        public Faculty Faculty { get; internal set; }
     }
 }

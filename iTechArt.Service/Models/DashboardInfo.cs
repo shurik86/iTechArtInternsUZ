@@ -7,12 +7,12 @@ namespace iTechArt.Service.Models
         /// <summary>
         /// Count of pupils
         /// </summary>
-        public int PupilCount { get; set; }
+        public long PupilCount { get; set; }
 
         /// <summary>
         /// Count of students
         /// </summary>
-        public int StudentCount { get; set; }
+        public long StudentCount { get; set; }
 
         /// <summary>
         /// Count of groceries

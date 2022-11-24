@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ParserInterfaces
 {
-    public interface IGenericParser
+    public interface IParser
     {
         /// <summary>
         /// Parse TSource file from excel.

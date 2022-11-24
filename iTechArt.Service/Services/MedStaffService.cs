@@ -6,6 +6,7 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using ITechArt.Parsers.Dtos.MedStaffs;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml;
@@ -14,6 +15,7 @@ namespace iTechArt.Service.Services
 {
     public sealed class MedStaffService : IMedStaffService
     {
+        private readonly IParser _parser;
         private readonly IMedStaffRepository _medStaffRepository;
         private readonly IMedStaffParser _medStaffParser;
         private readonly IMedStaffExcelGenerate _generateMedStaffExcel;
@@ -24,13 +26,15 @@ namespace iTechArt.Service.Services
                                IMedStaffParser medStaffParser, 
                                IMedStaffExcelGenerate generateMedStaffExcel, 
                                IMedStaffXmlGenerate generateMedStaffXml, 
-                               IStreamToArray streamToArray)
+                               IStreamToArray streamToArray,
+                               IParser parser)
         {
             _medStaffRepository = medStaffRepository;
             _medStaffParser = medStaffParser;
             _generateMedStaffExcel = generateMedStaffExcel;
             _generateMedStaffXml = generateMedStaffXml;
             _streamToArray = streamToArray;
+            _parser = parser;
         }
 
 
@@ -47,7 +51,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task CSVParseAsync(IFormFile file)
         {
-            await _medStaffParser.ParseCSVAsync(file);
+            var medStaffsFromCsv = await _parser.CsvParseAsync<MedStaffMap, MedStaffDto>(file);
+
+            await _medStaffRepository.AddRangeAsync(medStaffsFromCsv);
         }
 
         /// <summary>
@@ -55,7 +61,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task ExcelParseAsync(IFormFile file)
         {
-            await _medStaffParser.ParseExcelAsync(file);
+            var medStaffsFromExcel = await _parser.ExcelParseAsync<MedStaffDto>(file);
+
+            await _medStaffRepository.AddRangeAsync(medStaffsFromExcel);
         }
 
         /// <summary>

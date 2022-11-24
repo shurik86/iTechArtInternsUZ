@@ -28,6 +28,9 @@ builder.Services.AddScoped<IPoliceRepository, PoliceRepository>();
 builder.Services.AddScoped<IMedStaffRepository, MedStaffRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IGroceryRepository, GroceryRepository>();
+builder.Services.AddScoped<IRetirementRepository, RetirementRepository>();
+builder.Services.AddScoped<IFacultyInfoRepository, FacultyInfoRepository>();
+
 
 builder.Services.AddScoped<ITotalStatisticsService, TotalStatisticsService>();
 builder.Services.AddScoped<IAirportsService, AirportService>();
@@ -37,6 +40,8 @@ builder.Services.AddScoped<IMedStaffService, MedStaffService>();
 builder.Services.AddScoped<IPoliceService, PoliceService>();
 builder.Services.AddScoped<IPupilService, PupilService>();
 builder.Services.AddScoped<IStreamToArray, StreamToArray>();
+builder.Services.AddScoped<IGetRetirementInfoService, GetRetirementInfoService>();
+builder.Services.AddScoped<IFacultyInfoService, FacultyInfoService>();
 
 // Parser Services
 builder.Services.AddScoped<IExcelParse, ParseExcel>();
@@ -45,9 +50,7 @@ builder.Services.AddScoped<ICsvParse, ParseCsv>();
 builder.Services.AddScoped<IMedStaffParser, MedStaffParser>();
 builder.Services.AddScoped<IGroceryParser, GroceryParser>();
 builder.Services.AddScoped<IAirportParsers, AirportParser>();
-builder.Services.AddScoped<IPupilParser, PupilParser>();
-builder.Services.AddScoped<IStudentParser, StudentParser>();
-builder.Services.AddScoped<IGenericParser, GenericParser>();
+builder.Services.AddScoped<IParser, Parser>();
 
 builder.Services.AddScoped<IGraphRepository, GraphRepository>();
 builder.Services.AddScoped<IGenderGraphService, GenderGraphService>();
@@ -66,6 +69,7 @@ builder.Services.AddScoped<IMedStaffXmlGenerate, MedStaffXmlGenerate>();
 builder.Services.AddScoped<IPoliceXmlGenerate, PoliceXmlGenerate>();
 builder.Services.AddScoped<IPupilXmlGenerate, PupilXmlGenerate>();
 builder.Services.AddScoped<IStudentXmlGenerate, StudentXmlGenerate>();
+
 
 builder.Services.AddCors(option =>
 {

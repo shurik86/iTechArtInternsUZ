@@ -6,9 +6,9 @@ using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
-using iTechArt.Repository.Repositories;
 using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
+using iTechArt.Service.Parsers;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using System.Globalization;
@@ -18,6 +18,7 @@ namespace iTechArt.Service.Services
 {
     public sealed class AirportService : IAirportsService
     {
+        private readonly IParser _parser;
         private readonly IAirportRepository _airportRepository;
         private readonly IAirportExcelGenerate _generateAirportExcel;
         private readonly IAirportParsers _airportParsers;
@@ -28,13 +29,15 @@ namespace iTechArt.Service.Services
                               IAirportParsers airportParsers,
                               IAirportExcelGenerate generateAirportExcel,
                               IAirportXmlGenerate generateAirportXml,
-                              IStreamToArray streamToArray)
+                              IStreamToArray streamToArray,
+                              IParser parser)
         {
             _airportRepository = airportRepository;
             _airportParsers = airportParsers;
             _generateAirportExcel = generateAirportExcel;
             _generateAirportXml = generateAirportXml;
             _streamToArray = streamToArray;
+            _parser = parser;
         }
 
         /// <summary>
@@ -75,7 +78,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task AirportExcelParseAsync(IFormFile file)
         {
-            await _airportParsers.ExcelParserAsync(file);
+            var airportsFromExcel = await _parser.ExcelParseAsync<AirportDTO>(file);
+
+            await _airportRepository.AddRangeAsync(airportsFromExcel);
         }
 
         /// <summary>
@@ -83,7 +88,9 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task AirportCSVParseAsync(IFormFile file)
         {
-            await _airportParsers.CsvParserAsync(file);
+            var airportsFromCsv = await _parser.CsvParseAsync<AirportMap, AirportDTO>(file);
+
+            await _airportRepository.AddRangeAsync(airportsFromCsv);
         }
 
         /// <summary>

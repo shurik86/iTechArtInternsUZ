@@ -30,14 +30,14 @@ namespace ITechArt.Parsers.XmlGenerate
             {
                 var groceryElement = xmlDocument.CreateElement(null, XmlConstants.grocery, null);
                 
-                var FirstName = xmlDocument.CreateAttribute(null, GroceryConstants.FirstName, null);
-                var LastName = xmlDocument.CreateAttribute(null, GroceryConstants.LastName, null);
-                var Birthday = xmlDocument.CreateAttribute(null, GroceryConstants.Birthday, null);
-                var Gender = xmlDocument.CreateAttribute(null, GroceryConstants.Gender, null);
-                var Email = xmlDocument.CreateAttribute(null, GroceryConstants.Email, null);
-                var Jobtitle = xmlDocument.CreateAttribute(null, GroceryConstants.Jobtitle, null);
-                var Departmentretail = xmlDocument.CreateAttribute(null, GroceryConstants.Departmentretail, null);
-                var Salary = xmlDocument.CreateAttribute(null, GroceryConstants.Salary, null);
+                var FirstName = xmlDocument.CreateAttribute(null, GroceryConstants.FIRSTNAME, null);
+                var LastName = xmlDocument.CreateAttribute(null, GroceryConstants.LASTNAME, null);
+                var Birthday = xmlDocument.CreateAttribute(null, GroceryConstants.BIRTHDAY, null);
+                var Gender = xmlDocument.CreateAttribute(null, GroceryConstants.GENDER, null);
+                var Email = xmlDocument.CreateAttribute(null, GroceryConstants.EMAIL, null);
+                var Jobtitle = xmlDocument.CreateAttribute(null, GroceryConstants.JOBTITLE, null);
+                var Departmentretail = xmlDocument.CreateAttribute(null, GroceryConstants.DEPARTMENTRETAIL, null);
+                var Salary = xmlDocument.CreateAttribute(null, GroceryConstants.SALARY, null);
 
                 FirstName.Value = grocery.FirstName;
                 LastName.Value = grocery.LastName;

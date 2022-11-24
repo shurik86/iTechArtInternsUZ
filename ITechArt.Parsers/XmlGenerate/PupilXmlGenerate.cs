@@ -31,17 +31,17 @@ namespace ITechArt.Parsers.XmlGenerate
             {
                 var pupilElement = xmlDocument.CreateElement(null, XmlConstants.pupil, null);
                 
-                var FirstName = xmlDocument.CreateAttribute(null, PupilsConstants.FirstName, null);
-                var LastName = xmlDocument.CreateAttribute(null, PupilsConstants.LastName, null);
-                var DateOfBirth = xmlDocument.CreateAttribute(null, PupilsConstants.DateOfBirth, null);
-                var Gender = xmlDocument.CreateAttribute(null, PupilsConstants.Gender, null);
-                var PhoneNumber = xmlDocument.CreateAttribute(null, PupilsConstants.PhoneNumber, null);
-                var Address = xmlDocument.CreateAttribute(null, PupilsConstants.Address, null);
-                var City = xmlDocument.CreateAttribute(null, PupilsConstants.City, null);
-                var SchoolName = xmlDocument.CreateAttribute(null, PupilsConstants.SchoolName, null);
-                var Grade = xmlDocument.CreateAttribute(null, PupilsConstants.Grade, null);
-                var CourseLanguage = xmlDocument.CreateAttribute(null, PupilsConstants.CourseLanguage, null);
-                var Shift = xmlDocument.CreateAttribute(null, PupilsConstants.Shift, null);
+                var FirstName = xmlDocument.CreateAttribute(null, PupilConstants.FIRSTNAME, null);
+                var LastName = xmlDocument.CreateAttribute(null, PupilConstants.LASTNAME, null);
+                var DateOfBirth = xmlDocument.CreateAttribute(null, PupilConstants.DATEOFBIRTH, null);
+                var Gender = xmlDocument.CreateAttribute(null, PupilConstants.GENDER, null);
+                var PhoneNumber = xmlDocument.CreateAttribute(null, PupilConstants.PHONENUMBER, null);
+                var Address = xmlDocument.CreateAttribute(null, PupilConstants.ADDRESS, null);
+                var City = xmlDocument.CreateAttribute(null, PupilConstants.CITY, null);
+                var SchoolName = xmlDocument.CreateAttribute(null, PupilConstants.SCHOOLNAME, null);
+                var Grade = xmlDocument.CreateAttribute(null, PupilConstants.GRADE, null);
+                var CourseLanguage = xmlDocument.CreateAttribute(null, PupilConstants.COURSELANGUAGE, null);
+                var Shift = xmlDocument.CreateAttribute(null, PupilConstants.SHIFT, null);
 
                 FirstName.Value = pupil.FirstName;
                 LastName.Value = pupil.LastName;
