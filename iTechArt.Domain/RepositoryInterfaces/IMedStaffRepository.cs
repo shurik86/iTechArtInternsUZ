@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -8,7 +9,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all medStaff from database.
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize);
+        Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
 
         /// <summary>
         /// Add medStaff to database.

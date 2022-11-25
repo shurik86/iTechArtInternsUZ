@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Groceries;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
 using iTechArt.Repository.PaginationExtensions;
+using iTechArt.Repository.SortingExtentions.Sorters;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -21,9 +24,13 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all entities from database.
         /// </summary>
-        public async Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize)
+        public async Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _dbContext.Groceries.Paginate(pageIndex, pageSize).Select(groceries => _mapper.Map<Grocery>(groceries)).ToArrayAsync();
+            return await _dbContext.Groceries.AsNoTracking()
+                                             .Sort(fieldName, sortDirection, new GroceryDBSorter())
+                                             .Paginate(pageIndex, pageSize)
+                                             .ProjectTo<Grocery>(_mapper.ConfigurationProvider)
+                                             .ToArrayAsync();
         }
 
         /// <summary>

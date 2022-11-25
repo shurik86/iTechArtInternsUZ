@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
 {
+    [ApiController]
+    //[Route(RouteConstants.GRAPH)]
     public class GraphController : ControllerBase
     {
         private readonly IGenderGraphService _genderGraphService;
