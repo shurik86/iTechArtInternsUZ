@@ -137,6 +137,19 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
+        /// Exports Medstaff table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _medStaffService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
+        
+        /// <summary>
         /// Gets retirement info about medstaffs from database.
         /// </summary>
         [HttpGet("get_retired")]

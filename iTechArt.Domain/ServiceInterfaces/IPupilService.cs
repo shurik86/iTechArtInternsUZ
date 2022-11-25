@@ -39,5 +39,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports Pupils Data to a new Excel file.
         /// </summary>
         public Task<byte[]> ExportExcelAsync();
+
+        /// <summary>
+        /// Exports Pupils Data to a new Csv file.
+        /// </summary>
+        public Task<byte[]> ExportCsvAsync();
     }
 }

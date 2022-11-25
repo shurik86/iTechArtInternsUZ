@@ -124,6 +124,19 @@ namespace iTechArt.Api.Controllers
         }
 
         /// <summary>
+        /// Exports Police table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _policeService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
+        
+        /// <summary>
         /// Gets retirement info about polices from database.
         /// </summary>
         [HttpGet("get_retired")]

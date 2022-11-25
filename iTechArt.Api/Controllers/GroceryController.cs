@@ -131,6 +131,19 @@ namespace iTechArt.Api.Controllers
             };
         }
 
+        /// <summary>
+        /// Exports Grocery table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _groceryService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+         }
+         
         // <summary>
         /// Gets retirement info about groceries from database.
         /// </summary>
@@ -138,6 +151,7 @@ namespace iTechArt.Api.Controllers
         public async Task<ActionResult> GetRetiredGroceries(int from, int to)
         {
             return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
+
         }
     }
 }
