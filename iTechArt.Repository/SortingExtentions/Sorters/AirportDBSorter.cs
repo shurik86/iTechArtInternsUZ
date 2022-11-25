@@ -1,15 +1,13 @@
 ﻿using iTechArt.Database.Entities.Airports;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace iTechArt.Repository.SortingExtentions.Sorters
 {
     public sealed class AirportDBSorter : BaseDBSorter<AirportDb>
     {
+        /// <summary>
+        /// Gets tablesorter.
+        /// </summary
         protected override Dictionary<string, Expression<Func<AirportDb, object>>> TableFieldSorters { get; } = new() {
             { "airportname", a => a.AirportName },
             { "capacity", c => c.Capacity },

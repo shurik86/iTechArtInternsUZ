@@ -5,6 +5,9 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
 {
     public sealed class StudentDBSorter : BaseDBSorter<StudentDb>
     {
+        /// <summary>
+        /// Gets tablesorter.
+        /// </summary>
         protected override Dictionary<string, Expression<Func<StudentDb, object>>> TableFieldSorters { get; } = new() {
             { "firstname", f => f.FirstName },
             { "lastname", l => l.LastName },

@@ -7,7 +7,7 @@ namespace iTechArt.Repository.PaginationExtensions
     internal static class Sorting
     {
         /// <summary>
-        /// Paginates DbSet according to the pageIndex and PageSize.
+        /// Sorts DbSet according to the fieldname and sortdirection.
         /// </summary>
         public static IOrderedQueryable<TSource> Sort<TSource>(this IQueryable<TSource> source,
                                                                string fieldName,
@@ -24,14 +24,9 @@ namespace iTechArt.Repository.PaginationExtensions
                                                                        Expression<Func<TSource, object>> selector,
                                                                        SortDirection sortDirection)
         {
-            if (sortDirection == SortDirection.Ascending)
-            {
-                return source.OrderBy(selector);
-            }
-            else
-            {
-                return source.OrderByDescending(selector);
-            }
+            return sortDirection == SortDirection.Ascending
+                ? source.OrderBy(selector)
+                : source.OrderByDescending(selector);
         }
     }
 }
