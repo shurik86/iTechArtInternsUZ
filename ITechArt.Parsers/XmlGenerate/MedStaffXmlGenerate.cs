@@ -30,17 +30,17 @@ namespace ITechArt.Parsers.XmlGenerate
             {
                 var staffElement = xmlDocument.CreateElement(null, XmlConstants.staff, null);
                 
-                var FirstName = xmlDocument.CreateAttribute(null, MedStaffConstants.FirstName, null);
-                var LastName = xmlDocument.CreateAttribute(null, MedStaffConstants.LastName, null);
-                var Gender = xmlDocument.CreateAttribute(null, MedStaffConstants.Gender, null);
-                var Email = xmlDocument.CreateAttribute(null, MedStaffConstants.Email, null);
-                var PhoneNumber = xmlDocument.CreateAttribute(null, MedStaffConstants.PhoneNumber, null);
-                var DateOfBirth = xmlDocument.CreateAttribute(null, MedStaffConstants.DateOfBirth, null);
-                var Address = xmlDocument.CreateAttribute(null, MedStaffConstants.Address, null);
-                var Salary = xmlDocument.CreateAttribute(null, MedStaffConstants.Salary, null);
-                var HospitalName = xmlDocument.CreateAttribute(null, MedStaffConstants.HospitalName, null);
-                var PostalCode = xmlDocument.CreateAttribute(null, MedStaffConstants.PostalCode, null);
-                var Shift = xmlDocument.CreateAttribute(null, MedStaffConstants.Shift, null);
+                var FirstName = xmlDocument.CreateAttribute(null, MedStaffConstants.FIRSTNAME, null);
+                var LastName = xmlDocument.CreateAttribute(null, MedStaffConstants.LASTNAME, null);
+                var Gender = xmlDocument.CreateAttribute(null, MedStaffConstants.GENDER, null);
+                var Email = xmlDocument.CreateAttribute(null, MedStaffConstants.EMAIL, null);
+                var PhoneNumber = xmlDocument.CreateAttribute(null, MedStaffConstants.PHONENUMBER, null);
+                var DateOfBirth = xmlDocument.CreateAttribute(null, MedStaffConstants.DATEOFBIRTH, null);
+                var Address = xmlDocument.CreateAttribute(null, MedStaffConstants.ADDRESS, null);
+                var Salary = xmlDocument.CreateAttribute(null, MedStaffConstants.SALARY, null);
+                var HospitalName = xmlDocument.CreateAttribute(null, MedStaffConstants.HOSPITALNAME, null);
+                var PostalCode = xmlDocument.CreateAttribute(null, MedStaffConstants.POSTALCODE, null);
+                var Shift = xmlDocument.CreateAttribute(null, MedStaffConstants.SHIFT, null);
 
                 FirstName.Value = medStaff.FirstName;
                 LastName.Value = medStaff.LastName;

@@ -36,5 +36,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports Police Data to a new Excel file.
         /// </summary>
         public Task<byte[]> ExportExcelAsync();
+
+        /// <summary>
+        /// Exports Police Data to a new Csv file.
+        /// </summary>
+        public Task<byte[]> ExportCsvAsync();
     }
 }

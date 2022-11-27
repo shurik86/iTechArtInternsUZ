@@ -11,10 +11,12 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
+        private readonly IGetRetirementInfoService _getRetirementInfo;
 
-        public PoliceController(IPoliceService policeService)
+        public PoliceController(IPoliceService policeService, IGetRetirementInfoService getRetirementInfo)
         {
             _policeService = policeService;
+            _getRetirementInfo = getRetirementInfo;
         }
 
         /// <summary>
@@ -120,6 +122,28 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
+        }
+
+        /// <summary>
+        /// Exports Police table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _policeService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
+        
+        /// <summary>
+        /// Gets retirement info about polices from database.
+        /// </summary>
+        [HttpGet("get_retired")]
+        public async Task<ActionResult> GetRetiredPolices(int from, int to)
+        {
+            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
         }
     }
 }

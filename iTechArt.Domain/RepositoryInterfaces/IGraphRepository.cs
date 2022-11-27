@@ -6,26 +6,26 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Gets the table name, amount for both genders,and average ages for both genders for grocery table.
         /// </summary>
-        public Task<IGraph> GetGroceryGraphData();
+        public Task<IGraph> GetGroceryGraphDataAsync();
 
         /// <summary>
         /// Gets the table name, amount for both genders,and average ages for both genders for Pupils table.
         /// </summary>
-        public Task<IGraph> GetPupilsGraphData();
+        public Task<IGraph> GetPupilsGraphDataAsync();
 
         /// <summary>
         /// Gets the table name, amount for both genders,and average ages for both genders for Students table.
         /// </summary>
-        public Task<IGraph> GetStudentsGraphData();
+        public Task<IGraph> GetStudentsGraphDataAsync();
 
         /// <summary>
         /// Gets the table name, amount for both genders,and average ages for both genders for Staffs table.
         /// </summary>
-        public Task<IGraph> GetMedstaffGraphData();
+        public Task<IGraph> GetMedstaffGraphDataAsync();
 
         /// <summary>
         /// Gets the table name, amount for both genders for Police table.
         /// </summary>
-        public Task<IGraph> GetPoliceGraphData();
+        public Task<IGraph> GetPoliceGraphDataAsync();
     }
 }

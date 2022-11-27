@@ -31,14 +31,14 @@ namespace ITechArt.Parsers.XmlGenerate
             {
                 var policeElement = xmlDocument.CreateElement(null, XmlConstants.record, null);
                 
-                var Name = xmlDocument.CreateAttribute(null, PoliceConstants.Name, null);
-                var Surname = xmlDocument.CreateAttribute(null, PoliceConstants.Surname, null);
-                var Email = xmlDocument.CreateAttribute(null, PoliceConstants.Email, null);
-                var Gender = xmlDocument.CreateAttribute(null, PoliceConstants.Gender, null);
-                var Address = xmlDocument.CreateAttribute(null, PoliceConstants.Address, null);
-                var JobTitle = xmlDocument.CreateAttribute(null, PoliceConstants.JobTitle, null);
-                var Salary = xmlDocument.CreateAttribute(null, PoliceConstants.Salary, null);
-                var BirthDate = xmlDocument.CreateAttribute(null, PoliceConstants.Birthdate, null);
+                var Name = xmlDocument.CreateAttribute(null, PoliceConstants.NAME, null);
+                var Surname = xmlDocument.CreateAttribute(null, PoliceConstants.SURNAME, null);
+                var Email = xmlDocument.CreateAttribute(null, PoliceConstants.EMAIL, null);
+                var Gender = xmlDocument.CreateAttribute(null, PoliceConstants.GENDER, null);
+                var Address = xmlDocument.CreateAttribute(null, PoliceConstants.ADDRESS, null);
+                var JobTitle = xmlDocument.CreateAttribute(null, PoliceConstants.JOBTITLE, null);
+                var Salary = xmlDocument.CreateAttribute(null, PoliceConstants.SALARY, null);
+                var BirthDate = xmlDocument.CreateAttribute(null, PoliceConstants.BIRTHDATE, null);
 
                 Name.Value = police.Name;
                 Surname.Value = police.Surname;

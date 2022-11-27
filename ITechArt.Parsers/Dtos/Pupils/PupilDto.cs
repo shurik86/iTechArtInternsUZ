@@ -4,9 +4,9 @@ using ITechArt.Parsers.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
-namespace ITechArt.Parsers.Dtos
+namespace ITechArt.Parsers.Dtos.Pupils
 {
-    [XmlRoot(PupilStringConstants.PUPILS)]
+    [XmlRoot(PupilConstants.PUPILS)]
     public class PupilDto : IPupil
     {
         /// <summary>
@@ -19,72 +19,72 @@ namespace ITechArt.Parsers.Dtos
         /// Gets or sets the name of pupil.
         /// </summary>
         [MaxLength(64)]
-        [XmlElement(ElementName = PupilStringConstants.FIRSTNAME)]
+        [XmlElement(ElementName = PupilConstants.FIRSTNAME)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets surname of pupil.
         /// </summary>
         [MaxLength(64)]
-        [XmlElement(ElementName = PupilStringConstants.LASTNAME)]
+        [XmlElement(ElementName = PupilConstants.LASTNAME)]
         public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets birthdate of pupil.
         /// </summary>
-        [XmlElement(ElementName = PupilStringConstants.DATEOFBIRTH)]
+        [XmlElement(ElementName = PupilConstants.DATEOFBIRTH)]
         public DateTime DateOfBirth { get; set; }
 
         /// <summary>
         /// Gets or sets gender of pupil.
         /// </summary>
-        [XmlElement(ElementName = PupilStringConstants.GENDER)]
+        [XmlElement(ElementName = PupilConstants.GENDER)]
         public Gender Gender { get; set; }
 
         /// <summary>
         /// Gets or sets phone number of pupil.
         /// </summary>
         [MaxLength(64)]
-        [XmlElement(ElementName = PupilStringConstants.PHONENUMBER)]
+        [XmlElement(ElementName = PupilConstants.PHONENUMBER)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Gets or sets address of pupil.
         /// </summary>
         [MaxLength(64)]
-        [XmlElement(ElementName = PupilStringConstants.ADDRESS)]
+        [XmlElement(ElementName = PupilConstants.ADDRESS)]
         public string Address { get; set; }
 
         /// <summary>
         /// Gets or sets the city, where pupil lives.
         /// </summary>
         [MaxLength(64)]
-        [XmlElement(ElementName = PupilStringConstants.CITY)]
+        [XmlElement(ElementName = PupilConstants.CITY)]
         public string City { get; set; }
 
         /// <summary>
         /// Gets or sets the name of school, where pupil study.
         /// </summary>
         [MaxLength(256)]
-        [XmlElement(ElementName = PupilStringConstants.SCHOOLNAME)]
+        [XmlElement(ElementName = PupilConstants.SCHOOLNAME)]
         public string SchoolName { get; set; }
 
         /// <summary>
         /// Gets or sets the grade of study of pupil.
         /// </summary>
-        [XmlElement(ElementName = PupilStringConstants.GRADE)]
+        [XmlElement(ElementName = PupilConstants.GRADE)]
         public int Grade { get; set; }
 
         /// <summary>
         /// Gets or sets the language of education.
         /// </summary>
-        [XmlElement(ElementName = PupilStringConstants.COURSELANGUAGE)]
+        [XmlElement(ElementName = PupilConstants.COURSELANGUAGE)]
         public CourseLanguage CourseLanguage { get; set; }
 
         /// <summary>
         /// Gets or sets shift of study.
         /// </summary>
-        [XmlElement(ElementName = PupilStringConstants.SHIFT)]
+        [XmlElement(ElementName = PupilConstants.SHIFT)]
         public Shift Shift { get; set; }
     }
 }

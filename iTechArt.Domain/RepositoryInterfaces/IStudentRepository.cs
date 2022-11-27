@@ -32,7 +32,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// </summary>
         /// Get count of students.
         /// </summary>
-        public Task<int> GetCountOfStudentsAsync();
+        public Task<long> GetCountAsync();
 
         /// <summary>
         /// Add student array.

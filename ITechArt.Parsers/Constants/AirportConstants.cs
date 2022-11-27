@@ -1,27 +1,30 @@
-﻿
-namespace ITechArt.Parsers.Constants
+﻿namespace ITechArt.Parsers.Constants
 {
     /// <summary>
     /// Static Strings for Airport Model to use inside Parsers.
     /// </summary>
     public static class AirportConstants
     {
-        public const string AirportName = "AirportName";
+        public const string AIPORTS = "airports";
+        
+        public const string AIPRORT = "airport";
 
-        public const string BuiltDate = "BuiltDate";
+        public const string AIRPORTNAME = "AirportName";
 
-        public const string Capacity = "Capacity";
+        public const string BUILTDATE = "BuiltDate";
 
-        public const string Address = "Address";
+        public const string CAPACITY = "Capacity";
 
-        public const string City = "City";
+        public const string ADDRESS = "Address";
 
-        public const string EmpoyeesCount = "EmpoyeesCount";
+        public const string CITY = "City";
 
-        public const string PassengersPerYear = "PassengersPerYear";
+        public const string EMPLOYEESCOUNT = "EmpoyeesCount";
 
-        public const string FlightsPerYear = "FlightsPerYear";
+        public const string PASSERNGERSPERYEAR = "PassengersPerYear";
 
-        public const string AverageTicketPrice = "AverageTicketPrice";
+        public const string FLIGHTSPERYEAR = "FlightsPerYear";
+
+        public const string AVERAGETICKETPRICE = "AverageTicketPrice";
     }
 }

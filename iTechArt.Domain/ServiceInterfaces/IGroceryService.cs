@@ -23,7 +23,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Count of grocery items.
         /// </summary>
         public Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize);
-        public ValueTask <int> GetCountOfGroceryAsync();
+        public ValueTask <long> GetCountAsync();
 
         /// <summary>
         /// Exports Grocery Data to a new XML file.
@@ -34,5 +34,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports Grocery Data to a new Excel file.
         /// </summary>
         public Task<byte[]> ExportExcelAsync();
+
+        /// <summary>
+        /// Exports Grocery Data to a new Csv file.
+        /// </summary>
+        public Task<byte[]> ExportCsvAsync();
     }
 }
