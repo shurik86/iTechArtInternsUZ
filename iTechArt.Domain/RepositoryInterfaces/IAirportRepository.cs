@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -7,7 +8,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all airports from database.
         /// </summary>
-        Task<IAirport[]> GetAllAsync(int pageIndex, int pageSize);
+        Task<IAirport[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
 
         /// <summary>
         /// Add array of airport.

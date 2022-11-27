@@ -1,4 +1,5 @@
-﻿using CsvHelper;
+using iTechArt.Domain.Enums;
+using CsvHelper;
 using CsvHelper.Configuration;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
@@ -25,6 +26,7 @@ namespace iTechArt.Service.Services
         private readonly IStreamToArray _streamToArray;
         private readonly IPoliceXmlGenerate _generatePoliceXml;
 
+
         public PoliceService(IPoliceRepository policeRepository, 
                              ICsvParse csvParse, 
                              IExcelParse excelParse, 
@@ -33,6 +35,7 @@ namespace iTechArt.Service.Services
                              IStreamToArray streamToArray, 
                              IPoliceXmlGenerate generatePoliceXml,
                              IParser parser)
+
         {
             _policeRepository = policeRepository;
             _csvParse = csvParse;
@@ -47,9 +50,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _policeRepository.GetAllAsync(pageIndex, pageSize);
+            return await _policeRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>

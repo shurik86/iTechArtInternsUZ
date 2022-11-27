@@ -31,11 +31,13 @@ namespace iTechArt.Repository.Repositories
             graphs.Unit = tableName;
             graphs.MaleAmount = maleAmount;
             graphs.FemaleAmount = femaleAmount;
-            graphs.AverageAgeMale = maleAge/ maleAmount;
-            graphs.AverageAgeFemale = femaleAge/ femaleAmount;  
+
+            graphs.AverageAgeMale = maleAge / maleAmount;
+            graphs.AverageAgeFemale = femaleAge / femaleAmount;
+
             return graphs;
         }
-            
+
         /// <summary>
         /// Gets from database table-name for pupils and count of males and females in pupil table.
         /// </summary>
@@ -86,13 +88,16 @@ namespace iTechArt.Repository.Repositories
             double femaleAge = await _dbContext.Staffs.Where(p => p.Gender == Gender.Female).Select(c => new { Age = DateTime.Now.Year - c.DateOfBirth.Year }.Age).SumAsync();
             double maleAge = await _dbContext.Staffs.Where(p => p.Gender == Gender.Male).Select(c => new { Age = DateTime.Now.Year - c.DateOfBirth.Year }.Age).SumAsync();
 
-            IGraph graphs = new Graph();
-            graphs.Unit = tableName;
-            graphs.MaleAmount = maleAmount;
-            graphs.FemaleAmount = femaleAmount;
-            graphs.AverageAgeMale = maleAge / maleAmount;
-            graphs.AverageAgeFemale = femaleAge / femaleAmount;
-            return graphs;
+
+            return new Graph
+            {
+                Unit = $"Med{tableName}",
+                MaleAmount = maleAmount,
+                FemaleAmount = femaleAmount,
+                AverageAgeMale = maleAge / maleAmount,
+                AverageAgeFemale = femaleAge / femaleAmount
+            };
+
         }
 
         /// <summary>

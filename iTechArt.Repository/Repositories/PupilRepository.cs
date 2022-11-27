@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Pupils;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
 using iTechArt.Repository.PaginationExtensions;
+using iTechArt.Repository.SortingExtentions.Sorters;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -32,9 +35,12 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize)
+        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _dbContext.Pupils.Paginate(pageIndex, pageSize).Select(p => _mapper.Map<Pupil>(p))
+            return await _dbContext.Pupils.AsNoTracking()
+                                          .Sort(fieldName, sortDirection, new PupilDBSorter())
+                                          .Paginate(pageIndex, pageSize)
+                                          .ProjectTo<Pupil>(_mapper.ConfigurationProvider)
                                           .ToArrayAsync();
         }
 

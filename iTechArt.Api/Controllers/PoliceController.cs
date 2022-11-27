@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -91,9 +92,9 @@ namespace iTechArt.Api.Controllers
         /// Gets all data about police from the database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize)
+        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize,string fieldName, SortDirection sortDirection)
         {
-            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize));
+            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize, fieldName, sortDirection));
         }
 
         /// <summary>
