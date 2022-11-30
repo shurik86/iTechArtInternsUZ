@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
@@ -13,7 +14,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize);
+        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
 
         /// <summary>
         /// Parse pupil's file from excel.

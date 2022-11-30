@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Text;
 using System.Xml;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 
 namespace iTechArt.Serivce.Services
 {
@@ -41,9 +43,9 @@ namespace iTechArt.Serivce.Services
         /// <summary>
         /// Export grocery data.
         /// </summary>
-        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize)
+        public async Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _groceryRepository.GetAllAsync(pageIndex, pageSize);
+            return await _groceryRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CsvHelper;
 using CsvHelper.Configuration;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
@@ -11,6 +12,7 @@ using ITechArt.Parsers.Dtos.Pupils;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 
 namespace iTechArt.Service.Services
 {
@@ -42,9 +44,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize)
+        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _pupilRepository.GetAllAsync(pageIndex, pageSize);
+            return await _pupilRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>

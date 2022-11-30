@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
@@ -10,6 +11,7 @@ using ITechArt.Parsers.Dtos.MedStaffs;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 
 namespace iTechArt.Service.Services
 {
@@ -41,9 +43,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes no input so far.
         /// </summary>
-        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize)
+        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _medStaffRepository.GetAllAsync(pageIndex, pageSize);
+            return await _medStaffRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>

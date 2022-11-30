@@ -12,6 +12,7 @@ using ITechArt.Parsers.Dtos.Polices;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 
 namespace iTechArt.Service.Services
 {
