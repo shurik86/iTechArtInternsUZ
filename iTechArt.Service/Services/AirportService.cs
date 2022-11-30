@@ -1,4 +1,6 @@
-﻿using iTechArt.Domain.IExcelGenerate;
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
@@ -8,6 +10,8 @@ using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using iTechArt.Service.Parsers;
 using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
+using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Services
@@ -112,6 +116,33 @@ namespace iTechArt.Service.Services
         public async Task<byte[]> ExportExcelAsync()
         {
             return await _generateAirportExcel.GetExcelAsync();
+        }
+
+
+        /// <summary>
+        /// Exports Airport Data to a new Csv file.
+        /// </summary>
+        public async Task<byte[]> ExportCsvAsync()
+        {
+            var csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture)
+            {
+                HasHeaderRecord = true,
+                Delimiter = ",",
+                AllowComments = false,
+            };
+            var dataList = await _airportRepository.GetAllAsync();
+            await using var ms = new MemoryStream();
+            await using var writer = new StreamWriter(ms);
+            await using CsvWriter cs = new CsvWriter(writer, csvConfig);
+            cs.WriteHeader<IAirport>();
+            cs.NextRecord();
+            foreach (var record in dataList)
+            {
+                cs.WriteRecord(record);
+                cs.NextRecord();
+            }
+            var res = ms.ToArray();
+            return res;
         }
     }
 }

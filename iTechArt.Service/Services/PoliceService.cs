@@ -1,4 +1,7 @@
-﻿using iTechArt.Domain.IExcelGenerate;
+using iTechArt.Domain.Enums;
+using CsvHelper;
+using CsvHelper.Configuration;
+using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
@@ -7,6 +10,7 @@ using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using ITechArt.Parsers.Dtos.Polices;
 using Microsoft.AspNetCore.Http;
+using System.Globalization;
 using System.Xml;
 
 namespace iTechArt.Service.Services
@@ -22,6 +26,7 @@ namespace iTechArt.Service.Services
         private readonly IStreamToArray _streamToArray;
         private readonly IPoliceXmlGenerate _generatePoliceXml;
 
+
         public PoliceService(IPoliceRepository policeRepository, 
                              ICsvParse csvParse, 
                              IExcelParse excelParse, 
@@ -30,6 +35,7 @@ namespace iTechArt.Service.Services
                              IStreamToArray streamToArray, 
                              IPoliceXmlGenerate generatePoliceXml,
                              IParser parser)
+
         {
             _policeRepository = policeRepository;
             _csvParse = csvParse;
@@ -44,9 +50,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _policeRepository.GetAllAsync(pageIndex, pageSize);
+            return await _policeRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>
@@ -93,6 +99,32 @@ namespace iTechArt.Service.Services
         public async Task<byte[]> ExportExcelAsync()
         {
             return await _generatePoliceExcel.GetExcelAsync();
+        }
+
+        /// <summary>
+        /// Exports Police Data to a new Csv file.
+        /// </summary>
+        public async Task<byte[]> ExportCsvAsync()
+        {
+            var csvConfig = new CsvConfiguration(CultureInfo.CurrentCulture)
+            {
+                HasHeaderRecord = true,
+                Delimiter = ",",
+                AllowComments = false,
+            };
+            var dataList = await _policeRepository.GetAllAsync();
+            await using var ms = new MemoryStream();
+            await using var writer = new StreamWriter(ms);
+            await using CsvWriter cs = new CsvWriter(writer, csvConfig);
+            cs.WriteHeader<IPolice>();
+            cs.NextRecord();
+            foreach (var record in dataList)
+            {
+                cs.WriteRecord(record);
+                cs.NextRecord();
+            }
+            var res = ms.ToArray();
+            return res;
         }
     }
 }

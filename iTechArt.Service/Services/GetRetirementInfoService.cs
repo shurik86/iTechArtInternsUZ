@@ -5,11 +5,11 @@ using iTechArt.Domain.ServiceInterfaces;
 
 namespace iTechArt.Service.Services
 {
-    public sealed class GetRetirementInfo : IGetRetirementInfo
+    public sealed class GetRetirementInfoService : IGetRetirementInfoService
     {
         private readonly IRetirementRepository _retirementRepository;
 
-        public GetRetirementInfo(IRetirementRepository retirementRepository)
+        public GetRetirementInfoService(IRetirementRepository retirementRepository)
         {
             _retirementRepository = retirementRepository;
         }
@@ -18,9 +18,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Gets all polices from database who already retired
         /// </summary>
-        public async Task<IRetiredPeople> GetRetiredPoliceAsync()
+        public async Task<IRetiredPeople> GetRetiredPeopleAsync(int from, int to)
         {
-            return await _retirementRepository.GetRetiredPolicesAsync();
+            return await _retirementRepository.GetRetiredPeopleAsync(from, to);
         }
     }
 }

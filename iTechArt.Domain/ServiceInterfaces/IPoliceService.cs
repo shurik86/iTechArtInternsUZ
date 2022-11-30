@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.ServiceInterfaces
@@ -24,7 +25,7 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// function to export data from the database.
         /// </summary>
-        public Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize);
+        public Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
 
         /// <summary>
         /// Exports Police Data to a new XML file.
@@ -35,5 +36,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports Police Data to a new Excel file.
         /// </summary>
         public Task<byte[]> ExportExcelAsync();
+
+        /// <summary>
+        /// Exports Police Data to a new Csv file.
+        /// </summary>
+        public Task<byte[]> ExportCsvAsync();
     }
 }

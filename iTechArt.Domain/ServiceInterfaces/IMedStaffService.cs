@@ -39,5 +39,10 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Exports MedStaff Data to a new Excel file.
         /// </summary>
         public Task<byte[]> ExportExcelAsync();
+
+        /// <summary>
+        /// Exports Medstaff Data to a new Csv file.
+        /// </summary>
+        public Task<byte[]> ExportCsvAsync();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
-        private readonly IGetRetirementInfo _getRetirementInfo;
+        private readonly IGetRetirementInfoService _getRetirementInfo;
 
-        public PoliceController(IPoliceService policeService, IGetRetirementInfo getRetirementInfo)
+        public PoliceController(IPoliceService policeService, IGetRetirementInfoService getRetirementInfo)
         {
             _policeService = policeService;
             _getRetirementInfo = getRetirementInfo;
@@ -91,9 +92,9 @@ namespace iTechArt.Api.Controllers
         /// Gets all data about police from the database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize)
+        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize,string fieldName, SortDirection sortDirection)
         {
-            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize));
+            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize, fieldName, sortDirection));
         }
 
         /// <summary>
@@ -123,10 +124,26 @@ namespace iTechArt.Api.Controllers
             };
         }
 
-        [HttpGet("get_retired")]
-        public async Task<ActionResult> GetRetiredPolices()
+        /// <summary>
+        /// Exports Police table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
         {
-            return Ok(await _getRetirementInfo.GetRetiredPoliceAsync());
+            byte[] streamArray = await _policeService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
+        
+        /// <summary>
+        /// Gets retirement info about polices from database.
+        /// </summary>
+        [HttpGet("get_retired")]
+        public async Task<ActionResult> GetRetiredPolices(int from, int to)
+        {
+            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
         }
     }
 }

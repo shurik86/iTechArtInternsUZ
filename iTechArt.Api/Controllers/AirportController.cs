@@ -99,5 +99,18 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.xml}"
             };
         }
+
+        /// <summary>
+        /// Exports Airport table from Database to Csv file.
+        /// </summary>
+        [HttpGet("get_csv")]
+        public async Task<ActionResult> ExportCsvFile()
+        {
+            byte[] streamArray = await _airportsService.ExportCsvAsync();
+            return new FileContentResult(streamArray, "text/csv")
+            {
+                FileDownloadName = $"{FileConstants.Airports}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
+            };
+        }
     }
 }

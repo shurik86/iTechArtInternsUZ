@@ -1,4 +1,5 @@
-﻿using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -8,7 +9,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// Get all groceries from database.
         /// </summary>
         /// <returns> Array of Repository Model Interfaces </returns>
-        Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize);
+        Task<IGrocery[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
 
         /// <summary>
         /// Get grocery by id.

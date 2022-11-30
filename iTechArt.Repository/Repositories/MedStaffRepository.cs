@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.MedicalStaff;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
 using iTechArt.Repository.PaginationExtensions;
+using iTechArt.Repository.SortingExtentions.Sorters;
 using Microsoft.EntityFrameworkCore;
 
 namespace iTechArt.Repository.Repositories
@@ -44,11 +47,13 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all medStaffs from database.
         /// </summary>
-        public async Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize)
+        public async Task<IMedStaff[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            var medStaffs = await _dbContext.Staffs.Paginate(pageIndex, pageSize).ToArrayAsync();
-
-            return medStaffs.Select(_mapper.Map<MedStaff>).ToArray();
+            return await _dbContext.Staffs.AsNoTracking()
+                                   .Sort(fieldName, sortDirection, new MedStaffDBSorter())
+                                   .Paginate(pageIndex, pageSize)
+                                   .ProjectTo<MedStaff>(_mapper.ConfigurationProvider)
+                                   .ToArrayAsync();
         }
 
         /// <summary>
