@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -42,9 +43,9 @@ namespace iTechArt.Api.Controllers
         /// Get all students.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IStudent[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize)
+        public async Task<ActionResult<IStudent[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return Ok(await _studentsService.GetAllAsync(pageIndex, pageSize));
+            return Ok(await _studentsService.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection));
         }
 
         /// <summary>

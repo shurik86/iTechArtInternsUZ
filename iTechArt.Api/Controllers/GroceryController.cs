@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -91,9 +92,9 @@ namespace iTechArt.Api.Controllers
         /// Api route which allows to get all info from db and parse it to the following format.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportGroceryDataAsync([FromQuery] int pageIndex, int pageSize)
+        public async Task<IActionResult> ExportGroceryDataAsync([FromQuery] int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return Ok(await _groceryService.ExportGroceryAsync(pageIndex, pageSize));
+            return Ok(await _groceryService.ExportGroceryAsync(pageIndex, pageSize, fieldName, sortDirection));
         }
         /// <summary>
         /// Get total amount of groceries
