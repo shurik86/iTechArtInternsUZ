@@ -15,5 +15,10 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "majority", m => m.Majority },
             { "university", u => u.University }
         };
+
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<StudentDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
     }
 }

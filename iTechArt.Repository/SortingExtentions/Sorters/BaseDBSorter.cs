@@ -9,9 +9,19 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
         /// </summary>
         protected abstract Dictionary<string, Expression<Func<TTableSorter, object>>> TableFieldSorters { get; }
 
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected abstract Expression<Func<TTableSorter, object>> DefaultFieldSorter { get; }
+
         public Expression<Func<TTableSorter, object>> GetFieldSorter(string fieldName)
         {
-            return TableFieldSorters[fieldName];
+            if (TableFieldSorters.ContainsKey(fieldName))
+            {
+                return TableFieldSorters[fieldName];
+            }
+
+            return DefaultFieldSorter;
         }
     }
 }

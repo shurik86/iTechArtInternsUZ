@@ -1,4 +1,5 @@
 ﻿using iTechArt.Database.Entities.Airports;
+using iTechArt.Database.Entities.Students;
 using System.Linq.Expressions;
 
 namespace iTechArt.Repository.SortingExtentions.Sorters
@@ -18,5 +19,9 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "flightperyear", f => f.FlightsPerYear },
             { "averageticketprice", a => a.AverageTicketPrice }
         };
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<AirportDb, object>> DefaultFieldSorter => TableFieldSorters["airportname"];
     }
 }

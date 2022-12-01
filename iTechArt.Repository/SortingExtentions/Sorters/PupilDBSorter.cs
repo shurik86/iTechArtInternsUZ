@@ -1,4 +1,5 @@
 ﻿using iTechArt.Database.Entities.Pupils;
+using iTechArt.Database.Entities.Students;
 using System.Linq.Expressions;
 
 namespace iTechArt.Repository.SortingExtentions.Sorters
@@ -21,5 +22,11 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "courselanguage", c => c.CourseLanguage },
             { "shift", s => s.Shift }
         };
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<PupilDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
+
     }
+
 }

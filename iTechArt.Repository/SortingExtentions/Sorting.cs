@@ -1,6 +1,7 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Repository.SortingExtentions.Sorters;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 
 namespace iTechArt.Repository.PaginationExtensions
 {
@@ -16,6 +17,7 @@ namespace iTechArt.Repository.PaginationExtensions
             where TSource : class
         {
             var fieldTableSorter = dBSorter.GetFieldSorter(fieldName);
+
             return source.ApplySorter(fieldTableSorter,
                                       sortDirection);
         }

@@ -1,4 +1,5 @@
 ﻿using iTechArt.Database.Entities.Groceries;
+using iTechArt.Database.Entities.Students;
 using System.Linq.Expressions;
 
 namespace iTechArt.Repository.SortingExtentions.Sorters
@@ -18,5 +19,9 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "departmentretail", d => d.Departmentretail },
             { "salary", s => s.Salary }
         };
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<GroceryDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
     }
 }
