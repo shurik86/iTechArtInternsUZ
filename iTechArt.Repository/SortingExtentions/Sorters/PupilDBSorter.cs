@@ -22,11 +22,10 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "courselanguage", c => c.CourseLanguage },
             { "shift", s => s.Shift }
         };
+
         /// <summary>
         /// Gets default field sorter.
         /// </summary>
         protected override Expression<Func<PupilDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
-
     }
-
 }

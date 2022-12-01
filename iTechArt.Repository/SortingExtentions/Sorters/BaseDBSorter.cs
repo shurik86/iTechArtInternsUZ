@@ -16,7 +16,7 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
 
         public Expression<Func<TTableSorter, object>> GetFieldSorter(string fieldName)
         {
-            if (TableFieldSorters.ContainsKey(fieldName))
+            if (!string.IsNullOrEmpty(fieldName) && TableFieldSorters.ContainsKey(fieldName))
             {
                 return TableFieldSorters[fieldName];
             }

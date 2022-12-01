@@ -19,6 +19,7 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "departmentretail", d => d.Departmentretail },
             { "salary", s => s.Salary }
         };
+
         /// <summary>
         /// Gets default field sorter.
         /// </summary>

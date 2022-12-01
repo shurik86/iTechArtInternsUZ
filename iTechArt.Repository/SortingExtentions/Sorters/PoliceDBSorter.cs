@@ -1,5 +1,4 @@
 ﻿using iTechArt.Database.Entities.Police;
-using iTechArt.Database.Entities.Students;
 using System.Linq.Expressions;
 
 namespace iTechArt.Repository.SortingExtentions.Sorters
@@ -19,6 +18,7 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "salary", s => s.Salary },
             { "birthdate", b => b.BirthDate }
         };
+        
         /// <summary>
         /// Gets default field sorter.
         /// </summary>

@@ -26,9 +26,9 @@ namespace iTechArt.Repository.PaginationExtensions
                                                                        Expression<Func<TSource, object>> selector,
                                                                        SortDirection sortDirection)
         {
-            return sortDirection == SortDirection.Ascending
-                ? source.OrderBy(selector)
-                : source.OrderByDescending(selector);
+            return sortDirection == SortDirection.Descending
+                ? source.OrderByDescending(selector)
+                : source.OrderBy(selector);
         }
     }
 }
