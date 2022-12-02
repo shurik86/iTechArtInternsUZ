@@ -1,0 +1,13 @@
+<div class="graph-male-female">
+  <form [formGroup]="graphForm" (ngSubmit)="submit()">
+    <label>First Date: </label>
+    <input type="number" formControlName="firstDate" />
+
+    <label>Second Date: </label>
+    <input type="number" formControlName="secondDate" />
+
+    <button class="button-green" type="submit" [disabled]="graphForm.invalid">
+      Get
+    </button>
+  </form>
+</div>
