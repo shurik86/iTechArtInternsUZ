@@ -18,5 +18,10 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "salary", s => s.Salary },
             { "birthdate", b => b.BirthDate }
         };
+        
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<PoliceDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
     }
 }

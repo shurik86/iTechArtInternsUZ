@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,9 +40,9 @@ namespace iTechArt.Api.Controllers
         /// Controller of Exporting airport data.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex, int pageSize)
+        public async Task<IActionResult> ExportAirportExcelAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection )
         {
-            return Ok(await _airportsService.ExportAirportExcelAsync(pageIndex, pageSize));
+            return Ok(await _airportsService.ExportAirportExcelAsync(pageIndex, pageSize, fieldName, sortDirection));
         }
 
         /// <summary>

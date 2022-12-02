@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -39,9 +40,9 @@ namespace iTechArt.Api.Controllers
         /// Get all pupils
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPupil[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize)
+        public async Task<ActionResult<IPupil[]>> GetAllAsync([FromQuery] int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return Ok(await _pupilService.GetAllAsync(pageIndex, pageSize));
+            return Ok(await _pupilService.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection));
         }
 
         /// <summary>

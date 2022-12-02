@@ -22,6 +22,10 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "postalcode", p => p.PostalCode },
             { "shist", s => s.Shift }
         };
-       
+
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<MedStaffDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
     }
 }

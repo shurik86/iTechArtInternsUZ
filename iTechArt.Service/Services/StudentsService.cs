@@ -11,6 +11,8 @@ using ITechArt.Parsers.Dtos.Students;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml;
+using iTechArt.Domain.Enums;
+using IParser = iTechArt.Domain.ParserInterfaces.IParser;
 
 namespace iTechArt.Service.Services
 {
@@ -41,9 +43,9 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
-        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize)
+        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
         {
-            return await _studentRepository.GetAllAsync(pageIndex, pageSize);
+            return await _studentRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
         }
 
         /// <summary>
