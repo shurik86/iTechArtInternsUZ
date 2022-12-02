@@ -4,9 +4,11 @@ using CsvHelper;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Police;
 using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.FilterExtensions;
 using iTechArt.Repository.PaginationExtensions;
 using iTechArt.Repository.SortingExtentions.Sorters;
 using Microsoft.EntityFrameworkCore;
@@ -40,9 +42,11 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all Police data from database.
         /// </summary>
-        public async Task<IPolice[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IPolice[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IPoliceFilter policeFilter)
         {
             return await _dbContext.Police.AsNoTracking()
+                                          .Filtrate(policeFilter)
                                           .Sort(fieldName, sortDirection, new PoliceDBSorter())
                                           .Paginate(pageIndex, pageSize)
                                           .ProjectTo<Police>(_mapper.ConfigurationProvider)

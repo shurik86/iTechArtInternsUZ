@@ -6,6 +6,7 @@ namespace iTechArt.Domain.Enums
     {
         [XmlEnum("1")]
         Day = 1,
+        
         [XmlEnum("2")]
         Night = 2
     }

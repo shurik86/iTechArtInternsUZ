@@ -6,8 +6,10 @@ namespace iTechArt.Domain.Enums
     {
         [XmlEnum("1")]
         Russian = 1,
+
         [XmlEnum("2")]
         Uzbek = 2,
+        
         [XmlEnum("3")]
         English = 3
     }

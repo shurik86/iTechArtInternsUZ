@@ -1,10 +1,4 @@
-﻿using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.GraphModelInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using iTechArt.Domain.ModelInterfaces.GraphModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {

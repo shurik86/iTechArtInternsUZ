@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Api.Models;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
@@ -92,9 +93,10 @@ namespace iTechArt.Api.Controllers
         /// Gets all data about police from the database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize,string fieldName, SortDirection sortDirection)
+        public async Task<ActionResult<IPolice[]>> GetAllDataAsync([FromQuery] int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, [FromQuery] PoliceFilter policeFilter)
         {
-            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize, fieldName, sortDirection));
+            return Ok(await _policeService.GetAllPoliceAsync(pageIndex, pageSize, fieldName, sortDirection, policeFilter));
         }
 
         /// <summary>

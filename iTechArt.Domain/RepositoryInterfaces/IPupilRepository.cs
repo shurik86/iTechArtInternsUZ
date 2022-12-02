@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
@@ -13,7 +14,8 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection) ;
+        public Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IPupilFilter pupilFilter) ;
 
         /// <summary>
         /// Get pupil by id.

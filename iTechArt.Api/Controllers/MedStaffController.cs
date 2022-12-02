@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Api.Models;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
@@ -106,9 +107,10 @@ namespace iTechArt.Api.Controllers
         /// Gets all data from database.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromQuery] int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<ActionResult<IMedStaff[]>> ExportAsync([FromQuery] int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, [FromQuery] MedStaffFilter medStaffFilter)
         {
-            return Ok(await _medStaffService.ExportMedStaffFileAsync(pageIndex, pageSize, fieldName, sortDirection));
+            return Ok(await _medStaffService.ExportMedStaffFileAsync(pageIndex, pageSize, fieldName, sortDirection, medStaffFilter));
         }
 
         /// <summary>

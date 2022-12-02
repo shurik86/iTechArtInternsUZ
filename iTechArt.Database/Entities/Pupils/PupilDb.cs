@@ -1,7 +1,5 @@
 ﻿using iTechArt.Domain.Enums;
-using iTechArt.Domain.Helpers;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace iTechArt.Database.Entities.Pupils
 {

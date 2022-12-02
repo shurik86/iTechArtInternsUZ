@@ -3,9 +3,11 @@ using AutoMapper.QueryableExtensions;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Students;
 using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.FilterExtensions;
 using iTechArt.Repository.PaginationExtensions;
 using iTechArt.Repository.SortingExtentions.Sorters;
 using Microsoft.EntityFrameworkCore;
@@ -35,9 +37,10 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all students from database.
         /// </summary>
-        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection, IStudentFilter studentFilter)
         {
             return await _dbContext.Students.AsNoTracking()
+                                            .Filtrate(studentFilter)
                                             .Sort(fieldName, sortDirection, new StudentDBSorter())
                                             .Paginate(pageIndex, pageSize)
                                             .ProjectTo<Student>(_mapper.ConfigurationProvider)

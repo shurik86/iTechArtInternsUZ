@@ -6,6 +6,7 @@ namespace iTechArt.Domain.Enums
     {
         [XmlEnum("1")]
         Male = 1,
+        
         [XmlEnum("2")]
         Female = 2
     }

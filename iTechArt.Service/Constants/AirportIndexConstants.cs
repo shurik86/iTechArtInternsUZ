@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace iTechArt.Service.Constants
+﻿namespace iTechArt.Service.Constants
 {
     internal static class AirportIndexConstants
     {

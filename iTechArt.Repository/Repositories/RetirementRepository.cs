@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using iTechArt.Database.DbContexts;
+﻿using iTechArt.Database.DbContexts;
 using iTechArt.Domain.ModelInterfaces.GraphModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
-using iTechArt.Repository.BusinessModels;
 using iTechArt.Repository.BusinessModels.GraphModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +21,7 @@ namespace iTechArt.Repository.Repositories
 
 
         /// <summary>
-        /// Gets all polices from database who already retired
+        /// Gets all polices from database who already retired.
         /// </summary>
         public async Task<IRetiredPeople> GetRetiredPeopleAsync(int from, int to)
         {

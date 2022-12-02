@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 using Microsoft.AspNetCore.Http;
 
@@ -10,10 +11,12 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Import Csv format data for grocery.
         /// </summary>
         public Task ImportCSVGroceryAsync(IFormFile formFile);
+
         /// <summary>
         /// Import Excel format data for grocery.
         /// </summary>
         public Task ImportExcelGroceryAsync(IFormFile formFile);
+
         /// <summary>
         /// Import Xml format data for grocery.
         /// </summary>
@@ -23,7 +26,13 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Export data for grocery.
         /// Count of grocery items.
         /// </summary>
-        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
+        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IGroceryFilter groceryFilter);
+
+        /// <summary>
+        /// Get count of groceries.
+        /// </summary>
+        /// <returns></returns>
         public ValueTask <long> GetCountAsync();
 
         /// <summary>
