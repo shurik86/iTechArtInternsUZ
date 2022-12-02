@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { GraphsService } from '../../graphs.service';
 import { IGraphRetired } from '../../interfaces/graph-retired';
+import { graphRetiredDefaultData } from './graph-retired-default-data';
 
 @Component({
   selector: 'app-graph-retired',
@@ -13,6 +14,20 @@ export class GraphRetiredComponent {
   public minYear = 1900;
   public currentYear = new Date().getFullYear();
   public graphData: IGraphRetired | undefined;
+  public graphDataDefault = graphRetiredDefaultData;
+  public graphDataForView: any[] | undefined;
+  public view: [number, number] = [800, 400];
+
+  // options
+  public gradient = true;
+  public showLegend = true;
+  public showLabels = true;
+  public isDoughnut = false;
+  public legendPosition: any = 'below';
+
+  public colorScheme: any = {
+    domain: ['#ffa1b5', '#86c7f3'],
+  };
 
   public graphForm = new FormGroup({
     firstDate: new FormControl('', [
@@ -40,7 +55,20 @@ export class GraphRetiredComponent {
         .getStatsForRetired(firstDate, secondDate)
         .subscribe((data: IGraphRetired) => {
           this.graphData = data;
-          console.log(this.graphData);
+          this.graphDataForView = [
+            {
+              name: 'Police',
+              value: this.graphData?.retiredPolice,
+            },
+            {
+              name: 'MedStaff',
+              value: this.graphData?.retiredMedStaff,
+            },
+            {
+              name: 'Grocery',
+              value: this.graphData?.retiredGrocery,
+            },
+          ];
         });
     }
   }

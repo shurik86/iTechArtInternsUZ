@@ -1,6 +1,35 @@
-.graph-male-female {
-  min-width: 400px;
-  min-height: 400px;
+.graph-retired {
   margin-left: 25vw;
   margin-top: 30px;
+  &__form {
+    display: flex;
+    align-items: center;
+    width: 790px;
+    justify-content: space-between;
+    &__label {
+      color: #3a5696;
+      font-weight: bold;
+    }
+    &__input {
+      border: 2px solid grey;
+      border-radius: 5px;
+      height: 25px;
+    }
+    &__button {
+    }
+    &__errors-container {
+      padding: 0;
+      margin: 20px 0 0 0 ;
+      min-height: 40px;
+      &__error {
+        padding: 0;
+        margin: 0;
+        color: red;
+      }
+    }
+  }
+}
+
+::ng-deep .legend-title-text {
+  display: none !important;
 }

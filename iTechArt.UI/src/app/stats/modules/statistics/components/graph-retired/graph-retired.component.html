@@ -1,13 +1,119 @@
-<div class="graph-male-female">
-  <form [formGroup]="graphForm" (ngSubmit)="submit()">
-    <label>First Date: </label>
-    <input type="number" formControlName="firstDate" />
+<div class="graph-retired">
+  <form
+    class="graph-retired__form"
+    [formGroup]="graphForm"
+    (ngSubmit)="submit()"
+  >
+    <div>
+    <label class="graph-retired__form__label">First Date: </label>
+    <input
+      class="graph-retired__form__input"
+      type="number"
+      formControlName="firstDate"
+    />
+    </div>
 
-    <label>Second Date: </label>
-    <input type="number" formControlName="secondDate" />
+    <div>
+    <label class="graph-retired__form__label">Second Date: </label>
+    <input
+      class="graph-retired__form__input"
+      type="number"
+      formControlName="secondDate"
+    />
+    </div>
 
-    <button class="button-green" type="submit" [disabled]="graphForm.invalid">
-      Get
+    <button
+      class="button-green graph-retired__form__button"
+      type="submit"
+      [disabled]="graphForm.invalid"
+    >
+      Get statistics
     </button>
   </form>
+
+  <div class="graph-retired__form__errors-container">
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('secondDate')?.touched &&
+        graphForm.get('secondDate')?.value &&
+        graphForm.get('firstDate')?.touched &&
+        graphForm.get('firstDate')?.value &&
+        graphForm.get('secondDate')?.value! <
+          graphForm?.get('firstDate')?.value!
+      "
+    >
+      First date more than second! You'll have some troubles.
+    </p>
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('secondDate')?.hasError('required') &&
+        graphForm.get('secondDate')?.touched
+      "
+    >
+      Field 'second date' is required.
+    </p>
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('secondDate')?.hasError('min') &&
+        graphForm.get('secondDate')?.touched &&
+        graphForm.get('secondDate')?.value
+      "
+    >
+      Min value for 'second date' field is 1900.
+    </p>
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('secondDate')?.hasError('max') &&
+        graphForm.get('secondDate')?.touched &&
+        graphForm.get('secondDate')?.value
+      "
+    >
+      Max value for 'second date' field is current year.
+    </p>
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('firstDate')?.hasError('required') &&
+        graphForm.get('firstDate')?.touched
+      "
+    >
+      Field 'first date' is required.
+    </p>
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('firstDate')?.hasError('min') &&
+        graphForm.get('firstDate')?.touched &&
+        graphForm.get('firstDate')?.value
+      "
+    >
+      Min value for 'first date' field is 1900.
+    </p>
+    <p
+      class="graph-retired__form__errors-container__error"
+      *ngIf="
+        graphForm.get('firstDate')?.hasError('max') &&
+        graphForm.get('firstDate')?.touched &&
+        graphForm.get('firstDate')?.value
+      "
+    >
+      Max value for 'first date' field is current year.
+    </p>
+  </div>
+
+  <ngx-charts-pie-chart
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="graphDataForView || graphDataDefault"
+    [gradient]="gradient"
+    [legend]="showLegend"
+    [legendPosition]="legendPosition"
+    [labels]="showLabels"
+    [doughnut]="isDoughnut"
+  >
+  </ngx-charts-pie-chart>
 </div>

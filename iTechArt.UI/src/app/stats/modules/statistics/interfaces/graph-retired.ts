@@ -1,5 +1,5 @@
 export interface IGraphRetired {
-  retiredGrocery: number,
-  retiredMedStaff: number,
-  retiredPolice: number
+  retiredPolice: number;
+  retiredMedStaff: number;
+  retiredGrocery: number;
 }
