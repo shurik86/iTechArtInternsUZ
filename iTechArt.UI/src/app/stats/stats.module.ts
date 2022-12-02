@@ -19,6 +19,8 @@ import {
 } from "igniteui-angular-charts";
 import { NgChartsModule } from "ng2-charts";
 import { GraphMaleFemaleComponent } from './modules/statistics/components/graph-male-female/graph-male-female.component';
+import { GraphRetiredComponent } from './modules/statistics/components/graph-retired/graph-retired.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -37,8 +39,9 @@ import { GraphMaleFemaleComponent } from './modules/statistics/components/graph-
     IgxCategoryHighlightLayerModule,
     IgxBarSeriesModule,
     IgxDataToolTipLayerModule,
-    NgChartsModule
+    NgChartsModule,
+    ReactiveFormsModule
   ],
-  declarations: [StatisticsPageComponent, GraphMaleFemaleComponent],
+  declarations: [StatisticsPageComponent, GraphMaleFemaleComponent, GraphRetiredComponent],
 })
 export class StatsModule {}

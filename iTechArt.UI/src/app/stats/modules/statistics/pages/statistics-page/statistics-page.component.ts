@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './statistics-page.component.html',
   styleUrls: ['./statistics-page.component.scss'],
 })
-export class StatisticsPageComponent {}
+export class StatisticsPageComponent {
+  public currentTab?: string = 'MaleFemale';
+
+  public switchTab(tab: string): void {
+    this.currentTab = tab;
+  }
+}

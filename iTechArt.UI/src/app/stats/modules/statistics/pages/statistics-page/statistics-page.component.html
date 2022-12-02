@@ -1,8 +1,10 @@
 <div class="statistics-page">
   <div class="statistics-page__side-bar">
-    <p>Male / Female (by units)</p>
+    <p (click)="switchTab('MaleFemale')">Male / Female (by units)</p>
+    <p (click)="switchTab('Retired')">Retired</p>
   </div>
   <div class="statistics-page__main-content">
-    <app-graph-male-female></app-graph-male-female>
+    <app-graph-male-female *ngIf="currentTab === 'MaleFemale'"></app-graph-male-female>
+    <app-graph-retired *ngIf="currentTab === 'Retired'"></app-graph-retired>
   </div>
 </div>

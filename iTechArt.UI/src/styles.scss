@@ -42,6 +42,11 @@ html {
     background-color: #3a5696;
     color: white;
   }
+  &:disabled {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
+    color: white;
+  }
 }
 
 .button-green {
@@ -52,6 +57,11 @@ html {
   &:hover {
     background-color: white;
     color: seagreen;
+  }
+  &:disabled {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
+    color: white;
   }
 }
 

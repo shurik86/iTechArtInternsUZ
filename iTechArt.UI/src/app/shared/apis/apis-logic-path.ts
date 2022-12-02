@@ -12,7 +12,7 @@ export const APIS_LOGIC_PATHS = {
     csv: 'get_csv'
   },
   graphs: {
-    sexAndAge: 'get_graph',
+    sexAndAge: 'api/graph/get_graph',
     dashboard: 'api/dashboard/count-of-users',
   },
 };

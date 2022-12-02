@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { APIS_LOGIC_PATHS } from '../../../shared/apis/apis-logic-path';
 import { UnitCountDashboardInterface } from '../../../shared/interfaces/unit-count-dashboard.interface';
+import { Observable } from "rxjs";
+import { APIS_UNIT_PATHS } from "../../../shared/apis/api-unit-paths";
+import { IGraphRetired } from "./interfaces/graph-retired";
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +24,12 @@ export class GraphsService {
   public getStatsForGraphSexAndAge(): any {
     return this.http.get<any>(
       `${this.url}${APIS_LOGIC_PATHS.graphs.sexAndAge}`
+    );
+  }
+
+  public getStatsForRetired(fd: string | null, sd: string | null): Observable<IGraphRetired> {
+    return this.http.get<IGraphRetired>(
+      `${this.url}${APIS_UNIT_PATHS.grocery}get_retired?from=${fd}&to=${sd}`
     );
   }
 
