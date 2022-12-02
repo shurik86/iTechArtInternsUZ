@@ -8,7 +8,7 @@ namespace iTechArt.Domain.Helpers
         private const string Format = "yyyy-MM-dd";
 
         /// <summary>
-        /// Reads and serializes DateOnly
+        /// Reads and serializes DateOnly.
         /// </summary>
         public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -16,7 +16,7 @@ namespace iTechArt.Domain.Helpers
         }
 
         /// <summary>
-        /// Writes DateOnly
+        /// Writes DateOnly.
         /// </summary>
         public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
         {

@@ -2,9 +2,9 @@
 using CsvHelper;
 using CsvHelper.Configuration;
 using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
@@ -44,9 +44,10 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all pupils.
         /// </summary>
-        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IPupil[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IPupilFilter pupilFilter)
         {
-            return await _pupilRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
+            return await _pupilRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection, pupilFilter);
         }
 
         /// <summary>

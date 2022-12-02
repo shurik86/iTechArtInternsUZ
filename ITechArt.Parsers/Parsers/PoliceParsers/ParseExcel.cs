@@ -3,7 +3,6 @@ using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using ITechArt.Parsers.Constants;
-using ITechArt.Parsers.Dtos;
 using ITechArt.Parsers.Dtos.Polices;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;

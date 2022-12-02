@@ -1,5 +1,4 @@
 ﻿using iTechArt.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Domain.ModelInterfaces
 {

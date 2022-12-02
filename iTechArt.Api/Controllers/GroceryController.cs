@@ -1,4 +1,5 @@
 ﻿using iTechArt.Api.Constants;
+using iTechArt.Api.Models;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -41,6 +42,7 @@ namespace iTechArt.Api.Controllers
             }
             return BadRequest();
         }
+
         /// <summary>
         /// Api route which applies the following extensions
         /// will allow to upload the data from CSV file to db.
@@ -57,6 +59,7 @@ namespace iTechArt.Api.Controllers
             return BadRequest();
 
         }
+
         /// <summary>
         /// Api route which applies the following extensions
         /// will allow to upload the data from Excel file to db.
@@ -73,6 +76,7 @@ namespace iTechArt.Api.Controllers
                 return BadRequest();
 
         }
+
         /// <summary>
         /// Api route which applies the following extensions
         /// will allow to upload the data from XML file to db.
@@ -88,13 +92,15 @@ namespace iTechArt.Api.Controllers
             else
                 return BadRequest();
         }
+
         /// <summary>
         /// Api route which allows to get all info from db and parse it to the following format.
         /// </summary>
         [HttpGet("get_all")]
-        public async Task<IActionResult> ExportGroceryDataAsync([FromQuery] int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IActionResult> ExportGroceryDataAsync([FromQuery] int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, [FromQuery] GroceryFilter groceryFilter)
         {
-            return Ok(await _groceryService.ExportGroceryAsync(pageIndex, pageSize, fieldName, sortDirection));
+            return Ok(await _groceryService.ExportGroceryAsync(pageIndex, pageSize, fieldName, sortDirection, groceryFilter));
         }
         /// <summary>
         /// Get total amount of groceries

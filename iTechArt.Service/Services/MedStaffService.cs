@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
@@ -43,9 +44,10 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Takes no input so far.
         /// </summary>
-        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IMedStaffFilter medStaffFilter)
         {
-            return await _medStaffRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
+            return await _medStaffRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection, medStaffFilter);
         }
 
         /// <summary>

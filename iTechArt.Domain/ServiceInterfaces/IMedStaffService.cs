@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 using Microsoft.AspNetCore.Http;
 
@@ -29,7 +30,8 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Gets all info from database.
         /// </summary>
-        public Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
+        public Task<IMedStaff[]> ExportMedStaffFileAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IMedStaffFilter medStaffFilter);
 
         /// <summary>
         /// Exports MedStaff Data to a new XML file.

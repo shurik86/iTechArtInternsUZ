@@ -3,9 +3,11 @@ using AutoMapper.QueryableExtensions;
 using iTechArt.Database.DbContexts;
 using iTechArt.Database.Entities.Airports;
 using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Repository.BusinessModels;
+using iTechArt.Repository.FilterExtensions;
 using iTechArt.Repository.PaginationExtensions;
 using iTechArt.Repository.SortingExtentions.Sorters;
 using Microsoft.EntityFrameworkCore;
@@ -35,9 +37,10 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Get all airports from database
         /// </summary>
-        public async Task<IAirport[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IAirport[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection, IAirportFilter airportFilter)
         {
             return await _dbContext.Airports.AsNoTracking()
+                                            .Filtrate(airportFilter)
                                             .Sort(fieldName, sortDirection, new AirportDBSorter())
                                             .Paginate(pageIndex, pageSize)
                                             .ProjectTo<Airport>(_mapper.ConfigurationProvider)
