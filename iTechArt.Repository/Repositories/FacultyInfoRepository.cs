@@ -23,12 +23,12 @@ namespace iTechArt.Repository.Repositories
         public async Task<IFacultyInfo> GetFacultyInfo()
         {
             var students = await _dbContext.Students.ToArrayAsync();
-            int economics = students.Select(c => c.Faculty = Faculty.Economics).ToList().Count;
-            int law = students.Select(c => c.Faculty = Faculty.Law).ToList().Count;
-            int medicine = students.Select(c => c.Faculty = Faculty.Medicine).ToList().Count;
-            int psychology = students.Select(c => c.Faculty = Faculty.Psychology).ToList().Count;
-            int engineering = students.Select(c => c.Faculty = Faculty.Engineering).ToList().Count;
-            int science = students.Select(c => c.Faculty = Faculty.Science).ToList().Count;
+            int economics = students.Where(c => c.Faculty == Faculty.Economics).ToList().Count;
+            int law = students.Where(c => c.Faculty == Faculty.Law).ToList().Count;
+            int medicine = students.Where(c => c.Faculty == Faculty.Medicine).ToList().Count;
+            int psychology = students.Where(c => c.Faculty == Faculty.Psychology).ToList().Count;
+            int engineering = students.Where(c => c.Faculty == Faculty.Engineering).ToList().Count;
+            int science = students.Where(c => c.Faculty == Faculty.Science).ToList().Count;
 
             var facutlyInfo = new FacultyInfo
             {
