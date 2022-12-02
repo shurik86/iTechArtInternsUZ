@@ -23,14 +23,18 @@ export class StatsService {
     pageNumber = 1,
     pageSize: string | number = 20,
     chosenColumn?: string | undefined,
-    chosenSortingMethod?: number | undefined
+    chosenSortingMethod?: number | undefined,
+    searchColumn?: string,
+    searchInput?: string
   ): any {
     this._api = this.apiService.defineExportApiForCurrentUnit(
       unit,
       pageNumber,
       pageSize,
       chosenColumn,
-      chosenSortingMethod
+      chosenSortingMethod,
+      searchColumn,
+      searchInput
     );
     return this.http.get<UnitsTypes>(`${this._api}`);
   }

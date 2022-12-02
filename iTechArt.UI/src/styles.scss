@@ -65,6 +65,22 @@ html {
   }
 }
 
+.button-white {
+  @include button;
+  color: seagreen;
+  background-color: white;
+  border-color: seagreen;
+  &:hover {
+    background-color: seagreen;
+    color: white;
+  }
+  &:disabled {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
+    color: white;
+  }
+}
+
 hr {
   height: 1px;
 }

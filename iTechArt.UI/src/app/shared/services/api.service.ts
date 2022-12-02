@@ -46,9 +46,14 @@ export class ApiService {
     pageIndex?: number,
     pageSize?: number | string,
     chosenColumn?: string | undefined,
-    chosenSortingMethod?: number | undefined
+    chosenSortingMethod?: number | undefined,
+    searchColumn?: string,
+    searchInput?: string
   ): string {
     this.defineUnitPath(unit);
+    if (chosenColumn && chosenSortingMethod && searchColumn && searchInput) {
+      return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}&fieldName=${chosenColumn}&sortDirection=${chosenSortingMethod}&${searchColumn}=${searchInput}`;
+    }
     if (chosenColumn && chosenSortingMethod) {
       return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}&fieldName=${chosenColumn}&sortDirection=${chosenSortingMethod}`;
     } else {

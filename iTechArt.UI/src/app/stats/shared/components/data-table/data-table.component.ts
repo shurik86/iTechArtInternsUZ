@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from "@angular/core";
-import { FormControl } from '@angular/forms';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { StatsService } from '../../../stats.service';
 import { UnitsTypes } from '../../types/units-types';
@@ -27,6 +27,9 @@ export class DataTableComponent implements OnChanges, OnInit {
   public pageRows = new FormControl(this.itemsPerPage);
   public currentChosenColumn: any;
   public currentSortingMethod: any = 1;
+  public searchInput = new FormControl('', Validators.required);
+  public searchColumn = new FormControl('', Validators.required);
+  public searchResultAmount: any;
 
   public constructor(
     private statsService: StatsService,
@@ -34,11 +37,10 @@ export class DataTableComponent implements OnChanges, OnInit {
   ) {}
 
   public ngOnInit(): void {
-  this.currentChosenColumn = this.columns![0]!.field;
+    this.currentChosenColumn = this.columns![0]!.field;
   }
 
   public ngOnChanges(): void {
-    this.page = 1;
     this.switchPage();
     this.getUnitCountsInfo(this.unit);
   }
@@ -60,7 +62,9 @@ export class DataTableComponent implements OnChanges, OnInit {
     pageNumber?: number,
     pageSize?: number | string,
     chosenColumn?: string | undefined,
-    chosenSortingMethod?: string | undefined
+    chosenSortingMethod?: string | undefined,
+    searchColumn?: string,
+    searchInput?: string
   ): void {
     this.page = pageNumber;
     this.dataOnPage = pageSize;
@@ -79,7 +83,9 @@ export class DataTableComponent implements OnChanges, OnInit {
         this.page,
         this.itemsPerPage,
         this.currentChosenColumn,
-        this.currentSortingMethod
+        this.currentSortingMethod,
+        this.searchColumn.value!,
+        this.searchInput.value!
       )
       .subscribe({
         next: (data: UnitsTypes) => (this.dataOnPage = this.data = data),
@@ -135,5 +141,45 @@ export class DataTableComponent implements OnChanges, OnInit {
       this.currentChosenColumn,
       this.currentSortingMethod
     );
+  }
+
+  public searchByValueInColumn(): void {
+    const searchColumn = this.searchColumn.value;
+    const searchInput = this.searchInput.value;
+
+    this.statsService
+      .getAllStatsByUnit(
+        this.unit!,
+        0,
+        0,
+        this.currentChosenColumn,
+        this.currentSortingMethod,
+        searchColumn!,
+        searchInput!
+      )
+      .subscribe({
+        next: (data: UnitsTypes) => {
+          this.searchResultAmount = data.length;
+          this.allUnitDataCount = Math.ceil(
+            +this.searchResultAmount / +this.itemsPerPage
+          );
+          console.log(this.allUnitDataCount);
+          this.switchPage(
+            this.page,
+            this.itemsPerPage,
+            this.currentChosenColumn,
+            this.currentSortingMethod,
+            searchColumn!,
+            searchInput!
+          );
+        },
+      });
+  }
+
+  public cleanSearchForm(): void {
+    this.searchInput.setValue('');
+    this.searchColumn.setValue('');
+
+    this.searchByValueInColumn();
   }
 }

@@ -1,10 +1,60 @@
 <div class="container">
+  <div class="graph-retired__form">
+    <div>
+      <label class="graph-retired__form__label">Finding by column: </label>
+      <select
+        [formControl]="searchColumn"
+        class="graph-retired__form__input"
+      >
+        <option *ngFor="let column of columns" [value]="column.field">
+          {{ column.header }}
+        </option>
+      </select>
+
+      <label class="graph-retired__form__label">Value:</label>
+      <input
+        class="graph-retired__form__input"
+        type="text"
+        [formControl]="searchInput"
+      />
+    </div>
+    <button
+      class="button-green graph-retired__form__button"
+      [disabled]="searchInput.invalid"
+      (click)="searchByValueInColumn()"
+    >
+      Search
+    </button>
+    <button
+      class="button-white graph-retired__form__button"
+      style="margin-left: 30px;"
+      (click)="cleanSearchForm()"
+    >
+      Clean
+    </button>
+  </div>
+
   <table class="grid">
     <thead class="grid__columns">
-      <th *ngFor="let col of columns" [style.width.px]="col.width" class="grid__columns__header" (click)="chooseHeader(col.field)">
+      <th
+        *ngFor="let col of columns"
+        [style.width.px]="col.width"
+        class="grid__columns__header"
+        (click)="chooseHeader(col.field)"
+      >
         {{ col.header }}
-        <span *ngIf="currentChosenColumn === col.field && currentSortingMethod === 2">&uarr;</span>
-        <span *ngIf="currentChosenColumn === col.field && currentSortingMethod === 1">&darr;</span>
+        <span
+          *ngIf="
+            currentChosenColumn === col.field && currentSortingMethod === 2
+          "
+          >&uarr;</span
+        >
+        <span
+          *ngIf="
+            currentChosenColumn === col.field && currentSortingMethod === 1
+          "
+          >&darr;</span
+        >
       </th>
     </thead>
     <tbody class="grid__rows">

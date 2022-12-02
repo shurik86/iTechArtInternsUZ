@@ -4,7 +4,7 @@
 }
 .grid {
   border-collapse: collapse;
-  margin: 30px;
+  margin: 10px 30px 30px;
   th,
   td {
     border: 1px solid black;
@@ -16,9 +16,16 @@
       background-color: #3a5696;
       color: white;
     }
-    &__header:hover {
-      background-color: #66779e !important;
-      cursor: pointer;
+    &__header {
+      position: relative;
+      &:hover {
+        background-color: #66779e !important;
+        cursor: pointer;
+      }
+      &__find {
+        position: absolute;
+        right: 10px;
+      }
     }
   }
   &__rows {
@@ -41,4 +48,29 @@
   &__label {
     margin-right: 5px;
   }
+}
+
+.graph-retired__form {
+  display: flex;
+  align-items: center;
+  width: 790px;
+  margin: 60px 0 0 30px;
+  &__label {
+    color: #3a5696;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  &__input {
+    font-size: 1rem;
+    border: 2px solid grey;
+    border-radius: 5px;
+    min-height: 35px;
+    max-height: 35px;
+    padding: 1px 2px;
+    margin-right: 30px;
+  }
+}
+
+::ng-deep .legend-title-text {
+  display: none !important;
 }
