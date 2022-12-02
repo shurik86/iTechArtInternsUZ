@@ -41,9 +41,9 @@ export class ApiService {
     return `${this._url}${this._unitPath}${currentImportApi}`;
   }
 
-  public defineExportApiForCurrentUnit(unit: UnitsEnum | undefined): string {
+  public defineExportApiForCurrentUnit(unit: UnitsEnum | undefined, pageIndex: number, pageSize: number | string): string {
     this.defineUnitPath(unit);
-    return `${this._url}${this._unitPath}${APIS_LOGIC_PATHS.export}`;
+    return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}`;
   }
 
   public defineDownloadFileApiForCurrentUnit(

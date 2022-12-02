@@ -1,5 +1,4 @@
 export const APIS_LOGIC_PATHS = {
-  export: 'get_all?pageIndex=',
   import: {
     xlsx: 'import_excel',
     xls: 'import_excel',

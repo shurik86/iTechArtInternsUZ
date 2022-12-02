@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { StatsService } from '../../../stats.service';
 import { UnitsTypes } from '../../types/units-types';
@@ -17,12 +18,13 @@ export class DataTableComponent implements OnChanges {
   @Input() public columns: any[] | undefined;
   @Input() public unit: UnitsEnum | undefined;
 
-  public page = 1;
-  public itemsPerPage = 20;
+  public page: number | undefined = 1;
+  public itemsPerPage: number | string = 10;
   public dataOnPage: any = [];
   public unitCountsInfo: UnitCountDashboardInterface | undefined;
   public url = environment.apiUrl;
   public allUnitDataCount: number | undefined;
+  public pageRows = new FormControl(this.itemsPerPage);
 
   public constructor(
     private statsService: StatsService,
@@ -31,26 +33,33 @@ export class DataTableComponent implements OnChanges {
 
   public ngOnChanges(): void {
     this.page = 1;
-    this.switchPage(1);
+    this.switchPage();
     this.getUnitCountsInfo(this.unit);
     console.log(this.dataOnPage);
   }
 
-  public switchPage(pageNo: any): void {
-    const start = (pageNo - 1) * this.itemsPerPage;
-    const end = pageNo * this.itemsPerPage;
+  public getRowsAmountPerPage(): void {
+    if (this.itemsPerPage != this.pageRows.value) {
+      this.itemsPerPage = +this.pageRows.value!;
+      this.switchPage(this.page, this.itemsPerPage);
+    }
+  }
+
+  public switchPage(pageNumber?: number, pageSize?: number | string): void {
+    this.page = pageNumber;
+    this.dataOnPage = pageSize;
 
     if (this.data == null) {
       console.log('Requested page change before data is received.');
       return;
     }
 
-    this.statsService.getAllStatsByUnit(this.unit!, pageNo).subscribe({
-      next: (data: UnitsTypes) => this.dataOnPage = this.data = data,
-      error: () => alert("Couldn't load data."),
-    });
-
-    this.dataOnPage = this.data.slice(start, end);
+    this.statsService
+      .getAllStatsByUnit(this.unit!, this.page, this.itemsPerPage)
+      .subscribe({
+        next: (data: UnitsTypes) => this.dataOnPage = this.data = data,
+        error: () => alert("Couldn't load data."),
+      });
   }
 
   public defineUnitCount(unit: UnitsEnum | undefined): number | undefined {

@@ -18,9 +18,9 @@ export class StatsService {
     private apiService: ApiService
   ) {}
 
-  public getAllStatsByUnit(unit: UnitsEnum, pageNumber = 1): any {
-    this._api = this.apiService.defineExportApiForCurrentUnit(unit);
-    return this.http.get<UnitsTypes>(`${this._api}${pageNumber}`);
+  public getAllStatsByUnit(unit: UnitsEnum, pageNumber = 1, pageSize: string | number = 20): any {
+    this._api = this.apiService.defineExportApiForCurrentUnit(unit, pageNumber, pageSize);
+    return this.http.get<UnitsTypes>(`${this._api}`);
   }
 
   public downloadFile(

@@ -1,26 +1,41 @@
 <div class="container">
   <table class="grid">
     <thead class="grid__columns">
-    <th *ngFor="let col of columns" [style.width.px]="col.width">
-      {{ col.header }}
-    </th>
+      <th *ngFor="let col of columns" [style.width.px]="col.width">
+        {{ col.header }}
+      </th>
     </thead>
     <tbody class="grid__rows">
-    <tr *ngFor="let row of dataOnPage | paginate: { itemsPerPage: itemsPerPage,
-              currentPage: page,
-              totalItems: allUnitDataCount }">
-      <td
-        *ngFor="let col of columns"
-        style="padding-left: 1rem"
-      > {{row[col.field]}}
-      </td>
-    </tr>
+      <tr
+        *ngFor="
+          let row of dataOnPage
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: allUnitDataCount
+                }
+        "
+      >
+        <td *ngFor="let col of columns" style="padding-left: 1rem">
+          {{ row[col.field] }}
+        </td>
+      </tr>
     </tbody>
   </table>
   <div class="pagination-controls-wrapper">
     <pagination-controls
       class="pagi"
-      (pageChange)="switchPage(page = $event)"
+      (pageChange)="switchPage((page = $event))"
     ></pagination-controls>
+    <div>
+      <label>Rows on page</label>
+      <select [formControl]="pageRows" (click)="getRowsAmountPerPage()">
+        <option value="5">5</option>
+        <option value="10" [defaultSelected]="true">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
   </div>
 </div>
