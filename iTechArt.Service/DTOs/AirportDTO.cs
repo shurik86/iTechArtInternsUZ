@@ -1,7 +1,5 @@
-﻿using iTechArt.Domain.Helpers;
-using iTechArt.Domain.ModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace iTechArt.Service.DTOs
 {

@@ -15,7 +15,8 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Exports students from DB.
         /// </summary>
-        public Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection, IStudentFilter studentFilter);
+        public Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IStudentFilter studentFilter);
 
         /// <summary>
         /// Parse student's file from xml.

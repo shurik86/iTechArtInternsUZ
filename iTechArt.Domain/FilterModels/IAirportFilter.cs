@@ -3,7 +3,7 @@
     public interface IAirportFilter
     {
         /// <summary>
-        /// Gets or internal sets Id of airport.
+        /// Gets id of airport.
         /// </summary>
         public long? Id { get; }
 

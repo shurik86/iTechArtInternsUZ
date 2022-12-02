@@ -1,8 +1,4 @@
-﻿using CsvHelper.Configuration;
-using CsvHelper;
-using CsvHelper.TypeConversion;
-
-namespace iTechArt.Service.Helpers
+﻿namespace iTechArt.Service.Helpers
 {
     public class DateOnlyHelper : StringTypeConverterBase<DateOnly>
     {

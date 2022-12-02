@@ -5,62 +5,62 @@ namespace iTechArt.Domain.FilterModels
     public interface IMedStaffFilter
     {
         /// <summary>
-        /// Gets Id of a medStaff.
+        /// Gets id of a medStaff.
         /// </summary>
         public long? Id { get; }
 
         /// <summary>
-        /// Gets Firstname of a medStaff.
+        /// Gets firstname of a medStaff.
         /// </summary>
         public string FirstName { get; }
 
         /// <summary>
-        /// Gets Lastname of a medStaff.
+        /// Gets lastname of a medStaff.
         /// </summary>
         public string LastName { get; }
 
         /// <summary>
-        /// Gets Gender of a medStaff.
+        /// Gets gender of a medStaff.
         /// </summary>
         public Gender? Gender { get; }
 
         /// <summary>
-        /// Gets Email of a medStaff.
+        /// Gets email of a medStaff.
         /// </summary>
         public string Email { get; }
 
         /// <summary>
-        /// Gets Phonenumber of a medStaff.
+        /// Gets phonenumber of a medStaff.
         /// </summary>
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// Gets Date of birth of a medStaff.
+        /// Gets date of birth of a medStaff.
         /// </summary>
         public int? Age { get; }
 
         /// <summary>
-        /// Gets Address of a medStaff.
+        /// Gets address of a medStaff.
         /// </summary>
         public string Address { get; }
 
         /// <summary>
-        /// Gets Current salay of a medStaff.
+        /// Gets current salay of a medStaff.
         /// </summary>
         public decimal? Salary { get; }
 
         /// <summary>
-        /// Gets Hospital name where the medStaff works.
+        /// Gets hospital name where the medStaff works.
         /// </summary>
         public string HospitalName { get; }
 
         /// <summary>
-        /// Gets Postal code of the city where medStaff lives.
+        /// Gets postal code of the city where medStaff lives.
         /// </summary>
         public string PostalCode { get; }
 
         /// <summary>
-        /// Gets Shift of a medStaff [day/night].
+        /// Gets shift of a medStaff [day/night].
         /// </summary>
         public Shift? Shift { get; }
     }

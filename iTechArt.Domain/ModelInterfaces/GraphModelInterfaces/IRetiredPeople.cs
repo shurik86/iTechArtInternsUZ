@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace iTechArt.Domain.ModelInterfaces.GraphModelInterfaces
+﻿namespace iTechArt.Domain.ModelInterfaces.GraphModelInterfaces
 {
     public interface IRetiredPeople
     {

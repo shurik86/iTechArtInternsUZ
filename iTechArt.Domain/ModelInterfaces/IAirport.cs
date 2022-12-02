@@ -1,7 +1,4 @@
-﻿using iTechArt.Domain.Helpers;
-using System.Text.Json.Serialization;
-
-namespace iTechArt.Domain.ModelInterfaces
+﻿namespace iTechArt.Domain.ModelInterfaces
 {
     public interface IAirport
     {

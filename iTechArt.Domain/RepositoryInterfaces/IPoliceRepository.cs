@@ -1,7 +1,6 @@
 ﻿using iTechArt.Domain.Enums;
 using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
-using Microsoft.AspNetCore.Http;
 
 namespace iTechArt.Domain.RepositoryInterfaces
 {
@@ -10,7 +9,8 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all polices from database.
         /// </summary>
-        public Task<IPolice[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection, IPoliceFilter policeFilter);
+        public Task<IPolice[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IPoliceFilter policeFilter);
 
         /// <summary>
         /// Add police to database.

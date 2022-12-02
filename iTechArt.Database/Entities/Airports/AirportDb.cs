@@ -1,6 +1,4 @@
-﻿using iTechArt.Domain.Helpers;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace iTechArt.Database.Entities.Airports
 {

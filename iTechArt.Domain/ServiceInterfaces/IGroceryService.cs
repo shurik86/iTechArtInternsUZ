@@ -26,7 +26,8 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// Export data for grocery.
         /// Count of grocery items.
         /// </summary>
-        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection, IGroceryFilter groceryFilter);
+        public Task<IGrocery[]> ExportGroceryAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IGroceryFilter groceryFilter);
 
         /// <summary>
         /// Get count of groceries.

@@ -1,5 +1,4 @@
-﻿using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ModelInterfaces.GraphModelInterfaces;
+﻿using iTechArt.Domain.ModelInterfaces.GraphModelInterfaces;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
 
