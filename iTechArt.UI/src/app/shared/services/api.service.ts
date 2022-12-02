@@ -63,6 +63,8 @@ export class ApiService {
         return APIS_LOGIC_PATHS.download.xlsx;
       case ExtensionsEnum.xml:
         return APIS_LOGIC_PATHS.download.xml;
+      case ExtensionsEnum.csv:
+        return APIS_LOGIC_PATHS.download.csv;
       default:
         return undefined;
     }

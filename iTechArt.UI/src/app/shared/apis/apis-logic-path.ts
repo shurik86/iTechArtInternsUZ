@@ -9,6 +9,7 @@ export const APIS_LOGIC_PATHS = {
   download: {
     xml: 'get_xml',
     xlsx: 'get_xlsx',
+    csv: 'get_csv'
   },
   graphs: {
     sexAndAge: 'get_graph',
