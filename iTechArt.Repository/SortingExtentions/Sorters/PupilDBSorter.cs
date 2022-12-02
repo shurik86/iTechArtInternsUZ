@@ -10,7 +10,7 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
         /// Gets tablesorter.
         /// </summary>
         protected override Dictionary<string, Expression<Func<PupilDb, object>>> TableFieldSorters { get; } = new() {
-            { "firtstname", f => f.FirstName },
+            { "firstname", f => f.FirstName },
             { "lastname", l => l.LastName },
             { "dateofbirth", d => d.DateOfBirth },
             { "gender", g => g.Gender },
