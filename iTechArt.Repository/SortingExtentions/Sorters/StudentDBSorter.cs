@@ -9,8 +9,8 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
         /// Gets tablesorter.
         /// </summary>
         protected override Dictionary<string, Expression<Func<StudentDb, object>>> TableFieldSorters { get; } = new() {
-            { "firstname", f => f.FirstName },
-            { "lastname", l => l.LastName },
+            { "firstName", f => f.FirstName },
+            { "lastName", l => l.LastName },
             { "email", e => e.Email },
             { "majority", m => m.Majority },
             { "university", u => u.University }
@@ -19,6 +19,6 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
         /// <summary>
         /// Gets default field sorter.
         /// </summary>
-        protected override Expression<Func<StudentDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
+        protected override Expression<Func<StudentDb, object>> DefaultFieldSorter => TableFieldSorters["firstName"];
     }
 }

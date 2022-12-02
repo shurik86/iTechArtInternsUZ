@@ -9,19 +9,19 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
         /// Gets tablesorter.
         /// </summary>
         protected override Dictionary<string, Expression<Func<PoliceDb, object>>> TableFieldSorters { get; } = new() {
-            { "firstname", f => f.Name },
+            { "firstName", f => f.Name },
             { "surname", s => s.Surname },
             { "email", e => e.Email },
             { "gender", g => g.Gender },
             { "address", a => a.Address },
-            { "jobtitle", j => j.JobTitle },
+            { "jobTitle", j => j.JobTitle },
             { "salary", s => s.Salary },
-            { "birthdate", b => b.BirthDate }
+            { "birthDate", b => b.BirthDate }
         };
         
         /// <summary>
         /// Gets default field sorter.
         /// </summary>
-        protected override Expression<Func<PoliceDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
+        protected override Expression<Func<PoliceDb, object>> DefaultFieldSorter => TableFieldSorters["firstName"];
     }
 }
