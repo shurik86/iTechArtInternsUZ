@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ParserInterfaces;
@@ -11,7 +12,6 @@ using iTechArt.Service.Constants;
 using iTechArt.Service.DTOs;
 using iTechArt.Service.Parsers;
 using Microsoft.AspNetCore.Http;
-using OfficeOpenXml;
 using System.Globalization;
 using System.Xml;
 using IParser = iTechArt.Domain.ParserInterfaces.IParser;
@@ -45,9 +45,10 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Exporting airport datas.
         /// </summary>
-        public async Task<IAirport[]> ExportAirportExcelAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IAirport[]> ExportAirportExcelAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IAirportFilter airportFilter)
         {
-            return await _airportRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
+            return await _airportRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection, airportFilter);
         }
 
         /// <summary>

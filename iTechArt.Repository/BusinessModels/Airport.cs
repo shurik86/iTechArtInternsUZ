@@ -1,7 +1,4 @@
-﻿using iTechArt.Domain.Helpers;
-using iTechArt.Domain.ModelInterfaces;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Repository.BusinessModels
 {
@@ -15,8 +12,6 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or internal sets Airport Name.
         /// </summary>
-
-        [MaxLength(64)]
         public string AirportName { get; internal set; }
 
         /// <summary>
@@ -34,15 +29,11 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or internal sets  Address location of the airport.
         /// </summary>
-
-        [MaxLength(64)]
         public string Address { get; internal set; }
 
         /// <summary>
         /// Gets or internal sets City location of the airport.
         /// </summary>
-
-        [MaxLength(32)]
         public string City { get; internal set; }
 
         /// <summary>
@@ -54,13 +45,11 @@ namespace iTechArt.Repository.BusinessModels
         /// <summary>
         /// Gets or internal sets The number of passengers who fly from a particular airport.
         /// </summary>
-
         public long PassengersPerYear { get; internal set; }
 
         /// <summary>
         /// Gets or internal sets The number of flights from a particular airport in a year.
         /// </summary>
-
         public uint FlightsPerYear { get; internal set; }
 
         /// <summary>

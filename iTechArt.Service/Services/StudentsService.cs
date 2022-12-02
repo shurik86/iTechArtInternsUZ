@@ -3,7 +3,6 @@ using CsvHelper.Configuration;
 ﻿using AutoMapper;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
@@ -13,6 +12,7 @@ using System.Globalization;
 using System.Xml;
 using iTechArt.Domain.Enums;
 using IParser = iTechArt.Domain.ParserInterfaces.IParser;
+using iTechArt.Domain.FilterModels;
 
 namespace iTechArt.Service.Services
 {
@@ -43,9 +43,10 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Async method takes no parameters and returns serialized entities as file.
         /// </summary>
-        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IStudentFilter studentFilter)
         {
-            return await _studentRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
+            return await _studentRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection, studentFilter);
         }
 
         /// <summary>

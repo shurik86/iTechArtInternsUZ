@@ -3,7 +3,6 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using iTechArt.Domain.IExcelGenerate;
 using iTechArt.Domain.ModelInterfaces;
-using iTechArt.Domain.ParserInterfaces;
 using iTechArt.Domain.ParserInterfaces.IPoliceParsers;
 using iTechArt.Domain.ParserInterfaces.IXmlGenerate;
 using iTechArt.Domain.RepositoryInterfaces;
@@ -13,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using System.Xml;
 using IParser = iTechArt.Domain.ParserInterfaces.IParser;
+using iTechArt.Domain.FilterModels;
 
 namespace iTechArt.Service.Services
 {
@@ -51,9 +51,10 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Get all data from the databse.
         /// </summary>
-        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection)
+        public async Task<IPolice[]> GetAllPoliceAsync(int pageIndex, int pageSize, string fieldName, 
+            SortDirection sortDirection, IPoliceFilter policeFilter)
         {
-            return await _policeRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection);
+            return await _policeRepository.GetAllAsync(pageIndex, pageSize, fieldName, sortDirection, policeFilter);
         }
 
         /// <summary>

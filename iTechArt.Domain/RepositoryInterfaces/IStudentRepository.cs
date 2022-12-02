@@ -1,4 +1,5 @@
 ﻿using iTechArt.Domain.Enums;
+using iTechArt.Domain.FilterModels;
 using iTechArt.Domain.ModelInterfaces;
 
 namespace iTechArt.Domain.RepositoryInterfaces
@@ -8,7 +9,7 @@ namespace iTechArt.Domain.RepositoryInterfaces
         /// <summary>
         /// Get all students from database.
         /// </summary>
-        public Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection);
+        public Task<IStudent[]> GetAllAsync(int pageIndex, int pageSize, string fieldName, SortDirection sortDirection, IStudentFilter studentFilter);
 
         /// <summary>
         /// Add student to database.
