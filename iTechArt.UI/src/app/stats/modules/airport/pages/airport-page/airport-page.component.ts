@@ -14,7 +14,6 @@ export class AirportPageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 58 },
     { field: 'airportName', header: 'Name', width: 217 },
     { field: 'builtDate', header: 'Built Date', width: 117 },
     { field: 'capacity', header: 'Capacity', width: 117 },

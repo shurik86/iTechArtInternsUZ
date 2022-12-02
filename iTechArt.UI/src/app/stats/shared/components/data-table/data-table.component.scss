@@ -16,6 +16,10 @@
       background-color: #3a5696;
       color: white;
     }
+    &__header:hover {
+      background-color: #66779e !important;
+      cursor: pointer;
+    }
   }
   &__rows {
     th,
@@ -29,4 +33,12 @@
 .pagination-controls-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.row-container {
+  align-self: center;
+  margin-left: 20px;
+  &__label {
+    margin-right: 5px;
+  }
 }

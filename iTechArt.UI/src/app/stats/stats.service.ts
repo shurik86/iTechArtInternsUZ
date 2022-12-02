@@ -18,8 +18,20 @@ export class StatsService {
     private apiService: ApiService
   ) {}
 
-  public getAllStatsByUnit(unit: UnitsEnum, pageNumber = 1, pageSize: string | number = 20): any {
-    this._api = this.apiService.defineExportApiForCurrentUnit(unit, pageNumber, pageSize);
+  public getAllStatsByUnit(
+    unit: UnitsEnum,
+    pageNumber = 1,
+    pageSize: string | number = 20,
+    chosenColumn?: string | undefined,
+    chosenSortingMethod?: number | undefined
+  ): any {
+    this._api = this.apiService.defineExportApiForCurrentUnit(
+      unit,
+      pageNumber,
+      pageSize,
+      chosenColumn,
+      chosenSortingMethod
+    );
     return this.http.get<UnitsTypes>(`${this._api}`);
   }
 

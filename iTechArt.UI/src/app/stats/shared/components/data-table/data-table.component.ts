@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from "@angular/core";
 import { FormControl } from '@angular/forms';
 
 import { StatsService } from '../../../stats.service';
@@ -13,7 +13,7 @@ import { GraphsService } from '../../../modules/statistics/graphs.service';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss'],
 })
-export class DataTableComponent implements OnChanges {
+export class DataTableComponent implements OnChanges, OnInit {
   @Input() public data: any[] | undefined;
   @Input() public columns: any[] | undefined;
   @Input() public unit: UnitsEnum | undefined;
@@ -25,39 +25,64 @@ export class DataTableComponent implements OnChanges {
   public url = environment.apiUrl;
   public allUnitDataCount: number | undefined;
   public pageRows = new FormControl(this.itemsPerPage);
+  public currentChosenColumn: any;
+  public currentSortingMethod: any = 1;
 
   public constructor(
     private statsService: StatsService,
     private graphsService: GraphsService
   ) {}
 
+  public ngOnInit(): void {
+  this.currentChosenColumn = this.columns![0]!.field;
+  }
+
   public ngOnChanges(): void {
     this.page = 1;
     this.switchPage();
     this.getUnitCountsInfo(this.unit);
-    console.log(this.dataOnPage);
   }
 
   public getRowsAmountPerPage(): void {
     if (this.itemsPerPage != this.pageRows.value) {
       this.itemsPerPage = +this.pageRows.value!;
-      this.switchPage(this.page, this.itemsPerPage);
+      this.page = 1;
+      this.switchPage(
+        this.page,
+        this.itemsPerPage,
+        this.currentChosenColumn,
+        this.currentSortingMethod
+      );
     }
   }
 
-  public switchPage(pageNumber?: number, pageSize?: number | string): void {
+  public switchPage(
+    pageNumber?: number,
+    pageSize?: number | string,
+    chosenColumn?: string | undefined,
+    chosenSortingMethod?: string | undefined
+  ): void {
     this.page = pageNumber;
     this.dataOnPage = pageSize;
 
-    if (this.data == null) {
-      console.log('Requested page change before data is received.');
-      return;
+    if (chosenColumn) {
+      this.currentChosenColumn = chosenColumn;
+    }
+
+    if (chosenSortingMethod) {
+      this.currentSortingMethod = chosenSortingMethod;
     }
 
     this.statsService
-      .getAllStatsByUnit(this.unit!, this.page, this.itemsPerPage)
+      .getAllStatsByUnit(
+        this.unit!,
+        this.page,
+        this.itemsPerPage,
+        this.currentChosenColumn,
+        this.currentSortingMethod
+      )
       .subscribe({
-        next: (data: UnitsTypes) => this.dataOnPage = this.data = data,
+        next: (data: UnitsTypes) => (this.dataOnPage = this.data = data),
         error: () => alert("Couldn't load data."),
       });
   }
@@ -88,5 +113,27 @@ export class DataTableComponent implements OnChanges {
         this.unitCountsInfo = data;
         this.allUnitDataCount = this.defineUnitCount(unit);
       });
+  }
+
+  public chooseHeader(columnField: string): void {
+    if (this.currentChosenColumn != columnField) {
+      this.currentSortingMethod = 1;
+      this.currentChosenColumn = columnField;
+    } else {
+      if (this.currentSortingMethod == 1) {
+        this.currentSortingMethod = 2;
+      } else {
+        this.currentSortingMethod = 1;
+      }
+    }
+
+    this.page = 1;
+
+    this.switchPage(
+      this.page,
+      this.itemsPerPage,
+      this.currentChosenColumn,
+      this.currentSortingMethod
+    );
   }
 }

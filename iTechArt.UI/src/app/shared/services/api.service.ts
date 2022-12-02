@@ -41,9 +41,19 @@ export class ApiService {
     return `${this._url}${this._unitPath}${currentImportApi}`;
   }
 
-  public defineExportApiForCurrentUnit(unit: UnitsEnum | undefined, pageIndex: number, pageSize: number | string): string {
+  public defineExportApiForCurrentUnit(
+    unit: UnitsEnum | undefined,
+    pageIndex?: number,
+    pageSize?: number | string,
+    chosenColumn?: string | undefined,
+    chosenSortingMethod?: number | undefined
+  ): string {
     this.defineUnitPath(unit);
-    return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    if (chosenColumn && chosenSortingMethod) {
+      return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}&fieldName=${chosenColumn}&sortDirection=${chosenSortingMethod}`;
+    } else {
+      return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    }
   }
 
   public defineDownloadFileApiForCurrentUnit(

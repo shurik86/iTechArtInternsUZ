@@ -13,7 +13,6 @@ export class StudentsPageComponent implements OnInit {
   public unit: UnitsEnum = UnitsEnum.students;
   public data: UnitsTypes | undefined;
   public columns = [
-    { field: 'id', header: 'Id', width: 57 },
     { field: 'firstName', header: 'First Name', width: 217 },
     { field: 'lastName', header: 'Last Name', width: 124 },
     { field: 'gender', header: 'Gender', width: 117 },

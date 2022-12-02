@@ -14,7 +14,6 @@ export class MedStaffPageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 57 },
     { field: 'firstName', header: 'First Name', width: 117 },
     { field: 'lastName', header: 'Last Name', width: 117 },
     { field: 'gender', header: 'Gender', width: 69 },

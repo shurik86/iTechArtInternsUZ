@@ -1,8 +1,10 @@
 <div class="container">
   <table class="grid">
     <thead class="grid__columns">
-      <th *ngFor="let col of columns" [style.width.px]="col.width">
+      <th *ngFor="let col of columns" [style.width.px]="col.width" class="grid__columns__header" (click)="chooseHeader(col.field)">
         {{ col.header }}
+        <span *ngIf="currentChosenColumn === col.field && currentSortingMethod === 2">&uarr;</span>
+        <span *ngIf="currentChosenColumn === col.field && currentSortingMethod === 1">&darr;</span>
       </th>
     </thead>
     <tbody class="grid__rows">
@@ -28,8 +30,8 @@
       class="pagi"
       (pageChange)="switchPage((page = $event))"
     ></pagination-controls>
-    <div>
-      <label>Rows on page</label>
+    <div class="row-container">
+      <label class="row-container__label">Rows on page</label>
       <select [formControl]="pageRows" (click)="getRowsAmountPerPage()">
         <option value="5">5</option>
         <option value="10" [defaultSelected]="true">10</option>
