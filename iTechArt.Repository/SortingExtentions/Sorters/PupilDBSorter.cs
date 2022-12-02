@@ -1,4 +1,5 @@
 ﻿using iTechArt.Database.Entities.Pupils;
+using iTechArt.Database.Entities.Students;
 using System.Linq.Expressions;
 
 namespace iTechArt.Repository.SortingExtentions.Sorters
@@ -9,7 +10,7 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
         /// Gets tablesorter.
         /// </summary>
         protected override Dictionary<string, Expression<Func<PupilDb, object>>> TableFieldSorters { get; } = new() {
-            { "firtstname", f => f.FirstName },
+            { "firstname", f => f.FirstName },
             { "lastname", l => l.LastName },
             { "dateofbirth", d => d.DateOfBirth },
             { "gender", g => g.Gender },
@@ -21,5 +22,10 @@ namespace iTechArt.Repository.SortingExtentions.Sorters
             { "courselanguage", c => c.CourseLanguage },
             { "shift", s => s.Shift }
         };
+
+        /// <summary>
+        /// Gets default field sorter.
+        /// </summary>
+        protected override Expression<Func<PupilDb, object>> DefaultFieldSorter => TableFieldSorters["firstname"];
     }
 }
