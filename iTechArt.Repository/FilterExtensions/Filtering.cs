@@ -27,12 +27,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(pupilFilter.FirstName))
             {
-                where.And(p => p.FirstName.StartsWith(pupilFilter.FirstName));
+                where.And(p => p.FirstName.ToLower().StartsWith(pupilFilter.FirstName.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(pupilFilter.LastName))
             {
-                where.And(p => p.LastName.StartsWith(pupilFilter.LastName));
+                where.And(p => p.LastName.ToLower().StartsWith(pupilFilter.LastName.ToLower()));
             }
 
             if (pupilFilter.Age != null)
@@ -47,22 +47,22 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(pupilFilter.PhoneNumber))
             {
-                where.And(p => p.PhoneNumber.StartsWith(pupilFilter.PhoneNumber));
+                where.And(p => p.PhoneNumber.ToLower().StartsWith(pupilFilter.PhoneNumber.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(pupilFilter.Address))
             {
-                where.And(p => p.Address.StartsWith(pupilFilter.Address));
+                where.And(p => p.Address.ToLower().StartsWith(pupilFilter.Address.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(pupilFilter.City))
             {
-                where.And(p => p.City.StartsWith(pupilFilter.City));
+                where.And(p => p.City.ToLower().StartsWith(pupilFilter.City.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(pupilFilter.SchoolName))
             {
-                where.And(p => p.SchoolName.StartsWith(pupilFilter.SchoolName));
+                where.And(p => p.SchoolName.ToLower().StartsWith(pupilFilter.SchoolName.ToLower()));
             }
 
             if (pupilFilter.Grade != null)
@@ -104,32 +104,32 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(studentFilter.FirstName))
             {
-                where.And(s => s.FirstName.StartsWith(studentFilter.FirstName));
+                where.And(s => s.FirstName.ToLower().StartsWith(studentFilter.FirstName.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(studentFilter.LastName))
             {
-                where.And(s => s.LastName.StartsWith(studentFilter.LastName));
+                where.And(s => s.LastName.ToLower().StartsWith(studentFilter.LastName.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(studentFilter.Email))
             {
-                where.And(s => s.Email.StartsWith(studentFilter.Email));
+                where.And(s => s.Email.ToLower().StartsWith(studentFilter.Email.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(studentFilter.Password))
             {
-                where.And(s => s.Password.StartsWith(studentFilter.Password));
+                where.And(s => s.Password.ToLower().StartsWith(studentFilter.Password.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(studentFilter.Majority))
             {
-                where.And(s => s.Majority.StartsWith(studentFilter.Majority));
+                where.And(s => s.Majority.ToLower().StartsWith(studentFilter.Majority.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(studentFilter.Majority))
             {
-                where.And(s => s.Majority.StartsWith(studentFilter.Majority));
+                where.And(s => s.Majority.ToLower().StartsWith(studentFilter.Majority.ToLower()));
             }
 
             if (studentFilter.Gender == Domain.Enums.Gender.Male || studentFilter.Gender == Domain.Enums.Gender.Female)
@@ -144,7 +144,7 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(studentFilter.University))
             {
-                where.And(s => s.University.StartsWith(studentFilter.University));
+                where.And(s => s.University.ToLower().StartsWith(studentFilter.University.ToLower()));
             }
 
             if (studentFilter.Faculty == Domain.Enums.Faculty.Economics ||
@@ -179,17 +179,17 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(policeFilter.Name))
             {
-                where.And(p => p.Name.StartsWith(policeFilter.Name));
+                where.And(p => p.Name.ToLower().StartsWith(policeFilter.Name.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(policeFilter.Surname))
             {
-                where.And(p => p.Surname.StartsWith(policeFilter.Surname));
+                where.And(p => p.Surname.ToLower().StartsWith(policeFilter.Surname.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(policeFilter.Email))
             {
-                where.And(p => p.Email.StartsWith(policeFilter.Email));
+                where.And(p => p.Email.ToLower().StartsWith(policeFilter.Email.ToLower()));
             }
 
             if (policeFilter.Gender == Domain.Enums.Gender.Male || policeFilter.Gender == Domain.Enums.Gender.Female)
@@ -199,12 +199,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(policeFilter.Address))
             {
-                where.And(p => p.Address.StartsWith(policeFilter.Address));
+                where.And(p => p.Address.ToLower().StartsWith(policeFilter.Address.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(policeFilter.JobTitle))
             {
-                where.And(p => p.JobTitle.StartsWith(policeFilter.JobTitle));
+                where.And(p => p.JobTitle.ToLower().StartsWith(policeFilter.JobTitle.ToLower()));
             }
 
             if (policeFilter.Salary != null)
@@ -239,12 +239,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(medStaffFilter.FirstName))
             {
-                where.And(m => m.FirstName.StartsWith(medStaffFilter.FirstName));
+                where.And(m => m.FirstName.ToLower().StartsWith(medStaffFilter.FirstName.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(medStaffFilter.LastName))
             {
-                where.And(m => m.LastName.StartsWith(medStaffFilter.LastName));
+                where.And(m => m.LastName.ToLower().StartsWith(medStaffFilter.LastName.ToLower()));
             }
 
             if (medStaffFilter.Gender == Domain.Enums.Gender.Male || medStaffFilter.Gender == Domain.Enums.Gender.Female)
@@ -254,12 +254,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(medStaffFilter.Email))
             {
-                where.And(m => m.Email.StartsWith(medStaffFilter.Email));
+                where.And(m => m.Email.ToLower().StartsWith(medStaffFilter.Email.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(medStaffFilter.PhoneNumber))
             {
-                where.And(m => m.PhoneNumber.StartsWith(medStaffFilter.PhoneNumber));
+                where.And(m => m.PhoneNumber.ToLower().StartsWith(medStaffFilter.PhoneNumber.ToLower()));
             }
 
             if (medStaffFilter.Age != null)
@@ -269,7 +269,7 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(medStaffFilter.Address))
             {
-                where.And(m => m.Address.StartsWith(medStaffFilter.Address));
+                where.And(m => m.Address.ToLower().StartsWith(medStaffFilter.Address.ToLower()));
             }
 
             if (medStaffFilter.Salary != null)
@@ -279,12 +279,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(medStaffFilter.HospitalName))
             {
-                where.And(m => m.HospitalName.StartsWith(medStaffFilter.HospitalName));
+                where.And(m => m.HospitalName.ToLower().StartsWith(medStaffFilter.HospitalName.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(medStaffFilter.PostalCode))
             {
-                where.And(m => m.PostalCode.StartsWith(medStaffFilter.PostalCode));
+                where.And(m => m.PostalCode.ToLower().StartsWith(medStaffFilter.PostalCode.ToLower()));
             }
 
             if (medStaffFilter.Shift == Domain.Enums.Shift.Day || medStaffFilter.Shift == Domain.Enums.Shift.Night)
@@ -314,7 +314,7 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(airportFilter.AirportName))
             {
-                where.And(a => a.AirportName.StartsWith(airportFilter.AirportName));
+                where.And(a => a.AirportName.ToLower().StartsWith(airportFilter.AirportName.ToLower()));
             }
 
             if (airportFilter.BuiltDate != null)
@@ -329,12 +329,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(airportFilter.Address))
             {
-                where.And(a => a.Address.StartsWith(airportFilter.Address));
+                where.And(a => a.Address.ToLower().StartsWith(airportFilter.Address.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(airportFilter.City))
             {
-                where.And(a => a.City.StartsWith(airportFilter.City));
+                where.And(a => a.City.ToLower().StartsWith(airportFilter.City.ToLower()));
             }
 
             if (airportFilter.EmployeesCount != null)
@@ -379,12 +379,12 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(groceryFilter.FirstName))
             {
-                where.And(s => s.FirstName.StartsWith(groceryFilter.FirstName));
+                where.And(s => s.FirstName.ToLower().StartsWith(groceryFilter.FirstName.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(groceryFilter.LastName))
             {
-                where.And(s => s.LastName.StartsWith(groceryFilter.LastName));
+                where.And(s => s.LastName.ToLower().StartsWith(groceryFilter.LastName.ToLower()));
             }
 
             if (groceryFilter.Age != null)
@@ -399,17 +399,17 @@ namespace iTechArt.Repository.FilterExtensions
 
             if (!string.IsNullOrEmpty(groceryFilter.Email))
             {
-                where.And(p => p.Email.StartsWith(groceryFilter.Email));
+                where.And(p => p.Email.ToLower().StartsWith(groceryFilter.Email.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(groceryFilter.JobTitle))
             {
-                where.And(p => p.Jobtitle.StartsWith(groceryFilter.JobTitle));
+                where.And(p => p.Jobtitle.ToLower().StartsWith(groceryFilter.JobTitle.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(groceryFilter.DepartmentRetail))
             {
-                where.And(p => p.Departmentretail.StartsWith(groceryFilter.DepartmentRetail));
+                where.And(p => p.Departmentretail.ToLower().StartsWith(groceryFilter.DepartmentRetail.ToLower()));
             }
 
             if (groceryFilter.Salary != null)
