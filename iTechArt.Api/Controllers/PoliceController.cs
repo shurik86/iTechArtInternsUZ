@@ -3,6 +3,7 @@ using iTechArt.Api.Models;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -12,10 +13,12 @@ namespace iTechArt.Api.Controllers
     public sealed class PoliceController : ControllerBase
     {
         private readonly IPoliceService _policeService;
+        private readonly IGetRetirementInfoService _getRetirementInfoService;
 
-        public PoliceController(IPoliceService policeService)
+        public PoliceController(IPoliceService policeService, IGetRetirementInfoService getRetirementInfoService)
         {
             _policeService = policeService;
+            _getRetirementInfoService = getRetirementInfoService;
         }
 
         /// <summary>
@@ -135,6 +138,15 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.Police}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
             };
+        }
+
+        /// <summary>
+        /// Provides collection of data about retired staff from 3 models between the given years.
+        /// </summary>
+        [HttpGet(ApiConstants.GetRetirementInfo)]
+        public async ValueTask<IActionResult> GetRetiremenData(int from, int to)
+        {
+            return Ok(await _getRetirementInfoService.GetRetiredPeopleAsync(from, to));
         }
     }
 }

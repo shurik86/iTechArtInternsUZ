@@ -40,7 +40,7 @@
         /// <summary>
         /// Gets the retirement data for api route.
         /// </summary>
-        public const string GetRetirementInfo = "get_retirement_data";
+        public const string GetRetirementInfo = "get_retired";
 
         /// <summary>
         /// Gets the faculty data for api route.

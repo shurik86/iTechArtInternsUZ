@@ -12,8 +12,8 @@ using iTechArt.Database.DbContexts;
 namespace iTechArt.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221112102625_Update")]
-    partial class Update
+    [Migration("20221205115534_DateTimeMigration")]
+    partial class DateTimeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,8 +43,8 @@ namespace iTechArt.Database.Migrations
                     b.Property<int>("AverageTicketPrice")
                         .HasColumnType("integer");
 
-                    b.Property<DateOnly>("BuiltDate")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("BuiltDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
@@ -127,8 +127,8 @@ namespace iTechArt.Database.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("character varying(32)");
 
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(32)
@@ -177,31 +177,34 @@ namespace iTechArt.Database.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Address")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(32)
-                        .HasColumnType("character varying(32)");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<byte>("Gender")
                         .HasColumnType("smallint");
 
                     b.Property<string>("JobTitle")
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)");
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<double>("Salary")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Surname")
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)");
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.HasKey("Id");
 
@@ -227,8 +230,8 @@ namespace iTechArt.Database.Migrations
                     b.Property<byte>("CourseLanguage")
                         .HasColumnType("smallint");
 
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(64)
@@ -268,12 +271,15 @@ namespace iTechArt.Database.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)");
+
+                    b.Property<byte>("Faculty")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(64)
