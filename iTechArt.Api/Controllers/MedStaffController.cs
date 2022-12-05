@@ -135,14 +135,5 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
         }
-
-        /// <summary>
-        /// Gets retirement info about medstaffs from database.
-        /// </summary>
-        [HttpGet("get_retired")]
-        public async Task<ActionResult> GetRetiredMedStaffs(int from, int to)
-        {
-            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
-        }
     }
 }

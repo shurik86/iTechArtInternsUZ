@@ -114,14 +114,5 @@ namespace iTechArt.Api.Controllers
                 FileDownloadName = $"{FileConstants.Students}_{Guid.NewGuid().ToString()}{FileConstants.xlsx}"
             };
         }
-
-        /// <summary>
-        /// Gets students number of each faculty from database.
-        /// </summary>
-        [HttpGet("get_faculty_info")]
-        public async Task<ActionResult> GetFacultyInfo()
-        {
-            return Ok(await _faultyInfoService.GetFacultyInfo());
-        }
     }
 }
