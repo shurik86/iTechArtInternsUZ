@@ -3,6 +3,7 @@ using iTechArt.Api.Models;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ModelInterfaces;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -11,10 +12,12 @@ namespace iTechArt.Api.Controllers
     public sealed class MedStaffController : ControllerBase
     {
         private readonly IMedStaffService _medStaffService;
+        private readonly IGetRetirementInfoService _getRetirementInfoService;
 
-        public MedStaffController(IMedStaffService medStaffService)
+        public MedStaffController(IMedStaffService medStaffService, IGetRetirementInfoService getRetirementInfoService)
         {
             _medStaffService = medStaffService;
+            _getRetirementInfoService = getRetirementInfoService;
         }
 
         /// <summary>
@@ -148,6 +151,15 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
             };
+        }
+
+        /// <summary>
+        /// Provides collection of data about retired staff from 3 models between the given years.
+        /// </summary>
+        [HttpGet(ApiConstants.GetRetirementInfo)]
+        public async ValueTask<IActionResult> GetRetiremenData(int from, int to)
+        {
+            return Ok(await _getRetirementInfoService.GetRetiredPeopleAsync(from, to));
         }
     }
 }

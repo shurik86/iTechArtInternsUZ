@@ -18,7 +18,7 @@ namespace iTechArt.Service.Services
         /// </summary>
         public async Task<IFacultyInfo> GetFacultyInfoAsync()
         {
-            return await _facultyInfoRepository.GetFacultyInfo();
+            return await _facultyInfoRepository.GetFacultyInfoAsync();
         }
     }
 }
