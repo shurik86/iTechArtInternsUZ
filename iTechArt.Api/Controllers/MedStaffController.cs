@@ -11,12 +11,10 @@ namespace iTechArt.Api.Controllers
     public sealed class MedStaffController : ControllerBase
     {
         private readonly IMedStaffService _medStaffService;
-        private readonly IGetRetirementInfoService _getRetirementInfo;
 
-        public MedStaffController(IMedStaffService medStaffService, IGetRetirementInfoService getRetirementInfo)
+        public MedStaffController(IMedStaffService medStaffService)
         {
             _medStaffService = medStaffService;
-            _getRetirementInfo = getRetirementInfo;
         }
 
         /// <summary>
@@ -150,15 +148,6 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.MedStaff}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
             };
-        }
-        
-        /// <summary>
-        /// Gets retirement info about medstaffs from database.
-        /// </summary>
-        [HttpGet("get_retired")]
-        public async Task<ActionResult> GetRetiredMedStaffs(int from, int to)
-        {
-            return Ok(await _getRetirementInfo.GetRetiredPeopleAsync(from, to));
         }
     }
 }
