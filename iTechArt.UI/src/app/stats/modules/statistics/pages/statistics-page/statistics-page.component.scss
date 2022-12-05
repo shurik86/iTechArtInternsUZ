@@ -1,0 +1,26 @@
+.statistics-page {
+  display: flex;
+  margin-top: -30px;
+  min-width: 100%;
+  justify-content: space-between;
+  &__side-bar {
+    background-color: aliceblue;
+    width: 20vw;
+    min-width: 300px;
+    min-height: calc(100vh - 110px);
+    position: fixed;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    p {
+      cursor: pointer;
+      font-size: 20px;
+      color: #3a5696;
+    }
+  }
+  &__main-content {
+    width: 100vw;
+  }
+}

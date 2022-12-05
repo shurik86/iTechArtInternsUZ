@@ -1,0 +1,46 @@
+<div class="statistics-page">
+  <div class="statistics-page__side-bar">
+    <p
+      [style]="
+        currentTab === tabsEnum.MaleFemale ? 'text-decoration: underline' : ''
+      "
+      (click)="switchTab(tabsEnum.MaleFemale)"
+    >
+      Male / Female
+    </p>
+    <p
+      [style]="
+        currentTab === tabsEnum.Retired ? 'text-decoration: underline' : ''
+      "
+      (click)="switchTab(tabsEnum.Retired)"
+    >
+      Retired
+    </p>
+    <p
+      [style]="currentTab === tabsEnum.Age ? 'text-decoration: underline' : ''"
+      (click)="switchTab(tabsEnum.Age)"
+    >
+      Age
+    </p>
+    <p
+      [style]="
+        currentTab === tabsEnum.Faculties ? 'text-decoration: underline' : ''
+      "
+      (click)="switchTab(tabsEnum.Faculties)"
+    >
+      Faculties
+    </p>
+  </div>
+  <div class="statistics-page__main-content">
+    <app-graph-male-female
+      *ngIf="currentTab === tabsEnum.MaleFemale"
+    ></app-graph-male-female>
+    <app-graph-retired
+      *ngIf="currentTab === tabsEnum.Retired"
+    ></app-graph-retired>
+    <app-graph-age *ngIf="currentTab === tabsEnum.Age"></app-graph-age>
+    <app-graph-faculties
+      *ngIf="currentTab === tabsEnum.Faculties"
+    ></app-graph-faculties>
+  </div>
+</div>

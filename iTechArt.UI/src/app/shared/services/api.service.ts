@@ -1,75 +1,112 @@
 import { Injectable } from '@angular/core';
 
 import { UnitsEnum } from '../enums/units.enum';
-import { APIS } from '../apis/constants/apis';
 import { ExtensionsEnum } from '../enums/extensions.enum';
 import { environment } from '../../../environments/environment';
-import { ApisImportEnum } from '../apis/enums/apis-import.enum';
-import { ApisExportEnum } from "../apis/enums/apis-export.enum";
+import { APIS_LOGIC_PATHS } from '../apis/apis-logic-path';
+import { APIS_UNIT_PATHS } from '../apis/api-unit-paths';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  public url = environment.apiUrl;
-  public unitPath: string | undefined;
-
-  public defineUnitPath(unit: UnitsEnum | undefined): void {
-    switch (unit) {
-      case UnitsEnum.airport:
-        this.unitPath = APIS.airport.path;
-        break;
-      case UnitsEnum.grocery:
-        this.unitPath = APIS.grocery.path;
-        break;
-      case UnitsEnum.police:
-        this.unitPath = APIS.police.path;
-        break;
-      case UnitsEnum.pupils:
-        this.unitPath = APIS.pupils.path;
-        break;
-      case UnitsEnum.medStaff:
-        this.unitPath = APIS.medStaff.path;
-        break;
-      case UnitsEnum.students:
-        this.unitPath = APIS.students.path;
-        break;
-      default:
-        break;
-    }
-  }
+  private _url = environment.apiUrl;
+  private _unitPath: string | undefined;
 
   public defineImportApiForCurrentUnit(
     unit: UnitsEnum | undefined,
     extension: string | undefined
   ): string {
-    let currentImportApi: ApisImportEnum | undefined;
+    let currentImportApi: string | undefined;
 
     this.defineUnitPath(unit);
 
     switch (extension) {
       case ExtensionsEnum.xml:
-        currentImportApi = ApisImportEnum.xml;
+        currentImportApi = APIS_LOGIC_PATHS.import.xml;
         break;
       case ExtensionsEnum.xls:
-        currentImportApi = ApisImportEnum.xls;
+        currentImportApi = APIS_LOGIC_PATHS.import.xls;
         break;
       case ExtensionsEnum.xlsx:
-        currentImportApi = ApisImportEnum.xlsx;
+        currentImportApi = APIS_LOGIC_PATHS.import.xlsx;
         break;
       case ExtensionsEnum.csv:
-        currentImportApi = ApisImportEnum.csv;
+        currentImportApi = APIS_LOGIC_PATHS.import.csv;
         break;
       default:
         return '';
     }
 
-    return `${this.url}${this.unitPath}${currentImportApi}`;
+    return `${this._url}${this._unitPath}${currentImportApi}`;
   }
 
-  public defineExportApiForCurrentUnit(unit: UnitsEnum | undefined): string {
+  public defineExportApiForCurrentUnit(
+    unit: UnitsEnum | undefined,
+    pageIndex?: number,
+    pageSize?: number | string,
+    chosenColumn?: string | undefined,
+    chosenSortingMethod?: number | undefined,
+    searchColumn?: string,
+    searchInput?: string
+  ): string {
     this.defineUnitPath(unit);
+    if (chosenColumn && chosenSortingMethod && searchColumn && searchInput) {
+      return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}&fieldName=${chosenColumn}&sortDirection=${chosenSortingMethod}&${searchColumn}=${searchInput}`;
+    }
+    if (chosenColumn && chosenSortingMethod) {
+      return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}&fieldName=${chosenColumn}&sortDirection=${chosenSortingMethod}`;
+    } else {
+      return `${this._url}${this._unitPath}get_all?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    }
+  }
 
-    return `${this.url}${this.unitPath}${ApisExportEnum.getAll}`;
+  public defineDownloadFileApiForCurrentUnit(
+    unit: UnitsEnum | undefined,
+    extension: ExtensionsEnum | undefined
+  ): string {
+    this.defineUnitPath(unit);
+    const extensionPath = this.defineDownloadApiByExtension(extension);
+    return `${this._url}${this._unitPath}${extensionPath}`;
+  }
+
+  private defineDownloadApiByExtension(
+    extension: ExtensionsEnum | undefined
+  ): string | undefined {
+    switch (extension) {
+      case ExtensionsEnum.xlsx:
+        return APIS_LOGIC_PATHS.download.xlsx;
+      case ExtensionsEnum.xml:
+        return APIS_LOGIC_PATHS.download.xml;
+      case ExtensionsEnum.csv:
+        return APIS_LOGIC_PATHS.download.csv;
+      default:
+        return undefined;
+    }
+  }
+
+  private defineUnitPath(unit: UnitsEnum | undefined): void {
+    switch (unit) {
+      case UnitsEnum.airport:
+        this._unitPath = APIS_UNIT_PATHS.airport;
+        break;
+      case UnitsEnum.grocery:
+        this._unitPath = APIS_UNIT_PATHS.grocery;
+        break;
+      case UnitsEnum.police:
+        this._unitPath = APIS_UNIT_PATHS.police;
+        break;
+      case UnitsEnum.pupils:
+        this._unitPath = APIS_UNIT_PATHS.pupils;
+        break;
+      case UnitsEnum.medStaff:
+        this._unitPath = APIS_UNIT_PATHS.medStaff;
+        break;
+      case UnitsEnum.students:
+        this._unitPath = APIS_UNIT_PATHS.students;
+        break;
+      default:
+        break;
+    }
   }
 }

@@ -7,10 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 @NgModule({
-  declarations: [
-    DashboardPageComponent,
-    HeaderComponent
-  ],
+  declarations: [DashboardPageComponent, HeaderComponent],
   exports: [HeaderComponent],
   imports: [CommonModule, RouterLink, ReactiveFormsModule],
 })

@@ -1,15 +1,26 @@
 body {
   margin: 0;
+  min-height: 100%;
+}
+
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+@mixin button {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 2px solid;
+  cursor: pointer;
+  transition: all 1s ease;
 }
 
 .button-main {
-  padding: 10px 15px;
+  @include button;
   background-color: #3a5696;
   color: white;
-  border: 2px solid #3a5696;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 1s ease;
+  border: #3a5696;
   &:hover {
     background-color: white;
     color: #3a5696;
@@ -22,16 +33,50 @@ body {
 }
 
 .button-secondary {
-  padding: 10px 15px;
+  @include button;
   background-color: white;
   color: #3a5696;
-  border: 2px solid white;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 1s ease;
+  border: white;
   min-width: 90px;
   &:hover {
     background-color: #3a5696;
+    color: white;
+  }
+  &:disabled {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
+    color: white;
+  }
+}
+
+.button-green {
+  @include button;
+  color: white;
+  background-color: seagreen;
+  border-color: seagreen;
+  &:hover {
+    background-color: white;
+    color: seagreen;
+  }
+  &:disabled {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
+    color: white;
+  }
+}
+
+.button-white {
+  @include button;
+  color: seagreen;
+  background-color: white;
+  border-color: seagreen;
+  &:hover {
+    background-color: seagreen;
+    color: white;
+  }
+  &:disabled {
+    background-color: lightgrey;
+    border: 2px solid lightgrey;
     color: white;
   }
 }

@@ -14,7 +14,6 @@ export class PupilsPageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 41 },
     { field: 'firstName', header: 'First Name', width: 101 },
     { field: 'lastName', header: 'Last Name', width: 125 },
     { field: 'dateOfBirth', header: 'Date of Birth', width: 78 },

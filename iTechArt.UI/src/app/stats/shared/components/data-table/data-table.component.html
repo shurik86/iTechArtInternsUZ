@@ -1,16 +1,93 @@
-<table class="grid">
-  <thead class="grid__columns">
-  <th *ngFor="let col of columns" [style.width.px]="col.width">
-    {{ col.header }}
-  </th>
-  </thead>
-  <tbody class="grid__rows">
-    <tr *ngFor="let row of data">
-      <td
+<div class="container">
+  <div class="graph-retired__form">
+    <div>
+      <label class="graph-retired__form__label">Finding by column: </label>
+      <select
+        [formControl]="searchColumn"
+        class="graph-retired__form__input"
+      >
+        <option *ngFor="let column of columns" [value]="column.field">
+          {{ column.header }}
+        </option>
+      </select>
+
+      <label class="graph-retired__form__label">Value:</label>
+      <input
+        class="graph-retired__form__input"
+        type="text"
+        [formControl]="searchInput"
+      />
+    </div>
+    <button
+      class="button-green graph-retired__form__button"
+      [disabled]="searchInput.invalid"
+      (click)="searchByValueInColumn()"
+    >
+      Search
+    </button>
+    <button
+      class="button-white graph-retired__form__button"
+      style="margin-left: 30px;"
+      (click)="cleanSearchForm()"
+    >
+      Clean
+    </button>
+  </div>
+
+  <table class="grid">
+    <thead class="grid__columns">
+      <th
         *ngFor="let col of columns"
-        style="padding-left: 1rem"
-      > {{row[col.field]}}
-      </td>
-    </tr>
-  </tbody>
-</table>
+        [style.width.px]="col.width"
+        class="grid__columns__header"
+        (click)="chooseHeader(col.field)"
+      >
+        {{ col.header }}
+        <span
+          *ngIf="
+            currentChosenColumn === col.field && currentSortingMethod === 2
+          "
+          >&uarr;</span
+        >
+        <span
+          *ngIf="
+            currentChosenColumn === col.field && currentSortingMethod === 1
+          "
+          >&darr;</span
+        >
+      </th>
+    </thead>
+    <tbody class="grid__rows">
+      <tr
+        *ngFor="
+          let row of dataOnPage
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page,
+                  totalItems: allUnitDataCount
+                }
+        "
+      >
+        <td *ngFor="let col of columns" style="padding-left: 1rem">
+          {{ row[col.field] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-controls-wrapper">
+    <pagination-controls
+      class="pagi"
+      (pageChange)="switchPage((page = $event))"
+    ></pagination-controls>
+    <div class="row-container">
+      <label class="row-container__label">Rows on page</label>
+      <select [formControl]="pageRows" (click)="getRowsAmountPerPage()">
+        <option value="5">5</option>
+        <option value="10" [defaultSelected]="true">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+</div>

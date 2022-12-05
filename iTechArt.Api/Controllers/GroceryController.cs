@@ -2,6 +2,7 @@
 using iTechArt.Api.Models;
 using iTechArt.Domain.Enums;
 using iTechArt.Domain.ServiceInterfaces;
+using iTechArt.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iTechArt.Api.Controllers
@@ -11,13 +12,15 @@ namespace iTechArt.Api.Controllers
     public sealed class GroceryController : Controller
     {
         private readonly IGroceryService _groceryService;
+        private readonly IGetRetirementInfoService _getRetirementInfoService;
         private const string CSV = "csv";
         private const string EXCEL = "officedocument.spreadsheetml.sheet";
         private const string XML = "xml";
 
-        public GroceryController(IGroceryService groceryService)
+        public GroceryController(IGroceryService groceryService, IGetRetirementInfoService getRetirementInfoService)
         {
             _groceryService = groceryService;
+            _getRetirementInfoService = getRetirementInfoService;
         }
 
         [HttpPost(ApiConstants.IMPORT),Obsolete]
@@ -147,6 +150,15 @@ namespace iTechArt.Api.Controllers
             {
                 FileDownloadName = $"{FileConstants.Groceries}_{Guid.NewGuid().ToString()}{FileConstants.csv}"
             };
+        }
+
+        /// <summary>
+        /// Provides collection of data about retired staff from 3 models between the given years.
+        /// </summary>
+        [HttpGet(ApiConstants.GetRetirementInfo)]
+        public async ValueTask<IActionResult> GetRetiremenData(int from, int to)
+        {
+            return Ok(await _getRetirementInfoService.GetRetiredPeopleAsync(from, to));
         }
     }
 }

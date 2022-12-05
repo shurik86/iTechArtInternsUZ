@@ -1,0 +1,10 @@
+<canvas
+  baseChart
+  class="graph-male-female"
+  [data]="barGraphData || barAgeDefaultData"
+  [options]="barGraphOptions"
+  [plugins]="barGraphPlugins"
+  [legend]="barGraphLegend"
+  [type]="'bar'"
+></canvas>
+<p *ngIf="!barGraphData" class="loading">loading... please wait...</p>

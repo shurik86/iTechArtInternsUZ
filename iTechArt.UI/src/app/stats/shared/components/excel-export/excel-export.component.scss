@@ -1,3 +1,5 @@
+@import "src/styles";
+
 :host {
   .excel-export {
     margin-left: 30px;
@@ -5,6 +7,12 @@
       display: flex;
       &__button {
         margin-left: 20px;
+      }
+    }
+    &__download-buttons {
+      margin-left: 200px;
+      &__btn {
+        margin: 0 10px;
       }
     }
     &__message {

@@ -14,7 +14,6 @@ export class GroceryPageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 58 },
     { field: 'firstName', header: 'First Name', width: 217 },
     { field: 'lastName', header: 'Last Name', width: 117 },
     { field: 'gender', header: 'Gender', width: 117 },
@@ -29,7 +28,7 @@ export class GroceryPageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.statsService.getAllStatsByUnit(this.unit).subscribe({
-      next: (data: UnitsTypes) => (this.data = data),
+      next: (data: UnitsTypes) => this.data = data,
       error: () => alert("Couldn't load data."),
     });
   }

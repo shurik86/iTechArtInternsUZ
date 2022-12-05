@@ -134,10 +134,10 @@ namespace iTechArt.Api.Controllers
         /// <summary>
         /// Gets students number of each faculty from database.
         /// </summary>
-        [HttpGet("get_faculty_info")]
+        [HttpGet(ApiConstants.GetFacultyInfo)]
         public async Task<ActionResult> GetFacultyInfo()
         {
-            return Ok(await _faultyInfoService.GetFacultyInfo());
+            return Ok(await _faultyInfoService.GetFacultyInfoAsync());
         }
     }
 }

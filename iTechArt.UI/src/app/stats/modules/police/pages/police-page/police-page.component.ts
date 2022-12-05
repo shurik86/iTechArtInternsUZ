@@ -14,7 +14,6 @@ export class PolicePageComponent implements OnInit {
   public data: UnitsTypes | undefined;
 
   public columns = [
-    { field: 'id', header: 'Id', width: 58 },
     { field: 'name', header: 'First Name', width: 217 },
     { field: 'surname', header: 'Last Name', width: 117 },
     { field: 'gender', header: 'Gender', width: 117 },
@@ -27,7 +26,7 @@ export class PolicePageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.statsService.getAllStatsByUnit(this.unit).subscribe({
-      next: (data: UnitsTypes) => (this.data = data),
+      next: (data: UnitsTypes) => this.data = data,
       error: () => alert("Couldn't load data."),
     });
   }
