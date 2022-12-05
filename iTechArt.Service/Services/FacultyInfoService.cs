@@ -16,7 +16,7 @@ namespace iTechArt.Service.Services
         /// <summary>
         /// Gets info about number of students enrolled in each faculty.
         /// </summary>
-        public async Task<IFacultyInfo> GetFacultyInfo()
+        public async Task<IFacultyInfo> GetFacultyInfoAsync()
         {
             return await _facultyInfoRepository.GetFacultyInfo();
         }

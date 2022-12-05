@@ -37,5 +37,15 @@
         /// </summary>
         public const string GETGRAPH = "get_graph";
 
+        /// <summary>
+        /// Gets the retirement data for api route.
+        /// </summary>
+        public const string GetRetirementInfo = "get_retirement_data";
+
+        /// <summary>
+        /// Gets the faculty data for api route.
+        /// </summary>
+        public const string GetFacultyInfo = "get_faculty_info";
+
     }
 }

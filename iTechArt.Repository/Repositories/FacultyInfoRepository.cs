@@ -20,7 +20,7 @@ namespace iTechArt.Repository.Repositories
         /// <summary>
         /// Gets info about number of students enrolled in each faculty.
         /// </summary>
-        public async Task<IFacultyInfo> GetFacultyInfo()
+        public async Task<IFacultyInfo> GetFacultyInfoAsync()
         {
             var students = await _dbContext.Students.ToArrayAsync();
             int economics = students.Where(c => c.Faculty == Faculty.Economics).ToList().Count;

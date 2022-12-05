@@ -7,6 +7,6 @@ namespace iTechArt.Domain.ServiceInterfaces
         /// <summary>
         /// Gets info about number of students enrolled in each faculty.
         /// </summary>
-        public Task<IFacultyInfo> GetFacultyInfo();
+        public Task<IFacultyInfo> GetFacultyInfoAsync();
     }
 }
