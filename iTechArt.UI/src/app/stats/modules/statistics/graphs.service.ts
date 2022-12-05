@@ -39,7 +39,7 @@ export class GraphsService {
 
   public getStatsForFaculties(): Observable<IFaculties> {
     return this.http.get<IFaculties>(
-      `${this.url}${APIS_UNIT_PATHS.students}get_faculty_info`
+      `https://localhost:7073/api/students/get_faculty_info`
     );
   }
 
