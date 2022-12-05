@@ -26,7 +26,7 @@ export class GraphRetiredComponent {
   public legendPosition: any = 'below';
 
   public colorScheme: any = {
-    domain: ['#ffa1b5', '#86c7f3'],
+    domain: ['#ffa1b5', '#86c7f3', '#bd4863', '#5896bf', '#8d52c4', '#cd7be8'],
   };
 
   public graphForm = new FormGroup({
